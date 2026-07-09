@@ -233,9 +233,3 @@ Contribuições são bem-vindas! Se encontrar um erro, quiser melhorar uma expli
 Este projeto está sob a licença [MIT](LICENSE).
 
 Sinta-se à vontade para usar, modificar e distribuir — com os devidos créditos.
-
----
-
-<div align="center">
-  Feito com ☕ e muito CSS
-</div>
