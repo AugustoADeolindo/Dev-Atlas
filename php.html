@@ -1,0 +1,1271 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dev Atlas — PHP: Introdução à linguagem do back-end web para iniciantes.">
+    <title>PHP — Dev Atlas</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+<!-- ── LAYOUT ── -->
+<div class="page-wrapper">
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="sidebar">
+        <h3>Módulos</h3>
+        <ul>
+            <li><a href="index.html"><span class="dot"></span>Início</a></li>
+            <li><a href="fundamentos.html"><span class="dot"></span>Fundamentos</a></li>
+            <li><a href="html.html"><span class="dot"></span>HTML</a></li>
+            <li><a href="css.html"><span class="dot"></span>CSS</a></li>
+            <li><a href="javascript.html"><span class="dot"></span>JavaScript</a></li>
+            <li><a href="php.html" class="active"><span class="dot"></span>PHP</a></li>
+            <li><a href="git.html"><span class="dot"></span>Git</a></li>
+            <li><a href="ferramentas.html"><span class="dot"></span>Ferramentas</a></li>
+        </ul>
+
+        <h3>Nesta página</h3>
+        <ul>
+            <li><a href="#intro"><span class="dot"></span>O que é PHP</a></li>
+            <li><a href="#web"><span class="dot"></span>PHP e a Web</a></li>
+            <li><a href="#sintaxe"><span class="dot"></span>Sintaxe básica</a></li>
+            <li><a href="#tipos"><span class="dot"></span>Tipos de Dados</a></li>
+            <li><a href="#controle"><span class="dot"></span>Condicionais e Loops</a></li>
+            <li><a href="#funcoes"><span class="dot"></span>Funções</a></li>
+            <li><a href="#arrays"><span class="dot"></span>Arrays</a></li>
+            <li><a href="#formularios"><span class="dot"></span>Formulários</a></li>
+        </ul>
+    </aside>
+
+    <!-- ── MAIN ── -->
+    <main class="content">
+
+        <div class="page-badge">🐘 PHP</div>
+        <h1 class="page-title">Introdução ao PHP</h1>
+        <p class="page-subtitle">A linguagem que roda no servidor e dá vida ao back-end da web. Sim, o elefante é a mascote.</p>
+
+        <!-- ══════════════════════════════════════
+             1. O QUE É PHP E SUA HISTÓRIA
+        ══════════════════════════════════════ -->
+        <section id="intro">
+            <h2 class="section-h">🐘 O que é PHP e sua história</h2>
+
+            <p>
+                PHP significa <strong>PHP: Hypertext Preprocessor</strong>. Sim, o nome é uma sigla… que contém a própria sigla dentro dela. Isso se chama <em>acrônimo recursivo</em>, e sim, é exatamente tão hilário quanto parece. A comunidade PHP tem senso de humor assim.
+            </p>
+
+            <div class="callout fun">
+                <span class="callout-icon">🐘</span>
+                <div class="callout-body">
+                    <p><strong>PHP é como aquele amigo que todo mundo fala mal mas ainda chama na hora de construir uma casa.</strong> Todo desenvolvedor já ouviu "PHP é coisa do passado" — e todo desenvolvedor já abriu um WordPress, um Laravel ou um e-commerce rodando PHP no servidor de produção.</p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Como tudo começou</h3>
+            <p>
+                Em 1994, um cara chamado <strong>Rasmus Lerdorf</strong> estava cansado de escrever scripts CGI em C para rastrear quem visitava o seu currículo online. Então ele criou um conjunto de ferramentas simples chamado <strong>"Personal Home Page tools"</strong> — apelidado de <strong>PHP/FI</strong>. A ideia era pequena, pragmática e, bem… não tinha pretensão nenhuma de virar uma das linguagens mais usadas do mundo.
+            </p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-year">1994</span>
+                    <div class="timeline-text"><strong>PHP/FI nasce</strong> — Rasmus cria scripts pessoais para rastrear visitas ao seu currículo. Ninguém imagina o que isso vai virar.</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-year">1997</span>
+                    <div class="timeline-text"><strong>PHP 3</strong> — Zeev Suraski e Andi Gutmans reescrevem o motor do zero. O PHP para de ser ferramenta pessoal e vira linguagem de verdade.</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-year">2000</span>
+                    <div class="timeline-text"><strong>PHP 4</strong> — Motor Zend Engine 1. Adoção explode. PHP começa a dominar o back-end da web.</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-year">2004</span>
+                    <div class="timeline-text"><strong>PHP 5</strong> — OOP de verdade chega. Classes, interfaces, exceções. A linguagem cresce como plataforma séria.</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-year">2015</span>
+                    <div class="timeline-text"><strong>PHP 7</strong> — Performance 2x maior que o PHP 5. Type hints, operador <code>??</code> (null coalescing). O elefante acelerou.</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-year">2020</span>
+                    <div class="timeline-text"><strong>PHP 8</strong> — JIT (Just-In-Time compiler), match expression, named arguments, union types. PHP entrou de vez na era moderna.</div>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Quem usa PHP hoje?</h3>
+            <p>
+                Segundo as estatísticas mais recentes, <strong>cerca de 77% de todos os sites da web com back-end identificado usam PHP</strong>. Isso inclui gigantes como:
+            </p>
+            <ul class="lst">
+                <li><strong>WordPress</strong> — mais de 40% de todos os sites do mundo rodam nele</li>
+                <li><strong>Wikipedia</strong> — sim, a enciclopédia da humanidade</li>
+                <li><strong>Facebook</strong> — usou PHP por anos e criou o Hack (dialeto próprio de PHP)</li>
+                <li><strong>Laravel, Symfony, CodeIgniter</strong> — frameworks modernos e robustos</li>
+                <li><strong>Drupal, Joomla, Magento</strong> — CMSs e e-commerces</li>
+            </ul>
+
+            <h3 class="sub-h">Onde PHP se encaixa no fluxo da web</h3>
+            <p>PHP vive no servidor. Quando alguém acessa um site, o PHP processa a lógica, consulta o banco de dados e monta o HTML que o browser vai exibir.</p>
+
+            <div class="diagram">
+                <div class="d-line"><span class="d-tag">🌐 Browser</span> <span style="color:var(--text-muted)">— usuário digita a URL —</span></div>
+                <div class="d-line i1"><span>↓</span></div>
+                <div class="d-line i1"><span class="d-key">HTTP Request</span> <span class="d-note">GET /pagina.php</span></div>
+                <div class="d-line i1"><span>↓</span></div>
+                <div class="d-line i1"><span class="d-tag">🖥️ Servidor (Apache / Nginx)</span></div>
+                <div class="d-line i2"><span>↓</span></div>
+                <div class="d-line i2"><span class="d-key">Motor PHP</span> <span class="d-note">executa o arquivo .php</span></div>
+                <div class="d-line i3"><span>↓</span></div>
+                <div class="d-line i3"><span class="d-tag">🗄️ Banco de Dados (MySQL)</span> <span class="d-note">consulta, insere, atualiza dados</span></div>
+                <div class="d-line i3"><span>↓</span></div>
+                <div class="d-line i2"><span class="d-val">PHP monta HTML dinamicamente</span></div>
+                <div class="d-line i1"><span>↓</span></div>
+                <div class="d-line i1"><span class="d-key">HTTP Response</span> <span class="d-note">HTML puro — o browser não vê PHP</span></div>
+                <div class="d-line i1"><span>↓</span></div>
+                <div class="d-line"><span class="d-tag">🌐 Browser renderiza a página</span></div>
+            </div>
+
+            <div class="callout info">
+                <span class="callout-icon">💡</span>
+                <div class="callout-body">
+                    <p><strong>Ponto chave:</strong> o browser nunca vê o código PHP. Ele recebe apenas o HTML gerado. PHP fica 100% no servidor — por isso é chamado de linguagem <em>server-side</em>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════
+             2. COMO PHP SE RELACIONA COM A WEB
+        ══════════════════════════════════════ -->
+        <section id="web">
+            <h2 class="section-h">🌐 Como PHP se relaciona com a Web</h2>
+
+            <p>
+                JavaScript roda no browser. PHP roda no servidor. Essa é a diferença mais importante. Quando você abre uma página PHP, o servidor executa todo o código e te manda de volta um HTML prontinho — como um restaurante que prepara o prato na cozinha e entrega pronto na mesa.
+            </p>
+
+            <h3 class="sub-h">HTML estático vs página PHP dinâmica</h3>
+            <div class="two-col">
+                <div class="half">
+                    <h4 style="color:var(--text-muted)">📄 HTML Estático</h4>
+                    <p style="font-size:.83rem;color:var(--text-muted)">Arquivo <code>.html</code> — sempre o mesmo conteúdo. Todo mundo que abre vê a mesma coisa.</p>
+                    <div class="code-block">
+                        <div class="cb-header">
+                            <span class="cb-lang">html</span>
+                            <div class="cb-dots">
+                                <div class="cb-dot" style="background:#ff5f56"></div>
+                                <div class="cb-dot" style="background:#ffbd2e"></div>
+                                <div class="cb-dot" style="background:#27c93f"></div>
+                            </div>
+                        </div>
+                        <pre><code><span class="ct">&lt;p&gt;</span>Olá, visitante!<span class="ct">&lt;/p&gt;</span>
+<span class="ct">&lt;p&gt;</span>Hoje é... sei lá qual dia.<span class="ct">&lt;/p&gt;</span></code></pre>
+                    </div>
+                </div>
+                <div class="half">
+                    <h4 style="color:var(--green)">🐘 Página PHP Dinâmica</h4>
+                    <p style="font-size:.83rem;color:var(--text-muted)">Arquivo <code>.php</code> — conteúdo muda conforme lógica, dados do banco, hora do dia, usuário logado etc.</p>
+                    <div class="code-block">
+                        <div class="cb-header">
+                            <span class="cb-lang">php</span>
+                            <div class="cb-dots">
+                                <div class="cb-dot" style="background:#ff5f56"></div>
+                                <div class="cb-dot" style="background:#ffbd2e"></div>
+                                <div class="cb-dot" style="background:#27c93f"></div>
+                            </div>
+                        </div>
+                        <pre><code><span class="ct">&lt;p&gt;</span>Olá, <span class="ck">&lt;?=</span> <span class="cv">$nomeUsuario</span> <span class="ck">?&gt;</span>!<span class="ct">&lt;/p&gt;</span>
+<span class="ct">&lt;p&gt;</span>Hoje é <span class="ck">&lt;?=</span> <span class="cf">date</span>(<span class="cs">'d/m/Y'</span>) <span class="ck">?&gt;</span>.<span class="ct">&lt;/p&gt;</span></code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="sub-h">A stack LAMP</h3>
+            <p>
+                Historicamente, o ambiente mais clássico para rodar PHP é chamado de <strong>LAMP</strong>:
+            </p>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-badge b-blue">L</div>
+                    <div class="card-title">Linux</div>
+                    <div class="card-desc">Sistema operacional do servidor. Gratuito, confiável, onipresente em servidores web.</div>
+                </div>
+                <div class="card">
+                    <div class="card-badge b-orange">A</div>
+                    <div class="card-title">Apache</div>
+                    <div class="card-desc">Servidor web que recebe as requisições HTTP e passa os arquivos .php pro motor PHP processar.</div>
+                </div>
+                <div class="card">
+                    <div class="card-badge b-yellow">M</div>
+                    <div class="card-title">MySQL</div>
+                    <div class="card-desc">Banco de dados relacional. Guarda usuários, posts, produtos — todos os dados da aplicação.</div>
+                </div>
+                <div class="card">
+                    <div class="card-badge b-purple">P</div>
+                    <div class="card-title">PHP</div>
+                    <div class="card-desc">A linguagem que processa a lógica, consulta o banco e gera o HTML que o browser vai receber.</div>
+                </div>
+            </div>
+
+            <div class="callout tip">
+                <span class="callout-icon">🛠️</span>
+                <div class="callout-body">
+                    <p><strong>Ambiente local:</strong> Para rodar PHP na sua máquina sem configurar nada complexo, use <strong>XAMPP</strong> (Windows/Mac/Linux) ou <strong>Laragon</strong> (Windows). Eles instalam Apache + PHP + MySQL de uma vez com alguns cliques.</p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Tags PHP e como misturar com HTML</h3>
+            <p>
+                O PHP usa a tag <code>&lt;?php</code> para abrir e <code>?&gt;</code> para fechar. Você pode misturar código PHP com HTML normalmente — o servidor processa as partes PHP e deixa o HTML passar intacto.
+            </p>
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">php</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f56"></div>
+                        <div class="cb-dot" style="background:#ffbd2e"></div>
+                        <div class="cb-dot" style="background:#27c93f"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ct">&lt;!DOCTYPE html&gt;</span>
+<span class="ct">&lt;html&gt;</span>
+<span class="ct">&lt;body&gt;</span>
+
+  <span class="cc">&lt;!-- PHP misturado com HTML --&gt;</span>
+  <span class="ck">&lt;?php</span>
+    <span class="cv">$nome</span> = <span class="cs">"Maria"</span>;
+    <span class="cv">$hora</span> = <span class="cf">date</span>(<span class="cs">"H"</span>);
+
+    <span class="ck">if</span> (<span class="cv">$hora</span> &lt; <span class="cn">12</span>) {
+        <span class="cv">$saudacao</span> = <span class="cs">"Bom dia"</span>;
+    } <span class="ck">elseif</span> (<span class="cv">$hora</span> &lt; <span class="cn">18</span>) {
+        <span class="cv">$saudacao</span> = <span class="cs">"Boa tarde"</span>;
+    } <span class="ck">else</span> {
+        <span class="cv">$saudacao</span> = <span class="cs">"Boa noite"</span>;
+    }
+  <span class="ck">?&gt;</span>
+
+  <span class="ct">&lt;h1&gt;</span><span class="ck">&lt;?=</span> <span class="cv">$saudacao</span> <span class="ck">?&gt;</span>, <span class="ck">&lt;?=</span> <span class="cv">$nome</span> <span class="ck">?&gt;</span>!<span class="ct">&lt;/h1&gt;</span>
+  <span class="ct">&lt;p&gt;</span>São <span class="ck">&lt;?=</span> <span class="cf">date</span>(<span class="cs">"H:i"</span>) <span class="ck">?&gt;</span> horas.<span class="ct">&lt;/p&gt;</span>
+
+<span class="ct">&lt;/body&gt;</span>
+<span class="ct">&lt;/html&gt;</span></code></pre>
+            </div>
+
+            <p>
+                A tag curta <code>&lt;?=</code> é atalho para <code>&lt;?php echo</code> — perfeita para exibir valores dentro do HTML sem escrever muito.
+            </p>
+        </section>
+
+        <!-- ══════════════════════════════════════
+             3. SINTAXE BÁSICA
+        ══════════════════════════════════════ -->
+        <section id="sintaxe">
+            <h2 class="section-h">✏️ Sintaxe básica</h2>
+
+            <p>
+                PHP tem uma sintaxe bem acessível para quem já viu um pouco de programação. Mas tem algumas regras que <em>você vai esquecer no começo e levar sustos</em> — então vamos cobrir todas elas.
+            </p>
+
+            <h3 class="sub-h">Tags e comentários</h3>
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">php</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f56"></div>
+                        <div class="cb-dot" style="background:#ffbd2e"></div>
+                        <div class="cb-dot" style="background:#27c93f"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">&lt;?php</span>
+
+<span class="cc">// Comentário de uma linha</span>
+
+<span class="cc"># Também comentário de uma linha (estilo shell)</span>
+
+<span class="cc">/*
+   Comentário
+   de múltiplas linhas
+*/</span>
+
+<span class="cc">// Tag curta de saída — atalho para echo</span>
+<span class="ck">?&gt;</span>
+<span class="ct">&lt;p&gt;</span>Olá, <span class="ck">&lt;?=</span> <span class="cs">"mundo"</span> <span class="ck">?&gt;</span>!<span class="ct">&lt;/p&gt;</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">Variáveis — sempre com $</h3>
+            <p>
+                Todo nome de variável em PHP começa com o sinal de dólar <code>$</code>. Sem o <code>$</code>, não é variável. Simples assim — e impossível de esquecer depois do terceiro erro de sintaxe.
+            </p>
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">php</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f56"></div>
+                        <div class="cb-dot" style="background:#ffbd2e"></div>
+                        <div class="cb-dot" style="background:#27c93f"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">&lt;?php</span>
+
+<span class="cc">// Variáveis: sempre começam com $</span>
+<span class="cv">$nome</span>       = <span class="cs">"João"</span>;       <span class="cc">// string</span>
+<span class="cv">$idade</span>      = <span class="cn">28</span>;           <span class="cc">// integer</span>
+<span class="cv">$altura</span>     = <span class="cn">1.75</span>;         <span class="cc">// float</span>
+<span class="cv">$ativo</span>      = <span class="ck">true</span>;         <span class="cc">// boolean</span>
+<span class="cv">$nada</span>       = <span class="ck">null</span>;         <span class="cc">// null</span>
+
+<span class="cc">// Convenções de nomenclatura</span>
+<span class="cv">$nomeCompleto</span>     = <span class="cs">"camelCase"</span>;    <span class="cc">// mais comum em variáveis</span>
+<span class="cv">$nome_completo</span>    = <span class="cs">"snake_case"</span>;   <span class="cc">// também aceito</span>
+
+<span class="cc">// Exibir com echo</span>
+<span class="ck">echo</span> <span class="cv">$nome</span>;            <span class="cc">// João</span>
+<span class="ck">echo</span> <span class="cs">"Olá, "</span> . <span class="cv">$nome</span>;  <span class="cc">// ponto (.) concatena strings</span>
+
+<span class="cc">// Erro comum: esquecer o $</span>
+<span class="cc">// echo nome;  ← ERRO! PHP vai procurar uma constante chamada 'nome'</span></code></pre>
+            </div>
+
+            <div class="callout warning">
+                <span class="callout-icon">⚠️</span>
+                <div class="callout-body">
+                    <p><strong>Ponto e vírgula é obrigatório!</strong> Cada instrução em PHP termina com <code>;</code>. Esquecer o ponto e vírgula é um dos erros mais clássicos de iniciante. O PHP não vai adivinhar onde a linha termina.</p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">echo vs print</h3>
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">php</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f56"></div>
+                        <div class="cb-dot" style="background:#ffbd2e"></div>
+                        <div class="cb-dot" style="background:#27c93f"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">&lt;?php</span>
+
+<span class="cc">// echo: aceita múltiplos valores, levemente mais rápido</span>
+<span class="ck">echo</span> <span class="cs">"Olá"</span>;
+<span class="ck">echo</span> <span class="cs">"Olá"</span>, <span class="cs">" mundo"</span>;  <span class="cc">// múltiplos argumentos separados por vírgula</span>
+
+<span class="cc">// print: retorna 1 (pode ser usado em expressões), só aceita um valor</span>
+<span class="ck">print</span> <span class="cs">"Olá mundo"</span>;
+
+<span class="cc">// Concatenação com ponto (.)</span>
+<span class="cv">$cidade</span> = <span class="cs">"São Paulo"</span>;
+<span class="ck">echo</span> <span class="cs">"Bem-vindo a "</span> . <span class="cv">$cidade</span> . <span class="cs">"!"</span>;
+
+<span class="cc">// Na prática: echo é o mais usado no dia a dia</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">Case sensitivity — onde importa e onde não importa</h3>
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">php</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f56"></div>
+                        <div class="cb-dot" style="background:#ffbd2e"></div>
+                        <div class="cb-dot" style="background:#27c93f"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">&lt;?php</span>
+
+<span class="cc">// Variáveis são case-sensitive — CUIDADO!</span>
+<span class="cv">$nome</span> = <span class="cs">"Ana"</span>;
+<span class="cc">// echo $Nome;  ← ERRO! $Nome e $nome são variáveis diferentes</span>
+
+<span class="cc">// Funções NÃO são case-sensitive — tanto faz</span>
+<span class="cf">echo</span>(<span class="cs">"oi"</span>);
+<span class="cf">ECHO</span>(<span class="cs">"oi"</span>);   <span class="cc">// funciona igual</span>
+<span class="cf">strlen</span>(<span class="cs">"oi"</span>);
+<span class="cf">STRLEN</span>(<span class="cs">"oi"</span>);  <span class="cc">// também funciona</span></code></pre>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════
+             4. TIPOS DE DADOS
+        ══════════════════════════════════════ -->
+        <section id="tipos">
+            <h2 class="section-h">📦 Tipos de Dados</h2>
+
+            <p>PHP é uma linguagem de tipagem <strong>dinâmica</strong> — você não precisa declarar o tipo da variável, o PHP descobre sozinho. Isso é ótimo para agilidade e pode ser uma fonte de surpresas se você não prestar atenção.</p>
+
+            <h3 class="sub-h">Os tipos principais</h3>
+            <div class="tbl-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Exemplo</th>
+                            <th>Descrição</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>string</code></td><td><code>"olá"</code>, <code>'mundo'</code></td><td>Texto</td></tr>
+                        <tr><td><code>integer</code></td><td><code>42</code>, <code>-7</code></td><td>Número inteiro</td></tr>
+                        <tr><td><code>float</code></td><td><code>3.14</code>, <code>-0.5</code></td><td>Número decimal</td></tr>
+                        <tr><td><code>boolean</code></td><td><code>true</code>, <code>false</code></td><td>Verdadeiro ou falso</td></tr>
+                        <tr><td><code>null</code></td><td><code>null</code></td><td>Ausência de valor</td></tr>
+                        <tr><td><code>array</code></td><td><code>[1, 2, 3]</code></td><td>Coleção de valores</td></tr>
+                        <tr><td><code>object</code></td><td><code>new Classe()</code></td><td>Instância de classe</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="sub-h">var_dump() e gettype() para debugar</h3>
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">php</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f56"></div>
+                        <div class="cb-dot" style="background:#ffbd2e"></div>
+                        <div class="cb-dot" style="background:#27c93f"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">&lt;?php</span>
+
+<span class="cv">$preco</span> = <span class="cn">29.90</span>;
+<span class="cv">$ativo</span> = <span class="ck">true</span>;
+<span class="cv">$nome</span>  = <span class="cs">"Produto X"</span>;
+
+<span class="cc">// var_dump: mostra tipo + valor (essencial para debug)</span>
+<span class="cf">var_dump</span>(<span class="cv">$preco</span>);   <span class="cc">// float(29.9)</span>
+<span class="cf">var_dump</span>(<span class="cv">$ativo</span>);   <span class="cc">// bool(true)</span>
+<span class="cf">var_dump</span>(<span class="cv">$nome</span>);    <span class="cc">// string(9) "Produto X"</span>
+
+<span class="cc">// gettype: retorna o nome do tipo como string</span>
+<span class="ck">echo</span> <span class="cf">gettype</span>(<span class="cv">$preco</span>);  <span class="cc">// double (PHP usa 'double' pra float)</span>
+<span class="ck">echo</span> <span class="cf">gettype</span>(<span class="cv">$nome</span>);   <span class="cc">// string</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">Aspas simples vs aspas duplas</h3>
+            <p>Uma das diferenças mais importantes para iniciantes PHP:</p>
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">php</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f56"></div>
+                        <div class="cb-dot" style="background:#ffbd2e"></div>
+                        <div class="cb-dot" style="background:#27c93f"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">&lt;?php</span>
+
+<span class="cv">$nome</span> = <span class="cs">"João"</span>;
+
+<span class="cc">// Aspas DUPLAS: interpolação de variáveis! PHP substitui a variável.</span>
+<span class="ck">echo</span> <span class="cs">"Olá, <span class="cv">$nome</span>!"</span>;          <span class="cc">// Olá, João!</span>
+<span class="ck">echo</span> <span class="cs">"Olá, {<span class="cv">$nome</span>}!"</span>;        <span class="cc">// Olá, João! (chaves deixam mais claro)</span>
+
+<span class="cc">// Aspas SIMPLES: texto literal. PHP não interpola nada.</span>
+<span class="ck">echo</span> <span class="cs">'Olá, $nome!'</span>;          <span class="cc">// Olá, $nome! (literal)</span>
+
+<span class="cc">// Regra prática: use duplas quando precisar de variáveis,
+// simples quando for texto puro (levemente mais rápido)</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">Heredoc e Nowdoc</h3>
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">php</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f56"></div>
+                        <div class="cb-dot" style="background:#ffbd2e"></div>
+                        <div class="cb-dot" style="background:#27c93f"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">&lt;?php</span>
+
+<span class="cv">$usuario</span> = <span class="cs">"Maria"</span>;
+
+<span class="cc">// Heredoc: como aspas duplas, mas para textos longos</span>
+<span class="cv">$html</span> = <span class="ck">&lt;&lt;&lt;EOT</span>
+<span class="cs">    &lt;div&gt;
+        &lt;h1&gt;Bem-vinda, <span class="cv">$usuario</span>!&lt;/h1&gt;
+        &lt;p&gt;Interpolação funciona aqui.&lt;/p&gt;
+    &lt;/div&gt;</span>
+<span class="ck">EOT;</span>
+
+<span class="cc">// Nowdoc: como aspas simples, sem interpolação</span>
+<span class="cv">$codigo</span> = <span class="ck">&lt;&lt;&lt;'EOT'</span>
+<span class="cs">    echo $variavel; // isso não é interpolado</span>
+<span class="ck">EOT;</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">Type casting — convertendo tipos</h3>
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">php</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f56"></div>
+                        <div class="cb-dot" style="background:#ffbd2e"></div>
+                        <div class="cb-dot" style="background:#27c93f"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">&lt;?php</span>
+
+<span class="cv">$valor</span> = <span class="cs">"42"</span>;          <span class="cc">// string</span>
+
+<span class="cv">$inteiro</span> = (<span class="ck">int</span>) <span class="cv">$valor</span>;    <span class="cc">// 42 (integer)</span>
+<span class="cv">$flutuante</span> = (<span class="ck">float</span>) <span class="cv">$valor</span>; <span class="cc">// 42.0 (float)</span>
+<span class="cv">$texto</span> = (<span class="ck">string</span>) <span class="cn">99</span>;        <span class="cc">// "99" (string)</span>
+<span class="cv">$bool</span> = (<span class="ck">bool</span>) <span class="cn">0</span>;             <span class="cc">// false</span>
+<span class="cv">$bool2</span> = (<span class="ck">bool</span>) <span class="cn">1</span>;            <span class="cc">// true</span>
+
+<span class="cc">// intval(), floatval(), strval() são alternativas funcionais</span>
+<span class="cv">$n</span> = <span class="cf">intval</span>(<span class="cs">"10px"</span>);   <span class="cc">// 10 — extrai o número do início da string</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">Funções de string essenciais</h3>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-title">strlen($str)</div>
+                    <div class="card-desc">Retorna o número de caracteres da string.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">strtolower / strtoupper</div>
+                    <div class="card-desc">Converte para minúsculas ou maiúsculas.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">str_replace($old,$new,$str)</div>
+                    <div class="card-desc">Substitui ocorrências de um texto por outro.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">substr($str, $start, $len)</div>
+                    <div class="card-desc">Extrai parte de uma string a partir de um índice.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">trim($str)</div>
+                    <div class="card-desc">Remove espaços (e outros caracteres) do início e fim.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">explode($sep, $str)</div>
+                    <div class="card-desc">Divide string em array. Como split() em outras linguagens.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">implode($sep, $arr)</div>
+                    <div class="card-desc">Une array em string. O inverso do explode.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">str_contains / str_starts_with</div>
+                    <div class="card-desc">PHP 8: verifica se string contém ou começa com outro texto.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════
+             5. CONDICIONAIS E LOOPS
+        ══════════════════════════════════════ -->
+        <section id="controle">
+            <h2 class="section-h">🔀 Condicionais e Loops</h2>
+
+            <p>Condicionais decidem o que acontece. Loops repetem o que precisa ser repetido. Juntos, eles são o coração de qualquer lógica de programação.</p>
+
+            <h3 class="sub-h">if / elseif / else</h3>
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">php</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f56"></div>
+                        <div class="cb-dot" style="background:#ffbd2e"></div>
+                        <div class="cb-dot" style="background:#27c93f"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">&lt;?php</span>
+
+<span class="cv">$logado</span> = <span class="ck">true</span>;
+<span class="cv">$perfil</span> = <span class="cs">"admin"</span>;
+
+<span class="ck">if</span> (<span class="cv">$logado</span> && <span class="cv">$perfil</span> === <span class="cs">"admin"</span>) {
+    <span class="ck">echo</span> <span class="cs">"Bem-vindo, administrador!"</span>;
+} <span class="ck">elseif</span> (<span class="cv">$logado</span>) {
+    <span class="ck">echo</span> <span class="cs">"Bem-vindo, usuário!"</span>;
+} <span class="ck">else</span> {
+    <span class="ck">echo</span> <span class="cs">"Por favor, faça login."</span>;
+}
+
+<span class="cc">// Operador ternário: condição ? valor_se_true : valor_se_false</span>
+<span class="cv">$msg</span> = <span class="cv">$logado</span> ? <span class="cs">"Olá!"</span> : <span class="cs">"Faça login"</span>;
+
+<span class="cc">// Null coalescing (PHP 7+): retorna o primeiro valor não-null</span>
+<span class="cv">$nome</span> = <span class="cv">$_GET</span>[<span class="cs">'nome'</span>] ?? <span class="cs">"visitante"</span>;</code></pre>
+            </div>
+
+            <h3 class="sub-h">switch</h3>
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">php</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f56"></div>
+                        <div class="cb-dot" style="background:#ffbd2e"></div>
+                        <div class="cb-dot" style="background:#27c93f"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">&lt;?php</span>
+
+<span class="cv">$diaSemana</span> = <span class="cn">3</span>;
+
+<span class="ck">switch</span> (<span class="cv">$diaSemana</span>) {
+    <span class="ck">case</span> <span class="cn">1</span>:
+        <span class="ck">echo</span> <span class="cs">"Segunda-feira"</span>;
+        <span class="ck">break</span>;
+    <span class="ck">case</span> <span class="cn">2</span>:
+        <span class="ck">echo</span> <span class="cs">"Terça-feira"</span>;
+        <span class="ck">break</span>;
+    <span class="ck">case</span> <span class="cn">3</span>:
+        <span class="ck">echo</span> <span class="cs">"Quarta-feira"</span>;
+        <span class="ck">break</span>;
+    <span class="ck">default</span>:
+        <span class="ck">echo</span> <span class="cs">"Outro dia"</span>;
+}</code></pre>
+            </div>
+
+            <h3 class="sub-h">match — o switch moderno (PHP 8)</h3>
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">php 8</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f56"></div>
+                        <div class="cb-dot" style="background:#ffbd2e"></div>
+                        <div class="cb-dot" style="background:#27c93f"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">&lt;?php</span>
+
+<span class="cv">$status</span> = <span class="cs">"aprovado"</span>;
+
+<span class="cc">// match usa comparação estrita (===), não precisa de break,
+// e retorna um valor diretamente — muito mais limpo que switch</span>
+<span class="cv">$msg</span> = <span class="ck">match</span>(<span class="cv">$status</span>) {
+    <span class="cs">"aprovado"</span>  => <span class="cs">"✅ Pedido aprovado!"</span>,
+    <span class="cs">"pendente"</span>  => <span class="cs">"⏳ Aguardando aprovação..."</span>,
+    <span class="cs">"recusado"</span>  => <span class="cs">"❌ Pedido recusado."</span>,
+    <span class="ck">default</span>     => <span class="cs">"Status desconhecido"</span>,
+};
+
+<span class="ck">echo</span> <span class="cv">$msg</span>; <span class="cc">// ✅ Pedido aprovado!</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">Loops</h3>
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">php</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f56"></div>
+                        <div class="cb-dot" style="background:#ffbd2e"></div>
+                        <div class="cb-dot" style="background:#27c93f"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">&lt;?php</span>
+
+<span class="cc">// for: quando você sabe quantas vezes vai repetir</span>
+<span class="ck">for</span> (<span class="cv">$i</span> = <span class="cn">0</span>; <span class="cv">$i</span> &lt; <span class="cn">5</span>; <span class="cv">$i</span>++) {
+    <span class="ck">echo</span> <span class="cs">"Iteração: <span class="cv">$i</span>&lt;br&gt;"</span>;
+}
+
+<span class="cc">// while: enquanto a condição for verdadeira</span>
+<span class="cv">$contador</span> = <span class="cn">0</span>;
+<span class="ck">while</span> (<span class="cv">$contador</span> &lt; <span class="cn">3</span>) {
+    <span class="ck">echo</span> <span class="cs">"Contando: <span class="cv">$contador</span>&lt;br&gt;"</span>;
+    <span class="cv">$contador</span>++;
+}
+
+<span class="cc">// do...while: executa pelo menos uma vez antes de checar</span>
+<span class="ck">do</span> {
+    <span class="ck">echo</span> <span class="cs">"Pelo menos uma vez!&lt;br&gt;"</span>;
+    <span class="cv">$contador</span>++;
+} <span class="ck">while</span> (<span class="cv">$contador</span> &lt; <span class="cn">1</span>);
+
+<span class="cc">// foreach: perfeito para percorrer arrays</span>
+<span class="cv">$produtos</span> = [<span class="cs">"Tênis"</span>, <span class="cs">"Camiseta"</span>, <span class="cs">"Boné"</span>];
+
+<span class="ck">foreach</span> (<span class="cv">$produtos</span> <span class="ck">as</span> <span class="cv">$produto</span>) {
+    <span class="ck">echo</span> <span class="cs">"- <span class="cv">$produto</span>&lt;br&gt;"</span>;
+}
+
+<span class="cc">// break: interrompe o loop</span>
+<span class="cc">// continue: pula para a próxima iteração</span>
+<span class="ck">for</span> (<span class="cv">$i</span> = <span class="cn">0</span>; <span class="cv">$i</span> &lt; <span class="cn">10</span>; <span class="cv">$i</span>++) {
+    <span class="ck">if</span> (<span class="cv">$i</span> === <span class="cn">5</span>) <span class="ck">break</span>;       <span class="cc">// para ao chegar em 5</span>
+    <span class="ck">if</span> (<span class="cv">$i</span> % <span class="cn">2</span> === <span class="cn">0</span>) <span class="ck">continue</span>; <span class="cc">// pula números pares</span>
+    <span class="ck">echo</span> <span class="cv">$i</span>;                    <span class="cc">// exibe: 1, 3</span>
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════
+             6. FUNÇÕES
+        ══════════════════════════════════════ -->
+        <section id="funcoes">
+            <h2 class="section-h">⚙️ Funções</h2>
+
+            <p>Funções são blocos de código reutilizáveis. Em vez de escrever a mesma lógica dez vezes, você escreve uma vez, dá um nome, e chama quando precisar. Essa é a base da programação que não te faz querer largar tudo.</p>
+
+            <h3 class="sub-h">Definindo e chamando funções</h3>
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">php</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f56"></div>
+                        <div class="cb-dot" style="background:#ffbd2e"></div>
+                        <div class="cb-dot" style="background:#27c93f"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">&lt;?php</span>
+
+<span class="cc">// Definição básica</span>
+<span class="ck">function</span> <span class="cf">saudacao</span>(<span class="cv">$nome</span>) {
+    <span class="ck">return</span> <span class="cs">"Olá, <span class="cv">$nome</span>!"</span>;
+}
+
+<span class="ck">echo</span> <span class="cf">saudacao</span>(<span class="cs">"Pedro"</span>); <span class="cc">// Olá, Pedro!</span>
+
+<span class="cc">// Parâmetro com valor padrão</span>
+<span class="ck">function</span> <span class="cf">boasVindas</span>(<span class="cv">$nome</span> = <span class="cs">"visitante"</span>) {
+    <span class="ck">return</span> <span class="cs">"Bem-vindo, <span class="cv">$nome</span>!"</span>;
+}
+
+<span class="ck">echo</span> <span class="cf">boasVindas</span>();         <span class="cc">// Bem-vindo, visitante!</span>
+<span class="ck">echo</span> <span class="cf">boasVindas</span>(<span class="cs">"Ana"</span>);    <span class="cc">// Bem-vindo, Ana!</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">Type hints — PHP 7+</h3>
+            <p>A partir do PHP 7, você pode (e deve!) declarar os tipos esperados dos parâmetros e do retorno. Isso previne bugs e torna o código muito mais legível.</p>
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">php 7+</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f56"></div>
+                        <div class="cb-dot" style="background:#ffbd2e"></div>
+                        <div class="cb-dot" style="background:#27c93f"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">&lt;?php</span>
+
+<span class="cc">// Type hints: tipo do parâmetro : tipo do retorno</span>
+<span class="ck">function</span> <span class="cf">soma</span>(<span class="ck">int</span> <span class="cv">$a</span>, <span class="ck">int</span> <span class="cv">$b</span>): <span class="ck">int</span> {
+    <span class="ck">return</span> <span class="cv">$a</span> + <span class="cv">$b</span>;
+}
+
+<span class="ck">echo</span> <span class="cf">soma</span>(<span class="cn">3</span>, <span class="cn">4</span>);  <span class="cc">// 7</span>
+<span class="cc">// soma("oi", 4);  ← TypeError em strict mode</span>
+
+<span class="cc">// Nullable type: aceita o tipo ou null</span>
+<span class="ck">function</span> <span class="cf">buscarUsuario</span>(<span class="ck">int</span> <span class="cv">$id</span>): <span class="ck">?string</span> {
+    <span class="cc">// Retorna nome ou null se não encontrar</span>
+    <span class="ck">return</span> <span class="cv">$id</span> === <span class="cn">1</span> ? <span class="cs">"Admin"</span> : <span class="ck">null</span>;
+}
+
+<span class="cc">// Union types (PHP 8): aceita mais de um tipo</span>
+<span class="ck">function</span> <span class="cf">formatar</span>(<span class="ck">int</span>|<span class="ck">float</span> <span class="cv">$valor</span>): <span class="ck">string</span> {
+    <span class="ck">return</span> <span class="cs">"R$ "</span> . <span class="cf">number_format</span>(<span class="cv">$valor</span>, <span class="cn">2</span>, <span class="cs">','</span>, <span class="cs">'.'</span>);
+}</code></pre>
+            </div>
+
+            <h3 class="sub-h">Escopo de variáveis</h3>
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">php</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f56"></div>
+                        <div class="cb-dot" style="background:#ffbd2e"></div>
+                        <div class="cb-dot" style="background:#27c93f"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">&lt;?php</span>
+
+<span class="cv">$total</span> = <span class="cn">100</span>;  <span class="cc">// variável global</span>
+
+<span class="ck">function</span> <span class="cf">calcularDesconto</span>(<span class="cv">$pct</span>) {
+    <span class="cc">// $total não existe aqui! Escopo local.</span>
+    <span class="cc">// echo $total;  ← undefined variable</span>
+
+    <span class="cc">// Para acessar a global, use a keyword global:</span>
+    <span class="ck">global</span> <span class="cv">$total</span>;
+    <span class="ck">return</span> <span class="cv">$total</span> * (<span class="cn">1</span> - <span class="cv">$pct</span> / <span class="cn">100</span>);
+}
+
+<span class="ck">echo</span> <span class="cf">calcularDesconto</span>(<span class="cn">10</span>); <span class="cc">// 90</span>
+
+<span class="cc">// Dica: prefira passar como parâmetro em vez de usar global</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">Funções nativas que você vai usar todo dia</h3>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-title">date($format)</div>
+                    <div class="card-desc">Retorna a data/hora atual formatada. Ex: <code>date('d/m/Y')</code></div>
+                </div>
+                <div class="card">
+                    <div class="card-title">rand($min, $max)</div>
+                    <div class="card-desc">Número aleatório entre dois valores. Essencial para testes.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">isset($var)</div>
+                    <div class="card-desc">Retorna true se a variável existe e não é null. Muito usado com formulários.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">empty($var)</div>
+                    <div class="card-desc">Retorna true se a variável está vazia (<code>""</code>, <code>0</code>, <code>[]</code>, <code>null</code>, <code>false</code>).</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">is_array($var)</div>
+                    <div class="card-desc">Verifica se a variável é um array. Existem funções <code>is_*</code> para todos os tipos.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">array_map($fn, $arr)</div>
+                    <div class="card-desc">Aplica uma função em cada elemento do array e retorna um novo array.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">array_filter($arr, $fn)</div>
+                    <div class="card-desc">Filtra elementos do array baseado em uma função de callback.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">count($arr)</div>
+                    <div class="card-desc">Conta quantos elementos há no array (ou string).</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════
+             7. ARRAYS
+        ══════════════════════════════════════ -->
+        <section id="arrays">
+            <h2 class="section-h">📚 Arrays</h2>
+
+            <p>Arrays em PHP são superpoderes. Ao contrário de outras linguagens onde arrays e dicionários são coisas separadas, em PHP tudo é array — indexado por número <em>ou</em> por string. Versátil até demais.</p>
+
+            <h3 class="sub-h">Array indexado</h3>
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">php</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f56"></div>
+                        <div class="cb-dot" style="background:#ffbd2e"></div>
+                        <div class="cb-dot" style="background:#27c93f"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">&lt;?php</span>
+
+<span class="cc">// Array indexado (índices numéricos, começa em 0)</span>
+<span class="cv">$frutas</span> = [<span class="cs">"maçã"</span>, <span class="cs">"banana"</span>, <span class="cs">"laranja"</span>];
+
+<span class="ck">echo</span> <span class="cv">$frutas</span>[<span class="cn">0</span>];  <span class="cc">// maçã</span>
+<span class="ck">echo</span> <span class="cv">$frutas</span>[<span class="cn">2</span>];  <span class="cc">// laranja</span>
+
+<span class="cc">// Adicionar elementos</span>
+<span class="cv">$frutas</span>[] = <span class="cs">"uva"</span>;              <span class="cc">// adiciona no final</span>
+<span class="cf">array_push</span>(<span class="cv">$frutas</span>, <span class="cs">"manga"</span>);  <span class="cc">// equivalente</span>
+
+<span class="cc">// Remover último elemento</span>
+<span class="cv">$ultima</span> = <span class="cf">array_pop</span>(<span class="cv">$frutas</span>);
+
+<span class="cc">// Contar elementos</span>
+<span class="ck">echo</span> <span class="cf">count</span>(<span class="cv">$frutas</span>);  <span class="cc">// 4</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">Array associativo</h3>
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">php</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f56"></div>
+                        <div class="cb-dot" style="background:#ffbd2e"></div>
+                        <div class="cb-dot" style="background:#27c93f"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">&lt;?php</span>
+
+<span class="cc">// Array associativo: chaves personalizadas (como objeto/dicionário)</span>
+<span class="cv">$usuario</span> = [
+    <span class="cs">"nome"</span>  => <span class="cs">"João"</span>,
+    <span class="cs">"idade"</span> => <span class="cn">25</span>,
+    <span class="cs">"email"</span> => <span class="cs">"joao@email.com"</span>,
+    <span class="cs">"ativo"</span> => <span class="ck">true</span>,
+];
+
+<span class="ck">echo</span> <span class="cv">$usuario</span>[<span class="cs">"nome"</span>];   <span class="cc">// João</span>
+<span class="ck">echo</span> <span class="cv">$usuario</span>[<span class="cs">"idade"</span>];  <span class="cc">// 25</span>
+
+<span class="cc">// Modificar um valor</span>
+<span class="cv">$usuario</span>[<span class="cs">"idade"</span>] = <span class="cn">26</span>;
+
+<span class="cc">// foreach com chave => valor</span>
+<span class="ck">foreach</span> (<span class="cv">$usuario</span> <span class="ck">as</span> <span class="cv">$chave</span> => <span class="cv">$valor</span>) {
+    <span class="ck">echo</span> <span class="cs">"<span class="cv">$chave</span>: <span class="cv">$valor</span>&lt;br&gt;"</span>;
+}
+<span class="cc">// nome: João</span>
+<span class="cc">// idade: 26</span>
+<span class="cc">// email: joao@email.com</span>
+<span class="cc">// ativo: 1</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">Array multidimensional</h3>
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">php</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f56"></div>
+                        <div class="cb-dot" style="background:#ffbd2e"></div>
+                        <div class="cb-dot" style="background:#27c93f"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">&lt;?php</span>
+
+<span class="cc">// Array de arrays — muito comum para representar tabelas/listas</span>
+<span class="cv">$produtos</span> = [
+    [<span class="cs">"nome"</span> => <span class="cs">"Tênis"</span>,    <span class="cs">"preco"</span> => <span class="cn">299.90</span>, <span class="cs">"estoque"</span> => <span class="cn">15</span>],
+    [<span class="cs">"nome"</span> => <span class="cs">"Camiseta"</span>, <span class="cs">"preco"</span> => <span class="cn">79.90</span>,  <span class="cs">"estoque"</span> => <span class="cn">42</span>],
+    [<span class="cs">"nome"</span> => <span class="cs">"Boné"</span>,     <span class="cs">"preco"</span> => <span class="cn">49.90</span>,  <span class="cs">"estoque"</span> => <span class="cn">8</span>],
+];
+
+<span class="cc">// Acessar elemento específico</span>
+<span class="ck">echo</span> <span class="cv">$produtos</span>[<span class="cn">0</span>][<span class="cs">"nome"</span>];   <span class="cc">// Tênis</span>
+<span class="ck">echo</span> <span class="cv">$produtos</span>[<span class="cn">1</span>][<span class="cs">"preco"</span>];  <span class="cc">// 79.9</span>
+
+<span class="cc">// Percorrer e exibir</span>
+<span class="ck">foreach</span> (<span class="cv">$produtos</span> <span class="ck">as</span> <span class="cv">$p</span>) {
+    <span class="ck">echo</span> <span class="cs">"<span class="cv">{$p['nome']}</span> — R$ <span class="cv">{$p['preco']}</span> (<span class="cv">{$p['estoque']}</span> em estoque)&lt;br&gt;"</span>;
+}</code></pre>
+            </div>
+
+            <h3 class="sub-h">Funções de array mais usadas</h3>
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">php</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f56"></div>
+                        <div class="cb-dot" style="background:#ffbd2e"></div>
+                        <div class="cb-dot" style="background:#27c93f"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">&lt;?php</span>
+
+<span class="cv">$numeros</span> = [<span class="cn">5</span>, <span class="cn">3</span>, <span class="cn">8</span>, <span class="cn">1</span>, <span class="cn">9</span>, <span class="cn">2</span>];
+<span class="cv">$frutas</span>  = [<span class="cs">"maçã"</span>, <span class="cs">"banana"</span>];
+<span class="cv">$legumes</span> = [<span class="cs">"cenoura"</span>, <span class="cs">"brócolis"</span>];
+
+<span class="cc">// Ordenar</span>
+<span class="cf">sort</span>(<span class="cv">$numeros</span>);   <span class="cc">// [1, 2, 3, 5, 8, 9] — ordena in-place</span>
+
+<span class="cc">// Ordenação customizada</span>
+<span class="cf">usort</span>(<span class="cv">$produtos</span>, <span class="ck">function</span>(<span class="cv">$a</span>, <span class="cv">$b</span>) {
+    <span class="ck">return</span> <span class="cv">$a</span>[<span class="cs">"preco"</span>] &lt;=&gt; <span class="cv">$b</span>[<span class="cs">"preco"</span>]; <span class="cc">// operador spaceship</span>
+});
+
+<span class="cc">// Mesclar arrays</span>
+<span class="cv">$alimentos</span> = <span class="cf">array_merge</span>(<span class="cv">$frutas</span>, <span class="cv">$legumes</span>);
+
+<span class="cc">// Verificar se valor existe</span>
+<span class="ck">if</span> (<span class="cf">in_array</span>(<span class="cs">"banana"</span>, <span class="cv">$frutas</span>)) {
+    <span class="ck">echo</span> <span class="cs">"Tem banana!"</span>;
+}
+
+<span class="cc">// Obter só as chaves ou só os valores</span>
+<span class="cv">$chaves</span>  = <span class="cf">array_keys</span>(<span class="cv">$usuario</span>);
+<span class="cv">$valores</span> = <span class="cf">array_values</span>(<span class="cv">$usuario</span>);
+
+<span class="cc">// array_map: transforma cada elemento</span>
+<span class="cv">$maiusculas</span> = <span class="cf">array_map</span>(<span class="cs">'strtoupper'</span>, <span class="cv">$frutas</span>);
+<span class="cc">// ["MAÇÃ", "BANANA"]</span>
+
+<span class="cc">// array_filter: filtra elementos (mantém os que passam no callback)</span>
+<span class="cv">$caros</span> = <span class="cf">array_filter</span>(<span class="cv">$produtos</span>, <span class="ck">function</span>(<span class="cv">$p</span>) {
+    <span class="ck">return</span> <span class="cv">$p</span>[<span class="cs">"preco"</span>] > <span class="cn">100</span>;
+});
+
+<span class="cc">// Spread operator (PHP 8) — espalhar array em argumentos</span>
+<span class="cv">$extra</span>   = [<span class="cs">"uva"</span>, <span class="cs">"manga"</span>];
+<span class="cv">$todasFrutas</span> = [<span class="cs">"maçã"</span>, ...<span class="cv">$extra</span>]; <span class="cc">// ["maçã", "uva", "manga"]</span></code></pre>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════
+             8. PHP E FORMULÁRIOS HTML
+        ══════════════════════════════════════ -->
+        <section id="formularios">
+            <h2 class="section-h">📬 PHP e Formulários HTML</h2>
+
+            <p>Uma das coisas mais práticas do PHP é processar formulários HTML. O usuário preenche, clica em enviar, o PHP recebe, valida, e faz o que precisar. É a base de 99% dos sites com interação.</p>
+
+            <h3 class="sub-h">$_GET vs $_POST — quando usar cada um</h3>
+            <div class="two-col">
+                <div class="half">
+                    <h4 style="color:var(--blue)">$_GET</h4>
+                    <p style="font-size:.83rem;color:var(--text-muted)">Dados aparecem na URL: <code>pagina.php?nome=João&id=5</code></p>
+                    <ul class="lst" style="font-size:.82rem">
+                        <li>Bom para buscas e filtros</li>
+                        <li>Pode ser salvo nos favoritos</li>
+                        <li>Visível na URL — não use para senhas</li>
+                        <li>Limite de tamanho pela URL (~2KB)</li>
+                    </ul>
+                </div>
+                <div class="half">
+                    <h4 style="color:var(--green)">$_POST</h4>
+                    <p style="font-size:.83rem;color:var(--text-muted)">Dados enviados no corpo da requisição HTTP — invisíveis na URL.</p>
+                    <ul class="lst" style="font-size:.82rem">
+                        <li>Bom para login, cadastro, formulários</li>
+                        <li>Não aparece na URL</li>
+                        <li>Mais seguro para dados sensíveis</li>
+                        <li>Suporta dados maiores e arquivos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Exemplo completo: formulário de contato</h3>
+            <p>O HTML do formulário:</p>
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">html (contato.html)</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f56"></div>
+                        <div class="cb-dot" style="background:#ffbd2e"></div>
+                        <div class="cb-dot" style="background:#27c93f"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ct">&lt;form</span> <span class="ca">action</span>=<span class="cs">"processar.php"</span> <span class="ca">method</span>=<span class="cs">"post"</span><span class="ct">&gt;</span>
+
+  <span class="ct">&lt;label&gt;</span>Nome:<span class="ct">&lt;/label&gt;</span>
+  <span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cs">"text"</span> <span class="ca">name</span>=<span class="cs">"nome"</span> <span class="ca">required</span><span class="ct">&gt;</span>
+
+  <span class="ct">&lt;label&gt;</span>E-mail:<span class="ct">&lt;/label&gt;</span>
+  <span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cs">"email"</span> <span class="ca">name</span>=<span class="cs">"email"</span> <span class="ca">required</span><span class="ct">&gt;</span>
+
+  <span class="ct">&lt;label&gt;</span>Mensagem:<span class="ct">&lt;/label&gt;</span>
+  <span class="ct">&lt;textarea</span> <span class="ca">name</span>=<span class="cs">"mensagem"</span> <span class="ca">rows</span>=<span class="cs">"5"</span><span class="ct">&gt;&lt;/textarea&gt;</span>
+
+  <span class="ct">&lt;button</span> <span class="ca">type</span>=<span class="cs">"submit"</span><span class="ct">&gt;</span>Enviar<span class="ct">&lt;/button&gt;</span>
+
+<span class="ct">&lt;/form&gt;</span></code></pre>
+            </div>
+
+            <p>O PHP que processa (<code>processar.php</code>):</p>
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">php (processar.php)</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f56"></div>
+                        <div class="cb-dot" style="background:#ffbd2e"></div>
+                        <div class="cb-dot" style="background:#27c93f"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">&lt;?php</span>
+
+<span class="cv">$erros</span> = [];
+
+<span class="cc">// 1. Verificar se o formulário foi enviado via POST</span>
+<span class="ck">if</span> (<span class="cv">$_SERVER</span>[<span class="cs">'REQUEST_METHOD'</span>] === <span class="cs">'POST'</span>) {
+
+    <span class="cc">// 2. Sanitizar: limpar os dados antes de usar</span>
+    <span class="cv">$nome</span>     = <span class="cf">trim</span>(<span class="cf">htmlspecialchars</span>(<span class="cv">$_POST</span>[<span class="cs">'nome'</span>] ?? <span class="cs">''</span>));
+    <span class="cv">$email</span>    = <span class="cf">trim</span>(<span class="cf">htmlspecialchars</span>(<span class="cv">$_POST</span>[<span class="cs">'email'</span>] ?? <span class="cs">''</span>)));
+    <span class="cv">$mensagem</span> = <span class="cf">trim</span>(<span class="cf">strip_tags</span>(<span class="cv">$_POST</span>[<span class="cs">'mensagem'</span>] ?? <span class="cs">''</span>));
+
+    <span class="cc">// 3. Validar: checar se os dados fazem sentido</span>
+    <span class="ck">if</span> (<span class="cf">empty</span>(<span class="cv">$nome</span>)) {
+        <span class="cv">$erros</span>[] = <span class="cs">"Nome é obrigatório."</span>;
+    }
+
+    <span class="ck">if</span> (!<span class="cf">filter_var</span>(<span class="cv">$email</span>, <span class="ck">FILTER_VALIDATE_EMAIL</span>)) {
+        <span class="cv">$erros</span>[] = <span class="cs">"E-mail inválido."</span>;
+    }
+
+    <span class="ck">if</span> (<span class="cf">strlen</span>(<span class="cv">$mensagem</span>) &lt; <span class="cn">10</span>) {
+        <span class="cv">$erros</span>[] = <span class="cs">"Mensagem muito curta (mínimo 10 caracteres)."</span>;
+    }
+
+    <span class="cc">// 4. Processar se não houver erros</span>
+    <span class="ck">if</span> (<span class="cf">empty</span>(<span class="cv">$erros</span>)) {
+        <span class="cc">// Aqui você enviaria e-mail, salvaria no banco etc.</span>
+        <span class="ck">echo</span> <span class="cs">"&lt;p&gt;✅ Mensagem recebida! Obrigado, <span class="cv">$nome</span>.&lt;/p&gt;"</span>;
+    } <span class="ck">else</span> {
+        <span class="cc">// Exibir erros</span>
+        <span class="ck">foreach</span> (<span class="cv">$erros</span> <span class="ck">as</span> <span class="cv">$erro</span>) {
+            <span class="ck">echo</span> <span class="cs">"&lt;p style='color:red'&gt;❌ <span class="cv">$erro</span>&lt;/p&gt;"</span>;
+        }
+    }
+}
+<span class="ck">?&gt;</span></code></pre>
+            </div>
+
+            <div class="callout danger">
+                <span class="callout-icon">🔒</span>
+                <div class="callout-body">
+                    <p><strong>REGRA DE OURO DA SEGURANÇA:</strong> NUNCA confie em dados vindos do usuário sem validar e sanitizar. Um usuário mal-intencionado pode enviar qualquer coisa em um formulário — scripts, SQL malicioso, código HTML. Sempre use <code>htmlspecialchars()</code>, <code>strip_tags()</code>, <code>trim()</code> e <code>filter_var()</code> antes de usar qualquer dado do <code>$_POST</code> ou <code>$_GET</code>.</p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Funções de validação e sanitização</h3>
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">php</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f56"></div>
+                        <div class="cb-dot" style="background:#ffbd2e"></div>
+                        <div class="cb-dot" style="background:#27c93f"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">&lt;?php</span>
+
+<span class="cv">$email</span> = <span class="cs">"usuario@exemplo.com"</span>;
+<span class="cv">$idade</span> = <span class="cs">"25"</span>;
+<span class="cv">$url</span>   = <span class="cs">"https://exemplo.com"</span>;
+
+<span class="cc">// filter_var: validação</span>
+<span class="cf">filter_var</span>(<span class="cv">$email</span>, <span class="ck">FILTER_VALIDATE_EMAIL</span>);  <span class="cc">// string ou false</span>
+<span class="cf">filter_var</span>(<span class="cv">$idade</span>, <span class="ck">FILTER_VALIDATE_INT</span>);    <span class="cc">// int ou false</span>
+<span class="cf">filter_var</span>(<span class="cv">$url</span>,   <span class="ck">FILTER_VALIDATE_URL</span>);    <span class="cc">// string ou false</span>
+
+<span class="cc">// filter_var: sanitização (limpa o valor)</span>
+<span class="cv">$emailLimpo</span> = <span class="cf">filter_var</span>(<span class="cv">$email</span>, <span class="ck">FILTER_SANITIZE_EMAIL</span>);
+<span class="cv">$numLimpo</span>   = <span class="cf">filter_var</span>(<span class="cs">"R$ 29,90"</span>, <span class="ck">FILTER_SANITIZE_NUMBER_FLOAT</span>, <span class="ck">FILTER_FLAG_ALLOW_FRACTION</span>);
+
+<span class="cc">// htmlspecialchars: converte caracteres especiais em entidades HTML</span>
+<span class="cc">// Evita XSS (Cross-Site Scripting)</span>
+<span class="cv">$input</span> = <span class="cs">'&lt;script&gt;alert("XSS")&lt;/script&gt;'</span>;
+<span class="ck">echo</span> <span class="cf">htmlspecialchars</span>(<span class="cv">$input</span>);
+<span class="cc">// &amp;lt;script&amp;gt;alert("XSS")&amp;lt;/script&amp;gt; — inofensivo!</span>
+
+<span class="cc">// strip_tags: remove todas as tags HTML do texto</span>
+<span class="ck">echo</span> <span class="cf">strip_tags</span>(<span class="cs">"&lt;b&gt;Texto&lt;/b&gt; normal"</span>); <span class="cc">// Texto normal</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">Superglobais — uma visão geral</h3>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-badge b-purple">Superglobal</div>
+                    <div class="card-title">$_POST</div>
+                    <div class="card-desc">Dados enviados via método POST (formulários, APIs). Mais seguro para dados sensíveis.</div>
+                </div>
+                <div class="card">
+                    <div class="card-badge b-blue">Superglobal</div>
+                    <div class="card-title">$_GET</div>
+                    <div class="card-desc">Parâmetros da URL. Ex: <code>?busca=php</code> → <code>$_GET['busca']</code></div>
+                </div>
+                <div class="card">
+                    <div class="card-badge b-green">Superglobal</div>
+                    <div class="card-title">$_REQUEST</div>
+                    <div class="card-desc">Mistura de $_GET, $_POST e $_COOKIE. Prático, mas prefira ser específico.</div>
+                </div>
+                <div class="card">
+                    <div class="card-badge b-yellow">Superglobal</div>
+                    <div class="card-title">$_SERVER</div>
+                    <div class="card-desc">Informações do servidor: IP do cliente, método HTTP, URL atual, headers etc.</div>
+                </div>
+                <div class="card">
+                    <div class="card-badge b-orange">Superglobal</div>
+                    <div class="card-title">$_SESSION</div>
+                    <div class="card-desc">Armazena dados entre requisições. Perfeito para manter usuário logado. Use <code>session_start()</code>.</div>
+                </div>
+                <div class="card">
+                    <div class="card-badge b-red">Superglobal</div>
+                    <div class="card-title">$_COOKIE</div>
+                    <div class="card-desc">Acessa cookies enviados pelo browser. Use <code>setcookie()</code> para criar.</div>
+                </div>
+                <div class="card">
+                    <div class="card-badge b-purple">Superglobal</div>
+                    <div class="card-title">$_FILES</div>
+                    <div class="card-desc">Dados de arquivos enviados via upload (<code>type="file"</code>). Contém nome, tipo, tamanho e caminho temporário.</div>
+                </div>
+            </div>
+
+            <h3 class="sub-h">$_SESSION — mantendo o usuário logado</h3>
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">php</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f56"></div>
+                        <div class="cb-dot" style="background:#ffbd2e"></div>
+                        <div class="cb-dot" style="background:#27c93f"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">&lt;?php</span>
+<span class="cc">// session_start() DEVE ser a primeira coisa do arquivo</span>
+<span class="cf">session_start</span>();
+
+<span class="cc">// Salvar dados na sessão (após login bem-sucedido)</span>
+<span class="cv">$_SESSION</span>[<span class="cs">'usuario_id'</span>]   = <span class="cn">42</span>;
+<span class="cv">$_SESSION</span>[<span class="cs">'usuario_nome'</span>] = <span class="cs">"Maria"</span>;
+<span class="cv">$_SESSION</span>[<span class="cs">'logado'</span>]       = <span class="ck">true</span>;
+
+<span class="cc">// Verificar se está logado em outra página</span>
+<span class="ck">if</span> (<span class="cf">isset</span>(<span class="cv">$_SESSION</span>[<span class="cs">'logado'</span>]) && <span class="cv">$_SESSION</span>[<span class="cs">'logado'</span>] === <span class="ck">true</span>) {
+    <span class="ck">echo</span> <span class="cs">"Bem-vinda, <span class="cv">{$_SESSION['usuario_nome']}</span>!"</span>;
+} <span class="ck">else</span> {
+    <span class="cc">// Redirecionar para login</span>
+    <span class="cf">header</span>(<span class="cs">"Location: login.php"</span>);
+    <span class="ck">exit</span>;
+}
+
+<span class="cc">// Destruir sessão (logout)</span>
+<span class="cf">session_destroy</span>();</code></pre>
+            </div>
+
+            <div class="callout tip">
+                <span class="callout-icon">🍪</span>
+                <div class="callout-body">
+                    <p><strong>Sessão vs Cookie:</strong> A sessão guarda os dados <em>no servidor</em> — o browser só guarda um ID de sessão num cookie pequeno. Cookies ficam no browser do usuário — ótimos para lembrar preferências, mas nunca guarde dados sensíveis neles, pois o usuário pode ver e editar cookies.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════
+             SUMMARY BOX
+        ══════════════════════════════════════ -->
+        <div class="summary-box">
+            <h4>🐘 Resumo do módulo PHP</h4>
+            <ul>
+                <li>PHP é uma linguagem server-side: roda no servidor, gera HTML, o browser nunca vê o código</li>
+                <li>Arquivos têm extensão <code>.php</code>, código fica entre <code>&lt;?php</code> e <code>?&gt;</code> (ou <code>&lt;?=</code> para exibir)</li>
+                <li>Toda variável começa com <code>$</code> — e ponto e vírgula é obrigatório no fim de cada instrução</li>
+                <li>Aspas duplas interpolam variáveis; aspas simples são texto literal</li>
+                <li>PHP 7+ trouxe type hints; PHP 8 trouxe JIT, <code>match</code>, named args e union types</li>
+                <li>Arrays em PHP são tanto indexados (numérico) quanto associativos (chave => valor)</li>
+                <li>Formulários enviam dados via <code>$_POST</code> ou <code>$_GET</code> — sempre valide e sanitize antes de usar</li>
+                <li><code>htmlspecialchars()</code>, <code>strip_tags()</code> e <code>filter_var()</code> são seus escudos contra XSS e dados inválidos</li>
+                <li>Sessões (<code>$_SESSION</code>) permitem manter estado entre requisições — base do sistema de login</li>
+                <li>O ecossistema PHP é enorme: WordPress, Laravel, Symfony, Drupal — há framework pra tudo</li>
+            </ul>
+        </div>
+
+    </main>
+
+    <!-- ── TOC ── -->
+    <nav class="toc-panel" aria-label="Índice">
+        <h4>Nesta página</h4>
+        <ul>
+            <li><a href="#intro">O que é PHP</a></li>
+            <li class="sub"><a href="#intro">História e timeline</a></li>
+            <li class="sub"><a href="#intro">Fluxo web com PHP</a></li>
+            <li><a href="#web">PHP e a Web</a></li>
+            <li class="sub"><a href="#web">HTML estático vs dinâmico</a></li>
+            <li class="sub"><a href="#web">Stack LAMP</a></li>
+            <li><a href="#sintaxe">Sintaxe básica</a></li>
+            <li class="sub"><a href="#sintaxe">Variáveis com $</a></li>
+            <li class="sub"><a href="#sintaxe">echo e print</a></li>
+            <li><a href="#tipos">Tipos de Dados</a></li>
+            <li class="sub"><a href="#tipos">Strings e aspas</a></li>
+            <li class="sub"><a href="#tipos">Type casting</a></li>
+            <li><a href="#controle">Condicionais e Loops</a></li>
+            <li class="sub"><a href="#controle">if / switch / match</a></li>
+            <li class="sub"><a href="#controle">for / foreach / while</a></li>
+            <li><a href="#funcoes">Funções</a></li>
+            <li class="sub"><a href="#funcoes">Type hints</a></li>
+            <li class="sub"><a href="#funcoes">Escopo</a></li>
+            <li><a href="#arrays">Arrays</a></li>
+            <li class="sub"><a href="#arrays">Indexado e associativo</a></li>
+            <li class="sub"><a href="#arrays">Funções de array</a></li>
+            <li><a href="#formularios">Formulários</a></li>
+            <li class="sub"><a href="#formularios">$_GET vs $_POST</a></li>
+            <li class="sub"><a href="#formularios">Validação e sanitização</a></li>
+            <li class="sub"><a href="#formularios">Sessões e Cookies</a></li>
+        </ul>
+    </nav>
+
+</div><!-- /.page-wrapper -->
+<script src="./assets/js/include.js" defer></script>
+</body>
+</html>

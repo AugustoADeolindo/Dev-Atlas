@@ -1,0 +1,521 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript — Dev Atlas</title>
+<link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+
+<div class="page-wrapper">
+  <aside class="sidebar">
+    <h3>Navegação</h3>
+    <ul><li><a href="index.html">🏠 Home</a></li></ul>
+    <h3>JavaScript</h3>
+    <ul>
+      <li><a href="#intro" class="active">Introdução</a></li>
+      <li><a href="#variaveis">Variáveis</a></li>
+      <li><a href="#tipos">Tipos de Dados</a></li>
+      <li><a href="#operadores">Operadores</a></li>
+      <li><a href="#condicionais">Condicionais</a></li>
+      <li><a href="#loops">Loops</a></li>
+      <li><a href="#funcoes">Funções</a></li>
+      <li><a href="#objetos">Objetos</a></li>
+      <li><a href="#arrays">Arrays</a></li>
+      <li><a href="#dom">DOM</a></li>
+      <li><a href="#eventos">Eventos</a></li>
+      <li><a href="#fetch">Fetch API</a></li>
+      <li><a href="#async">Promises &amp; Async</a></li>
+    </ul>
+    <h3>Outros Módulos</h3>
+    <ul>
+      <li><a href="fundamentos.html">🌍 Fundamentos</a></li>
+      <li><a href="html.html">📄 HTML</a></li>
+      <li><a href="css.html">🎨 CSS</a></li>
+      <li><a href="php.html">🐘 PHP</a></li>
+      <li><a href="git.html">🌿 Git</a></li>
+      <li><a href="ferramentas.html">🛠️ Ferramentas</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+
+    <div class="page-badge">⚡ JavaScript</div>
+    <h1 class="page-title">JavaScript</h1>
+    <p class="page-subtitle">A linguagem que dá vida às páginas web. Com JS você manipula o HTML, reage a eventos, consome APIs e cria experiências interativas do zero.</p>
+
+    <!-- ═══ INTRO ═══ -->
+    <h2 class="section-h" id="intro">⚡ Introdução</h2>
+
+    <div class="callout fun">
+      <div class="callout-icon">😂</div>
+      <div class="callout-body"><p>JavaScript <strong>não tem nada a ver com Java</strong>. Absolutamente nada. É como Hot Dog e Dog — o nome foi uma sacada de marketing da Netscape em 1995 para surfar na onda do Java. Mas os dois são linguagens completamente diferentes. Se alguém perguntar, você já sabe responder.</p></div>
+    </div>
+
+    <p>JavaScript roda <strong>no navegador</strong> (client-side) e também <strong>no servidor</strong> com Node.js. É a única linguagem que funciona nativamente nos dois lados da web.</p>
+
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-lang">HTML — Como incluir JavaScript</span><div class="cb-dots"><div class="cb-dot" style="background:#ff5f57"></div><div class="cb-dot" style="background:#febc2e"></div><div class="cb-dot" style="background:#28c840"></div></div></div>
+      <pre><code><span class="cc">&lt;!-- No final do body (carrega depois do HTML) --&gt;</span>
+<span class="ct">&lt;script</span> <span class="ca">src</span>=<span class="cs">"app.js"</span><span class="ct">&gt;&lt;/script&gt;</span>
+
+<span class="cc">&lt;!-- No head com defer (melhor prática) --&gt;</span>
+<span class="ct">&lt;script</span> <span class="ca">src</span>=<span class="cs">"app.js"</span> <span class="ca">defer</span><span class="ct">&gt;&lt;/script&gt;</span>
+
+<span class="cc">&lt;!-- Inline (só para pequenos scripts) --&gt;</span>
+<span class="ct">&lt;script&gt;</span>
+  console.log('Olá, mundo!')
+<span class="ct">&lt;/script&gt;</span></code></pre>
+    </div>
+
+    <!-- ═══ VARIÁVEIS ═══ -->
+    <h2 class="section-h" id="variaveis">📦 Variáveis</h2>
+
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-lang">JavaScript</span><div class="cb-dots"><div class="cb-dot" style="background:#ff5f57"></div><div class="cb-dot" style="background:#febc2e"></div><div class="cb-dot" style="background:#28c840"></div></div></div>
+      <pre><code><span class="cc">// const: valor que não muda (use por padrão)</span>
+<span class="ck">const</span> <span class="cv">nome</span> = <span class="cs">'Maria'</span>
+<span class="ck">const</span> <span class="cv">PI</span> = <span class="cn">3.14159</span>
+
+<span class="cc">// let: valor que pode mudar</span>
+<span class="ck">let</span> <span class="cv">contador</span> = <span class="cn">0</span>
+<span class="cv">contador</span> = <span class="cn">1</span>   <span class="cc">// ok</span>
+
+<span class="cc">// var: evite! Tem escopo de função e hoisting confuso</span>
+<span class="ck">var</span> <span class="cv">antiga</span> = <span class="cs">'não use'</span></code></pre>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th></th><th>var</th><th>let</th><th>const</th></tr></thead>
+        <tbody>
+          <tr><td>Escopo</td><td>função</td><td>bloco</td><td>bloco</td></tr>
+          <tr><td>Hoisting</td><td>sim (undefined)</td><td>sim (TDZ)</td><td>sim (TDZ)</td></tr>
+          <tr><td>Redeclarar</td><td>sim</td><td>não</td><td>não</td></tr>
+          <tr><td>Reatribuir</td><td>sim</td><td>sim</td><td>não</td></tr>
+          <tr><td>Usar?</td><td>❌</td><td>✅ quando muda</td><td>✅ padrão</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ═══ TIPOS ═══ -->
+    <h2 class="section-h" id="tipos">🔤 Tipos de Dados</h2>
+
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-lang">JavaScript</span><div class="cb-dots"><div class="cb-dot" style="background:#ff5f57"></div><div class="cb-dot" style="background:#febc2e"></div><div class="cb-dot" style="background:#28c840"></div></div></div>
+      <pre><code><span class="cc">// Primitivos</span>
+<span class="ck">const</span> <span class="cv">texto</span>      = <span class="cs">'olá'</span>          <span class="cc">// string</span>
+<span class="ck">const</span> <span class="cv">numero</span>     = <span class="cn">42</span>            <span class="cc">// number</span>
+<span class="ck">const</span> <span class="cv">decimal</span>    = <span class="cn">3.14</span>          <span class="cc">// number (float)</span>
+<span class="ck">const</span> <span class="cv">ativo</span>      = <span class="ck">true</span>          <span class="cc">// boolean</span>
+<span class="ck">const</span> <span class="cv">vazio</span>      = <span class="ck">null</span>          <span class="cc">// null (ausência intencional)</span>
+<span class="ck">let</span>   <span class="cv">indefinido</span>               <span class="cc">// undefined (não inicializado)</span>
+
+<span class="cc">// Referência</span>
+<span class="ck">const</span> <span class="cv">lista</span>      = [<span class="cn">1</span>, <span class="cn">2</span>, <span class="cn">3</span>]     <span class="cc">// array</span>
+<span class="ck">const</span> <span class="cv">pessoa</span>     = { nome: <span class="cs">'João'</span> } <span class="cc">// object</span>
+<span class="ck">const</span> <span class="cv">soma</span>       = (<span class="cv">a</span>, <span class="cv">b</span>) => <span class="cv">a</span> + <span class="cv">b</span> <span class="cc">// function</span>
+
+<span class="cc">// Template literals (interpolação de strings)</span>
+<span class="ck">const</span> <span class="cv">mensagem</span> = <span class="cs">`Olá, <span style="color:var(--orange)">${nome}</span>! Você tem <span style="color:var(--orange)">${numero}</span> anos.`</span>
+
+<span class="cc">// typeof</span>
+<span class="cf">typeof</span> <span class="cs">'texto'</span>   <span class="cc">// "string"</span>
+<span class="cf">typeof</span> <span class="cn">42</span>       <span class="cc">// "number"</span>
+<span class="cf">typeof</span> <span class="ck">true</span>     <span class="cc">// "boolean"</span>
+<span class="cf">typeof</span> <span class="ck">null</span>     <span class="cc">// "object" ← bug histórico do JS, cuidado!</span>
+<span class="cf">typeof</span> []       <span class="cc">// "object"</span>
+Array.<span class="cf">isArray</span>([]) <span class="cc">// true ← use para verificar arrays</span></code></pre>
+    </div>
+
+    <!-- ═══ OPERADORES ═══ -->
+    <h2 class="section-h" id="operadores">➕ Operadores</h2>
+
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-lang">JavaScript</span><div class="cb-dots"><div class="cb-dot" style="background:#ff5f57"></div><div class="cb-dot" style="background:#febc2e"></div><div class="cb-dot" style="background:#28c840"></div></div></div>
+      <pre><code><span class="cc">// Aritméticos</span>
+<span class="cn">10</span> + <span class="cn">3</span>   <span class="cc">// 13</span>
+<span class="cn">10</span> - <span class="cn">3</span>   <span class="cc">// 7</span>
+<span class="cn">10</span> * <span class="cn">3</span>   <span class="cc">// 30</span>
+<span class="cn">10</span> / <span class="cn">3</span>   <span class="cc">// 3.333...</span>
+<span class="cn">10</span> % <span class="cn">3</span>   <span class="cc">// 1 (resto da divisão)</span>
+<span class="cn">2</span> ** <span class="cn">10</span>  <span class="cc">// 1024 (potência)</span>
+
+<span class="cc">// Comparação — use sempre === (estrito!)</span>
+<span class="cn">5</span> <span class="co">===</span> <span class="cn">5</span>    <span class="cc">// true  ← verifica valor E tipo</span>
+<span class="cn">5</span> <span class="co">==</span> <span class="cs">'5'</span>  <span class="cc">// true  ← converte tipo, evite!</span>
+<span class="cn">5</span> <span class="co">!==</span> <span class="cn">6</span>   <span class="cc">// true</span>
+<span class="cn">5</span> <span class="co">&gt;</span> <span class="cn">3</span>     <span class="cc">// true</span>
+
+<span class="cc">// Lógicos</span>
+<span class="ck">true</span> <span class="co">&amp;&amp;</span> <span class="ck">false</span>  <span class="cc">// false (AND)</span>
+<span class="ck">true</span> <span class="co">||</span> <span class="ck">false</span>  <span class="cc">// true  (OR)</span>
+<span class="co">!</span><span class="ck">true</span>         <span class="cc">// false (NOT)</span>
+
+<span class="cc">// Ternário: condição ? se_true : se_false</span>
+<span class="ck">const</span> <span class="cv">msg</span> = <span class="cv">idade</span> >= <span class="cn">18</span> ? <span class="cs">'Maior'</span> : <span class="cs">'Menor'</span>
+
+<span class="cc">// Nullish coalescing: usa direito se esquerdo for null/undefined</span>
+<span class="ck">const</span> <span class="cv">nome</span> = <span class="cv">usuario</span>?.nome <span class="co">??</span> <span class="cs">'Visitante'</span>
+
+<span class="cc">// Optional chaining: acessa propriedade se objeto existe</span>
+<span class="ck">const</span> <span class="cv">cidade</span> = <span class="cv">usuario</span>?.<span class="cv">endereco</span>?.<span class="cv">cidade</span>
+
+<span class="cc">// Spread: espalha array/objeto</span>
+<span class="ck">const</span> <span class="cv">copia</span> = [...<span class="cv">array</span>]
+<span class="ck">const</span> <span class="cv">novo</span> = { ...<span class="cv">objeto</span>, extra: <span class="ck">true</span> }</code></pre>
+    </div>
+
+    <!-- ═══ CONDICIONAIS ═══ -->
+    <h2 class="section-h" id="condicionais">🔀 Condicionais</h2>
+
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-lang">JavaScript</span><div class="cb-dots"><div class="cb-dot" style="background:#ff5f57"></div><div class="cb-dot" style="background:#febc2e"></div><div class="cb-dot" style="background:#28c840"></div></div></div>
+      <pre><code><span class="cc">// if / else if / else</span>
+<span class="ck">if</span> (<span class="cv">nota</span> >= <span class="cn">90</span>) {
+  <span class="cv">console</span>.<span class="cf">log</span>(<span class="cs">'A'</span>)
+} <span class="ck">else if</span> (<span class="cv">nota</span> >= <span class="cn">70</span>) {
+  <span class="cv">console</span>.<span class="cf">log</span>(<span class="cs">'B'</span>)
+} <span class="ck">else</span> {
+  <span class="cv">console</span>.<span class="cf">log</span>(<span class="cs">'Reprovado'</span>)
+}
+
+<span class="cc">// switch</span>
+<span class="ck">switch</span> (<span class="cv">diaDaSemana</span>) {
+  <span class="ck">case</span> <span class="cn">1</span>:
+    <span class="cv">console</span>.<span class="cf">log</span>(<span class="cs">'Segunda'</span>); <span class="ck">break</span>
+  <span class="ck">case</span> <span class="cn">2</span>:
+    <span class="cv">console</span>.<span class="cf">log</span>(<span class="cs">'Terça'</span>); <span class="ck">break</span>
+  <span class="ck">default</span>:
+    <span class="cv">console</span>.<span class="cf">log</span>(<span class="cs">'Outro dia'</span>)
+}
+
+<span class="cc">// Valores falsy: false, 0, "", null, undefined, NaN</span>
+<span class="cc">// Tudo o resto é truthy</span>
+<span class="ck">if</span> (<span class="cv">usuario</span>) { <span class="cc">/* só executa se usuario não for falsy */</span> }
+
+<span class="cc">// Short-circuit: usa &amp;&amp; para executar só se condição for true</span>
+<span class="cv">isAdmin</span> <span class="co">&amp;&amp;</span> <span class="cf">mostrarPainel</span>()</code></pre>
+    </div>
+
+    <!-- ═══ LOOPS ═══ -->
+    <h2 class="section-h" id="loops">🔁 Loops</h2>
+
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-lang">JavaScript</span><div class="cb-dots"><div class="cb-dot" style="background:#ff5f57"></div><div class="cb-dot" style="background:#febc2e"></div><div class="cb-dot" style="background:#28c840"></div></div></div>
+      <pre><code><span class="cc">// for clássico</span>
+<span class="ck">for</span> (<span class="ck">let</span> <span class="cv">i</span> = <span class="cn">0</span>; <span class="cv">i</span> < <span class="cn">5</span>; <span class="cv">i</span>++) {
+  <span class="cv">console</span>.<span class="cf">log</span>(<span class="cv">i</span>) <span class="cc">// 0 1 2 3 4</span>
+}
+
+<span class="cc">// for...of: melhor para arrays e iteráveis</span>
+<span class="ck">const</span> <span class="cv">frutas</span> = [<span class="cs">'maçã'</span>, <span class="cs">'banana'</span>, <span class="cs">'uva'</span>]
+<span class="ck">for</span> (<span class="ck">const</span> <span class="cv">fruta</span> <span class="ck">of</span> <span class="cv">frutas</span>) {
+  <span class="cv">console</span>.<span class="cf">log</span>(<span class="cv">fruta</span>)
+}
+
+<span class="cc">// for...in: para propriedades de objetos</span>
+<span class="ck">const</span> <span class="cv">pessoa</span> = { nome: <span class="cs">'João'</span>, idade: <span class="cn">25</span> }
+<span class="ck">for</span> (<span class="ck">const</span> <span class="cv">chave</span> <span class="ck">in</span> <span class="cv">pessoa</span>) {
+  <span class="cv">console</span>.<span class="cf">log</span>(<span class="cv">chave</span>, <span class="cv">pessoa</span>[<span class="cv">chave</span>])
+}
+
+<span class="cc">// while</span>
+<span class="ck">let</span> <span class="cv">n</span> = <span class="cn">0</span>
+<span class="ck">while</span> (<span class="cv">n</span> < <span class="cn">5</span>) {
+  <span class="cv">console</span>.<span class="cf">log</span>(<span class="cv">n</span>++)
+}
+
+<span class="cc">// break e continue</span>
+<span class="ck">for</span> (<span class="ck">let</span> <span class="cv">i</span> = <span class="cn">0</span>; <span class="cv">i</span> < <span class="cn">10</span>; <span class="cv">i</span>++) {
+  <span class="ck">if</span> (<span class="cv">i</span> === <span class="cn">3</span>) <span class="ck">continue</span> <span class="cc">// pula o 3</span>
+  <span class="ck">if</span> (<span class="cv">i</span> === <span class="cn">7</span>) <span class="ck">break</span>    <span class="cc">// para no 7</span>
+  <span class="cv">console</span>.<span class="cf">log</span>(<span class="cv">i</span>)
+}</code></pre>
+    </div>
+
+    <!-- ═══ FUNÇÕES ═══ -->
+    <h2 class="section-h" id="funcoes">🔧 Funções</h2>
+
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-lang">JavaScript</span><div class="cb-dots"><div class="cb-dot" style="background:#ff5f57"></div><div class="cb-dot" style="background:#febc2e"></div><div class="cb-dot" style="background:#28c840"></div></div></div>
+      <pre><code><span class="cc">// Declaração de função (hoisted — pode usar antes de declarar)</span>
+<span class="ck">function</span> <span class="cf">saudar</span>(<span class="cv">nome</span>) {
+  <span class="ck">return</span> <span class="cs">`Olá, <span style="color:var(--orange)">${nome}</span>!`</span>
+}
+
+<span class="cc">// Expressão de função</span>
+<span class="ck">const</span> <span class="cv">somar</span> = <span class="ck">function</span>(<span class="cv">a</span>, <span class="cv">b</span>) {
+  <span class="ck">return</span> <span class="cv">a</span> + <span class="cv">b</span>
+}
+
+<span class="cc">// Arrow function (mais concisa)</span>
+<span class="ck">const</span> <span class="cv">dobrar</span> = (<span class="cv">n</span>) => <span class="cv">n</span> * <span class="cn">2</span>
+<span class="ck">const</span> <span class="cv">somar</span>  = (<span class="cv">a</span>, <span class="cv">b</span>) => <span class="cv">a</span> + <span class="cv">b</span>
+<span class="ck">const</span> <span class="cv">gritar</span> = (<span class="cv">msg</span>) => {
+  <span class="ck">const</span> <span class="cv">upper</span> = <span class="cv">msg</span>.<span class="cf">toUpperCase</span>()
+  <span class="ck">return</span> <span class="cv">upper</span> + <span class="cs">'!!!'</span>
+}
+
+<span class="cc">// Parâmetro padrão</span>
+<span class="ck">const</span> <span class="cf">saudar</span> = (<span class="cv">nome</span> = <span class="cs">'Visitante'</span>) => <span class="cs">`Olá, <span style="color:var(--orange)">${nome}</span>!`</span>
+<span class="cf">saudar</span>()         <span class="cc">// "Olá, Visitante!"</span>
+<span class="cf">saudar</span>(<span class="cs">'Ana'</span>)    <span class="cc">// "Olá, Ana!"</span>
+
+<span class="cc">// Rest params: coleta argumentos extras em array</span>
+<span class="ck">const</span> <span class="cf">somarTodos</span> = (...<span class="cv">nums</span>) => <span class="cv">nums</span>.<span class="cf">reduce</span>((<span class="cv">acc</span>, <span class="cv">n</span>) => <span class="cv">acc</span> + <span class="cv">n</span>, <span class="cn">0</span>)
+<span class="cf">somarTodos</span>(<span class="cn">1</span>, <span class="cn">2</span>, <span class="cn">3</span>, <span class="cn">4</span>) <span class="cc">// 10</span>
+
+<span class="cc">// Closure: função que lembra o escopo onde foi criada</span>
+<span class="ck">function</span> <span class="cf">criarContador</span>() {
+  <span class="ck">let</span> <span class="cv">count</span> = <span class="cn">0</span>
+  <span class="ck">return</span> () => ++<span class="cv">count</span>
+}
+<span class="ck">const</span> <span class="cv">contar</span> = <span class="cf">criarContador</span>()
+<span class="cf">contar</span>() <span class="cc">// 1</span>
+<span class="cf">contar</span>() <span class="cc">// 2</span></code></pre>
+    </div>
+
+    <!-- ═══ OBJETOS ═══ -->
+    <h2 class="section-h" id="objetos">🗂️ Objetos</h2>
+
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-lang">JavaScript</span><div class="cb-dots"><div class="cb-dot" style="background:#ff5f57"></div><div class="cb-dot" style="background:#febc2e"></div><div class="cb-dot" style="background:#28c840"></div></div></div>
+      <pre><code><span class="cc">// Criação literal</span>
+<span class="ck">const</span> <span class="cv">usuario</span> = {
+  nome: <span class="cs">'Ana'</span>,
+  idade: <span class="cn">28</span>,
+  ativo: <span class="ck">true</span>,
+  <span class="cf">saudar</span>() { <span class="ck">return</span> <span class="cs">`Oi, sou <span style="color:var(--orange)">${<span class="ck">this</span>.nome}</span>`</span> }
+}
+
+<span class="cc">// Acessar propriedades</span>
+<span class="cv">usuario</span>.nome          <span class="cc">// 'Ana'</span>
+<span class="cv">usuario</span>[<span class="cs">'nome'</span>]       <span class="cc">// 'Ana' (útil com variável)</span>
+
+<span class="cc">// Desestruturação</span>
+<span class="ck">const</span> { <span class="cv">nome</span>, <span class="cv">idade</span> } = <span class="cv">usuario</span>
+<span class="ck">const</span> { <span class="cv">nome</span>: <span class="cv">nomeDoUsuario</span> } = <span class="cv">usuario</span> <span class="cc">// renomear</span>
+<span class="ck">const</span> { <span class="cv">cidade</span> = <span class="cs">'SP'</span> } = <span class="cv">usuario</span>        <span class="cc">// valor padrão</span>
+
+<span class="cc">// Spread: copiar/mesclar objetos</span>
+<span class="ck">const</span> <span class="cv">copia</span>  = { ...<span class="cv">usuario</span> }
+<span class="ck">const</span> <span class="cv">atualizado</span> = { ...<span class="cv">usuario</span>, idade: <span class="cn">29</span> }
+
+<span class="cc">// Métodos úteis</span>
+Object.<span class="cf">keys</span>(<span class="cv">usuario</span>)    <span class="cc">// ['nome', 'idade', 'ativo', 'saudar']</span>
+Object.<span class="cf">values</span>(<span class="cv">usuario</span>)  <span class="cc">// ['Ana', 28, true, ƒ]</span>
+Object.<span class="cf">entries</span>(<span class="cv">usuario</span>) <span class="cc">// [['nome','Ana'], ['idade',28], ...]</span></code></pre>
+    </div>
+
+    <!-- ═══ ARRAYS ═══ -->
+    <h2 class="section-h" id="arrays">📋 Arrays</h2>
+
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-lang">JavaScript</span><div class="cb-dots"><div class="cb-dot" style="background:#ff5f57"></div><div class="cb-dot" style="background:#febc2e"></div><div class="cb-dot" style="background:#28c840"></div></div></div>
+      <pre><code><span class="ck">const</span> <span class="cv">nums</span> = [<span class="cn">3</span>, <span class="cn">1</span>, <span class="cn">4</span>, <span class="cn">1</span>, <span class="cn">5</span>]
+
+<span class="cc">// Adicionar / remover</span>
+<span class="cv">nums</span>.<span class="cf">push</span>(<span class="cn">9</span>)      <span class="cc">// adiciona no fim → [3,1,4,1,5,9]</span>
+<span class="cv">nums</span>.<span class="cf">pop</span>()        <span class="cc">// remove do fim</span>
+<span class="cv">nums</span>.<span class="cf">unshift</span>(<span class="cn">0</span>)   <span class="cc">// adiciona no início</span>
+<span class="cv">nums</span>.<span class="cf">shift</span>()      <span class="cc">// remove do início</span>
+
+<span class="cc">// Buscar</span>
+<span class="cv">nums</span>.<span class="cf">indexOf</span>(<span class="cn">4</span>)         <span class="cc">// 2</span>
+<span class="cv">nums</span>.<span class="cf">includes</span>(<span class="cn">5</span>)        <span class="cc">// true</span>
+<span class="cv">nums</span>.<span class="cf">find</span>(<span class="cv">n</span> => <span class="cv">n</span> > <span class="cn">3</span>)    <span class="cc">// 4 (primeiro que satisfaz)</span>
+<span class="cv">nums</span>.<span class="cf">findIndex</span>(<span class="cv">n</span> => <span class="cv">n</span> > <span class="cn">3</span>) <span class="cc">// 2</span>
+
+<span class="cc">// Transformar (não mutam o original)</span>
+<span class="ck">const</span> <span class="cv">dobrados</span> = <span class="cv">nums</span>.<span class="cf">map</span>(<span class="cv">n</span> => <span class="cv">n</span> * <span class="cn">2</span>)
+<span class="ck">const</span> <span class="cv">pares</span>    = <span class="cv">nums</span>.<span class="cf">filter</span>(<span class="cv">n</span> => <span class="cv">n</span> % <span class="cn">2</span> === <span class="cn">0</span>)
+<span class="ck">const</span> <span class="cv">soma</span>     = <span class="cv">nums</span>.<span class="cf">reduce</span>((<span class="cv">acc</span>, <span class="cv">n</span>) => <span class="cv">acc</span> + <span class="cv">n</span>, <span class="cn">0</span>)
+<span class="ck">const</span> <span class="cv">ordenado</span> = [...<span class="cv">nums</span>].<span class="cf">sort</span>((<span class="cv">a</span>, <span class="cv">b</span>) => <span class="cv">a</span> - <span class="cv">b</span>)
+<span class="ck">const</span> <span class="cv">parte</span>    = <span class="cv">nums</span>.<span class="cf">slice</span>(<span class="cn">1</span>, <span class="cn">3</span>) <span class="cc">// [1, 4]</span>
+
+<span class="cc">// Desestruturação</span>
+<span class="ck">const</span> [<span class="cv">primeiro</span>, <span class="cv">segundo</span>, ...<span class="cv">resto</span>] = <span class="cv">nums</span></code></pre>
+    </div>
+
+    <!-- ═══ DOM ═══ -->
+    <h2 class="section-h" id="dom">🌳 DOM</h2>
+    <p>DOM (Document Object Model) é a representação do HTML como uma árvore de objetos que o JavaScript pode manipular em tempo real.</p>
+
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-lang">JavaScript — DOM</span><div class="cb-dots"><div class="cb-dot" style="background:#ff5f57"></div><div class="cb-dot" style="background:#febc2e"></div><div class="cb-dot" style="background:#28c840"></div></div></div>
+      <pre><code><span class="cc">// Selecionar elementos</span>
+<span class="ck">const</span> <span class="cv">titulo</span>  = document.<span class="cf">querySelector</span>(<span class="cs">'h1'</span>)
+<span class="ck">const</span> <span class="cv">cards</span>   = document.<span class="cf">querySelectorAll</span>(<span class="cs">'.card'</span>)
+<span class="ck">const</span> <span class="cv">botao</span>   = document.<span class="cf">getElementById</span>(<span class="cs">'meu-botao'</span>)
+
+<span class="cc">// Ler e modificar conteúdo</span>
+<span class="cv">titulo</span>.<span class="cprop">textContent</span> = <span class="cs">'Novo título'</span>         <span class="cc">// texto puro (seguro)</span>
+<span class="cv">titulo</span>.<span class="cprop">innerHTML</span>    = <span class="cs">'&lt;strong&gt;Negrito&lt;/strong&gt;'</span> <span class="cc">// HTML (cuidado com XSS!)</span>
+
+<span class="cc">// Modificar estilos e classes</span>
+<span class="cv">titulo</span>.<span class="cprop">style</span>.color = <span class="cs">'red'</span>
+<span class="cv">botao</span>.<span class="cprop">classList</span>.<span class="cf">add</span>(<span class="cs">'ativo'</span>)
+<span class="cv">botao</span>.<span class="cprop">classList</span>.<span class="cf">remove</span>(<span class="cs">'inativo'</span>)
+<span class="cv">botao</span>.<span class="cprop">classList</span>.<span class="cf">toggle</span>(<span class="cs">'aberto'</span>)
+<span class="cv">botao</span>.<span class="cprop">classList</span>.<span class="cf">contains</span>(<span class="cs">'ativo'</span>) <span class="cc">// true/false</span>
+
+<span class="cc">// Atributos</span>
+<span class="cv">botao</span>.<span class="cf">setAttribute</span>(<span class="cs">'disabled'</span>, <span class="cs">''</span>)
+<span class="cv">botao</span>.<span class="cf">removeAttribute</span>(<span class="cs">'disabled'</span>)
+<span class="cv">botao</span>.<span class="cf">getAttribute</span>(<span class="cs">'href'</span>)
+
+<span class="cc">// Criar e inserir elementos</span>
+<span class="ck">const</span> <span class="cv">novoCard</span> = document.<span class="cf">createElement</span>(<span class="cs">'div'</span>)
+<span class="cv">novoCard</span>.<span class="cprop">className</span> = <span class="cs">'card'</span>
+<span class="cv">novoCard</span>.<span class="cprop">textContent</span> = <span class="cs">'Novo item'</span>
+document.<span class="cf">querySelector</span>(<span class="cs">'.lista'</span>).<span class="cf">appendChild</span>(<span class="cv">novoCard</span>)
+
+<span class="cc">// Remover elemento</span>
+<span class="cv">novoCard</span>.<span class="cf">remove</span>()</code></pre>
+    </div>
+
+    <!-- ═══ EVENTOS ═══ -->
+    <h2 class="section-h" id="eventos">🖱️ Eventos</h2>
+
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-lang">JavaScript — Eventos</span><div class="cb-dots"><div class="cb-dot" style="background:#ff5f57"></div><div class="cb-dot" style="background:#febc2e"></div><div class="cb-dot" style="background:#28c840"></div></div></div>
+      <pre><code><span class="ck">const</span> <span class="cv">btn</span> = document.<span class="cf">querySelector</span>(<span class="cs">'#meu-botao'</span>)
+
+<span class="cc">// Adicionar evento</span>
+<span class="cv">btn</span>.<span class="cf">addEventListener</span>(<span class="cs">'click'</span>, (<span class="cv">event</span>) => {
+  <span class="cv">console</span>.<span class="cf">log</span>(<span class="cs">'Clicou!'</span>, <span class="cv">event</span>.<span class="cprop">target</span>)
+  <span class="cv">event</span>.<span class="cf">preventDefault</span>() <span class="cc">// cancela comportamento padrão (ex: submit)</span>
+})
+
+<span class="cc">// Eventos comuns</span>
+<span class="cv">btn</span>.<span class="cf">addEventListener</span>(<span class="cs">'click'</span>, <span class="cv">fn</span>)
+<span class="cv">input</span>.<span class="cf">addEventListener</span>(<span class="cs">'input'</span>, <span class="cv">fn</span>)    <span class="cc">// a cada tecla</span>
+<span class="cv">input</span>.<span class="cf">addEventListener</span>(<span class="cs">'change'</span>, <span class="cv">fn</span>)   <span class="cc">// ao sair do campo</span>
+<span class="cv">form</span>.<span class="cf">addEventListener</span>(<span class="cs">'submit'</span>, <span class="cv">fn</span>)    <span class="cc">// ao enviar</span>
+document.<span class="cf">addEventListener</span>(<span class="cs">'keydown'</span>, <span class="cv">fn</span>) <span class="cc">// ao pressionar tecla</span>
+window.<span class="cf">addEventListener</span>(<span class="cs">'resize'</span>, <span class="cv">fn</span>)  <span class="cc">// ao redimensionar</span>
+
+<span class="cc">// Event delegation: um listener no pai cobre todos os filhos</span>
+document.<span class="cf">querySelector</span>(<span class="cs">'#lista'</span>).<span class="cf">addEventListener</span>(<span class="cs">'click'</span>, (<span class="cv">e</span>) => {
+  <span class="ck">if</span> (<span class="cv">e</span>.<span class="cprop">target</span>.<span class="cf">matches</span>(<span class="cs">'.item'</span>)) {
+    <span class="cv">console</span>.<span class="cf">log</span>(<span class="cs">'Item clicado:'</span>, <span class="cv">e</span>.<span class="cprop">target</span>.<span class="cprop">textContent</span>)
+  }
+})</code></pre>
+    </div>
+
+    <!-- ═══ FETCH ═══ -->
+    <h2 class="section-h" id="fetch">🌐 Fetch API</h2>
+    <p>A Fetch API é a forma moderna de fazer requisições HTTP no navegador — buscar dados de uma API, enviar formulários, consumir serviços externos.</p>
+
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-lang">JavaScript — Fetch</span><div class="cb-dots"><div class="cb-dot" style="background:#ff5f57"></div><div class="cb-dot" style="background:#febc2e"></div><div class="cb-dot" style="background:#28c840"></div></div></div>
+      <pre><code><span class="cc">// GET com async/await (jeito mais moderno)</span>
+<span class="ck">async function</span> <span class="cf">buscarUsuario</span>(<span class="cv">id</span>) {
+  <span class="ck">try</span> {
+    <span class="ck">const</span> <span class="cv">resposta</span> = <span class="ck">await</span> <span class="cf">fetch</span>(<span class="cs">`https://jsonplaceholder.typicode.com/users/<span style="color:var(--orange)">${id}</span>`</span>)
+
+    <span class="ck">if</span> (!<span class="cv">resposta</span>.<span class="cprop">ok</span>) {
+      <span class="ck">throw new</span> Error(<span class="cs">`Erro <span style="color:var(--orange)">${resposta.status}</span>`</span>)
+    }
+
+    <span class="ck">const</span> <span class="cv">dados</span> = <span class="ck">await</span> <span class="cv">resposta</span>.<span class="cf">json</span>()
+    <span class="cv">console</span>.<span class="cf">log</span>(<span class="cv">dados</span>)
+    <span class="ck">return</span> <span class="cv">dados</span>
+  } <span class="ck">catch</span> (<span class="cv">erro</span>) {
+    <span class="cv">console</span>.<span class="cf">error</span>(<span class="cs">'Falhou:'</span>, <span class="cv">erro</span>.<span class="cprop">message</span>)
+  }
+}
+
+<span class="cf">buscarUsuario</span>(<span class="cn">1</span>)
+
+<span class="cc">// POST com body JSON</span>
+<span class="ck">async function</span> <span class="cf">criarPost</span>(<span class="cv">dados</span>) {
+  <span class="ck">const</span> <span class="cv">res</span> = <span class="ck">await</span> <span class="cf">fetch</span>(<span class="cs">'https://jsonplaceholder.typicode.com/posts'</span>, {
+    method: <span class="cs">'POST'</span>,
+    headers: { <span class="cs">'Content-Type'</span>: <span class="cs">'application/json'</span> },
+    body: JSON.<span class="cf">stringify</span>(<span class="cv">dados</span>)
+  })
+  <span class="ck">return</span> <span class="cv">res</span>.<span class="cf">json</span>()
+}</code></pre>
+    </div>
+
+    <!-- ═══ ASYNC ═══ -->
+    <h2 class="section-h" id="async">⏳ Promises e Async/Await</h2>
+    <p>JavaScript é assíncrono por natureza. Promises são o mecanismo para lidar com operações que levam tempo (requisições, timers, leitura de arquivos).</p>
+
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-lang">JavaScript — Async</span><div class="cb-dots"><div class="cb-dot" style="background:#ff5f57"></div><div class="cb-dot" style="background:#febc2e"></div><div class="cb-dot" style="background:#28c840"></div></div></div>
+      <pre><code><span class="cc">// 1. Callback hell (o problema)</span>
+<span class="cf">buscarUsuario</span>(<span class="cn">1</span>, (<span class="cv">user</span>) => {
+  <span class="cf">buscarPosts</span>(<span class="cv">user</span>.id, (<span class="cv">posts</span>) => {
+    <span class="cf">buscarComentarios</span>(<span class="cv">posts</span>[<span class="cn">0</span>].id, (<span class="cv">comments</span>) => {
+      <span class="cc">// pirâmide da morte 😱</span>
+    })
+  })
+})
+
+<span class="cc">// 2. Promise: then/catch/finally</span>
+<span class="cf">fetch</span>(<span class="cs">'/api/usuario'</span>)
+  .<span class="cf">then</span>(<span class="cv">res</span> => <span class="cv">res</span>.<span class="cf">json</span>())
+  .<span class="cf">then</span>(<span class="cv">dados</span> => <span class="cv">console</span>.<span class="cf">log</span>(<span class="cv">dados</span>))
+  .<span class="cf">catch</span>(<span class="cv">err</span> => <span class="cv">console</span>.<span class="cf">error</span>(<span class="cv">err</span>))
+  .<span class="cf">finally</span>(() => <span class="cf">esconderLoader</span>())
+
+<span class="cc">// 3. async/await: mais limpo e legível</span>
+<span class="ck">async function</span> <span class="cf">carregarDados</span>() {
+  <span class="ck">try</span> {
+    <span class="ck">const</span> <span class="cv">user</span>  = <span class="ck">await</span> <span class="cf">buscarUsuario</span>(<span class="cn">1</span>)
+    <span class="ck">const</span> <span class="cv">posts</span> = <span class="ck">await</span> <span class="cf">buscarPosts</span>(<span class="cv">user</span>.id)
+    <span class="ck">return</span> { <span class="cv">user</span>, <span class="cv">posts</span> }
+  } <span class="ck">catch</span> (<span class="cv">err</span>) {
+    <span class="cv">console</span>.<span class="cf">error</span>(<span class="cv">err</span>)
+  }
+}
+
+<span class="cc">// Paralelizar com Promise.all</span>
+<span class="ck">const</span> [<span class="cv">users</span>, <span class="cv">posts</span>] = <span class="ck">await</span> Promise.<span class="cf">all</span>([
+  <span class="cf">fetch</span>(<span class="cs">'/api/users'</span>).<span class="cf">then</span>(<span class="cv">r</span> => <span class="cv">r</span>.<span class="cf">json</span>()),
+  <span class="cf">fetch</span>(<span class="cs">'/api/posts'</span>).<span class="cf">then</span>(<span class="cv">r</span> => <span class="cv">r</span>.<span class="cf">json</span>()),
+])</code></pre>
+    </div>
+
+    <div class="summary-box">
+      <h4>📌 Resumo JavaScript</h4>
+      <ul>
+        <li>Use <strong>const</strong> por padrão, <strong>let</strong> quando precisar reatribuir, evite <strong>var</strong></li>
+        <li>Sempre use <strong>===</strong> para comparação (nunca ==)</li>
+        <li>Arrow functions são mais concisas e não têm <code>this</code> próprio</li>
+        <li>O DOM é a interface do JS com o HTML — querySelector, classList, addEventListener</li>
+        <li>Use <strong>addEventListener</strong> para eventos — nunca onclick inline no HTML</li>
+        <li>Fetch + async/await é a forma moderna de consumir APIs</li>
+        <li>Trate sempre erros com try/catch em funções async</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <div class="toc-panel">
+    <h4>Nesta página</h4>
+    <ul>
+      <li><a href="#intro">Introdução</a></li>
+      <li><a href="#variaveis">Variáveis</a></li>
+      <li><a href="#tipos">Tipos de Dados</a></li>
+      <li><a href="#operadores">Operadores</a></li>
+      <li><a href="#condicionais">Condicionais</a></li>
+      <li><a href="#loops">Loops</a></li>
+      <li><a href="#funcoes">Funções</a></li>
+      <li><a href="#objetos">Objetos</a></li>
+      <li><a href="#arrays">Arrays</a></li>
+      <li><a href="#dom">DOM</a></li>
+      <li><a href="#eventos">Eventos</a></li>
+      <li><a href="#fetch">Fetch API</a></li>
+      <li><a href="#async">Promises &amp; Async</a></li>
+    </ul>
+  </div>
+</div>
+
+<script src="./assets/js/include.js" defer></script>
+</body>
+</html>

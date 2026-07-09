@@ -1,0 +1,996 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dev Atlas — Fundamentos da Programação: o que é programar, algoritmos, variáveis, tipos de dados e sua primeira linha de código.">
+    <title>Fundamentos da Programação — Dev Atlas</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <style>
+        .analogy-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin: 1.25rem 0;
+        }
+        @media(max-width:640px){ .analogy-card{ grid-template-columns:1fr } }
+        .analogy-item {
+            border-radius: 10px;
+            padding: 1.2rem;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+        .analogy-item__icon { font-size: 2rem; margin-bottom: .5rem; }
+        .analogy-item__label { font-size: .7rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: .07em; color: var(--text-muted); margin-bottom: .3rem; }
+        .analogy-item h4 { font-size: .92rem; margin: 0 0 .4rem; }
+        .analogy-item p { font-size: .83rem; color: var(--text-muted); margin: 0; line-height: 1.55; }
+
+        .concept-flow {
+            display: flex; flex-wrap: wrap; align-items: center;
+            gap: .5rem; background: var(--bg-code);
+            border: 1px solid var(--border); border-radius: 12px;
+            padding: 1.5rem; margin: 1.25rem 0;
+        }
+        .cf-box {
+            display: flex; flex-direction: column; align-items: center;
+            gap: .3rem; min-width: 80px; text-align: center;
+        }
+        .cf-box__icon { font-size: 1.8rem; }
+        .cf-box__label { font-size: .72rem; font-weight: 700; color: var(--accent); }
+        .cf-box__sub { font-size: .64rem; color: var(--text-muted); }
+        .cf-arrow { font-size: 1.2rem; color: var(--text-muted); flex-shrink: 0; }
+
+        .type-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem; margin: 1.25rem 0;
+        }
+        .type-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 10px; padding: 1rem; text-align: center;
+        }
+        .type-card__type {
+            font-family: 'Cascadia Code','Fira Code', monospace;
+            font-size: .85rem; font-weight: 700; color: var(--pink); margin-bottom: .3rem;
+        }
+        .type-card__name { font-size: .78rem; font-weight: 600; color: var(--text); margin-bottom: .3rem; }
+        .type-card__example { font-size: .75rem; color: var(--green); font-family: monospace; }
+        .type-card__desc { font-size: .73rem; color: var(--text-muted); margin-top: .3rem; line-height: 1.4; }
+
+        .page-nav { display: flex; justify-content: space-between; margin: 2.5rem 0 0; }
+        .page-nav a {
+            display: inline-flex; align-items: center; gap: .45rem;
+            padding: .6rem 1.1rem; border-radius: 8px;
+            border: 1px solid var(--border); font-size: .88rem;
+            color: var(--text); text-decoration: none;
+            transition: border-color .2s, background .2s;
+        }
+        .page-nav a:hover { border-color: var(--accent); background: rgba(108,99,255,.08); }
+    </style>
+</head>
+<body>
+<!-- ── LAYOUT ── -->
+<div class="page-wrapper">
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="sidebar">
+        <h3>Módulos</h3>
+        <ul>
+            <li><a href="index.html"><span class="dot"></span>Início</a></li>
+            <li><a href="programacao.html" class="active"><span class="dot"></span>Fundamentos da Programação</a></li>
+            <li><a href="logica.html"><span class="dot"></span>Lógica de Programação</a></li>
+            <li><a href="fundamentos.html"><span class="dot"></span>Fundamentos Web</a></li>
+            <li><a href="html.html"><span class="dot"></span>HTML</a></li>
+            <li><a href="css.html"><span class="dot"></span>CSS</a></li>
+            <li><a href="javascript.html"><span class="dot"></span>JavaScript</a></li>
+            <li><a href="php.html"><span class="dot"></span>PHP</a></li>
+            <li><a href="git.html"><span class="dot"></span>Git</a></li>
+            <li><a href="ferramentas.html"><span class="dot"></span>Ferramentas</a></li>
+        </ul>
+
+        <h3>Nesta página</h3>
+        <ul>
+            <li><a href="#oque"><span class="dot"></span>O que é programar?</a></li>
+            <li><a href="#algoritmo"><span class="dot"></span>Algoritmos</a></li>
+            <li><a href="#variaveis"><span class="dot"></span>Variáveis</a></li>
+            <li><a href="#tipos"><span class="dot"></span>Tipos de Dados</a></li>
+            <li><a href="#entrada-saida"><span class="dot"></span>Entrada e Saída</a></li>
+            <li><a href="#primeirocod"><span class="dot"></span>Seu Primeiro Código</a></li>
+            <li><a href="#erros"><span class="dot"></span>Erros e Debugging</a></li>
+            <li><a href="#caminho"><span class="dot"></span>O Caminho à Frente</a></li>
+        </ul>
+    </aside>
+
+    <!-- ── MAIN ── -->
+    <main class="content">
+
+        <div class="page-badge">💡 Fundamentos da Programação</div>
+        <h1 class="page-title">O que é Programar?</h1>
+        <p class="page-subtitle">
+            Antes de escrever qualquer código, vale entender o que está acontecendo por baixo dos panos.
+            Programar é dar instruções para um computador. Simples assim — e profundamente poderoso.
+        </p>
+
+        <!-- ─────────────────────────────────────
+             1. O QUE É PROGRAMAR
+        ───────────────────────────────────── -->
+        <section id="oque">
+            <div class="section-label">
+                <div class="sl-icon sl-purple">💡</div>
+                <span>Tópico 1</span>
+            </div>
+            <h2 class="section-h">O que é Programar?</h2>
+
+            <p>
+                Programar é escrever instruções que um computador consegue entender e executar.
+                O computador é incrivelmente rápido e preciso, mas é completamente burro:
+                ele faz <em>exatamente</em> o que você mandar — nem mais, nem menos.
+                A habilidade do programador está em traduzir um problema do mundo real em
+                uma sequência de passos que a máquina consiga seguir.
+            </p>
+
+            <div class="callout fun">
+                <div class="callout-icon">👨‍🍳</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Analogia da receita de bolo:</strong> programar é como escrever uma
+                        receita. Você especifica os ingredientes (dados), a ordem dos passos (lógica)
+                        e o resultado esperado (saída). Se você esquecer um passo ou errar a ordem,
+                        o bolo não sai como deveria. O computador é o cozinheiro que segue a receita
+                        à risca — sem improvisar, sem usar o bom senso.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Linguagem de programação — o idioma do computador</h3>
+            <p>
+                Computadores entendem apenas zeros e uns (código binário). Mas ninguém programa em
+                binário — seria como montar um site digitando <code>01001000 01100101...</code>.
+                Por isso existem as <strong>linguagens de programação</strong>: uma ponte entre a
+                linguagem humana e o código binário que a máquina executa.
+            </p>
+
+            <div class="concept-flow">
+                <div class="cf-box">
+                    <div class="cf-box__icon">🧠</div>
+                    <div class="cf-box__label">Humano</div>
+                    <div class="cf-box__sub">ideia / problema</div>
+                </div>
+                <div class="cf-arrow">→</div>
+                <div class="cf-box">
+                    <div class="cf-box__icon">📝</div>
+                    <div class="cf-box__label">Código-fonte</div>
+                    <div class="cf-box__sub">JavaScript, Python…</div>
+                </div>
+                <div class="cf-arrow">→</div>
+                <div class="cf-box">
+                    <div class="cf-box__icon">⚙️</div>
+                    <div class="cf-box__label">Compilador / Interpretador</div>
+                    <div class="cf-box__sub">traduz o código</div>
+                </div>
+                <div class="cf-arrow">→</div>
+                <div class="cf-box">
+                    <div class="cf-box__icon">💻</div>
+                    <div class="cf-box__label">Máquina</div>
+                    <div class="cf-box__sub">executa em binário</div>
+                </div>
+                <div class="cf-arrow">→</div>
+                <div class="cf-box">
+                    <div class="cf-box__icon">✅</div>
+                    <div class="cf-box__label">Resultado</div>
+                    <div class="cf-box__sub">na tela / no sistema</div>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Por que aprender JavaScript primeiro?</h3>
+            <p>
+                Existem centenas de linguagens de programação. Neste material, usamos
+                <strong>JavaScript</strong> para os exemplos de lógica e algoritmos porque:
+            </p>
+
+            <div class="analogy-card">
+                <div class="analogy-item">
+                    <div class="analogy-item__icon">🌐</div>
+                    <div class="analogy-item__label">Acessibilidade</div>
+                    <h4>Roda direto no browser</h4>
+                    <p>Você não precisa instalar nada. Abra o navegador, pressione F12, vá no Console e já pode escrever código.</p>
+                </div>
+                <div class="analogy-item">
+                    <div class="analogy-item__icon">🔁</div>
+                    <div class="analogy-item__label">Feedback</div>
+                    <h4>Retorno imediato</h4>
+                    <p>O resultado aparece na hora, na tela, com <code>alert()</code> e <code>console.log()</code>. Perfeito para aprender.</p>
+                </div>
+                <div class="analogy-item">
+                    <div class="analogy-item__icon">📈</div>
+                    <div class="analogy-item__label">Relevância</div>
+                    <h4>Linguagem do mercado</h4>
+                    <p>JavaScript é a linguagem mais usada no mundo. O que você aprende aqui vale direto na prática profissional.</p>
+                </div>
+                <div class="analogy-item">
+                    <div class="analogy-item__icon">🔀</div>
+                    <div class="analogy-item__label">Transferência</div>
+                    <h4>Conceitos universais</h4>
+                    <p>Variáveis, condicionais e loops funcionam igual em Python, PHP, Java, C. Aprenda uma vez, leve para qualquer lugar.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────
+             2. ALGORITMOS
+        ───────────────────────────────────── -->
+        <section id="algoritmo">
+            <div class="section-label">
+                <div class="sl-icon sl-green">🗺️</div>
+                <span>Tópico 2</span>
+            </div>
+            <h2 class="section-h">Algoritmos — O Mapa do Problema</h2>
+
+            <p>
+                Um <strong>algoritmo</strong> é uma sequência finita de passos bem definidos para
+                resolver um problema. Antes de escrever qualquer código, um bom programador pensa
+                no algoritmo — no <em>raciocínio</em> — depois traduz para código.
+            </p>
+
+            <div class="callout info">
+                <div class="callout-icon">🗺️</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Algoritmo não é código.</strong> É a lógica por trás do código.
+                        Você pode escrever um algoritmo em português simples (chamado de pseudocódigo),
+                        num diagrama de fluxo, ou numa lista de passos. O código vem depois.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Exemplo: fazer café</h3>
+            <p>
+                Vamos descrever um algoritmo para fazer café — algo que qualquer pessoa faz no piloto
+                automático, mas que exige uma sequência exata de passos para funcionar:
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">Pseudocódigo — Fazer Café</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">INÍCIO</span>
+  <span class="cn">1.</span> Pegar a cafeteira
+  <span class="cn">2.</span> Encher com água até a marcação
+  <span class="cn">3.</span> Colocar o filtro
+  <span class="cn">4.</span> Adicionar o pó de café (2 colheres por xícara)
+  <span class="cn">5.</span> Ligar a cafeteira
+
+  <span class="ck">ENQUANTO</span> o café não terminar de passar <span class="ck">FAÇA</span>
+      Aguardar
+
+  <span class="cn">6.</span> Desligar a cafeteira
+  <span class="cn">7.</span> Servir na xícara
+  <span class="ck">FIM</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">As três estruturas fundamentais de qualquer algoritmo</h3>
+            <p>
+                Todo algoritmo, por mais complexo que seja, é construído com apenas três peças básicas.
+                Dominar essas três estruturas é dominar a lógica de programação:
+            </p>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-badge b-blue">Estrutura 1</span>
+                    <div class="card-title">Sequência</div>
+                    <div class="card-desc">
+                        Passos executados um após o outro, em ordem. A linha 1 roda antes da linha 2,
+                        que roda antes da linha 3. A ordem importa muito.
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-yellow">Estrutura 2</span>
+                    <div class="card-title">Decisão (Condicionais)</div>
+                    <div class="card-desc">
+                        O programa escolhe um caminho com base numa condição. "SE está chovendo,
+                        pegar guarda-chuva. SENÃO, não precisa."
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-green">Estrutura 3</span>
+                    <div class="card-title">Repetição (Loops)</div>
+                    <div class="card-desc">
+                        Um bloco de código se repete enquanto uma condição for verdadeira.
+                        "ENQUANTO houver louça suja, lavar uma peça."
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Fluxograma — visualizando o algoritmo</h3>
+            <p>
+                Fluxogramas representam o algoritmo como um diagrama. Cada forma tem um significado:
+            </p>
+
+            <div class="tbl-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Símbolo</th><th>Significado</th><th>Quando usar</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>⬭ Oval</td>
+                            <td>Início / Fim</td>
+                            <td>Marcar onde o algoritmo começa e termina</td>
+                        </tr>
+                        <tr>
+                            <td>▭ Retângulo</td>
+                            <td>Processo / Instrução</td>
+                            <td>Qualquer operação: calcular, atribuir, escrever</td>
+                        </tr>
+                        <tr>
+                            <td>◇ Losango</td>
+                            <td>Decisão</td>
+                            <td>Uma pergunta com resposta Sim/Não (bifurcação)</td>
+                        </tr>
+                        <tr>
+                            <td>▱ Paralelogramo</td>
+                            <td>Entrada / Saída</td>
+                            <td>Leitura de dado do usuário ou exibição de resultado</td>
+                        </tr>
+                        <tr>
+                            <td>→ Seta</td>
+                            <td>Fluxo de controle</td>
+                            <td>Indica a direção e sequência dos passos</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────
+             3. VARIÁVEIS
+        ───────────────────────────────────── -->
+        <section id="variaveis">
+            <div class="section-label">
+                <div class="sl-icon sl-yellow">📦</div>
+                <span>Tópico 3</span>
+            </div>
+            <h2 class="section-h">Variáveis — Caixas para Guardar Valores</h2>
+
+            <p>
+                Uma <strong>variável</strong> é um espaço na memória do computador onde você
+                guarda um valor para usar depois. Pense como uma caixa com uma etiqueta:
+                você coloca algo dentro, dá um nome à caixa, e pode pegar o conteúdo a qualquer
+                momento pelo nome.
+            </p>
+
+            <div class="callout fun">
+                <div class="callout-icon">📬</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Analogia da caixa de correio:</strong> cada caixa (variável) tem
+                        um endereço (nome) e um conteúdo (valor). Você pode verificar o conteúdo
+                        a qualquer hora, substituir por outro, ou usar em cálculos. A caixa continua
+                        existindo até você a descartar.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Declarando variáveis em JavaScript</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">JavaScript — Variáveis</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc">// Criar uma variável com "let" (pode mudar o valor depois)</span>
+<span class="ck">let</span> <span class="cv">nome</span> = <span class="cs">"Ana"</span>
+<span class="ck">let</span> <span class="cv">idade</span> = <span class="cn">25</span>
+<span class="ck">let</span> <span class="cv">altura</span> = <span class="cn">1.68</span>
+
+<span class="cc">// Usar a variável</span>
+<span class="cf">alert</span>(<span class="cv">nome</span>)      <span class="cc">// mostra: Ana</span>
+<span class="cf">alert</span>(<span class="cv">idade</span>)     <span class="cc">// mostra: 25</span>
+
+<span class="cc">// Mudar o valor da variável</span>
+<span class="cv">idade</span> = <span class="cn">26</span>
+<span class="cf">alert</span>(<span class="cv">idade</span>)     <span class="cc">// mostra: 26</span>
+
+<span class="cc">// "const" → valor não muda nunca (constante)</span>
+<span class="ck">const</span> <span class="cv">PI</span> = <span class="cn">3.14159</span>
+<span class="ck">const</span> <span class="cv">PAISES_DO_MUNDO</span> = <span class="cn">195</span>
+
+<span class="cc">// Variáveis podem guardar expressões calculadas</span>
+<span class="ck">let</span> <span class="cv">anoNascimento</span> = <span class="cn">2024</span> - <span class="cv">idade</span>  <span class="cc">// → 1998</span>
+<span class="ck">let</span> <span class="cv">mensagem</span> = <span class="cs">"Olá, "</span> + <span class="cv">nome</span> + <span class="cs">"!"</span>  <span class="cc">// → "Olá, Ana!"</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">Regras para nomear variáveis</h3>
+
+            <div class="tbl-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Regra</th><th>Exemplo válido</th><th>Exemplo inválido</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Começa com letra, _ ou $</td>
+                            <td><code>nomeCliente</code>, <code>_valor</code></td>
+                            <td><code>1nome</code>, <code>-preco</code></td>
+                        </tr>
+                        <tr>
+                            <td>Sem espaços</td>
+                            <td><code>nomeCompleto</code></td>
+                            <td><code>nome completo</code></td>
+                        </tr>
+                        <tr>
+                            <td>Sem acentos ou ç</td>
+                            <td><code>totalPedido</code></td>
+                            <td><code>totalPedidção</code></td>
+                        </tr>
+                        <tr>
+                            <td>Não pode ser palavra reservada</td>
+                            <td><code>valorTotal</code></td>
+                            <td><code>let</code>, <code>if</code>, <code>for</code></td>
+                        </tr>
+                        <tr>
+                            <td>Use camelCase por convenção</td>
+                            <td><code>dataNascimento</code></td>
+                            <td><code>data_nascimento</code> (funciona, mas não é JS)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout tip">
+                <div class="callout-icon">💡</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Nomeie variáveis de forma descritiva.</strong>
+                        <code>x</code> e <code>a</code> não dizem nada. <code>idadeUsuario</code>
+                        e <code>totalCompra</code> se explicam sozinhos. Código é lido muito mais
+                        vezes do que é escrito — nomeie para o humano que vai ler depois, não para
+                        economizar digitação.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────
+             4. TIPOS DE DADOS
+        ───────────────────────────────────── -->
+        <section id="tipos">
+            <div class="section-label">
+                <div class="sl-icon sl-blue">🎨</div>
+                <span>Tópico 4</span>
+            </div>
+            <h2 class="section-h">Tipos de Dados — Que tipo de coisa estou guardando?</h2>
+
+            <p>
+                Nem tudo é a mesma coisa. Um nome, uma idade, um preço e um valor "sim ou não" são
+                tipos de informação diferentes. As linguagens de programação organizam isso em
+                <strong>tipos de dados</strong>. Entender tipos evita erros bobos como tentar
+                somar texto com número.
+            </p>
+
+            <div class="type-grid">
+                <div class="type-card">
+                    <div class="type-card__type">string</div>
+                    <div class="type-card__name">Texto</div>
+                    <div class="type-card__example">"Olá, mundo!"<br>'João Silva'</div>
+                    <div class="type-card__desc">Qualquer sequência de caracteres entre aspas.</div>
+                </div>
+                <div class="type-card">
+                    <div class="type-card__type">number</div>
+                    <div class="type-card__name">Número</div>
+                    <div class="type-card__example">42<br>3.14<br>-100</div>
+                    <div class="type-card__desc">Inteiros e decimais. Sem aspas.</div>
+                </div>
+                <div class="type-card">
+                    <div class="type-card__type">boolean</div>
+                    <div class="type-card__name">Verdadeiro/Falso</div>
+                    <div class="type-card__example">true<br>false</div>
+                    <div class="type-card__desc">Só dois valores possíveis. Muito usado em condições.</div>
+                </div>
+                <div class="type-card">
+                    <div class="type-card__type">null</div>
+                    <div class="type-card__name">Vazio intencional</div>
+                    <div class="type-card__example">null</div>
+                    <div class="type-card__desc">Variável existe, mas não tem valor por decisão.</div>
+                </div>
+                <div class="type-card">
+                    <div class="type-card__type">undefined</div>
+                    <div class="type-card__name">Não definido</div>
+                    <div class="type-card__example">undefined</div>
+                    <div class="type-card__desc">Variável foi criada mas nenhum valor foi atribuído.</div>
+                </div>
+                <div class="type-card">
+                    <div class="type-card__type">array</div>
+                    <div class="type-card__name">Lista de valores</div>
+                    <div class="type-card__example">["Ana", "Bia", "Carlos"]</div>
+                    <div class="type-card__desc">Vários valores em sequência, entre colchetes.</div>
+                </div>
+                <div class="type-card">
+                    <div class="type-card__type">object</div>
+                    <div class="type-card__name">Objeto</div>
+                    <div class="type-card__example">{nome: "Ana", idade: 25}</div>
+                    <div class="type-card__desc">Conjunto de propriedades com nome e valor.</div>
+                </div>
+            </div>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">JavaScript — Exemplos de cada tipo</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc">// String (texto) — sempre entre aspas simples ou duplas</span>
+<span class="ck">let</span> <span class="cv">nome</span>      = <span class="cs">"Maria"</span>
+<span class="ck">let</span> <span class="cv">cidade</span>    = <span class="cs">'São Paulo'</span>
+<span class="ck">let</span> <span class="cv">mensagem</span>  = <span class="cs">`Olá, <span style="color:var(--orange)">${nome}</span>!`</span>   <span class="cc">// template literal</span>
+
+<span class="cc">// Number (número) — sem aspas!</span>
+<span class="ck">let</span> <span class="cv">idade</span>  = <span class="cn">30</span>
+<span class="ck">let</span> <span class="cv">preco</span>  = <span class="cn">49.90</span>
+<span class="ck">let</span> <span class="cv">saldo</span>  = <span class="cn">-150</span>
+
+<span class="cc">// Boolean (verdadeiro ou falso)</span>
+<span class="ck">let</span> <span class="cv">logado</span>     = <span class="ck">true</span>
+<span class="ck">let</span> <span class="cv">maiorIdade</span> = <span class="cv">idade</span> >= <span class="cn">18</span>   <span class="cc">// true ou false dependendo do valor</span>
+
+<span class="cc">// Array (lista)</span>
+<span class="ck">let</span> <span class="cv">frutas</span>  = [<span class="cs">"maçã"</span>, <span class="cs">"banana"</span>, <span class="cs">"uva"</span>]
+<span class="ck">let</span> <span class="cv">numeros</span> = [<span class="cn">10</span>, <span class="cn">20</span>, <span class="cn">30</span>, <span class="cn">40</span>]
+
+<span class="cc">// Object (objeto)</span>
+<span class="ck">let</span> <span class="cv">pessoa</span> = {
+    <span class="ca">nome</span>:   <span class="cs">"Carlos"</span>,
+    <span class="ca">idade</span>:  <span class="cn">28</span>,
+    <span class="ca">ativo</span>:  <span class="ck">true</span>
+}
+
+<span class="cc">// Cuidado: número em string NÃO é número!</span>
+<span class="ck">let</span> <span class="cv">a</span> = <span class="cs">"5"</span>   <span class="cc">// string</span>
+<span class="ck">let</span> <span class="cv">b</span> = <span class="cn">5</span>    <span class="cc">// number</span>
+<span class="cf">alert</span>(<span class="cv">a</span> + <span class="cv">b</span>)  <span class="cc">// → "55" (concatenou, não somou!)</span>
+<span class="cf">alert</span>(+<span class="cv">a</span> + <span class="cv">b</span>) <span class="cc">// → 10  (+ antes converte string para número)</span></code></pre>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────
+             5. ENTRADA E SAÍDA
+        ───────────────────────────────────── -->
+        <section id="entrada-saida">
+            <div class="section-label">
+                <div class="sl-icon sl-red">📡</div>
+                <span>Tópico 5</span>
+            </div>
+            <h2 class="section-h">Entrada e Saída — Comunicando com o Usuário</h2>
+
+            <p>
+                Todo programa precisa se comunicar com o mundo: receber informações de alguém
+                (<strong>entrada</strong>) e mostrar resultados (<strong>saída</strong>).
+                Em JavaScript, dentro do browser, fazemos isso com funções simples que aparecem
+                em caixas de diálogo na tela.
+            </p>
+
+            <div class="tbl-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Função</th><th>Tipo</th><th>O que faz</th><th>Retorna</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>alert("mensagem")</code></td>
+                            <td>Saída</td>
+                            <td>Exibe uma caixa com a mensagem</td>
+                            <td><code>undefined</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>prompt("pergunta")</code></td>
+                            <td>Entrada</td>
+                            <td>Exibe caixa onde o usuário digita algo</td>
+                            <td><code>string</code> ou <code>null</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>confirm("pergunta?")</code></td>
+                            <td>Entrada</td>
+                            <td>Caixa com botões OK e Cancelar</td>
+                            <td><code>true</code> ou <code>false</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>console.log(valor)</code></td>
+                            <td>Saída (debug)</td>
+                            <td>Exibe no Console do DevTools (F12)</td>
+                            <td><code>undefined</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">JavaScript — Entrada e saída na prática</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc">// Saída simples — mostra mensagem ao usuário</span>
+<span class="cf">alert</span>(<span class="cs">"Bem-vindo ao Dev Atlas!"</span>)
+
+<span class="cc">// Entrada — pede o nome ao usuário e guarda na variável</span>
+<span class="ck">let</span> <span class="cv">nome</span> = <span class="cf">prompt</span>(<span class="cs">"Qual é o seu nome?"</span>)
+
+<span class="cc">// Combina entrada com saída</span>
+<span class="cf">alert</span>(<span class="cs">"Olá, "</span> + <span class="cv">nome</span> + <span class="cs">"! Seja bem-vindo!"</span>)
+
+<span class="cc">// Entrada numérica — prompt SEMPRE retorna string, precisa converter</span>
+<span class="ck">let</span> <span class="cv">idadeTexto</span> = <span class="cf">prompt</span>(<span class="cs">"Quantos anos você tem?"</span>)
+<span class="ck">let</span> <span class="cv">idade</span>      = <span class="cf">Number</span>(<span class="cv">idadeTexto</span>)  <span class="cc">// converte "25" → 25</span>
+
+<span class="ck">let</span> <span class="cv">anoAtual</span>       = <span class="cn">2025</span>
+<span class="ck">let</span> <span class="cv">anoNascimento</span>  = <span class="cv">anoAtual</span> - <span class="cv">idade</span>
+<span class="cf">alert</span>(<span class="cs">"Você nasceu em "</span> + <span class="cv">anoNascimento</span>)
+
+<span class="cc">// Confirmação — retorna true (OK) ou false (Cancelar)</span>
+<span class="ck">let</span> <span class="cv">confirmado</span> = <span class="cf">confirm</span>(<span class="cs">"Deseja continuar?"</span>)
+<span class="cf">alert</span>(<span class="cv">confirmado</span>)  <span class="cc">// true ou false</span>
+
+<span class="cc">// console.log — aparece no DevTools (F12 → Console)</span>
+<span class="cf">console</span>.<span class="cf">log</span>(<span class="cs">"Nome:"</span>, <span class="cv">nome</span>)
+<span class="cf">console</span>.<span class="cf">log</span>(<span class="cs">"Idade:"</span>, <span class="cv">idade</span>)
+<span class="cf">console</span>.<span class="cf">log</span>(<span class="cs">"Nasceu em:"</span>, <span class="cv">anoNascimento</span>)</code></pre>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────
+             6. SEU PRIMEIRO CÓDIGO
+        ───────────────────────────────────── -->
+        <section id="primeirocod">
+            <div class="section-label">
+                <div class="sl-icon sl-purple">🚀</div>
+                <span>Tópico 6</span>
+            </div>
+            <h2 class="section-h">Seu Primeiro Código — Estrutura Básica HTML</h2>
+
+            <p>
+                Para rodar JavaScript no browser sem precisar de nenhuma instalação, basta um arquivo
+                HTML simples com uma tag <code>&lt;script&gt;</code>. Crie um arquivo com a extensão
+                <code>.html</code>, cole o código abaixo, abra no browser e está funcionando.
+            </p>
+
+            <div class="callout info">
+                <div class="callout-icon">📋</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Como criar o arquivo:</strong> abra o VS Code, crie um novo arquivo
+                        chamado <code>script.html</code>, cole o modelo abaixo e salve.
+                        Depois dê dois cliques no arquivo para abrir no browser — ou use a extensão
+                        <strong>Live Server</strong> para ter recarregamento automático ao salvar.
+                    </p>
+                </div>
+            </div>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">script.html — Estrutura mínima para rodar JavaScript</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ct">&lt;!DOCTYPE html&gt;</span>
+<span class="ct">&lt;html</span> <span class="ca">lang</span>=<span class="cs">"pt-BR"</span><span class="ct">&gt;</span>
+<span class="ct">&lt;head&gt;</span>
+  <span class="ct">&lt;meta</span> <span class="ca">charset</span>=<span class="cs">"UTF-8"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;title&gt;</span>Meu Script<span class="ct">&lt;/title&gt;</span>
+<span class="ct">&lt;/head&gt;</span>
+<span class="ct">&lt;body&gt;</span>
+
+  <span class="cc">&lt;!-- Todo o seu JavaScript fica aqui dentro --&gt;</span>
+  <span class="ct">&lt;script&gt;</span>
+
+    <span class="cc">// ← escreva seu código JavaScript a partir daqui</span>
+    <span class="cf">alert</span>(<span class="cs">"Olá, mundo!"</span>)
+
+  <span class="ct">&lt;/script&gt;</span>
+
+<span class="ct">&lt;/body&gt;</span>
+<span class="ct">&lt;/html&gt;</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">O que cada parte faz</h3>
+            <div class="tbl-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Linha</th><th>Significado</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>&lt;!DOCTYPE html&gt;</code></td>
+                            <td>Diz ao browser que é um arquivo HTML5</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;html lang="pt-BR"&gt;</code></td>
+                            <td>Início da página; define idioma como português</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;meta charset="UTF-8"&gt;</code></td>
+                            <td>Permite caracteres especiais (acentos, ç etc.)</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;title&gt;...&lt;/title&gt;</code></td>
+                            <td>Texto que aparece na aba do browser</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;body&gt;...&lt;/body&gt;</code></td>
+                            <td>Corpo da página — o conteúdo visível</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;script&gt;...&lt;/script&gt;</code></td>
+                            <td>Onde o JavaScript é escrito e executado</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="sub-h">Primeiro programa completo</h3>
+            <p>
+                Vamos criar um programa que pergunta o nome e a idade do usuário e calcula
+                o ano de nascimento. Copie, cole na estrutura acima e execute:
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">JavaScript — Primeiro programa</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc">// 1. Pedir o nome ao usuário</span>
+<span class="ck">let</span> <span class="cv">nome</span> = <span class="cf">prompt</span>(<span class="cs">"Qual é o seu nome?"</span>)
+
+<span class="cc">// 2. Pedir a idade (e converter para número)</span>
+<span class="ck">let</span> <span class="cv">idade</span> = <span class="cf">Number</span>( <span class="cf">prompt</span>(<span class="cs">"Quantos anos você tem?"</span>) )
+
+<span class="cc">// 3. Calcular o ano de nascimento</span>
+<span class="ck">let</span> <span class="cv">anoNascimento</span> = <span class="cn">2025</span> - <span class="cv">idade</span>
+
+<span class="cc">// 4. Montar a mensagem de resposta</span>
+<span class="ck">let</span> <span class="cv">resposta</span> = <span class="cs">"Olá, "</span> + <span class="cv">nome</span> + <span class="cs">"!\n"</span>
+             + <span class="cs">"Você tem "</span> + <span class="cv">idade</span> + <span class="cs">" anos.\n"</span>
+             + <span class="cs">"Você nasceu em "</span> + <span class="cv">anoNascimento</span> + <span class="cs">"."</span>
+
+<span class="cc">// 5. Mostrar a resposta</span>
+<span class="cf">alert</span>(<span class="cv">resposta</span>)</code></pre>
+            </div>
+
+            <div class="callout tip">
+                <div class="callout-icon">💡</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>\n dentro de strings</strong> representa uma quebra de linha.
+                        Por isso a mensagem aparece em três linhas no alert. Outros caracteres
+                        especiais: <code>\t</code> (tabulação), <code>\\</code> (barra invertida literal).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────
+             7. ERROS E DEBUGGING
+        ───────────────────────────────────── -->
+        <section id="erros">
+            <div class="section-label">
+                <div class="sl-icon sl-red">🐛</div>
+                <span>Tópico 7</span>
+            </div>
+            <h2 class="section-h">Erros e Debugging — Todo Programador Erra</h2>
+
+            <p>
+                Todo programador comete erros — do iniciante ao sênior com 20 anos de experiência.
+                A diferença está em saber <em>ler</em> os erros e <em>corrigi-los</em> com calma.
+                Erros não são fracasso, são parte do processo.
+            </p>
+
+            <div class="callout fun">
+                <div class="callout-icon">🐛</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Por que chamamos de "bug"?</strong> Em 1947, a cientista Grace Hopper
+                        encontrou uma mariposa real presa nos circuitos do computador Harvard Mark II
+                        causando uma falha. Ela colou o inseto no registro e anotou "first actual case
+                        of bug being found". O termo pegou para sempre. 🦗
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Os três tipos de erro</h3>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-badge b-red">Tipo 1</span>
+                    <div class="card-title">Erro de Sintaxe</div>
+                    <div class="card-desc">
+                        Você escreveu o código de forma errada — faltou uma aspas, parêntese, ou usou
+                        uma palavra reservada errada. O browser nem começa a executar.
+                        <br><br>
+                        <strong>Exemplo:</strong> <code>alet("Olá")</code> → <em>alet não é uma função</em>
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-yellow">Tipo 2</span>
+                    <div class="card-title">Erro de Lógica</div>
+                    <div class="card-desc">
+                        O código roda sem travar, mas o resultado está errado. Sua lógica ou conta
+                        está equivocada. É o mais difícil de encontrar.
+                        <br><br>
+                        <strong>Exemplo:</strong> calcular <code>2025 + idade</code> em vez de <code>2025 - idade</code>
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-orange">Tipo 3</span>
+                    <div class="card-title">Erro de Execução (Runtime)</div>
+                    <div class="card-desc">
+                        O código começa certo, mas em algum momento durante a execução algo
+                        inesperado acontece — como dividir por zero ou acessar uma variável que
+                        não existe.
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Usando o Console para depurar</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">JavaScript — Técnicas de debug</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc">// console.log — o melhor amigo do debugger</span>
+<span class="ck">let</span> <span class="cv">x</span> = <span class="cn">10</span>
+<span class="ck">let</span> <span class="cv">y</span> = <span class="cn">0</span>
+<span class="cf">console</span>.<span class="cf">log</span>(<span class="cs">"x ="</span>, <span class="cv">x</span>)   <span class="cc">// mostre o valor antes do problema</span>
+<span class="ck">let</span> <span class="cv">resultado</span> = <span class="cv">x</span> / <span class="cv">y</span>
+<span class="cf">console</span>.<span class="cf">log</span>(<span class="cs">"resultado ="</span>, <span class="cv">resultado</span>)  <span class="cc">// → Infinity (divisão por zero!)</span>
+
+<span class="cc">// console.error — destaca em vermelho no console</span>
+<span class="cf">console</span>.<span class="cf">error</span>(<span class="cs">"Algo deu errado!"</span>)
+
+<span class="cc">// typeof — descubra qual o tipo de um valor</span>
+<span class="ck">let</span> <span class="cv">valor</span> = <span class="cf">prompt</span>(<span class="cs">"Digite algo:"</span>)
+<span class="cf">console</span>.<span class="cf">log</span>(<span class="cf">typeof</span> <span class="cv">valor</span>)  <span class="cc">// sempre "string" — prompt retorna texto!</span>
+
+<span class="cc">// Estratégia: imprima variáveis antes e depois de cada operação</span>
+<span class="ck">let</span> <span class="cv">idades</span> = [<span class="cn">25</span>, <span class="cn">30</span>, <span class="cn">17</span>, <span class="cn">22</span>]
+<span class="cf">console</span>.<span class="cf">log</span>(<span class="cs">"Lista original:"</span>, <span class="cv">idades</span>)
+
+<span class="ck">let</span> <span class="cv">soma</span> = <span class="cn">0</span>
+<span class="ck">for</span> (<span class="ck">let</span> <span class="cv">i</span> = <span class="cn">0</span>; <span class="cv">i</span> < <span class="cv">idades</span>.length; <span class="cv">i</span>++) {
+    <span class="cv">soma</span> += <span class="cv">idades</span>[<span class="cv">i</span>]
+    <span class="cf">console</span>.<span class="cf">log</span>(<span class="cs">"Após somar"</span>, <span class="cv">idades</span>[<span class="cv">i</span>], <span class="cs">"→ soma ="</span>, <span class="cv">soma</span>)
+}
+<span class="cf">alert</span>(<span class="cs">"Soma total: "</span> + <span class="cv">soma</span>)</code></pre>
+            </div>
+
+            <div class="callout tip">
+                <div class="callout-icon">💡</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Método do pato de borracha:</strong> Quando travar num bug, explique
+                        o código linha por linha para um pato de borracha imaginário (ou qualquer objeto
+                        inanimado). Na maioria das vezes, você mesmo encontra o erro enquanto explica.
+                        É ridículo, mas funciona — e programadores sênior usam esse método sério.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────
+             8. O CAMINHO À FRENTE
+        ───────────────────────────────────── -->
+        <section id="caminho">
+            <div class="section-label">
+                <div class="sl-icon sl-green">🗺️</div>
+                <span>Tópico 8</span>
+            </div>
+            <h2 class="section-h">O Caminho à Frente</h2>
+
+            <p>
+                Você acaba de aprender os blocos de construção fundamentais de toda programação.
+                Agora é hora de montar esses blocos e ver a lógica de programação em ação.
+            </p>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-badge b-purple">Próximo passo</span>
+                    <div class="card-title">→ Lógica de Programação</div>
+                    <div class="card-desc">
+                        Condicionais, loops, funções — os mecanismos que fazem o programa
+                        tomar decisões e repetir ações. Com exercícios práticos.
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-blue">Depois</span>
+                    <div class="card-title">→ Fundamentos da Web</div>
+                    <div class="card-desc">
+                        HTTP, DNS, cliente e servidor. Como a internet realmente funciona por baixo.
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-green">E então</span>
+                    <div class="card-title">→ JavaScript Completo</div>
+                    <div class="card-desc">
+                        DOM, eventos, Fetch API, async/await. JavaScript no browser de verdade.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── SUMMARY BOX ── -->
+        <div class="summary-box">
+            <h4>📋 Resumo — Fundamentos da Programação</h4>
+            <ul>
+                <li>Programar é dar instruções precisas ao computador — ele faz exatamente o que você manda</li>
+                <li>Linguagens de programação são a ponte entre a linguagem humana e o código binário</li>
+                <li>Um <strong>algoritmo</strong> é a sequência de passos para resolver um problema — pense antes de codar</li>
+                <li>Todo algoritmo usa três estruturas: <strong>sequência</strong>, <strong>decisão</strong> e <strong>repetição</strong></li>
+                <li><strong>Variáveis</strong> são "caixas" para guardar valores na memória do computador</li>
+                <li>Tipos de dados: <code>string</code>, <code>number</code>, <code>boolean</code>, <code>array</code>, <code>object</code></li>
+                <li><code>alert()</code> exibe mensagem • <code>prompt()</code> recebe texto • <code>confirm()</code> retorna true/false</li>
+                <li><code>prompt()</code> sempre retorna <strong>string</strong> — use <code>Number()</code> para converter para número</li>
+                <li>Use <code>console.log()</code> para inspecionar variáveis e encontrar bugs</li>
+                <li>Erros são parte do processo — leia a mensagem, entenda o tipo, corrija com calma</li>
+            </ul>
+        </div>
+
+        <div class="page-nav">
+            <a href="index.html">← Início</a>
+            <a href="logica.html">Lógica de Programação →</a>
+        </div>
+
+    </main>
+
+    <!-- ── TOC ── -->
+    <nav class="toc-panel" aria-label="Nesta página">
+        <h4>Nesta página</h4>
+        <ul>
+            <li><a href="#oque">O que é programar?</a></li>
+            <li class="sub"><a href="#oque">Por que JavaScript</a></li>
+            <li><a href="#algoritmo">Algoritmos</a></li>
+            <li class="sub"><a href="#algoritmo">3 estruturas fundamentais</a></li>
+            <li class="sub"><a href="#algoritmo">Fluxograma</a></li>
+            <li><a href="#variaveis">Variáveis</a></li>
+            <li class="sub"><a href="#variaveis">let e const</a></li>
+            <li class="sub"><a href="#variaveis">Regras de nomenclatura</a></li>
+            <li><a href="#tipos">Tipos de Dados</a></li>
+            <li><a href="#entrada-saida">Entrada e Saída</a></li>
+            <li class="sub"><a href="#entrada-saida">alert / prompt / confirm</a></li>
+            <li><a href="#primeirocod">Seu Primeiro Código</a></li>
+            <li class="sub"><a href="#primeirocod">Estrutura HTML</a></li>
+            <li><a href="#erros">Erros e Debugging</a></li>
+            <li class="sub"><a href="#erros">console.log</a></li>
+            <li><a href="#caminho">O Caminho à Frente</a></li>
+        </ul>
+    </nav>
+
+</div><!-- /.page-wrapper -->
+<script src="./assets/js/include.js" defer></script>
+</body>
+</html>

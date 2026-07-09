@@ -1,0 +1,1571 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dev Atlas — Git: controle de versão, commits, branches, merge, rebase e GitHub.">
+    <title>Git — Dev Atlas</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+<div class="page-wrapper">
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="sidebar">
+        <h3>Módulos</h3>
+        <ul>
+            <li><a href="index.html"><span class="dot"></span>Início</a></li>
+            <li><a href="fundamentos.html"><span class="dot"></span>Fundamentos</a></li>
+            <li><a href="html.html"><span class="dot"></span>HTML</a></li>
+            <li><a href="css.html"><span class="dot"></span>CSS</a></li>
+            <li><a href="javascript.html"><span class="dot"></span>JavaScript</a></li>
+            <li><a href="php.html"><span class="dot"></span>PHP</a></li>
+            <li><a href="git.html" class="active"><span class="dot"></span>Git</a></li>
+            <li><a href="ferramentas.html"><span class="dot"></span>Ferramentas</a></li>
+        </ul>
+        <h3>Nesta página</h3>
+        <ul>
+            <li><a href="#intro"><span class="dot"></span>Introdução ao Git</a></li>
+            <li><a href="#commits"><span class="dot"></span>Commits</a></li>
+            <li><a href="#branches"><span class="dot"></span>Branches</a></li>
+            <li><a href="#merge"><span class="dot"></span>Merge e Rebase</a></li>
+            <li><a href="#github"><span class="dot"></span>GitHub e Pull Requests</a></li>
+            <li><a href="#cheatsheet"><span class="dot"></span>Cheat Sheet</a></li>
+        </ul>
+    </aside>
+
+    <!-- ── MAIN CONTENT ── -->
+    <main class="content">
+
+        <span class="page-badge">🌿 Módulo 6</span>
+        <h1 class="page-title">Git &amp; GitHub</h1>
+        <p class="page-subtitle">
+            Controle de versão, commits, branches, merge, rebase e colaboração com Pull Requests.
+            Porque "salvar e rezar" não é estratégia de desenvolvimento.
+        </p>
+
+        <!-- ═══════════════════════════════════════════
+             1. INTRODUÇÃO
+        ════════════════════════════════════════════ -->
+        <section id="intro">
+
+            <div class="section-label">
+                <div class="sl-icon sl-green">🌿</div>
+                <span>Tópico 1</span>
+            </div>
+            <h2 class="section-h">Introdução ao Git e Controle de Versão</h2>
+
+            <p>
+                Sabe aquele momento em que você mexe num arquivo, tudo quebra e você não lembra mais o que
+                estava funcionando antes? Pois é. É exatamente pra isso que existe o <strong>controle de versão</strong>:
+                um sistema que registra todas as alterações feitas nos seus arquivos ao longo do tempo,
+                permitindo que você volte a qualquer ponto da história do projeto como se fosse um ctrl+Z
+                infinito — mas muito mais poderoso.
+            </p>
+
+            <div class="callout fun">
+                <div class="callout-icon">😂</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>A síndrome do arquivo_final_v3_AGORA_VAI.docx</strong><br>
+                        Todo mundo já viveu isso: <code>projeto.zip</code>, <code>projeto_backup.zip</code>,
+                        <code>projeto_final.zip</code>, <code>projeto_final_MESMO.zip</code>,
+                        <code>projeto_final_v2_nao_apaga.zip</code>…<br>
+                        Com Git, você nunca mais precisa desse circo. Um único projeto,
+                        toda a história preservada, sem duplicar pasta nenhuma.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Git vs GitHub — não é a mesma coisa!</h3>
+            <p>
+                Essa confusão é clássica. <strong>Git</strong> é a <em>ferramenta</em> de controle de versão que roda
+                no seu computador — ela não precisa de internet, não precisa de conta, não precisa de nada.
+                <strong>GitHub</strong> é uma <em>plataforma online</em> que hospeda repositórios Git e adiciona
+                funcionalidades de colaboração: Pull Requests, Issues, Actions, etc. É basicamente o
+                <em>LinkedIn dos devs</em>, só que com código.
+            </p>
+
+            <div class="two-col">
+                <div class="half">
+                    <h4>🛠️ Git</h4>
+                    <ul class="lst">
+                        <li>Software livre instalado localmente</li>
+                        <li>Criado por Linus Torvalds em 2005</li>
+                        <li>Funciona 100% offline</li>
+                        <li>Gerencia versões no seu HD</li>
+                        <li>Não tem interface web própria</li>
+                    </ul>
+                </div>
+                <div class="half">
+                    <h4>☁️ GitHub</h4>
+                    <ul class="lst">
+                        <li>Plataforma online (pertence à Microsoft)</li>
+                        <li>Lançado em 2008</li>
+                        <li>Precisa de internet e conta</li>
+                        <li>Hospeda repositórios Git na nuvem</li>
+                        <li>Tem PRs, Issues, Actions, Pages…</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="callout info">
+                <div class="callout-icon">🐧</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Curiosidade histórica:</strong> Linus Torvalds — o mesmo cara que criou o Linux —
+                        desenvolveu o Git em apenas alguns dias de abril de 2005. O motivo? A ferramenta que
+                        o kernel do Linux usava (BitKeeper) mudou sua licença e o Linus, literalmente,
+                        escreveu o substituto num fim de semana. Faz sentido que a ferramenta seja
+                        ridiculamente eficiente, né?
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Instalação e configuração inicial</h3>
+            <p>
+                Depois de instalar o Git (<a href="https://git-scm.com" target="_blank">git-scm.com</a>),
+                a primeira coisa é se apresentar pra ele. Esses dados vão aparecer em todos os seus commits:
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">TERMINAL / BASH</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># Configurar seu nome e e-mail (feito uma única vez por máquina)</span>
+<span class="ck">git config</span> <span class="ck">--global</span> <span class="ca">user.name</span>  <span class="cs">"Seu Nome Aqui"</span>
+<span class="ck">git config</span> <span class="ck">--global</span> <span class="ca">user.email</span> <span class="cs">"seu@email.com"</span>
+
+<span class="cc"># Definir o editor padrão (ex: VS Code)</span>
+<span class="ck">git config</span> <span class="ck">--global</span> <span class="ca">core.editor</span> <span class="cs">"code --wait"</span>
+
+<span class="cc"># Ver todas as configurações</span>
+<span class="ck">git config</span> <span class="ck">--list</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">Iniciando um repositório</h3>
+            <p>
+                Você tem dois caminhos: criar um repositório novo do zero, ou clonar um existente de algum lugar.
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">TERMINAL / BASH</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># Criar um repositório novo na pasta atual</span>
+<span class="ck">git init</span>
+
+<span class="cc"># Criar um repositório numa pasta com nome específico</span>
+<span class="ck">git init</span> meu-projeto
+
+<span class="cc"># Clonar um repositório existente (do GitHub, por exemplo)</span>
+<span class="ck">git clone</span> <span class="cs">https://github.com/usuario/repositorio.git</span>
+
+<span class="cc"># Clonar numa pasta com nome diferente</span>
+<span class="ck">git clone</span> <span class="cs">https://github.com/usuario/repositorio.git</span> minha-pasta</code></pre>
+            </div>
+
+            <h3 class="sub-h">Os 3 estados do Git</h3>
+            <p>
+                Todo arquivo no seu projeto vive em um desses três estados. Entender isso é
+                <strong>fundamental</strong> pra não ficar perdido quando o Git parece não estar salvando
+                o que você quer:
+            </p>
+
+            <div class="diagram">
+                <div class="d-line" style="color:var(--text-muted);font-size:.75rem;margin-bottom:.8rem">
+                    OS 3 ESTADOS DO GIT
+                </div>
+                <div class="d-line">
+                    <span style="color:var(--yellow);font-weight:700">┌──────────────────────┐</span>
+                    <span style="color:var(--text-muted)">          </span>
+                    <span style="color:var(--green);font-weight:700">┌──────────────────────┐</span>
+                    <span style="color:var(--text-muted)">          </span>
+                    <span style="color:var(--accent);font-weight:700">┌──────────────────────┐</span>
+                </div>
+                <div class="d-line">
+                    <span style="color:var(--yellow);font-weight:700">│  Working Directory   │</span>
+                    <span style="color:var(--text-muted)">  ──────►  </span>
+                    <span style="color:var(--green);font-weight:700">│    Staging Area      │</span>
+                    <span style="color:var(--text-muted)">  ──────►  </span>
+                    <span style="color:var(--accent);font-weight:700">│     Repository       │</span>
+                </div>
+                <div class="d-line">
+                    <span style="color:var(--yellow)">│  (seus arquivos)     │</span>
+                    <span style="color:var(--text-muted)">  git add  </span>
+                    <span style="color:var(--green)">│   (index / stage)    │</span>
+                    <span style="color:var(--text-muted)">  git commit  </span>
+                    <span style="color:var(--accent)">│  (.git / histórico)  │</span>
+                </div>
+                <div class="d-line">
+                    <span style="color:var(--yellow);font-weight:700">└──────────────────────┘</span>
+                    <span style="color:var(--text-muted)">          </span>
+                    <span style="color:var(--green);font-weight:700">└──────────────────────┘</span>
+                    <span style="color:var(--text-muted)">              </span>
+                    <span style="color:var(--accent);font-weight:700">└──────────────────────┘</span>
+                </div>
+                <div class="d-line" style="margin-top:.8rem;font-size:.76rem;color:var(--text-muted)">
+                    Você edita aqui     Você prepara aqui        Git salva aqui
+                </div>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-badge b-yellow">Estado 1</span>
+                    <div class="card-title">Working Directory</div>
+                    <div class="card-desc">
+                        Onde você trabalha de verdade. Qualquer arquivo criado, editado ou deletado
+                        começa aqui. O Git sabe que algo mudou, mas ainda não registrou nada.
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-green">Estado 2</span>
+                    <div class="card-title">Staging Area (Index)</div>
+                    <div class="card-desc">
+                        A "sala de espera" antes do commit. Você escolhe exatamente quais mudanças
+                        quer incluir no próximo snapshot. É como montar o carrinho antes de
+                        fechar o pedido.
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-purple">Estado 3</span>
+                    <div class="card-title">Repository (.git)</div>
+                    <div class="card-desc">
+                        O histórico oficial. Cada commit aqui é imutável e rastreável.
+                        É onde ficam guardados todos os snapshots do seu projeto desde o início.
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ═══════════════════════════════════════════
+             2. COMMITS
+        ════════════════════════════════════════════ -->
+        <section id="commits">
+
+            <div class="section-label">
+                <div class="sl-icon sl-purple">📸</div>
+                <span>Tópico 2</span>
+            </div>
+            <h2 class="section-h">Commits</h2>
+
+            <p>
+                Um <strong>commit</strong> é um snapshot do seu projeto num determinado momento.
+                Não é só "salvar o arquivo" — é registrar o estado completo de todos os arquivos
+                rastreados, com autor, data, hora e uma mensagem explicando o que mudou.
+                Pense como fotografias: cada commit é uma foto do seu código.
+            </p>
+
+            <div class="callout fun">
+                <div class="callout-icon">📷</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>A metáfora da foto:</strong> Commit é como tirar uma foto do código.
+                        Não adianta tirar a foto <em>depois</em> da bagunça. Se você commitar um bug,
+                        ele ficará no histórico para sempre — mas isso não é problema, porque você pode
+                        criar outro commit consertando. O histórico é sagrado: não se apaga, se corrige.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">git status — o termômetro do projeto</h3>
+            <p>
+                Antes de qualquer coisa, <code>git status</code> mostra exatamente o que está acontecendo:
+                arquivos modificados, adicionados, deletados, o que está na staging area e o que não está.
+                Use esse comando o tempo todo — não tem custo nenhum.
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">TERMINAL / BASH</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># Ver o estado atual do repositório</span>
+<span class="ck">git status</span>
+
+<span class="cc"># Versão curta e compacta</span>
+<span class="ck">git status</span> <span class="ck">-s</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">git add — preparando o commit</h3>
+            <p>
+                O <code>git add</code> move arquivos do Working Directory para a Staging Area.
+                Você tem controle total sobre o que entra em cada commit:
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">TERMINAL / BASH</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># Adicionar um arquivo específico</span>
+<span class="ck">git add</span> index.html
+
+<span class="cc"># Adicionar múltiplos arquivos</span>
+<span class="ck">git add</span> style.css script.js
+
+<span class="cc"># Adicionar TUDO na pasta atual (cuidado!)</span>
+<span class="ck">git add</span> <span class="cs">.</span>
+
+<span class="cc"># Adicionar todos os arquivos com determinada extensão</span>
+<span class="ck">git add</span> <span class="cs">"*.css"</span>
+
+<span class="cc"># Modo interativo: escolher pedaços específicos de um arquivo</span>
+<span class="ck">git add</span> <span class="ck">-p</span> style.css
+<span class="cc"># O Git mostra cada trecho modificado e pergunta: stage? (y/n/q/a/d/?)</span></code></pre>
+            </div>
+
+            <div class="callout tip">
+                <div class="callout-icon">💡</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Dica:</strong> O <code>git add -p</code> (patch mode) é um dos comandos mais
+                        poderosos do Git. Ele permite que você adicione apenas <em>partes</em> de um arquivo,
+                        não o arquivo inteiro. Útil quando você fez duas coisas diferentes num mesmo arquivo
+                        e quer commitar separado. Sênior move.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">git commit — registrando o snapshot</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">TERMINAL / BASH</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># Commitar com mensagem inline</span>
+<span class="ck">git commit</span> <span class="ck">-m</span> <span class="cs">"feat: adiciona página de contato"</span>
+
+<span class="cc"># Adicionar e commitar arquivos já rastreados de uma vez</span>
+<span class="ck">git commit</span> <span class="ck">-am</span> <span class="cs">"fix: corrige layout no mobile"</span>
+
+<span class="cc"># Abrir editor para mensagem mais detalhada</span>
+<span class="ck">git commit</span>
+
+<span class="cc"># Corrigir o último commit (mensagem ou arquivos esquecidos)</span>
+<span class="ck">git commit</span> <span class="ck">--amend</span> <span class="ck">-m</span> <span class="cs">"feat: adiciona página de contato com validação"</span>
+<span class="cc"># ⚠️  Só use --amend se o commit ainda não foi enviado ao GitHub!</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">Como escrever uma boa mensagem de commit</h3>
+            <p>
+                Mensagem de commit ruim: <code>"arrumei coisa"</code>, <code>"wip"</code>, <code>"teste"</code>,
+                <code>"aaaa"</code>. Seis meses depois ninguém (incluindo você) vai entender o que foi feito.
+                O padrão <strong>Conventional Commits</strong> resolve isso com um formato simples:
+            </p>
+
+            <div class="diagram">
+                <div class="d-line" style="color:var(--text-muted);font-size:.75rem;margin-bottom:.6rem">FORMATO</div>
+                <div class="d-line">
+                    <span style="color:var(--pink);font-weight:700">tipo</span>
+                    <span style="color:var(--text-muted)">(</span>
+                    <span style="color:var(--yellow)">escopo</span>
+                    <span style="color:var(--text-muted)">): </span>
+                    <span style="color:var(--green)">descrição curta no imperativo</span>
+                </div>
+                <div class="d-line" style="margin-top:.5rem">
+                    <span style="color:var(--text-muted);font-size:.8rem">corpo opcional (explicação mais detalhada)</span>
+                </div>
+                <div class="d-line">
+                    <span style="color:var(--text-muted);font-size:.8rem">BREAKING CHANGE: descrição / Closes #123</span>
+                </div>
+            </div>
+
+            <div class="tbl-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Quando usar</th>
+                            <th>Exemplo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>feat</code></td>
+                            <td>Nova funcionalidade para o usuário</td>
+                            <td><code>feat: adiciona login com Google</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>fix</code></td>
+                            <td>Correção de bug</td>
+                            <td><code>fix: corrige erro 404 na rota /perfil</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>docs</code></td>
+                            <td>Mudanças na documentação</td>
+                            <td><code>docs: atualiza README com instruções de setup</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>style</code></td>
+                            <td>Formatação, espaços, vírgulas (sem lógica)</td>
+                            <td><code>style: formata arquivo com prettier</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>refactor</code></td>
+                            <td>Refatoração sem mudar comportamento</td>
+                            <td><code>refactor: extrai lógica de auth para serviço</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>test</code></td>
+                            <td>Adicionar ou corrigir testes</td>
+                            <td><code>test: adiciona testes para UserService</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>chore</code></td>
+                            <td>Tarefas de manutenção (deps, config)</td>
+                            <td><code>chore: atualiza dependências do npm</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>perf</code></td>
+                            <td>Melhoria de performance</td>
+                            <td><code>perf: otimiza query de busca de produtos</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="sub-h">git log — vendo o histórico</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">TERMINAL / BASH</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># Histórico completo</span>
+<span class="ck">git log</span>
+
+<span class="cc"># Versão compacta (uma linha por commit)</span>
+<span class="ck">git log</span> <span class="ck">--oneline</span>
+
+<span class="cc"># Com gráfico de branches (muito útil!)</span>
+<span class="ck">git log</span> <span class="ck">--oneline</span> <span class="ck">--graph</span> <span class="ck">--all</span>
+
+<span class="cc"># Filtrar por autor</span>
+<span class="ck">git log</span> <span class="ck">--author</span>=<span class="cs">"Seu Nome"</span>
+
+<span class="cc"># Ver os últimos 5 commits</span>
+<span class="ck">git log</span> <span class="ck">-5</span>
+
+<span class="cc"># Ver mudanças de cada commit</span>
+<span class="ck">git log</span> <span class="ck">-p</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">git diff — comparando versões</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">TERMINAL / BASH</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># Ver mudanças não staged (Working Directory vs Staging)</span>
+<span class="ck">git diff</span>
+
+<span class="cc"># Ver mudanças que já estão staged (Staging vs último commit)</span>
+<span class="ck">git diff</span> <span class="ck">--staged</span>
+
+<span class="cc"># Comparar dois commits específicos</span>
+<span class="ck">git diff</span> abc1234 def5678
+
+<span class="cc"># Comparar duas branches</span>
+<span class="ck">git diff</span> main feature/login
+
+<span class="cc"># Ver apenas os nomes dos arquivos que mudaram</span>
+<span class="ck">git diff</span> <span class="ck">--name-only</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">.gitignore — o que o Git não deve ver</h3>
+            <p>
+                Tem arquivos que não devem entrar no repositório jamais: dependências (pesadas e regeneráveis),
+                arquivos de configuração com senhas, builds e arquivos temporários do editor.
+                O <strong>.gitignore</strong> lista esses arquivos e o Git simplesmente os ignora.
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">.gitignore</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># Dependências (Node.js)</span>
+<span class="cs">node_modules/</span>
+
+<span class="cc"># Variáveis de ambiente — NUNCA commitar senhas!</span>
+<span class="cs">.env</span>
+<span class="cs">.env.local</span>
+<span class="cs">.env.*.local</span>
+
+<span class="cc"># Builds e distribuição</span>
+<span class="cs">dist/</span>
+<span class="cs">build/</span>
+<span class="cs">out/</span>
+
+<span class="cc"># Logs</span>
+<span class="cs">*.log</span>
+<span class="cs">npm-debug.log*</span>
+
+<span class="cc"># Sistema operacional</span>
+<span class="cs">.DS_Store</span>
+<span class="cs">Thumbs.db</span>
+
+<span class="cc"># Editor (VS Code)</span>
+<span class="cs">.vscode/</span>
+<span class="cs">*.swp</span>
+
+<span class="cc"># PHP</span>
+<span class="cs">vendor/</span>
+<span class="cs">.phpunit.result.cache</span></code></pre>
+            </div>
+
+            <div class="callout warning">
+                <div class="callout-icon">⚠️</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Atenção total:</strong> Se você commitar um arquivo <code>.env</code> com
+                        senhas de banco de dados ou API keys e enviar pro GitHub, essas credenciais ficam
+                        públicas para o mundo inteiro — e bots vasculham o GitHub em tempo real atrás
+                        exatamente disso. Adicione <code>.env</code> no <code>.gitignore</code> antes do
+                        primeiro commit. Sem exceções.
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ═══════════════════════════════════════════
+             3. BRANCHES
+        ════════════════════════════════════════════ -->
+        <section id="branches">
+
+            <div class="section-label">
+                <div class="sl-icon sl-blue">🌳</div>
+                <span>Tópico 3</span>
+            </div>
+            <h2 class="section-h">Branches</h2>
+
+            <p>
+                Uma <strong>branch</strong> (ramificação) é como uma linha do tempo paralela do seu projeto.
+                Você pode criar uma branch, fazer uma porção de mudanças radicais, e o código original
+                na branch principal fica completamente intacto. Se as mudanças ficarem boas, você une
+                as duas linhas do tempo. Se não ficarem, descarta e pronto.
+            </p>
+
+            <div class="callout info">
+                <div class="callout-icon">🎮</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Analogia de videogame:</strong> Lembra quando você salvava o jogo antes
+                        de uma missão difícil e abria um segundo save slot pra "tentar sem estragar o
+                        principal"? Branches funcionam exatamente assim — um save state paralelo onde você
+                        pode experimentar à vontade sem medo de quebrar o que já está funcionando.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Branch main/master</h3>
+            <p>
+                Todo repositório começa com uma branch padrão. Historicamente chamada de
+                <code>master</code>, hoje o GitHub e a maioria das ferramentas usa <code>main</code>.
+                Ela representa o estado "oficial" e estável do projeto.
+            </p>
+
+            <h3 class="sub-h">Gerenciando branches</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">TERMINAL / BASH</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># Listar todas as branches locais</span>
+<span class="ck">git branch</span>
+
+<span class="cc"># Listar branches locais E remotas</span>
+<span class="ck">git branch</span> <span class="ck">-a</span>
+
+<span class="cc"># Criar uma nova branch</span>
+<span class="ck">git branch</span> feature/nova-funcionalidade
+
+<span class="cc"># Trocar para uma branch existente (forma clássica)</span>
+<span class="ck">git checkout</span> feature/nova-funcionalidade
+
+<span class="cc"># Trocar para uma branch existente (forma moderna — Git 2.23+)</span>
+<span class="ck">git switch</span> feature/nova-funcionalidade
+
+<span class="cc"># Criar E trocar para nova branch ao mesmo tempo (clássico)</span>
+<span class="ck">git checkout</span> <span class="ck">-b</span> feature/carrinho-de-compras
+
+<span class="cc"># Criar E trocar para nova branch ao mesmo tempo (moderno)</span>
+<span class="ck">git switch</span> <span class="ck">-c</span> feature/carrinho-de-compras
+
+<span class="cc"># Renomear a branch atual</span>
+<span class="ck">git branch</span> <span class="ck">-m</span> novo-nome
+
+<span class="cc"># Deletar uma branch (seguro — só deleta se já foi mergeada)</span>
+<span class="ck">git branch</span> <span class="ck">-d</span> feature/funcionalidade-concluida
+
+<span class="cc"># Deletar uma branch à força (cuidado!)</span>
+<span class="ck">git branch</span> <span class="ck">-D</span> feature/experimento-descartado</code></pre>
+            </div>
+
+            <h3 class="sub-h">Estratégia de nomenclatura</h3>
+            <p>
+                Dar nome certo para branches torna o projeto muito mais organizado quando tem
+                várias pessoas trabalhando:
+            </p>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-badge b-green">feature/</span>
+                    <div class="card-title">feature/nome-da-funcionalidade</div>
+                    <div class="card-desc">
+                        Para desenvolvimento de novas funcionalidades. Ex: <code>feature/login-social</code>,
+                        <code>feature/dashboard-admin</code>
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-red">fix/</span>
+                    <div class="card-title">fix/descricao-do-bug</div>
+                    <div class="card-desc">
+                        Para correção de bugs em ciclos normais de desenvolvimento.
+                        Ex: <code>fix/menu-mobile-sobreposto</code>
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-orange">hotfix/</span>
+                    <div class="card-title">hotfix/bug-critico</div>
+                    <div class="card-desc">
+                        Para correções urgentes direto em produção.
+                        Ex: <code>hotfix/pagamento-quebrando</code>
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-blue">release/</span>
+                    <div class="card-title">release/v1.2.0</div>
+                    <div class="card-desc">
+                        Para preparar uma nova versão do projeto com ajustes finais
+                        antes de ir pra produção.
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Visualizando branches</h3>
+            <p>
+                O histórico com branches pode ser visualizado com <code>git log --graph</code>.
+                Aqui está um exemplo de como ele fica:
+            </p>
+
+            <div class="diagram">
+                <div class="d-line" style="color:var(--text-muted);font-size:.75rem;margin-bottom:.6rem">
+                    GIT LOG --ONELINE --GRAPH --ALL
+                </div>
+                <div class="d-line"><span style="color:var(--green)">*</span> <span style="color:var(--yellow)">a3f8d12</span> <span style="color:var(--text)">(HEAD → main)</span> <span style="color:var(--text-muted)">fix: corrige validação de email</span></div>
+                <div class="d-line"><span style="color:var(--green)">*</span>   <span style="color:var(--yellow)">b9e2c45</span> <span style="color:var(--text-muted)">Merge branch 'feature/login'</span></div>
+                <div class="d-line"><span style="color:var(--green)">|\ </span></div>
+                <div class="d-line"><span style="color:var(--green)">| *</span> <span style="color:var(--yellow)">f1d7a89</span> <span style="color:var(--text)">(feature/login)</span> <span style="color:var(--text-muted)">feat: adiciona autenticação JWT</span></div>
+                <div class="d-line"><span style="color:var(--green)">| *</span> <span style="color:var(--yellow)">c2b3e56</span> <span style="color:var(--text-muted)">feat: cria formulário de login</span></div>
+                <div class="d-line"><span style="color:var(--green)">|/</span></div>
+                <div class="d-line"><span style="color:var(--green)">*</span> <span style="color:var(--yellow)">d4a5f78</span> <span style="color:var(--text-muted)">chore: setup inicial do projeto</span></div>
+            </div>
+
+        </section>
+
+        <!-- ═══════════════════════════════════════════
+             4. MERGE E REBASE
+        ════════════════════════════════════════════ -->
+        <section id="merge">
+
+            <div class="section-label">
+                <div class="sl-icon sl-yellow">🔀</div>
+                <span>Tópico 4</span>
+            </div>
+            <h2 class="section-h">Merge e Rebase</h2>
+
+            <p>
+                Criar branches é fácil. O desafio (e a mágica) do Git é <strong>unir</strong> essas
+                linhas do tempo de volta. Existem duas formas principais de fazer isso: <code>merge</code>
+                e <code>rebase</code> — cada uma com suas vantagens e os seus momentos certos de usar.
+            </p>
+
+            <h3 class="sub-h">git merge — unindo branches</h3>
+            <p>
+                O merge integra o histórico de uma branch em outra. Existem dois tipos de merge:
+            </p>
+
+            <div class="two-col">
+                <div class="half">
+                    <h4>⚡ Fast-forward</h4>
+                    <p style="font-size:.85rem;color:var(--text-muted)">
+                        Acontece quando a branch principal não teve commits novos desde que a feature
+                        branch foi criada. O Git simplesmente "avança" o ponteiro — limpo e sem
+                        commit de merge extra.
+                    </p>
+                    <div class="diagram" style="margin-top:.8rem;padding:1rem;font-size:.78rem">
+                        <div class="d-line"><span style="color:var(--text-muted)">main:</span>  <span style="color:var(--green)">A──B</span></div>
+                        <div class="d-line"><span style="color:var(--text-muted)">feat:</span>       <span style="color:var(--accent)">C──D</span></div>
+                        <div class="d-line" style="margin-top:.4rem"><span style="color:var(--text-muted)">após:</span> <span style="color:var(--green)">A──B──C──D</span> <span style="color:var(--green)">(main)</span></div>
+                    </div>
+                </div>
+                <div class="half">
+                    <h4>🔀 3-way Merge</h4>
+                    <p style="font-size:.85rem;color:var(--text-muted)">
+                        Quando a branch principal teve commits depois que a feature branch foi criada,
+                        o Git cria um "commit de merge" que une os dois históricos. Preserva o contexto
+                        de quando cada mudança foi feita.
+                    </p>
+                    <div class="diagram" style="margin-top:.8rem;padding:1rem;font-size:.78rem">
+                        <div class="d-line"><span style="color:var(--text-muted)">main:</span>  <span style="color:var(--green)">A──B──E</span></div>
+                        <div class="d-line"><span style="color:var(--text-muted)">feat:</span>       <span style="color:var(--accent)">C──D</span></div>
+                        <div class="d-line" style="margin-top:.4rem"><span style="color:var(--text-muted)">após:</span> <span style="color:var(--green)">A──B──E────M</span> <span style="color:var(--text-muted)">(M = merge commit)</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">TERMINAL / BASH</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># Primeiro: ir para a branch que vai RECEBER as mudanças</span>
+<span class="ck">git switch</span> main
+
+<span class="cc"># Fazer o merge da feature branch na main</span>
+<span class="ck">git merge</span> feature/login
+
+<span class="cc"># Forçar um merge commit mesmo que seja fast-forward possível</span>
+<span class="ck">git merge</span> <span class="ck">--no-ff</span> feature/login
+
+<span class="cc"># Abandonar um merge que deu errado</span>
+<span class="ck">git merge</span> <span class="ck">--abort</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">Conflitos de merge — calma, acontece com todo mundo</h3>
+            <p>
+                Um conflito acontece quando duas branches editaram a <em>mesma linha</em> do mesmo arquivo.
+                O Git não sabe qual versão manter — e pede sua ajuda. O arquivo conflitado fica assim:
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">ARQUIVO COM CONFLITO</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD (branch atual — main)</span>
+<span class="cs">  &lt;h1&gt;Bem-vindo ao nosso site!&lt;/h1&gt;</span>
+<span class="co">=======</span>
+<span class="cs">  &lt;h1&gt;Olá, seja bem-vindo!&lt;/h1&gt;</span>
+<span class="cc">&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/novo-titulo</span></code></pre>
+            </div>
+
+            <p>
+                Para resolver: edite o arquivo manualmente, escolhendo qual versão manter (ou combinando
+                as duas), remova as marcações do Git (<code>&lt;&lt;&lt;</code>, <code>===</code>, <code>&gt;&gt;&gt;</code>)
+                e em seguida:
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">TERMINAL / BASH</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># 1. Editar os arquivos conflitados manualmente</span>
+<span class="cc"># 2. Marcar como resolvido</span>
+<span class="ck">git add</span> index.html
+
+<span class="cc"># 3. Concluir o merge</span>
+<span class="ck">git commit</span>
+<span class="cc"># O Git já sugere uma mensagem de merge — é só confirmar</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">git rebase — reescrevendo a história</h3>
+            <p>
+                O rebase "move" seus commits para cima dos commits da branch alvo, como se você tivesse
+                começado a trabalhar a partir do estado mais recente. Isso deixa o histórico mais
+                linear e limpo, sem commits de merge extras.
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">TERMINAL / BASH</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># Estando na feature branch, fazer rebase em cima da main</span>
+<span class="ck">git switch</span> feature/login
+<span class="ck">git rebase</span> main
+
+<span class="cc"># Se houver conflito: resolver, adicionar e continuar</span>
+<span class="ck">git add</span> arquivo-resolvido.js
+<span class="ck">git rebase</span> <span class="ck">--continue</span>
+
+<span class="cc"># Abandonar o rebase se as coisas ficarem complicadas</span>
+<span class="ck">git rebase</span> <span class="ck">--abort</span></code></pre>
+            </div>
+
+            <div class="callout danger">
+                <div class="callout-icon">🚨</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Regra de ouro do rebase:</strong> <em>Nunca faça rebase em uma branch
+                        pública/compartilhada.</em> O rebase reescreve o histórico de commits —
+                        se outras pessoas já baixaram esses commits, você vai criar um caos danado
+                        de conflitos pra todo mundo. Use rebase apenas em branches locais que só você
+                        está mexendo.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">git stash — guardando mudanças temporariamente</h3>
+            <p>
+                Você estava no meio de uma feature, aí chega uma demanda urgente. Mas você não quer
+                commitar código incompleto. É aí que entra o <strong>stash</strong>: um baú temporário
+                que guarda suas mudanças não commitadas pra você resolver outra coisa e voltar depois.
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">TERMINAL / BASH</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># Guardar mudanças não commitadas no baú</span>
+<span class="ck">git stash</span>
+
+<span class="cc"># Guardar com uma descrição</span>
+<span class="ck">git stash push</span> <span class="ck">-m</span> <span class="cs">"wip: implementando carrinho"</span>
+
+<span class="cc"># Ver o que tem no baú</span>
+<span class="ck">git stash list</span>
+
+<span class="cc"># Recuperar o último stash (remove do baú)</span>
+<span class="ck">git stash pop</span>
+
+<span class="cc"># Aplicar um stash específico (mantém no baú)</span>
+<span class="ck">git stash apply</span> stash@{2}
+
+<span class="cc"># Deletar um stash específico</span>
+<span class="ck">git stash drop</span> stash@{0}
+
+<span class="cc"># Limpar todos os stashes</span>
+<span class="ck">git stash clear</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">git reset — desfazendo commits</h3>
+            <p>
+                Às vezes você commitou algo que não devia, ou quer refazer o último commit.
+                O <code>git reset</code> permite voltar no tempo — mas com cuidado:
+            </p>
+
+            <div class="tbl-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Modo</th>
+                            <th>Commits</th>
+                            <th>Staging Area</th>
+                            <th>Working Directory</th>
+                            <th>Quando usar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>--soft</code></td>
+                            <td>Desfaz</td>
+                            <td>Mantém</td>
+                            <td>Mantém</td>
+                            <td>Quer refazer a mensagem ou separar em commits</td>
+                        </tr>
+                        <tr>
+                            <td><code>--mixed</code> (padrão)</td>
+                            <td>Desfaz</td>
+                            <td>Limpa</td>
+                            <td>Mantém</td>
+                            <td>Quer reescolher o que vai no commit</td>
+                        </tr>
+                        <tr>
+                            <td><code>--hard</code></td>
+                            <td>Desfaz</td>
+                            <td>Limpa</td>
+                            <td>Limpa</td>
+                            <td>Abandonar tudo mesmo — sem volta!</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">TERMINAL / BASH</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># Desfazer o último commit, mas manter as mudanças staged</span>
+<span class="ck">git reset</span> <span class="ck">--soft</span> HEAD~1
+
+<span class="cc"># Desfazer o último commit e tirar da staging area</span>
+<span class="ck">git reset</span> HEAD~1
+
+<span class="cc"># Desfazer os últimos 3 commits E as mudanças (IRREVERSÍVEL!)</span>
+<span class="ck">git reset</span> <span class="ck">--hard</span> HEAD~3
+
+<span class="cc"># Voltar para um commit específico pelo hash</span>
+<span class="ck">git reset</span> <span class="ck">--hard</span> abc1234</code></pre>
+            </div>
+
+            <h3 class="sub-h">git revert — desfazendo sem reescrever história</h3>
+            <p>
+                O <code>git revert</code> é a alternativa segura ao <code>reset --hard</code>:
+                em vez de apagar commits, ele cria um <em>novo commit</em> que desfaz as mudanças.
+                Perfeito para uso em branches compartilhadas ou já enviadas ao GitHub.
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">TERMINAL / BASH</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># Reverter o último commit criando um novo commit "undoing"</span>
+<span class="ck">git revert</span> HEAD
+
+<span class="cc"># Reverter um commit específico pelo hash</span>
+<span class="ck">git revert</span> abc1234
+
+<span class="cc"># Reverter sem abrir o editor de mensagem</span>
+<span class="ck">git revert</span> <span class="ck">--no-edit</span> HEAD</code></pre>
+            </div>
+
+            <blockquote>
+                <strong>reset vs revert:</strong> Use <code>revert</code> quando o commit já foi
+                para o GitHub ou quando outras pessoas já têm aquele código. Use <code>reset</code>
+                apenas para histórico local ainda não compartilhado.
+                <cite>— Regra prática do dia a dia</cite>
+            </blockquote>
+
+            <h3 class="sub-h">git cherry-pick — trazendo um commit específico</h3>
+            <p>
+                O <code>cherry-pick</code> copia um commit de qualquer branch e o aplica na branch
+                atual. É como dizer: <em>"Quero só aquele commit específico, sem trazer todo o resto
+                da branch."</em> Muito útil para levar uma correção de bug para produção sem precisar
+                fazer merge da feature branch inteira.
+            </p>
+
+            <div class="callout info">
+                <div class="callout-icon">🍒</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Analogia:</strong> imagine que a branch <code>feature/nova-tela</code>
+                        tem 10 commits. Nove são trabalho em progresso, mas o décimo corrige um bug
+                        crítico que também afeta a <code>main</code>. Com cherry-pick, você copia
+                        só esse commit para a <code>main</code> — sem levar nenhum dos outros nove.
+                    </p>
+                </div>
+            </div>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">TERMINAL / BASH</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># 1. Descubra o hash do commit que você quer copiar</span>
+<span class="ck">git log</span> <span class="ck">--oneline</span> feature/nova-tela
+<span class="cc"># → a3f8d12 fix: corrige validação de email  ← este!</span>
+<span class="cc"># → b9e2c45 wip: tela em progresso</span>
+<span class="cc"># → c2b3e56 wip: componente incompleto</span>
+
+<span class="cc"># 2. Vá para a branch que vai RECEBER o commit</span>
+<span class="ck">git switch</span> main
+
+<span class="cc"># 3. Aplique o commit pelo hash</span>
+<span class="ck">git cherry-pick</span> a3f8d12
+<span class="cc"># → O commit é copiado para a main com um novo hash</span>
+
+<span class="cc"># Cherry-pick de múltiplos commits (um por um)</span>
+<span class="ck">git cherry-pick</span> a3f8d12 c4d9e01
+
+<span class="cc"># Cherry-pick de um intervalo de commits (do mais antigo ao mais novo)</span>
+<span class="ck">git cherry-pick</span> abc123..def456
+
+<span class="cc"># Aplicar sem commitar imediatamente (fica na staging area)</span>
+<span class="ck">git cherry-pick</span> <span class="ck">--no-commit</span> a3f8d12
+
+<span class="cc"># Se houver conflito: resolver o arquivo, depois continuar</span>
+<span class="ck">git add</span> arquivo-resolvido.js
+<span class="ck">git cherry-pick</span> <span class="ck">--continue</span>
+
+<span class="cc"># Ou abandonar o cherry-pick se ficar complicado</span>
+<span class="ck">git cherry-pick</span> <span class="ck">--abort</span></code></pre>
+            </div>
+
+            <div class="callout warning">
+                <div class="callout-icon">⚠️</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Cherry-pick duplica o commit</strong> — ele cria uma cópia com
+                        um <em>novo hash</em> na branch de destino. O commit original permanece
+                        intacto na branch de origem. Se depois você fizer merge dessas duas branches,
+                        o Git pode mostrar um conflito aparente naquele trecho, já que o mesmo código
+                        foi introduzido por dois commits diferentes. Use com consciência.
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ═══════════════════════════════════════════
+             5. GITHUB E PULL REQUESTS
+        ════════════════════════════════════════════ -->
+        <section id="github">
+
+            <div class="section-label">
+                <div class="sl-icon sl-red">🐙</div>
+                <span>Tópico 5</span>
+            </div>
+            <h2 class="section-h">GitHub e Pull Requests</h2>
+
+            <p>
+                Agora que você domina o Git localmente, é hora de conectar tudo ao mundo. O
+                <strong>GitHub</strong> transforma seu repositório local em algo colaborativo, versionado
+                na nuvem e visível pra recrutadores, parceiros e a comunidade open source.
+            </p>
+
+            <div class="callout fun">
+                <div class="callout-icon">💼</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>GitHub é o LinkedIn dos devs</strong> — só que muito mais honesto.
+                        No LinkedIn as pessoas inventam skills. No GitHub o código está lá pra qualquer
+                        um ver. Mantenha seu perfil ativo, commite projetos reais e cuide bem do seu
+                        README. Recrutadores e CTOs olham pra isso.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Conectando ao repositório remoto</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">TERMINAL / BASH</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># Adicionar o repositório remoto (origin é só um apelido)</span>
+<span class="ck">git remote add</span> origin <span class="cs">https://github.com/seunome/meu-projeto.git</span>
+
+<span class="cc"># Ver os remotes configurados</span>
+<span class="ck">git remote</span> <span class="ck">-v</span>
+
+<span class="cc"># Enviar a branch main pro GitHub pela primeira vez (-u define o tracking)</span>
+<span class="ck">git push</span> <span class="ck">-u</span> origin main
+
+<span class="cc"># Envios seguintes (já com tracking configurado)</span>
+<span class="ck">git push</span>
+
+<span class="cc"># Enviar uma branch nova pro GitHub</span>
+<span class="ck">git push</span> <span class="ck">-u</span> origin feature/nova-pagina</code></pre>
+            </div>
+
+            <h3 class="sub-h">Baixando atualizações do remoto</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">TERMINAL / BASH</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># Baixar E integrar atualizações (fetch + merge)</span>
+<span class="ck">git pull</span>
+
+<span class="cc"># Baixar com rebase em vez de merge (histórico mais limpo)</span>
+<span class="ck">git pull</span> <span class="ck">--rebase</span>
+
+<span class="cc"># Só baixar, sem integrar (ver o que mudou antes de mexer)</span>
+<span class="ck">git fetch</span>
+<span class="ck">git fetch</span> origin
+
+<span class="cc"># Ver a diferença entre local e remoto após o fetch</span>
+<span class="ck">git diff</span> main origin/main</code></pre>
+            </div>
+
+            <div class="callout tip">
+                <div class="callout-icon">💡</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>fetch vs pull:</strong> O <code>fetch</code> baixa as atualizações mas
+                        não altera seu código local. O <code>pull</code> baixa e já faz o merge.
+                        Em projetos com muita gente, prefira <code>fetch</code> primeiro pra ver o que
+                        mudou antes de integrar tudo de uma vez.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Fork vs Clone</h3>
+            <div class="two-col">
+                <div class="half">
+                    <h4>🍴 Fork</h4>
+                    <p style="font-size:.85rem;color:var(--text-muted)">
+                        Cria uma <em>cópia do repositório de outra pessoa na sua conta do GitHub</em>.
+                        É o ponto de partida para contribuir em projetos open source: você faz o fork,
+                        trabalha na sua cópia, e depois abre um Pull Request para o projeto original.
+                    </p>
+                </div>
+                <div class="half">
+                    <h4>📥 Clone</h4>
+                    <p style="font-size:.85rem;color:var(--text-muted)">
+                        Baixa um repositório (do GitHub ou qualquer outro lugar) para o seu computador.
+                        Você clona o seu próprio projeto, o fork que você fez, ou qualquer repositório
+                        público que queira explorar localmente.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">O fluxo completo do Pull Request</h3>
+            <p>
+                O Pull Request (PR) é a forma padrão de propor mudanças em um projeto — seja open source
+                ou em equipe. O fluxo é sempre o mesmo:
+            </p>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-body">
+                        <strong>Fork (se for projeto de outro) ou clone o repositório</strong>
+                        <p>
+                            Crie seu próprio fork pelo botão no GitHub, depois clone localmente:
+                            <code>git clone https://github.com/seucusuario/projeto-forked.git</code>
+                        </p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-body">
+                        <strong>Crie uma branch descritiva para a sua mudança</strong>
+                        <p>
+                            Nunca trabalhe direto na <code>main</code>. Use
+                            <code>git switch -c feature/minha-contribuicao</code>
+                        </p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-body">
+                        <strong>Faça seus commits com mensagens claras</strong>
+                        <p>
+                            Commits pequenos e focados são muito melhor do que um commit gigante.
+                            Siga o padrão Conventional Commits.
+                        </p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-body">
+                        <strong>Envie a branch pro GitHub</strong>
+                        <p>
+                            <code>git push -u origin feature/minha-contribuicao</code>
+                        </p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">5</div>
+                    <div class="step-body">
+                        <strong>Abra o Pull Request no GitHub</strong>
+                        <p>
+                            O GitHub vai mostrar um botão "Compare &amp; pull request". Clique,
+                            escreva um título claro, descreva o que mudou e por quê, e envie.
+                        </p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">6</div>
+                    <div class="step-body">
+                        <strong>Code Review</strong>
+                        <p>
+                            Os mantenedores do projeto (ou seus colegas de equipe) revisam o código,
+                            deixam comentários, pedem ajustes. É um processo colaborativo, não uma
+                            avaliação — todo mundo aprende nessa etapa.
+                        </p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">7</div>
+                    <div class="step-body">
+                        <strong>Merge!</strong>
+                        <p>
+                            Aprovado o PR, o mantenedor faz o merge. Sua contribuição agora faz parte
+                            oficial do projeto. Parabéns! 🎉
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Issues e README — os pilares de um bom projeto</h3>
+            <p>
+                Um repositório profissional tem mais do que só código:
+            </p>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-badge b-blue">Issues</span>
+                    <div class="card-title">Rastreamento de bugs e tarefas</div>
+                    <div class="card-desc">
+                        Use issues para reportar bugs, propor features e organizar o trabalho.
+                        É o "sistema de tickets" integrado ao GitHub, com labels, milestones e
+                        atribuições de responsável.
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-green">README.md</span>
+                    <div class="card-title">A primeira impressão do projeto</div>
+                    <div class="card-desc">
+                        É a página inicial do seu repositório. Todo projeto sério tem um README
+                        explicando o que é, como instalar, como usar e como contribuir. Escreva
+                        com carinho — é a porta de entrada.
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-purple">GitHub Actions</span>
+                    <div class="card-title">CI/CD automatizado</div>
+                    <div class="card-desc">
+                        Ferramenta de automação do GitHub que roda fluxos ao detectar eventos
+                        (push, PR, etc.). Testa seu código, faz deploy, envia notificações —
+                        tudo automaticamente. Vale estudar quando evoluir no desenvolvimento.
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ═══════════════════════════════════════════
+             CHEAT SHEET
+        ════════════════════════════════════════════ -->
+        <section id="cheatsheet">
+
+            <div class="section-label">
+                <div class="sl-icon sl-green">📋</div>
+                <span>Referência Rápida</span>
+            </div>
+            <h2 class="section-h">Cheat Sheet — Comandos do Dia a Dia</h2>
+
+            <p>
+                Os comandos que você vai usar nos próximos 90% das interações com o Git.
+                Guarda essa tabela e consulta sempre que travar.
+            </p>
+
+            <div class="tbl-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Categoria</th>
+                            <th>Comando</th>
+                            <th>O que faz</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="card-badge b-blue" style="font-size:.65rem">Setup</span></td>
+                            <td><code>git init</code></td>
+                            <td>Inicia um repositório Git na pasta atual</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>git clone &lt;url&gt;</code></td>
+                            <td>Clona um repositório remoto localmente</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>git config --global user.name "…"</code></td>
+                            <td>Define seu nome nos commits</td>
+                        </tr>
+                        <tr>
+                            <td><span class="card-badge b-yellow" style="font-size:.65rem">Status</span></td>
+                            <td><code>git status</code></td>
+                            <td>Mostra o estado atual do repositório</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>git diff</code></td>
+                            <td>Mostra mudanças não staged</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>git diff --staged</code></td>
+                            <td>Mostra mudanças staged vs último commit</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>git log --oneline --graph</code></td>
+                            <td>Histórico compacto com gráfico de branches</td>
+                        </tr>
+                        <tr>
+                            <td><span class="card-badge b-green" style="font-size:.65rem">Staging</span></td>
+                            <td><code>git add &lt;arquivo&gt;</code></td>
+                            <td>Adiciona arquivo à staging area</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>git add .</code></td>
+                            <td>Adiciona tudo à staging area</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>git add -p</code></td>
+                            <td>Adiciona trechos específicos (patch mode)</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>git restore --staged &lt;arquivo&gt;</code></td>
+                            <td>Remove arquivo da staging area</td>
+                        </tr>
+                        <tr>
+                            <td><span class="card-badge b-purple" style="font-size:.65rem">Commit</span></td>
+                            <td><code>git commit -m "mensagem"</code></td>
+                            <td>Cria um commit com mensagem</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>git commit --amend</code></td>
+                            <td>Corrige o último commit (local only!)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="card-badge b-blue" style="font-size:.65rem">Branches</span></td>
+                            <td><code>git branch</code></td>
+                            <td>Lista branches locais</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>git switch -c &lt;nome&gt;</code></td>
+                            <td>Cria e muda para nova branch</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>git switch &lt;nome&gt;</code></td>
+                            <td>Troca para branch existente</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>git branch -d &lt;nome&gt;</code></td>
+                            <td>Deleta branch (seguro)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="card-badge b-orange" style="font-size:.65rem">Merge</span></td>
+                            <td><code>git merge &lt;branch&gt;</code></td>
+                            <td>Faz merge de uma branch na atual</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>git merge --abort</code></td>
+                            <td>Cancela um merge em andamento</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>git rebase &lt;branch&gt;</code></td>
+                            <td>Faz rebase na branch especificada</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>git stash</code></td>
+                            <td>Guarda mudanças temporariamente</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>git stash pop</code></td>
+                            <td>Recupera o último stash</td>
+                        </tr>
+                        <tr>
+                            <td><span class="card-badge b-red" style="font-size:.65rem">Desfazer</span></td>
+                            <td><code>git reset HEAD~1</code></td>
+                            <td>Desfaz o último commit (mantém arquivos)</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>git reset --hard HEAD~1</code></td>
+                            <td>Desfaz commit E mudanças (irreversível!)</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>git revert HEAD</code></td>
+                            <td>Cria commit que desfaz o último (seguro)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="card-badge b-orange" style="font-size:.65rem">Cherry-pick</span></td>
+                            <td><code>git cherry-pick &lt;hash&gt;</code></td>
+                            <td>Copia um commit específico para a branch atual</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>git cherry-pick --no-commit &lt;hash&gt;</code></td>
+                            <td>Aplica as mudanças sem commitar (fica na staging)</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>git cherry-pick --abort</code></td>
+                            <td>Cancela um cherry-pick em andamento</td>
+                        </tr>
+                        <tr>
+                            <td><span class="card-badge b-green" style="font-size:.65rem">Remoto</span></td>
+                            <td><code>git remote add origin &lt;url&gt;</code></td>
+                            <td>Adiciona repositório remoto</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>git push -u origin main</code></td>
+                            <td>Envia branch ao remoto pela 1ª vez</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>git push</code></td>
+                            <td>Envia commits ao remoto</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>git pull</code></td>
+                            <td>Baixa e integra atualizações do remoto</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>git fetch</code></td>
+                            <td>Baixa atualizações sem integrar</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+        <!-- ── SUMMARY BOX ── -->
+        <div class="summary-box">
+            <h4>Resumo do Módulo — O que você aprendeu</h4>
+            <ul>
+                <li>Git é uma ferramenta de controle de versão criada por Linus Torvalds; GitHub é a plataforma online para hospedar repositórios Git.</li>
+                <li>Todo arquivo vive em um dos 3 estados: Working Directory, Staging Area ou Repository.</li>
+                <li>Configure seu nome e e-mail com <code>git config --global</code> antes de começar qualquer projeto.</li>
+                <li>Commits são snapshots imutáveis do projeto — escreva mensagens claras seguindo Conventional Commits.</li>
+                <li>Use <code>.gitignore</code> para não commitar <code>node_modules</code>, <code>.env</code>, builds e arquivos de sistema.</li>
+                <li>Branches permitem desenvolver funcionalidades em paralelo sem afetar o código principal.</li>
+                <li>Prefira <code>git switch</code> e <code>git switch -c</code> (comandos modernos) ao invés de <code>git checkout</code>.</li>
+                <li>Merge integra branches; conflitos são resolvidos manualmente editando os arquivos marcados pelo Git.</li>
+                <li>Nunca faça rebase em branches públicas/compartilhadas — use apenas em branches locais.</li>
+                <li>Use <code>git stash</code> pra guardar trabalho em progresso e <code>git revert</code> pra desfazer com segurança.</li>
+                <li>O fluxo de Pull Request é: fork → branch → commits → push → PR → code review → merge.</li>
+                <li>Cuide do seu perfil no GitHub: projetos reais, READMEs bem escritos e commits frequentes.</li>
+            </ul>
+        </div>
+
+        <!-- ── NAV ENTRE MÓDULOS ── -->
+        <div style="display:flex;justify-content:space-between;margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--border)">
+            <a href="php.html" style="color:var(--text-muted);font-size:.85rem;display:flex;align-items:center;gap:.4rem">
+                ← PHP
+            </a>
+            <a href="ferramentas.html" style="color:var(--accent);font-size:.85rem;display:flex;align-items:center;gap:.4rem">
+                Ferramentas →
+            </a>
+        </div>
+
+    </main>
+
+    <!-- ── TOC PANEL ── -->
+    <nav class="toc-panel" aria-label="Nesta página">
+        <h4>Nesta página</h4>
+        <ul>
+            <li><a href="#intro">Introdução ao Git</a></li>
+            <li class="sub"><a href="#intro">Git vs GitHub</a></li>
+            <li class="sub"><a href="#intro">Configuração inicial</a></li>
+            <li class="sub"><a href="#intro">Os 3 estados</a></li>
+            <li><a href="#commits">Commits</a></li>
+            <li class="sub"><a href="#commits">git status / add</a></li>
+            <li class="sub"><a href="#commits">Mensagens de commit</a></li>
+            <li class="sub"><a href="#commits">git log / diff</a></li>
+            <li class="sub"><a href="#commits">.gitignore</a></li>
+            <li><a href="#branches">Branches</a></li>
+            <li class="sub"><a href="#branches">Criar e trocar</a></li>
+            <li class="sub"><a href="#branches">Estratégia de nomes</a></li>
+            <li><a href="#merge">Merge e Rebase</a></li>
+            <li class="sub"><a href="#merge">Fast-forward vs 3-way</a></li>
+            <li class="sub"><a href="#merge">Conflitos</a></li>
+            <li class="sub"><a href="#merge">git stash</a></li>
+            <li class="sub"><a href="#merge">git reset / revert</a></li>
+            <li class="sub"><a href="#merge">git cherry-pick</a></li>
+            <li><a href="#github">GitHub e PRs</a></li>
+            <li class="sub"><a href="#github">Push / pull / fetch</a></li>
+            <li class="sub"><a href="#github">Fork vs Clone</a></li>
+            <li class="sub"><a href="#github">Fluxo do PR</a></li>
+            <li><a href="#cheatsheet">Cheat Sheet</a></li>
+        </ul>
+    </nav>
+
+</div><!-- /page-wrapper -->
+<script src="./assets/js/include.js" defer></script>
+</body>
+</html>

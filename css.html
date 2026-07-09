@@ -1,0 +1,1552 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSS — Dev Atlas</title>
+  <link rel="stylesheet" href="./assets/css/style.css" />
+</head>
+<body>
+<!-- ══════════════════════════════════════════════
+     PAGE WRAPPER
+══════════════════════════════════════════════ -->
+<div class="page-wrapper">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <h3>Navegação</h3>
+    <ul>
+      <li><a href="./index.html"><span class="dot"></span>Início</a></li>
+      <li><a href="./fundamentos.html"><span class="dot"></span>Fundamentos</a></li>
+      <li><a href="./html.html"><span class="dot"></span>HTML</a></li>
+      <li><a href="./css.html" class="active"><span class="dot"></span>CSS</a></li>
+      <li><a href="./javascript.html"><span class="dot"></span>JavaScript</a></li>
+      <li><a href="./php.html"><span class="dot"></span>PHP</a></li>
+      <li><a href="./git.html"><span class="dot"></span>Git</a></li>
+      <li><a href="./ferramentas.html"><span class="dot"></span>Ferramentas</a></li>
+    </ul>
+
+    <h3>Nesta página</h3>
+    <ul>
+      <li><a href="#intro"><span class="dot"></span>Introdução ao CSS</a></li>
+      <li><a href="#seletores"><span class="dot"></span>Seletores</a></li>
+      <li><a href="#box-model"><span class="dot"></span>Box Model</a></li>
+      <li><a href="#display"><span class="dot"></span>Display</a></li>
+      <li><a href="#flexbox"><span class="dot"></span>Flexbox</a></li>
+      <li><a href="#grid"><span class="dot"></span>CSS Grid</a></li>
+      <li><a href="#responsividade"><span class="dot"></span>Responsividade</a></li>
+      <li><a href="#variaveis"><span class="dot"></span>Variáveis CSS</a></li>
+      <li><a href="#animacoes"><span class="dot"></span>Animações</a></li>
+    </ul>
+  </aside>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="content">
+
+    <div class="page-badge">🎨 CSS</div>
+    <h1 class="page-title">CSS — Dando vida às páginas</h1>
+    <p class="page-subtitle">
+      Do cinza sem graça ao layout incrível: aprenda a estilizar, posicionar e animar
+      qualquer coisa com CSS. Da especificidade até animações suaves, tem tudo aqui.
+    </p>
+
+    <!-- ════════════════════════════════════
+         1. INTRODUÇÃO AO CSS
+    ═════════════════════════════════════ -->
+    <h2 class="section-h" id="intro">🎨 Introdução ao CSS</h2>
+
+    <p>
+      <strong>CSS</strong> (Cascading Style Sheets — Folhas de Estilo em Cascata) é a linguagem
+      responsável por toda a parte visual de uma página web. O HTML estrutura o conteúdo;
+      o CSS decide como ele vai aparecer: cores, fontes, espaçamentos, layouts e até animações.
+    </p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <p>Pense no HTML como a estrutura de uma casa e o CSS como a decoração, pintura e móveis.
+        Sem CSS, a web seria uma lista enorme de texto sem formatação — tipo um documento do Bloco de Notas gigante.</p>
+      </div>
+    </div>
+
+    <h3 class="sub-h">Como funciona a Cascata</h3>
+    <p>
+      O "C" de CSS significa <strong>Cascata</strong>. Quando mais de uma regra CSS se aplica ao mesmo
+      elemento, o navegador precisa decidir qual vence. Essa decisão envolve três fatores, nessa ordem de
+      importância:
+    </p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Fator</th>
+            <th>O que é</th>
+            <th>Exemplo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Origem</strong></td>
+            <td>De onde vem o estilo: browser padrão, autor ou usuário</td>
+            <td>Seus estilos vencem o padrão do navegador</td>
+          </tr>
+          <tr>
+            <td><strong>Especificidade</strong></td>
+            <td>Quão "específico" é o seletor</td>
+            <td><code>#id</code> vence <code>.classe</code></td>
+          </tr>
+          <tr>
+            <td><strong>Ordem</strong></td>
+            <td>A última regra igual declarada vence</td>
+            <td>CSS mais abaixo no arquivo sobrescreve</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub-h">Herança</h3>
+    <p>
+      Algumas propriedades CSS são <strong>herdadas</strong> pelos elementos filhos automaticamente.
+      <code>color</code>, <code>font-family</code> e <code>font-size</code> são exemplos típicos.
+      Outras como <code>margin</code>, <code>padding</code> e <code>border</code> <em>não</em> são
+      herdadas — cada elemento cuida das suas próprias.
+    </p>
+
+    <h3 class="sub-h">Como linkar CSS ao HTML</h3>
+    <p>Existem três formas de aplicar CSS. A preferida é sempre a <strong>externa</strong>:</p>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">HTML — Externo (recomendado)</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cc">&lt;!-- No &lt;head&gt; do HTML --&gt;</span>
+<span class="ct">&lt;link</span> <span class="ca">rel</span>=<span class="cs">"stylesheet"</span> <span class="ca">href</span>=<span class="cs">"./assets/css/style.css"</span><span class="ct">&gt;</span></code></pre>
+    </div>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">HTML — Interno (evite para projetos reais)</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="ct">&lt;style&gt;</span>
+  <span class="cf">body</span> {
+    <span class="ca">background</span>: <span class="cs">#0f1117</span>;
+  }
+<span class="ct">&lt;/style&gt;</span></code></pre>
+    </div>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">HTML — Inline (use apenas quando não tiver jeito)</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="ct">&lt;p</span> <span class="ca">style</span>=<span class="cs">"color: red; font-size: 18px;"</span><span class="ct">&gt;</span>Texto vermelho<span class="ct">&lt;/p&gt;</span></code></pre>
+    </div>
+
+    <div class="callout warning">
+      <div class="callout-icon">⚠️</div>
+      <div class="callout-body">
+        <p>Inline CSS tem a maior especificidade (exceto <code>!important</code>), o que dificulta sobrescrever
+        depois. Prefira sempre o CSS externo — manutenção muito mais fácil.</p>
+      </div>
+    </div>
+
+    <h3 class="sub-h">Sintaxe básica</h3>
+    <p>A estrutura de uma regra CSS é sempre a mesma:</p>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — Anatomia de uma regra</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cc">/* seletor { propriedade: valor; } */</span>
+
+<span class="cf">h1</span> {
+  <span class="ca">color</span>: <span class="cs">#6c63ff</span>;
+  <span class="ca">font-size</span>: <span class="cn">2</span>rem;
+  <span class="ca">font-weight</span>: <span class="cn">800</span>;
+}
+
+<span class="cc">/* Múltiplos seletores na mesma regra */</span>
+<span class="cf">h1</span>, <span class="cf">h2</span>, <span class="cf">h3</span> {
+  <span class="ca">line-height</span>: <span class="cn">1.3</span>;
+}</code></pre>
+    </div>
+
+    <h3 class="sub-h">Especificidade — a tabela de pontos</h3>
+    <p>
+      Cada tipo de seletor tem um "peso". O navegador soma os pontos e a regra com maior pontuação vence.
+    </p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Seletor</th>
+            <th>Pontos</th>
+            <th>Exemplo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>*</code> (universal)</td>
+            <td><strong style="color:var(--text-muted)">0</strong></td>
+            <td><code>* { }</code></td>
+          </tr>
+          <tr>
+            <td>Elemento / tag</td>
+            <td><strong style="color:var(--green)">1</strong></td>
+            <td><code>p { }</code>, <code>div { }</code></td>
+          </tr>
+          <tr>
+            <td>Classe / pseudo-classe / atributo</td>
+            <td><strong style="color:var(--yellow)">10</strong></td>
+            <td><code>.btn { }</code>, <code>:hover { }</code></td>
+          </tr>
+          <tr>
+            <td>ID</td>
+            <td><strong style="color:var(--orange)">100</strong></td>
+            <td><code>#header { }</code></td>
+          </tr>
+          <tr>
+            <td>Inline style</td>
+            <td><strong style="color:var(--red)">1000</strong></td>
+            <td><code>style="..."</code></td>
+          </tr>
+          <tr>
+            <td><code>!important</code></td>
+            <td><strong style="color:var(--red)">∞ (evite!)</strong></td>
+            <td><code>color: red !important</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — Exemplo de especificidade</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cf">p</span> { <span class="ca">color</span>: <span class="cs">gray</span>; }          <span class="cc">/* pontos: 1 */</span>
+<span class="cf">.destaque</span> { <span class="ca">color</span>: <span class="cs">blue</span>; }  <span class="cc">/* pontos: 10 — vence! */</span>
+<span class="cf">#titulo</span> { <span class="ca">color</span>: <span class="cs">red</span>; }      <span class="cc">/* pontos: 100 — vence sobre os dois! */</span>
+
+<span class="cc">/* Seletores combinados somam pontos */</span>
+<span class="cf">div</span> <span class="cf">.btn</span><span class="cf">:hover</span> {
+  <span class="cc">/* 1 (div) + 10 (.btn) + 10 (:hover) = 21 pontos */</span>
+}</code></pre>
+    </div>
+
+    <!-- ════════════════════════════════════
+         2. SELETORES
+    ═════════════════════════════════════ -->
+    <h2 class="section-h" id="seletores">🎯 Seletores</h2>
+
+    <p>
+      Seletores são a forma de você dizer ao CSS <em>"quero aplicar esse estilo neste(s) elemento(s)"</em>.
+      Quanto mais você domina seletores, menos classes desnecessárias você cria no HTML.
+    </p>
+
+    <h3 class="sub-h">Seletores básicos</h3>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — Básicos</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cc">/* Elemento (tag) — aplica em todos os &lt;p&gt; */</span>
+<span class="cf">p</span> { <span class="ca">color</span>: <span class="cs">#e2e8f0</span>; }
+
+<span class="cc">/* Classe — aplica em qualquer elemento com class="card" */</span>
+<span class="cf">.card</span> { <span class="ca">background</span>: <span class="cs">#1a1d27</span>; }
+
+<span class="cc">/* ID — aplica apenas no elemento com id="header" */</span>
+<span class="cf">#header</span> { <span class="ca">height</span>: <span class="cn">60</span>px; }
+
+<span class="cc">/* Universal — aplica em TUDO (use com cuidado) */</span>
+<span class="cf">*</span> { <span class="ca">box-sizing</span>: <span class="ck">border-box</span>; }</code></pre>
+    </div>
+
+    <h3 class="sub-h">Combinadores</h3>
+    <p>Combinam seletores para selecionar elementos baseados na sua relação no HTML:</p>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — Combinadores</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cc">/* Descendente (espaço) — qualquer &lt;p&gt; dentro de .artigo */</span>
+<span class="cf">.artigo p</span> { <span class="ca">line-height</span>: <span class="cn">1.8</span>; }
+
+<span class="cc">/* Filho direto (>) — apenas &lt;li&gt; filho imediato de &lt;ul&gt; */</span>
+<span class="cf">ul</span> <span class="co">&gt;</span> <span class="cf">li</span> { <span class="ca">list-style</span>: <span class="ck">none</span>; }
+
+<span class="cc">/* Irmão adjacente (+) — &lt;p&gt; imediatamente após &lt;h2&gt; */</span>
+<span class="cf">h2</span> <span class="co">+</span> <span class="cf">p</span> { <span class="ca">margin-top</span>: <span class="cn">0</span>; }
+
+<span class="cc">/* Irmão geral (~) — todos os &lt;p&gt; após &lt;h2&gt; no mesmo nível */</span>
+<span class="cf">h2</span> <span class="co">~</span> <span class="cf">p</span> { <span class="ca">color</span>: <span class="cs">var(--text-muted)</span>; }</code></pre>
+    </div>
+
+    <h3 class="sub-h">Pseudo-classes</h3>
+    <p>
+      Selecionam elementos num <strong>estado especial</strong> ou numa posição específica na estrutura:
+    </p>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — Pseudo-classes</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cc">/* Estados de interação */</span>
+<span class="cf">a</span><span class="ck">:hover</span>   { <span class="ca">color</span>: <span class="cs">#6c63ff</span>; }          <span class="cc">/* mouse em cima */</span>
+<span class="cf">input</span><span class="ck">:focus</span>  { <span class="ca">outline</span>: <span class="cn">2</span>px <span class="ck">solid</span> <span class="cs">#6c63ff</span>; } <span class="cc">/* campo focado */</span>
+<span class="cf">button</span><span class="ck">:active</span> { <span class="ca">transform</span>: <span class="cf">scale</span>(<span class="cn">0.97</span>); }    <span class="cc">/* clicando */</span>
+
+<span class="cc">/* Posição na estrutura */</span>
+<span class="cf">li</span><span class="ck">:first-child</span>  { <span class="ca">font-weight</span>: <span class="ck">bold</span>; }      <span class="cc">/* primeiro filho */</span>
+<span class="cf">li</span><span class="ck">:last-child</span>   { <span class="ca">border-bottom</span>: <span class="ck">none</span>; }    <span class="cc">/* último filho */</span>
+<span class="cf">li</span><span class="ck">:nth-child(2)</span> { <span class="ca">color</span>: <span class="cs">#43d9ad</span>; }        <span class="cc">/* exatamente o 2º */</span>
+<span class="cf">li</span><span class="ck">:nth-child(odd)</span>  { <span class="ca">background</span>: <span class="cs">rgba(255,255,255,.03)</span>; } <span class="cc">/* ímpares */</span>
+<span class="cf">li</span><span class="ck">:nth-child(3n)</span>  { <span class="ca">color</span>: <span class="cs">#ffd166</span>; }     <span class="cc">/* a cada 3 */</span>
+
+<span class="cc">/* Negação */</span>
+<span class="cf">input</span><span class="ck">:not([type="submit"])</span> {
+  <span class="ca">border</span>: <span class="cn">1</span>px <span class="ck">solid</span> <span class="cs">#2a2d3e</span>;
+}</code></pre>
+    </div>
+
+    <h3 class="sub-h">Pseudo-elementos</h3>
+    <p>
+      Permitem estilizar <strong>partes específicas</strong> de um elemento ou inserir conteúdo
+      via CSS sem mexer no HTML. Usam dois pontos duplos <code>::</code>:
+    </p>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — Pseudo-elementos</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cc">/* Inserir conteúdo antes/depois do elemento */</span>
+<span class="cf">.card</span><span class="ck">::before</span> {
+  <span class="ca">content</span>: <span class="cs">'🃏 '</span>;
+  <span class="ca">display</span>: <span class="ck">inline-block</span>;
+}
+
+<span class="cf">.card</span><span class="ck">::after</span> {
+  <span class="ca">content</span>: <span class="cs">''</span>;
+  <span class="ca">display</span>: <span class="ck">block</span>;
+  <span class="ca">height</span>: <span class="cn">2</span>px;
+  <span class="ca">background</span>: <span class="cs">var(--accent)</span>;
+}
+
+<span class="cc">/* Placeholder dos inputs */</span>
+<span class="cf">input</span><span class="ck">::placeholder</span> {
+  <span class="ca">color</span>: <span class="cs">#8892a4</span>;
+  <span class="ca">font-style</span>: <span class="ck">italic</span>;
+}
+
+<span class="cc">/* Texto selecionado pelo usuário */</span>
+<span class="ck">::selection</span> {
+  <span class="ca">background</span>: <span class="cs">rgba(108,99,255,.35)</span>;
+  <span class="ca">color</span>: <span class="cs">#fff</span>;
+}</code></pre>
+    </div>
+
+    <h3 class="sub-h">Seletores de atributo</h3>
+    <p>Selecionam elementos baseado nos seus atributos HTML — muito útil para formulários:</p>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — Atributos</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cc">/* Tem o atributo href (qualquer valor) */</span>
+<span class="cf">a</span>[<span class="ca">href</span>] { <span class="ca">text-decoration</span>: <span class="ck">underline</span>; }
+
+<span class="cc">/* Valor exato */</span>
+<span class="cf">input</span>[<span class="ca">type</span>=<span class="cs">"text"</span>] { <span class="ca">border-radius</span>: <span class="cn">8</span>px; }
+<span class="cf">input</span>[<span class="ca">type</span>=<span class="cs">"checkbox"</span>] { <span class="ca">accent-color</span>: <span class="cs">#6c63ff</span>; }
+
+<span class="cc">/* Começa com... */</span>
+<span class="cf">[class^="btn"]</span> { <span class="ca">cursor</span>: <span class="ck">pointer</span>; }
+
+<span class="cc">/* Termina com... */</span>
+<span class="cf">a</span>[<span class="ca">href</span>$=<span class="cs">".pdf"</span>]<span class="ck">::after</span> { <span class="ca">content</span>: <span class="cs">' 📄'</span>; }
+
+<span class="cc">/* Contém... */</span>
+<span class="cf">a</span>[<span class="ca">href</span>*=<span class="cs">"external"</span>] { <span class="ca">color</span>: <span class="cs">var(--yellow)</span>; }</code></pre>
+    </div>
+
+    <!-- ════════════════════════════════════
+         3. BOX MODEL
+    ═════════════════════════════════════ -->
+    <h2 class="section-h" id="box-model">📦 Box Model</h2>
+
+    <p>
+      Todo elemento HTML é uma caixa retangular. O <strong>Box Model</strong> define como o tamanho
+      dessa caixa é calculado. Entender isso evita aquele frustrantemente famoso "por que está
+      estourando o layout?!".
+    </p>
+
+    <h3 class="sub-h">As quatro camadas</h3>
+    <p>De dentro para fora, cada caixa tem:</p>
+
+    <div class="diagram">
+      <div class="d-line"><span class="d-key">┌─────────────────────────────────────────────┐</span></div>
+      <div class="d-line"><span class="d-key">│</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="d-tag">MARGIN</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="d-key">│</span><span class="d-note">espaço fora da borda, transparente</span></div>
+      <div class="d-line"><span class="d-key">│</span>&nbsp;&nbsp;<span class="d-key">┌───────────────────────────────────────┐</span>&nbsp;&nbsp;<span class="d-key">│</span></div>
+      <div class="d-line"><span class="d-key">│</span>&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="d-tag">BORDER</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;<span class="d-key">│</span><span class="d-note">a linha visível ao redor</span></div>
+      <div class="d-line"><span class="d-key">│</span>&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;&nbsp;<span class="d-key">┌─────────────────────────────────┐</span>&nbsp;&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;<span class="d-key">│</span></div>
+      <div class="d-line"><span class="d-key">│</span>&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="d-tag">PADDING</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;<span class="d-key">│</span><span class="d-note">espaço interno, herda o fundo</span></div>
+      <div class="d-line"><span class="d-key">│</span>&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;&nbsp;<span class="d-key">┌───────────────────────────┐</span>&nbsp;&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;<span class="d-key">│</span></div>
+      <div class="d-line"><span class="d-key">│</span>&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="d-val">CONTENT</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;<span class="d-key">│</span><span class="d-note">o texto/imagem de verdade</span></div>
+      <div class="d-line"><span class="d-key">│</span>&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;<span class="d-key">│</span></div>
+      <div class="d-line"><span class="d-key">│</span>&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;&nbsp;<span class="d-key">└───────────────────────────┘</span>&nbsp;&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;<span class="d-key">│</span></div>
+      <div class="d-line"><span class="d-key">│</span>&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;&nbsp;<span class="d-key">└─────────────────────────────────┘</span>&nbsp;&nbsp;&nbsp;<span class="d-key">│</span>&nbsp;&nbsp;<span class="d-key">│</span></div>
+      <div class="d-line"><span class="d-key">│</span>&nbsp;&nbsp;<span class="d-key">└───────────────────────────────────────┘</span>&nbsp;&nbsp;<span class="d-key">│</span></div>
+      <div class="d-line"><span class="d-key">└─────────────────────────────────────────────┘</span></div>
+    </div>
+
+    <h3 class="sub-h">box-sizing: o herói silencioso</h3>
+    <p>
+      Por padrão (<code>content-box</code>), o <code>width</code> que você define se aplica apenas ao
+      conteúdo — padding e border são somados por fora. Isso quebra layouts o tempo todo.
+      Com <code>border-box</code>, o <code>width</code> inclui padding e border. <strong>Muito mais intuitivo.</strong>
+    </p>
+
+    <div class="two-col">
+      <div class="half">
+        <h4 style="color:var(--red)">content-box (padrão ruim)</h4>
+        <div class="code-block" style="margin:0">
+          <pre><code><span class="cf">.caixa</span> {
+  <span class="ca">width</span>: <span class="cn">200</span>px;
+  <span class="ca">padding</span>: <span class="cn">20</span>px;
+  <span class="ca">border</span>: <span class="cn">2</span>px <span class="ck">solid</span>;
+}
+<span class="cc">/* Tamanho real: 244px
+   (200 + 20*2 + 2*2) */</span></code></pre>
+        </div>
+      </div>
+      <div class="half">
+        <h4 style="color:var(--green)">border-box (use sempre!)</h4>
+        <div class="code-block" style="margin:0">
+          <pre><code><span class="cf">.caixa</span> {
+  <span class="ca">box-sizing</span>: <span class="ck">border-box</span>;
+  <span class="ca">width</span>: <span class="cn">200</span>px;
+  <span class="ca">padding</span>: <span class="cn">20</span>px;
+  <span class="ca">border</span>: <span class="cn">2</span>px <span class="ck">solid</span>;
+}
+<span class="cc">/* Tamanho real: 200px. Sempre. */</span></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">🏆</div>
+      <div class="callout-body">
+        <p>Adicione isso no começo de todo projeto CSS e durma tranquilo:</p>
+        <div class="code-block" style="margin:.6rem 0 0">
+          <pre><code><span class="cf">*</span>, <span class="cf">*::before</span>, <span class="cf">*::after</span> {
+  <span class="ca">box-sizing</span>: <span class="ck">border-box</span>;
+}</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub-h">Propriedades do Box Model</h3>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — Box Model completo</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cf">.caixa</span> {
+  <span class="cc">/* Dimensões */</span>
+  <span class="ca">width</span>: <span class="cn">300</span>px;
+  <span class="ca">height</span>: <span class="cn">150</span>px;
+  <span class="ca">max-width</span>: <span class="cn">100</span>%;    <span class="cc">/* não ultrapassa o pai */</span>
+  <span class="ca">min-height</span>: <span class="cn">50</span>px;  <span class="cc">/* altura mínima */</span>
+
+  <span class="cc">/* Padding — shorthand: top right bottom left */</span>
+  <span class="ca">padding</span>: <span class="cn">1rem</span>;              <span class="cc">/* todos os lados */</span>
+  <span class="ca">padding</span>: <span class="cn">1rem 2rem</span>;        <span class="cc">/* vertical | horizontal */</span>
+  <span class="ca">padding</span>: <span class="cn">10px 20px 10px 20px</span>; <span class="cc">/* t r b l */</span>
+
+  <span class="cc">/* Margin */</span>
+  <span class="ca">margin</span>: <span class="cn">0 auto</span>;  <span class="cc">/* centraliza horizontalmente */</span>
+
+  <span class="cc">/* Border */</span>
+  <span class="ca">border</span>: <span class="cn">1</span>px <span class="ck">solid</span> <span class="cs">#2a2d3e</span>;
+  <span class="ca">border-radius</span>: <span class="cn">8</span>px;
+}</code></pre>
+    </div>
+
+    <div class="callout warning">
+      <div class="callout-icon">⚠️</div>
+      <div class="callout-body">
+        <p><strong>Margin collapse:</strong> margens verticais entre elementos irmãos se "colapsam"
+        (a maior vence, não somam). Isso não acontece com padding. Fique esperto!</p>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════
+         4. DISPLAY
+    ═════════════════════════════════════ -->
+    <h2 class="section-h" id="display">🔲 Display</h2>
+
+    <p>
+      A propriedade <code>display</code> define como um elemento se comporta no fluxo da página e
+      como seus filhos são organizados. É uma das propriedades mais importantes do CSS.
+    </p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Valor</th>
+            <th>Comportamento</th>
+            <th>Exemplos nativos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>block</code></td>
+            <td>Ocupa linha inteira, aceita width/height/margin vertical</td>
+            <td><code>div</code>, <code>p</code>, <code>h1</code>–<code>h6</code></td>
+          </tr>
+          <tr>
+            <td><code>inline</code></td>
+            <td>Flui com o texto, ignora width/height, margens só horizontais</td>
+            <td><code>span</code>, <code>a</code>, <code>strong</code></td>
+          </tr>
+          <tr>
+            <td><code>inline-block</code></td>
+            <td>Flui com o texto MAS aceita width/height/margens verticais</td>
+            <td><code>img</code>, <code>button</code></td>
+          </tr>
+          <tr>
+            <td><code>none</code></td>
+            <td>Remove completamente do layout (não ocupa espaço)</td>
+            <td>Qualquer elemento escondido</td>
+          </tr>
+          <tr>
+            <td><code>flex</code></td>
+            <td>Ativa Flexbox no container; filhos viram flex items</td>
+            <td>Navbars, cards em linha</td>
+          </tr>
+          <tr>
+            <td><code>grid</code></td>
+            <td>Ativa CSS Grid no container; filhos viram grid items</td>
+            <td>Layouts de página inteira</td>
+          </tr>
+          <tr>
+            <td><code>inline-flex</code></td>
+            <td>Flex mas o container em si é inline</td>
+            <td>Badges, botões com ícone</td>
+          </tr>
+          <tr>
+            <td><code>contents</code></td>
+            <td>O container some, filhos sobem um nível no layout</td>
+            <td>Trick para grupos de flex items</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — Display na prática</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cc">/* Esconder elemento sem tirar do DOM */</span>
+<span class="cf">.escondido</span>  { <span class="ca">display</span>: <span class="ck">none</span>; }
+<span class="cf">.invisivel</span>  { <span class="ca">visibility</span>: <span class="ck">hidden</span>; } <span class="cc">/* esconde mas ocupa espaço */</span>
+
+<span class="cc">/* Botão com ícone alinhado */</span>
+<span class="cf">.btn</span> {
+  <span class="ca">display</span>: <span class="ck">inline-flex</span>;
+  <span class="ca">align-items</span>: <span class="ck">center</span>;
+  <span class="ca">gap</span>: <span class="cn">.5rem</span>;
+  <span class="ca">padding</span>: <span class="cn">.6rem 1.2rem</span>;
+}
+
+<span class="cc">/* Trocar inline por block para estilizar */</span>
+<span class="cf">span.destaque</span> {
+  <span class="ca">display</span>: <span class="ck">block</span>;
+  <span class="ca">width</span>: <span class="cn">100</span>%;
+}</code></pre>
+    </div>
+
+    <!-- ════════════════════════════════════
+         5. FLEXBOX
+    ═════════════════════════════════════ -->
+    <h2 class="section-h" id="flexbox">🔷 Flexbox</h2>
+
+    <p>
+      Flexbox é o sistema de layout unidimensional do CSS. Pense nele como
+      <strong>uma prateleira</strong>: você define se os itens ficam em linha ou coluna, como se
+      distribuem, como se alinham — e o navegador faz o trabalho pesado.
+    </p>
+
+    <div class="callout info">
+      <div class="callout-icon">📚</div>
+      <div class="callout-body">
+        <p>Flexbox trabalha em <strong>um eixo por vez</strong>: main axis (principal) e cross axis (cruzado).
+        O eixo principal é definido por <code>flex-direction</code>. Tudo gira em torno disso.</p>
+      </div>
+    </div>
+
+    <h3 class="sub-h">Propriedades do Container (pai)</h3>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — Flex Container</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cf">.container</span> {
+  <span class="ca">display</span>: <span class="ck">flex</span>;
+
+  <span class="cc">/* Direção do eixo principal */</span>
+  <span class="ca">flex-direction</span>: <span class="ck">row</span>;           <span class="cc">/* → padrão */</span>
+  <span class="ca">flex-direction</span>: <span class="ck">row-reverse</span>;   <span class="cc">/* ← */</span>
+  <span class="ca">flex-direction</span>: <span class="ck">column</span>;        <span class="cc">/* ↓ */</span>
+  <span class="ca">flex-direction</span>: <span class="ck">column-reverse</span>; <span class="cc">/* ↑ */</span>
+
+  <span class="cc">/* Quebra de linha */</span>
+  <span class="ca">flex-wrap</span>: <span class="ck">nowrap</span>;    <span class="cc">/* padrão — tudo em uma linha */</span>
+  <span class="ca">flex-wrap</span>: <span class="ck">wrap</span>;      <span class="cc">/* quebra pra próxima linha */</span>
+
+  <span class="cc">/* Alinhamento no eixo principal (horizontal se row) */</span>
+  <span class="ca">justify-content</span>: <span class="ck">flex-start</span>;    <span class="cc">/* ◀◀◀ padrão */</span>
+  <span class="ca">justify-content</span>: <span class="ck">center</span>;        <span class="cc">/* ▶◀ centro */</span>
+  <span class="ca">justify-content</span>: <span class="ck">flex-end</span>;      <span class="cc">/* ▶▶▶ */</span>
+  <span class="ca">justify-content</span>: <span class="ck">space-between</span>; <span class="cc">/* ◀ · ▶ espaço entre */</span>
+  <span class="ca">justify-content</span>: <span class="ck">space-around</span>;  <span class="cc">/* · ◀ · ▶ · espaço ao redor */</span>
+  <span class="ca">justify-content</span>: <span class="ck">space-evenly</span>;  <span class="cc">/* espaço igual em tudo */</span>
+
+  <span class="cc">/* Alinhamento no eixo cruzado (vertical se row) */</span>
+  <span class="ca">align-items</span>: <span class="ck">stretch</span>;     <span class="cc">/* padrão — estica para preencher */</span>
+  <span class="ca">align-items</span>: <span class="ck">center</span>;      <span class="cc">/* centraliza verticalmente */</span>
+  <span class="ca">align-items</span>: <span class="ck">flex-start</span>;  <span class="cc">/* alinha no topo */</span>
+  <span class="ca">align-items</span>: <span class="ck">flex-end</span>;    <span class="cc">/* alinha embaixo */</span>
+  <span class="ca">align-items</span>: <span class="ck">baseline</span>;    <span class="cc">/* alinha pela linha de base do texto */</span>
+
+  <span class="cc">/* Alinhamento de múltiplas linhas (quando wrap ativo) */</span>
+  <span class="ca">align-content</span>: <span class="ck">center</span>;
+
+  <span class="cc">/* Espaçamento entre itens */</span>
+  <span class="ca">gap</span>: <span class="cn">1rem</span>;         <span class="cc">/* linha e coluna */</span>
+  <span class="ca">gap</span>: <span class="cn">1rem 2rem</span>;   <span class="cc">/* linha | coluna */</span>
+}</code></pre>
+    </div>
+
+    <h3 class="sub-h">Propriedades dos Items (filhos)</h3>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — Flex Items</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cf">.item</span> {
+  <span class="cc">/* flex-grow: quanto crescer para preencher espaço livre */</span>
+  <span class="ca">flex-grow</span>: <span class="cn">0</span>;   <span class="cc">/* padrão — não cresce */</span>
+  <span class="ca">flex-grow</span>: <span class="cn">1</span>;   <span class="cc">/* cresce para preencher */</span>
+
+  <span class="cc">/* flex-shrink: quanto encolher quando faltar espaço */</span>
+  <span class="ca">flex-shrink</span>: <span class="cn">1</span>;  <span class="cc">/* padrão — pode encolher */</span>
+  <span class="ca">flex-shrink</span>: <span class="cn">0</span>;  <span class="cc">/* nunca encolhe */</span>
+
+  <span class="cc">/* flex-basis: tamanho "ideal" antes de crescer/encolher */</span>
+  <span class="ca">flex-basis</span>: <span class="ck">auto</span>;    <span class="cc">/* usa width/height */</span>
+  <span class="ca">flex-basis</span>: <span class="cn">200</span>px;  <span class="cc">/* tamanho base fixo */</span>
+
+  <span class="cc">/* Shorthand flex: grow shrink basis */</span>
+  <span class="ca">flex</span>: <span class="cn">1</span>;             <span class="cc">/* flex: 1 1 0 */</span>
+  <span class="ca">flex</span>: <span class="cn">1 1 200</span>px;
+
+  <span class="cc">/* Sobrescreve align-items só para este item */</span>
+  <span class="ca">align-self</span>: <span class="ck">center</span>;
+
+  <span class="cc">/* Ordem visual (não altera o DOM) */</span>
+  <span class="ca">order</span>: <span class="cn">2</span>;  <span class="cc">/* padrão é 0 */</span>
+}</code></pre>
+    </div>
+
+    <h3 class="sub-h">Exemplos práticos</h3>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — Navbar com Flexbox</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cf">.navbar</span> {
+  <span class="ca">display</span>: <span class="ck">flex</span>;
+  <span class="ca">align-items</span>: <span class="ck">center</span>;
+  <span class="ca">justify-content</span>: <span class="ck">space-between</span>;
+  <span class="ca">padding</span>: <span class="cn">0 2rem</span>;
+  <span class="ca">height</span>: <span class="cn">60</span>px;
+}
+
+<span class="cf">.nav-logo</span> { <span class="ca">font-weight</span>: <span class="ck">bold</span>; }
+
+<span class="cf">.nav-links</span> {
+  <span class="ca">display</span>: <span class="ck">flex</span>;
+  <span class="ca">gap</span>: <span class="cn">1rem</span>;
+  <span class="ca">list-style</span>: <span class="ck">none</span>;
+}</code></pre>
+    </div>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — Card centralizado (o clássico)</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cf">.tela-login</span> {
+  <span class="ca">display</span>: <span class="ck">flex</span>;
+  <span class="ca">justify-content</span>: <span class="ck">center</span>;
+  <span class="ca">align-items</span>: <span class="ck">center</span>;
+  <span class="ca">min-height</span>: <span class="cn">100vh</span>;
+}</code></pre>
+    </div>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — Footer sempre no fundo</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cf">body</span> {
+  <span class="ca">display</span>: <span class="ck">flex</span>;
+  <span class="ca">flex-direction</span>: <span class="ck">column</span>;
+  <span class="ca">min-height</span>: <span class="cn">100vh</span>;
+}
+
+<span class="cf">main</span> {
+  <span class="ca">flex</span>: <span class="cn">1</span>; <span class="cc">/* cresce para empurrar o footer */</span>
+}
+
+<span class="cf">footer</span> {
+  <span class="ca">margin-top</span>: <span class="ck">auto</span>;
+}</code></pre>
+    </div>
+
+    <!-- ════════════════════════════════════
+         6. CSS GRID
+    ═════════════════════════════════════ -->
+    <h2 class="section-h" id="grid">⬛ CSS Grid</h2>
+
+    <p>
+      CSS Grid é o sistema de layout <strong>bidimensional</strong> do CSS — linhas E colunas ao
+      mesmo tempo. Enquanto Flexbox é a prateleira, Grid é a planta baixa do apartamento inteiro.
+      Perfeito para layouts de página e componentes complexos.
+    </p>
+
+    <h3 class="sub-h">Propriedades do Container</h3>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — Grid Container</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cf">.grid</span> {
+  <span class="ca">display</span>: <span class="ck">grid</span>;
+
+  <span class="cc">/* Colunas: 3 colunas de tamanhos diferentes */</span>
+  <span class="ca">grid-template-columns</span>: <span class="cn">200</span>px <span class="cn">1</span>fr <span class="cn">1</span>fr;
+
+  <span class="cc">/* repeat() — repete o padrão N vezes */</span>
+  <span class="ca">grid-template-columns</span>: <span class="cf">repeat</span>(<span class="cn">3</span>, <span class="cn">1</span>fr);
+  <span class="ca">grid-template-columns</span>: <span class="cf">repeat</span>(<span class="cn">4</span>, <span class="cf">minmax</span>(<span class="cn">200</span>px, <span class="cn">1</span>fr));
+
+  <span class="cc">/* auto-fill: preenche com o máximo de colunas que couber */</span>
+  <span class="ca">grid-template-columns</span>: <span class="cf">repeat</span>(<span class="ck">auto-fill</span>, <span class="cf">minmax</span>(<span class="cn">250</span>px, <span class="cn">1</span>fr));
+
+  <span class="cc">/* Linhas */</span>
+  <span class="ca">grid-template-rows</span>: <span class="cn">60</span>px <span class="cn">1</span>fr <span class="cn">50</span>px;
+
+  <span class="cc">/* Espaçamentos */</span>
+  <span class="ca">gap</span>: <span class="cn">1rem</span>;
+  <span class="ca">gap</span>: <span class="cn">1.5rem 1rem</span>; <span class="cc">/* linha | coluna */</span>
+}</code></pre>
+    </div>
+
+    <h3 class="sub-h">A unidade fr</h3>
+    <p>
+      <code>fr</code> significa <strong>fraction</strong> (fração). É a unidade do Grid que distribui
+      o espaço disponível de forma proporcional. <code>1fr 2fr</code> = a segunda coluna tem o dobro
+      do tamanho da primeira. Super útil para layouts fluidos.
+    </p>
+
+    <h3 class="sub-h">grid-template-areas — o superpoder</h3>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — Layout de página com áreas nomeadas</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cf">.layout</span> {
+  <span class="ca">display</span>: <span class="ck">grid</span>;
+  <span class="ca">grid-template-columns</span>: <span class="cn">220</span>px <span class="cn">1</span>fr;
+  <span class="ca">grid-template-rows</span>: <span class="cn">60</span>px <span class="cn">1</span>fr <span class="cn">50</span>px;
+  <span class="ca">min-height</span>: <span class="cn">100vh</span>;
+
+  <span class="ca">grid-template-areas</span>:
+    <span class="cs">"header  header"</span>
+    <span class="cs">"sidebar main  "</span>
+    <span class="cs">"footer  footer"</span>;
+}
+
+<span class="cf">header</span>  { <span class="ca">grid-area</span>: header; }
+<span class="cf">.sidebar</span>{ <span class="ca">grid-area</span>: sidebar; }
+<span class="cf">main</span>    { <span class="ca">grid-area</span>: main; }
+<span class="cf">footer</span>  { <span class="ca">grid-area</span>: footer; }</code></pre>
+    </div>
+
+    <h3 class="sub-h">Posicionamento manual de itens</h3>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — grid-column e grid-row</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cf">.destaque</span> {
+  <span class="cc">/* Ocupa da coluna 1 até a 3 (2 colunas) */</span>
+  <span class="ca">grid-column</span>: <span class="cn">1</span> / <span class="cn">3</span>;
+
+  <span class="cc">/* Atalho para "ocupa 2 colunas a partir da atual" */</span>
+  <span class="ca">grid-column</span>: <span class="ck">span</span> <span class="cn">2</span>;
+
+  <span class="cc">/* Da linha 1 até a linha 2 */</span>
+  <span class="ca">grid-row</span>: <span class="cn">1</span> / <span class="cn">2</span>;
+
+  <span class="cc">/* -1 significa "até o final" */</span>
+  <span class="ca">grid-column</span>: <span class="cn">1</span> / <span class="cn">-1</span>; <span class="cc">/* ocupa a linha toda */</span>
+}
+
+<span class="cc">/* Cards responsivos sem media query — mágica! */</span>
+<span class="cf">.cards</span> {
+  <span class="ca">display</span>: <span class="ck">grid</span>;
+  <span class="ca">grid-template-columns</span>: <span class="cf">repeat</span>(<span class="ck">auto-fill</span>, <span class="cf">minmax</span>(<span class="cn">250</span>px, <span class="cn">1</span>fr));
+  <span class="ca">gap</span>: <span class="cn">1.2rem</span>;
+}</code></pre>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">🎯</div>
+      <div class="callout-body">
+        <p><strong>Regra geral:</strong> use Flexbox quando você pensa em uma dimensão (linha OU coluna).
+        Use Grid quando você pensa em duas dimensões (linha E coluna ao mesmo tempo).</p>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════
+         7. RESPONSIVIDADE
+    ═════════════════════════════════════ -->
+    <h2 class="section-h" id="responsividade">📱 Responsividade</h2>
+
+    <p>
+      Responsividade é fazer seu layout funcionar bem em qualquer tamanho de tela —
+      do celular de 320px ao monitor 4K. Em 2024, mais de 60% do tráfego web vem de mobile.
+      Ignorar isso é um erro caro.
+    </p>
+
+    <h3 class="sub-h">Mobile-first: comece pelo menor</h3>
+    <p>
+      A abordagem <strong>mobile-first</strong> é simples: escreva o CSS base para celular e use
+      <code>min-width</code> para adicionar estilos progressivamente em telas maiores.
+      É mais fácil expandir do que comprimir.
+    </p>
+
+    <div class="two-col">
+      <div class="half">
+        <h4 style="color:var(--red)">Desktop-first (evite)</h4>
+        <div class="code-block" style="margin:0">
+          <pre><code><span class="cc">/* Base para desktop */</span>
+<span class="cf">.grid</span> {
+  <span class="ca">display</span>: <span class="ck">grid</span>;
+  <span class="ca">grid-template-columns</span>: <span class="cn">1</span>fr <span class="cn">1</span>fr;
+}
+
+<span class="cc">/* Quebra pra mobile */</span>
+<span class="ck">@media</span> (<span class="ca">max-width</span>: <span class="cn">768</span>px) {
+  <span class="cf">.grid</span> {
+    <span class="ca">grid-template-columns</span>: <span class="cn">1</span>fr;
+  }
+}</code></pre>
+        </div>
+      </div>
+      <div class="half">
+        <h4 style="color:var(--green)">Mobile-first (prefira)</h4>
+        <div class="code-block" style="margin:0">
+          <pre><code><span class="cc">/* Base para mobile */</span>
+<span class="cf">.grid</span> {
+  <span class="ca">display</span>: <span class="ck">grid</span>;
+  <span class="ca">grid-template-columns</span>: <span class="cn">1</span>fr;
+}
+
+<span class="cc">/* Expande para desktop */</span>
+<span class="ck">@media</span> (<span class="ca">min-width</span>: <span class="cn">768</span>px) {
+  <span class="cf">.grid</span> {
+    <span class="ca">grid-template-columns</span>: <span class="cn">1</span>fr <span class="cn">1</span>fr;
+  }
+}</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub-h">Media Queries</h3>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — Media Queries</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cc">/* Breakpoints comuns */</span>
+<span class="ck">@media</span> (<span class="ca">min-width</span>: <span class="cn">640</span>px) { <span class="cc">/* sm — celular grande */</span> }
+<span class="ck">@media</span> (<span class="ca">min-width</span>: <span class="cn">768</span>px) { <span class="cc">/* md — tablet */</span> }
+<span class="ck">@media</span> (<span class="ca">min-width</span>: <span class="cn">1024</span>px) { <span class="cc">/* lg — laptop */</span> }
+<span class="ck">@media</span> (<span class="ca">min-width</span>: <span class="cn">1280</span>px) { <span class="cc">/* xl — desktop */</span> }
+
+<span class="cc">/* Orientação */</span>
+<span class="ck">@media</span> (<span class="ca">orientation</span>: landscape) { <span class="cc">/* paisagem */</span> }
+<span class="ck">@media</span> (<span class="ca">orientation</span>: portrait)  { <span class="cc">/* retrato */</span> }
+
+<span class="cc">/* Combinando condições */</span>
+<span class="ck">@media</span> (<span class="ca">min-width</span>: <span class="cn">768</span>px) <span class="ck">and</span> (<span class="ca">max-width</span>: <span class="cn">1024</span>px) {
+  <span class="cc">/* só tablets */</span>
+}
+
+<span class="cc">/* Preferência de tema do sistema */</span>
+<span class="ck">@media</span> (<span class="ca">prefers-color-scheme</span>: dark) { <span class="cc">/* modo escuro */</span> }
+<span class="ck">@media</span> (<span class="ca">prefers-reduced-motion</span>: reduce) { <span class="cc">/* desativa animações */</span> }</code></pre>
+    </div>
+
+    <h3 class="sub-h">Unidades relativas</h3>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Unidade</th>
+            <th>Relativa a</th>
+            <th>Uso típico</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>%</code></td>
+            <td>Elemento pai</td>
+            <td>Larguras fluidas: <code>width: 100%</code></td>
+          </tr>
+          <tr>
+            <td><code>vw</code></td>
+            <td>Largura da viewport</td>
+            <td>Seções full-width: <code>width: 100vw</code></td>
+          </tr>
+          <tr>
+            <td><code>vh</code></td>
+            <td>Altura da viewport</td>
+            <td>Hero sections: <code>min-height: 100vh</code></td>
+          </tr>
+          <tr>
+            <td><code>em</code></td>
+            <td>Font-size do elemento atual</td>
+            <td>Padding/margin em escala com o texto</td>
+          </tr>
+          <tr>
+            <td><code>rem</code></td>
+            <td>Font-size do elemento raiz (<code>html</code>)</td>
+            <td>Tipografia consistente no projeto</td>
+          </tr>
+          <tr>
+            <td><code>ch</code></td>
+            <td>Largura do caractere "0"</td>
+            <td>Largura de colunas de texto: <code>max-width: 65ch</code></td>
+          </tr>
+          <tr>
+            <td><code>svh</code></td>
+            <td>Small Viewport Height (sem barras do browser)</td>
+            <td>Mobile: evita barras cobrindo conteúdo</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub-h">clamp() — tipografia fluida</h3>
+    <p>
+      A função <code>clamp(min, preferred, max)</code> define um valor que cresce com a tela mas
+      nunca sai de um intervalo. Perfeito para tamanhos de fonte responsivos <em>sem media queries</em>:
+    </p>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — clamp() para tipografia fluida</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cf">h1</span> {
+  <span class="cc">/* Mínimo 1.8rem, ideal 5vw, máximo 3.5rem */</span>
+  <span class="ca">font-size</span>: <span class="cf">clamp</span>(<span class="cn">1.8rem</span>, <span class="cn">5vw</span>, <span class="cn">3.5rem</span>);
+}
+
+<span class="cf">p</span> {
+  <span class="ca">font-size</span>: <span class="cf">clamp</span>(<span class="cn">.9rem</span>, <span class="cn">2.5vw</span>, <span class="cn">1.1rem</span>);
+}
+
+<span class="cf">.hero</span> {
+  <span class="cc">/* Padding que cresce com a tela */</span>
+  <span class="ca">padding</span>: <span class="cf">clamp</span>(<span class="cn">2rem</span>, <span class="cn">8vw</span>, <span class="cn">6rem</span>);
+}
+
+<span class="cc">/* max-width com fluid — conteúdo não fica largo demais */</span>
+<span class="cf">.container</span> {
+  <span class="ca">width</span>: <span class="cf">min</span>(<span class="cn">90%</span>, <span class="cn">1200</span>px);
+  <span class="ca">margin</span>: <span class="cn">0 auto</span>;
+}</code></pre>
+    </div>
+
+    <!-- ════════════════════════════════════
+         8. VARIÁVEIS CSS
+    ═════════════════════════════════════ -->
+    <h2 class="section-h" id="variaveis">🎨 Variáveis CSS</h2>
+
+    <p>
+      Variáveis CSS (tecnicamente chamadas de <strong>Custom Properties</strong>) permitem definir
+      valores reutilizáveis diretamente no CSS — sem precisar de pré-processadores como Sass.
+      Elas são dinâmicas (podem ser alteradas via JavaScript) e funcionam em cascata.
+    </p>
+
+    <h3 class="sub-h">Sintaxe básica</h3>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — Declarando e usando variáveis</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cc">/* Declarar no :root = disponível em todo o documento */</span>
+<span class="ck">:root</span> {
+  <span class="ca">--cor-primaria</span>: <span class="cs">#6c63ff</span>;
+  <span class="ca">--cor-fundo</span>: <span class="cs">#0f1117</span>;
+  <span class="ca">--espaco-base</span>: <span class="cn">1rem</span>;
+  <span class="ca">--fonte-titulo</span>: <span class="cs">'Segoe UI', system-ui, sans-serif</span>;
+  <span class="ca">--raio-borda</span>: <span class="cn">8</span>px;
+}
+
+<span class="cc">/* Usar com var() */</span>
+<span class="cf">.botao</span> {
+  <span class="ca">background</span>: <span class="cf">var</span>(--cor-primaria);
+  <span class="ca">padding</span>: <span class="cf">var</span>(--espaco-base);
+  <span class="ca">border-radius</span>: <span class="cf">var</span>(--raio-borda);
+}
+
+<span class="cc">/* var() aceita fallback como segundo argumento */</span>
+<span class="cf">.card</span> {
+  <span class="ca">color</span>: <span class="cf">var</span>(--cor-texto, <span class="cs">#e2e8f0</span>); <span class="cc">/* usa #e2e8f0 se --cor-texto não existir */</span>
+}</code></pre>
+    </div>
+
+    <h3 class="sub-h">Escopo local</h3>
+    <p>
+      Variáveis não precisam ser globais. Você pode declarar uma variável em qualquer seletor e
+      ela só existe naquele contexto e nos filhos:
+    </p>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — Escopo local de variáveis</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cf">.card-verde</span> {
+  <span class="ca">--destaque</span>: <span class="cs">#43d9ad</span>;
+}
+
+<span class="cf">.card-roxo</span> {
+  <span class="ca">--destaque</span>: <span class="cs">#6c63ff</span>;
+}
+
+<span class="cc">/* Ambas as classes usam a mesma propriedade */</span>
+<span class="cf">.card</span> <span class="cf">.titulo</span> {
+  <span class="ca">color</span>: <span class="cf">var</span>(--destaque);
+  <span class="ca">border-bottom</span>: <span class="cn">2</span>px <span class="ck">solid</span> <span class="cf">var</span>(--destaque);
+}</code></pre>
+    </div>
+
+    <h3 class="sub-h">Tema dark/light com variáveis</h3>
+    <p>
+      A forma mais elegante de implementar dark mode. Você troca apenas as variáveis no <code>:root</code>
+      e todo o site muda instantaneamente:
+    </p>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — Dark/Light mode via variáveis</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cc">/* Tema claro (padrão) */</span>
+<span class="ck">:root</span> {
+  <span class="ca">--bg</span>: <span class="cs">#ffffff</span>;
+  <span class="ca">--texto</span>: <span class="cs">#1a1a2e</span>;
+  <span class="ca">--card-bg</span>: <span class="cs">#f5f5f5</span>;
+  <span class="ca">--borda</span>: <span class="cs">#e0e0e0</span>;
+}
+
+<span class="cc">/* Tema escuro — via preferência do sistema */</span>
+<span class="ck">@media</span> (<span class="ca">prefers-color-scheme</span>: dark) {
+  <span class="ck">:root</span> {
+    <span class="ca">--bg</span>: <span class="cs">#0f1117</span>;
+    <span class="ca">--texto</span>: <span class="cs">#e2e8f0</span>;
+    <span class="ca">--card-bg</span>: <span class="cs">#1a1d27</span>;
+    <span class="ca">--borda</span>: <span class="cs">#2a2d3e</span>;
+  }
+}
+
+<span class="cc">/* Alternativa: classe no elemento raiz (toggle via JS) */</span>
+<span class="cf">[data-theme="dark"]</span> {
+  <span class="ca">--bg</span>: <span class="cs">#0f1117</span>;
+  <span class="ca">--texto</span>: <span class="cs">#e2e8f0</span>;
+}
+
+<span class="cc">/* Todo o CSS usa as variáveis — nada muda aqui */</span>
+<span class="cf">body</span> { <span class="ca">background</span>: <span class="cf">var</span>(--bg); <span class="ca">color</span>: <span class="cf">var</span>(--texto); }
+<span class="cf">.card</span> { <span class="ca">background</span>: <span class="cf">var</span>(--card-bg); <span class="ca">border-color</span>: <span class="cf">var</span>(--borda); }</code></pre>
+    </div>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">JavaScript — Toggle de tema</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="ck">const</span> <span class="cv">btn</span> = document.<span class="cf">querySelector</span>(<span class="cs">'#toggle-tema'</span>);
+
+<span class="cv">btn</span>.<span class="cf">addEventListener</span>(<span class="cs">'click'</span>, () =&gt; {
+  <span class="ck">const</span> <span class="cv">atual</span> = document.documentElement.<span class="cf">getAttribute</span>(<span class="cs">'data-theme'</span>);
+  document.documentElement.<span class="cf">setAttribute</span>(
+    <span class="cs">'data-theme'</span>,
+    <span class="cv">atual</span> === <span class="cs">'dark'</span> ? <span class="cs">'light'</span> : <span class="cs">'dark'</span>
+  );
+});</code></pre>
+    </div>
+
+    <!-- ════════════════════════════════════
+         9. ANIMAÇÕES
+    ═════════════════════════════════════ -->
+    <h2 class="section-h" id="animacoes">✨ Animações</h2>
+
+    <p>
+      Animações bem feitas comunicam estado, guiam o olhar e tornam a experiência mais prazerosa.
+      Animações mal feitas deixam o site lento e irritam o usuário. A diferença está em usar
+      as ferramentas certas.
+    </p>
+
+    <h3 class="sub-h">transition — para estados</h3>
+    <p>
+      <code>transition</code> é usado para animar a mudança de um estado para outro (hover, focus, etc.).
+      É a animação mais simples e eficiente:
+    </p>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — Transitions</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cf">.botao</span> {
+  <span class="ca">background</span>: <span class="cs">#6c63ff</span>;
+  <span class="ca">transform</span>: <span class="cf">scale</span>(<span class="cn">1</span>);
+
+  <span class="cc">/* transition: propriedade duração timing delay */</span>
+  <span class="ca">transition</span>: <span class="ck">background</span> <span class="cn">.2s</span> <span class="ck">ease</span>, <span class="ck">transform</span> <span class="cn">.15s</span> <span class="ck">ease</span>;
+
+  <span class="cc">/* Ou anima todas as propriedades (menos eficiente) */</span>
+  <span class="ca">transition</span>: <span class="ck">all</span> <span class="cn">.2s</span> <span class="ck">ease</span>;
+}
+
+<span class="cf">.botao</span><span class="ck">:hover</span> {
+  <span class="ca">background</span>: <span class="cs">#5a52d5</span>;
+  <span class="ca">transform</span>: <span class="cf">translateY</span>(<span class="cn">-2</span>px);
+}
+
+<span class="cf">.botao</span><span class="ck">:active</span> {
+  <span class="ca">transform</span>: <span class="cf">scale</span>(<span class="cn">.97</span>);
+}
+
+<span class="cc">/* Timing functions mais usadas */</span>
+<span class="ca">transition-timing-function</span>: <span class="ck">ease</span>;        <span class="cc">/* suave no início e fim */</span>
+<span class="ca">transition-timing-function</span>: <span class="ck">ease-in</span>;     <span class="cc">/* começa devagar */</span>
+<span class="ca">transition-timing-function</span>: <span class="ck">ease-out</span>;    <span class="cc">/* termina devagar */</span>
+<span class="ca">transition-timing-function</span>: <span class="ck">ease-in-out</span>; <span class="cc">/* devagar nos dois */</span>
+<span class="ca">transition-timing-function</span>: <span class="ck">linear</span>;      <span class="cc">/* velocidade constante */</span>
+<span class="ca">transition-timing-function</span>: <span class="cf">cubic-bezier</span>(<span class="cn">.4</span>,<span class="cn">0</span>,<span class="cn">.2</span>,<span class="cn">1</span>); <span class="cc">/* customizado */</span></code></pre>
+    </div>
+
+    <h3 class="sub-h">@keyframes + animation — para sequências</h3>
+    <p>
+      Para animações mais complexas que não são simples transições de estado, use
+      <code>@keyframes</code> para definir a sequência e <code>animation</code> para aplicá-la:
+    </p>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — @keyframes e animation</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cc">/* Definindo a animação */</span>
+<span class="ck">@keyframes</span> <span class="cf">pular</span> {
+  <span class="cn">0</span>%   { <span class="ca">transform</span>: <span class="cf">translateY</span>(<span class="cn">0</span>); }
+  <span class="cn">50</span>%  { <span class="ca">transform</span>: <span class="cf">translateY</span>(<span class="cn">-20</span>px); }
+  <span class="cn">100</span>% { <span class="ca">transform</span>: <span class="cf">translateY</span>(<span class="cn">0</span>); }
+}
+
+<span class="ck">@keyframes</span> <span class="cf">girar</span> {
+  <span class="ck">from</span> { <span class="ca">transform</span>: <span class="cf">rotate</span>(<span class="cn">0deg</span>); }
+  <span class="ck">to</span>   { <span class="ca">transform</span>: <span class="cf">rotate</span>(<span class="cn">360</span>deg); }
+}
+
+<span class="ck">@keyframes</span> <span class="cf">aparecer</span> {
+  <span class="ck">from</span> { <span class="ca">opacity</span>: <span class="cn">0</span>; <span class="ca">transform</span>: <span class="cf">translateY</span>(<span class="cn">20</span>px); }
+  <span class="ck">to</span>   { <span class="ca">opacity</span>: <span class="cn">1</span>; <span class="ca">transform</span>: <span class="cf">translateY</span>(<span class="cn">0</span>); }
+}
+
+<span class="cc">/* Aplicando com animation */</span>
+<span class="cf">.botao-pulante</span> {
+  <span class="cc">/* animation: nome duração timing delay iteracao direction fill-mode */</span>
+  <span class="ca">animation</span>: <span class="cf">pular</span> <span class="cn">.6s</span> <span class="ck">ease</span> <span class="ck">infinite</span>;
+}
+
+<span class="cf">.spinner</span> {
+  <span class="ca">animation</span>: <span class="cf">girar</span> <span class="cn">1s</span> <span class="ck">linear</span> <span class="ck">infinite</span>;
+}
+
+<span class="cf">.card</span> {
+  <span class="ca">animation</span>: <span class="cf">aparecer</span> <span class="cn">.4s</span> <span class="ck">ease-out</span> <span class="ck">both</span>;
+}
+
+<span class="cc">/* Propriedades individuais */</span>
+<span class="cf">.animado</span> {
+  <span class="ca">animation-name</span>: <span class="cf">pular</span>;
+  <span class="ca">animation-duration</span>: <span class="cn">.6s</span>;
+  <span class="ca">animation-timing-function</span>: <span class="ck">ease-in-out</span>;
+  <span class="ca">animation-iteration-count</span>: <span class="ck">infinite</span>;  <span class="cc">/* ou um número */</span>
+  <span class="ca">animation-fill-mode</span>: <span class="ck">both</span>;            <span class="cc">/* mantém estado final */</span>
+  <span class="ca">animation-play-state</span>: <span class="ck">running</span>;        <span class="cc">/* paused para pausar */</span>
+}</code></pre>
+    </div>
+
+    <h3 class="sub-h">transform — a propriedade para animar</h3>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — Transform</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="cf">.elemento</span> {
+  <span class="cc">/* Mover */</span>
+  <span class="ca">transform</span>: <span class="cf">translate</span>(<span class="cn">20</span>px, <span class="cn">-10</span>px);  <span class="cc">/* x, y */</span>
+  <span class="ca">transform</span>: <span class="cf">translateX</span>(<span class="cn">50%</span>);
+  <span class="ca">transform</span>: <span class="cf">translateY</span>(<span class="cn">-100%</span>);
+
+  <span class="cc">/* Escalar */</span>
+  <span class="ca">transform</span>: <span class="cf">scale</span>(<span class="cn">1.1</span>);       <span class="cc">/* 10% maior */</span>
+  <span class="ca">transform</span>: <span class="cf">scale</span>(<span class="cn">.95</span>);      <span class="cc">/* 5% menor (clique) */</span>
+  <span class="ca">transform</span>: <span class="cf">scaleX</span>(<span class="cn">1.2</span>);     <span class="cc">/* só horizontal */</span>
+
+  <span class="cc">/* Rotacionar */</span>
+  <span class="ca">transform</span>: <span class="cf">rotate</span>(<span class="cn">45</span>deg);
+  <span class="ca">transform</span>: <span class="cf">rotate</span>(<span class="cn">-180</span>deg);
+
+  <span class="cc">/* Torcer */</span>
+  <span class="ca">transform</span>: <span class="cf">skew</span>(<span class="cn">10</span>deg, <span class="cn">5</span>deg);
+
+  <span class="cc">/* Combinar (ordem importa!) */</span>
+  <span class="ca">transform</span>: <span class="cf">translateY</span>(<span class="cn">-4</span>px) <span class="cf">scale</span>(<span class="cn">1.02</span>);
+}</code></pre>
+    </div>
+
+    <h3 class="sub-h">Exemplos divertidos</h3>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — Botão saltitante</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="ck">@keyframes</span> <span class="cf">bounce</span> {
+  <span class="cn">0</span>%, <span class="cn">100</span>% {
+    <span class="ca">transform</span>: <span class="cf">translateY</span>(<span class="cn">0</span>);
+    <span class="ca">animation-timing-function</span>: <span class="cf">cubic-bezier</span>(<span class="cn">.8</span>,<span class="cn">0</span>,<span class="cn">1</span>,<span class="cn">1</span>);
+  }
+  <span class="cn">50</span>% {
+    <span class="ca">transform</span>: <span class="cf">translateY</span>(<span class="cn">-16</span>px);
+    <span class="ca">animation-timing-function</span>: <span class="cf">cubic-bezier</span>(<span class="cn">0</span>,<span class="cn">0</span>,<span class="cn">.2</span>,<span class="cn">1</span>);
+  }
+}
+
+<span class="cf">.btn-bounce</span><span class="ck">:hover</span> {
+  <span class="ca">animation</span>: <span class="cf">bounce</span> <span class="cn">.6s</span> <span class="ck">infinite</span>;
+}</code></pre>
+    </div>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — Spinner de loading</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="ck">@keyframes</span> <span class="cf">spin</span> {
+  <span class="ck">to</span> { <span class="ca">transform</span>: <span class="cf">rotate</span>(<span class="cn">360</span>deg); }
+}
+
+<span class="cf">.spinner</span> {
+  <span class="ca">width</span>: <span class="cn">32</span>px;
+  <span class="ca">height</span>: <span class="cn">32</span>px;
+  <span class="ca">border</span>: <span class="cn">3</span>px <span class="ck">solid</span> <span class="cs">rgba(108,99,255,.2)</span>;
+  <span class="ca">border-top-color</span>: <span class="cs">#6c63ff</span>;
+  <span class="ca">border-radius</span>: <span class="cn">50</span>%;
+  <span class="ca">animation</span>: <span class="cf">spin</span> <span class="cn">.8s</span> <span class="ck">linear</span> <span class="ck">infinite</span>;
+}</code></pre>
+    </div>
+
+    <div class="code-block">
+      <div class="cb-header">
+        <span class="cb-lang">CSS — Fade in ao carregar</span>
+        <div class="cb-dots">
+          <div class="cb-dot" style="background:#ff5f57"></div>
+          <div class="cb-dot" style="background:#febc2e"></div>
+          <div class="cb-dot" style="background:#28c840"></div>
+        </div>
+      </div>
+      <pre><code><span class="ck">@keyframes</span> <span class="cf">fade-up</span> {
+  <span class="ck">from</span> {
+    <span class="ca">opacity</span>: <span class="cn">0</span>;
+    <span class="ca">transform</span>: <span class="cf">translateY</span>(<span class="cn">24</span>px);
+  }
+  <span class="ck">to</span> {
+    <span class="ca">opacity</span>: <span class="cn">1</span>;
+    <span class="ca">transform</span>: <span class="cf">translateY</span>(<span class="cn">0</span>);
+  }
+}
+
+<span class="cf">.card</span> {
+  <span class="ca">animation</span>: <span class="cf">fade-up</span> <span class="cn">.5s</span> <span class="ck">ease-out</span> <span class="ck">both</span>;
+}
+
+<span class="cc">/* Delay escalonado para lista de cards */</span>
+<span class="cf">.card</span><span class="ck">:nth-child(1)</span> { <span class="ca">animation-delay</span>: <span class="cn">0s</span>; }
+<span class="cf">.card</span><span class="ck">:nth-child(2)</span> { <span class="ca">animation-delay</span>: <span class="cn">.1s</span>; }
+<span class="cf">.card</span><span class="ck">:nth-child(3)</span> { <span class="ca">animation-delay</span>: <span class="cn">.2s</span>; }</code></pre>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">🚀</div>
+      <div class="callout-body">
+        <p><strong>Performance tip:</strong> anime apenas <code>opacity</code> e <code>transform</code>.
+        Essas duas propriedades são processadas pelo compositor do browser (GPU) sem causar
+        <em>layout recalculation</em> ou <em>repaint</em>. Evite animar <code>width</code>,
+        <code>height</code>, <code>top</code>, <code>left</code>, <code>margin</code> —
+        elas causam <em>reflow</em> e podem deixar a animação travada.</p>
+      </div>
+    </div>
+
+    <div class="callout warning">
+      <div class="callout-icon">♿</div>
+      <div class="callout-body">
+        <p>Respeite usuários com sensibilidade a movimento. Desabilite animações desnecessárias
+        para quem configurou o sistema para reduzir movimento:</p>
+        <div class="code-block" style="margin:.6rem 0 0">
+          <pre><code><span class="ck">@media</span> (<span class="ca">prefers-reduced-motion</span>: reduce) {
+  <span class="cf">*</span>, <span class="cf">*::before</span>, <span class="cf">*::after</span> {
+    <span class="ca">animation-duration</span>: <span class="cn">.01ms</span> <span class="ck">!important</span>;
+    <span class="ca">transition-duration</span>: <span class="cn">.01ms</span> <span class="ck">!important</span>;
+  }
+}</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════
+         SUMMARY BOX
+    ═════════════════════════════════════ -->
+    <div class="summary-box">
+      <h4>Resumo do módulo CSS</h4>
+      <ul>
+        <li>CSS controla toda a apresentação visual — cores, layout, tipografia e animações</li>
+        <li>A cascata resolve conflitos por origem, especificidade e ordem de declaração</li>
+        <li>Prefira CSS externo; use <code>box-sizing: border-box</code> em todo projeto</li>
+        <li>Seletores combinados, pseudo-classes e pseudo-elementos eliminam classes desnecessárias</li>
+        <li>O Box Model define Content → Padding → Border → Margin — sempre use border-box</li>
+        <li>Flexbox para layouts unidimensionais; Grid para layouts bidimensionais</li>
+        <li>Mobile-first com <code>min-width</code> e unidades relativas para responsividade</li>
+        <li>Variáveis CSS (<code>--custom-props</code>) são essenciais para temas e manutenção</li>
+        <li>Anime apenas <code>opacity</code> e <code>transform</code> para performance máxima</li>
+        <li>Respeite <code>prefers-reduced-motion</code> para acessibilidade</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <!-- ── TABLE OF CONTENTS ── -->
+  <div class="toc-panel">
+    <h4>Nesta página</h4>
+    <ul>
+      <li><a href="#intro">Introdução ao CSS</a></li>
+      <li class="sub"><a href="#intro">O que é CSS</a></li>
+      <li class="sub"><a href="#intro">A Cascata</a></li>
+      <li class="sub"><a href="#intro">Como linkar</a></li>
+      <li class="sub"><a href="#intro">Especificidade</a></li>
+      <li><a href="#seletores">Seletores</a></li>
+      <li class="sub"><a href="#seletores">Básicos</a></li>
+      <li class="sub"><a href="#seletores">Combinadores</a></li>
+      <li class="sub"><a href="#seletores">Pseudo-classes</a></li>
+      <li class="sub"><a href="#seletores">Pseudo-elementos</a></li>
+      <li><a href="#box-model">Box Model</a></li>
+      <li class="sub"><a href="#box-model">As quatro camadas</a></li>
+      <li class="sub"><a href="#box-model">box-sizing</a></li>
+      <li><a href="#display">Display</a></li>
+      <li><a href="#flexbox">Flexbox</a></li>
+      <li class="sub"><a href="#flexbox">Container</a></li>
+      <li class="sub"><a href="#flexbox">Items</a></li>
+      <li class="sub"><a href="#flexbox">Exemplos</a></li>
+      <li><a href="#grid">CSS Grid</a></li>
+      <li class="sub"><a href="#grid">Container</a></li>
+      <li class="sub"><a href="#grid">Unidade fr</a></li>
+      <li class="sub"><a href="#grid">template-areas</a></li>
+      <li><a href="#responsividade">Responsividade</a></li>
+      <li class="sub"><a href="#responsividade">Mobile-first</a></li>
+      <li class="sub"><a href="#responsividade">Media Queries</a></li>
+      <li class="sub"><a href="#responsividade">clamp()</a></li>
+      <li><a href="#variaveis">Variáveis CSS</a></li>
+      <li class="sub"><a href="#variaveis">Sintaxe</a></li>
+      <li class="sub"><a href="#variaveis">Dark/Light mode</a></li>
+      <li><a href="#animacoes">Animações</a></li>
+      <li class="sub"><a href="#animacoes">transition</a></li>
+      <li class="sub"><a href="#animacoes">@keyframes</a></li>
+      <li class="sub"><a href="#animacoes">transform</a></li>
+    </ul>
+  </div>
+
+</div><!-- /page-wrapper -->
+<script src="./assets/js/include.js" defer></script>
+</body>
+</html>

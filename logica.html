@@ -1,0 +1,1324 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dev Atlas — Lógica de Programação: condicionais, loops, funções e exercícios práticos com JavaScript.">
+    <title>Lógica de Programação — Dev Atlas</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <style>
+        /* ── Exercício cards ── */
+        .exercise {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .exercise__header {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            margin-bottom: .8rem;
+        }
+        .exercise__num {
+            width: 32px; height: 32px; border-radius: 50%;
+            background: var(--accent-dim);
+            border: 1px solid rgba(108,99,255,.4);
+            color: var(--accent);
+            display: flex; align-items: center; justify-content: center;
+            font-size: .82rem; font-weight: 800; flex-shrink: 0;
+        }
+        .exercise__title { font-size: 1rem; font-weight: 700; color: var(--text); }
+        .exercise__level {
+            font-size: .65rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: .07em; border-radius: 4px;
+            padding: .15rem .5rem; margin-left: auto; flex-shrink: 0;
+        }
+        .level-easy   { background: rgba(67,217,173,.15); color: var(--green); }
+        .level-medium { background: rgba(255,209,102,.15); color: var(--yellow); }
+        .level-hard   { background: rgba(255,101,132,.15); color: var(--red); }
+
+        .exercise__desc { font-size: .9rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6; }
+        .exercise__desc strong { color: var(--text); }
+
+        .exercise__hint {
+            font-size: .82rem; color: var(--text-muted);
+            background: rgba(108,99,255,.06);
+            border-left: 3px solid rgba(108,99,255,.4);
+            padding: .6rem .9rem; border-radius: 0 6px 6px 0;
+            margin-bottom: 1rem;
+        }
+
+        .btn-solution {
+            display: inline-flex; align-items: center; gap: .5rem;
+            background: var(--accent-dim);
+            border: 1px solid rgba(108,99,255,.35);
+            color: var(--accent);
+            padding: .55rem 1.1rem;
+            border-radius: 8px;
+            font-size: .84rem; font-weight: 600;
+            cursor: pointer;
+            transition: background .2s, border-color .2s;
+            width: 100%;
+            justify-content: center;
+            margin-top: .25rem;
+        }
+        .btn-solution:hover {
+            background: rgba(108,99,255,.25);
+            border-color: var(--accent);
+        }
+        .btn-solution .btn-icon { transition: transform .25s; }
+        .btn-solution.open .btn-icon { transform: rotate(90deg); }
+
+        .solution-panel {
+            display: none;
+            margin-top: 1rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+        .solution-panel.visible { display: block; }
+        .solution-panel .sol-label {
+            font-size: .7rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: .08em; color: var(--green); margin-bottom: .5rem;
+        }
+
+        /* ── page nav ── */
+        .page-nav { display: flex; justify-content: space-between; margin: 2.5rem 0 0; }
+        .page-nav a {
+            display: inline-flex; align-items: center; gap: .45rem;
+            padding: .6rem 1.1rem; border-radius: 8px;
+            border: 1px solid var(--border); font-size: .88rem;
+            color: var(--text); text-decoration: none;
+            transition: border-color .2s, background .2s;
+        }
+        .page-nav a:hover { border-color: var(--accent); background: rgba(108,99,255,.08); }
+
+        /* ── operator table badges ── */
+        .op-yes { color: var(--green); font-weight: 700; }
+        .op-no  { color: var(--red);   font-weight: 700; }
+    </style>
+</head>
+<body>
+<!-- ── LAYOUT ── -->
+<div class="page-wrapper">
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="sidebar">
+        <h3>Módulos</h3>
+        <ul>
+            <li><a href="index.html"><span class="dot"></span>Início</a></li>
+            <li><a href="programacao.html"><span class="dot"></span>Fundamentos da Programação</a></li>
+            <li><a href="logica.html" class="active"><span class="dot"></span>Lógica de Programação</a></li>
+            <li><a href="fundamentos.html"><span class="dot"></span>Fundamentos Web</a></li>
+            <li><a href="html.html"><span class="dot"></span>HTML</a></li>
+            <li><a href="css.html"><span class="dot"></span>CSS</a></li>
+            <li><a href="javascript.html"><span class="dot"></span>JavaScript</a></li>
+            <li><a href="php.html"><span class="dot"></span>PHP</a></li>
+            <li><a href="git.html"><span class="dot"></span>Git</a></li>
+            <li><a href="ferramentas.html"><span class="dot"></span>Ferramentas</a></li>
+        </ul>
+
+        <h3>Nesta página</h3>
+        <ul>
+            <li><a href="#operadores"><span class="dot"></span>Operadores</a></li>
+            <li><a href="#condicionais"><span class="dot"></span>Condicionais</a></li>
+            <li><a href="#loops"><span class="dot"></span>Loops</a></li>
+            <li><a href="#funcoes"><span class="dot"></span>Funções</a></li>
+            <li><a href="#arrays-logica"><span class="dot"></span>Arrays na Prática</a></li>
+            <li><a href="#escopo"><span class="dot"></span>Escopo</a></li>
+            <li><a href="#exercicios"><span class="dot"></span>Exercícios</a></li>
+        </ul>
+    </aside>
+
+    <!-- ── MAIN ── -->
+    <main class="content">
+
+        <div class="page-badge">🧠 Lógica de Programação</div>
+        <h1 class="page-title">Lógica de Programação</h1>
+        <p class="page-subtitle">
+            Aqui o programa começa a <em>pensar</em>. Condicionais, loops e funções são as ferramentas
+            que transformam uma sequência de instruções em algo capaz de tomar decisões, repetir tarefas
+            e resolver problemas reais.
+        </p>
+
+        <!-- ─────────────────────────────────────
+             1. OPERADORES
+        ───────────────────────────────────── -->
+        <section id="operadores">
+            <div class="section-label">
+                <div class="sl-icon sl-blue">⚙️</div>
+                <span>Tópico 1</span>
+            </div>
+            <h2 class="section-h">Operadores — As Ferramentas do Cálculo</h2>
+
+            <p>
+                Operadores são símbolos que realizam operações sobre valores. São a matemática
+                e a lógica do programa.
+            </p>
+
+            <h3 class="sub-h">Operadores Aritméticos</h3>
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">JavaScript</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">let</span> <span class="cv">a</span> = <span class="cn">10</span>
+<span class="ck">let</span> <span class="cv">b</span> = <span class="cn">3</span>
+
+<span class="cf">alert</span>(<span class="cv">a</span> + <span class="cv">b</span>)   <span class="cc">// 13  → Adição</span>
+<span class="cf">alert</span>(<span class="cv">a</span> - <span class="cv">b</span>)   <span class="cc">// 7   → Subtração</span>
+<span class="cf">alert</span>(<span class="cv">a</span> * <span class="cv">b</span>)   <span class="cc">// 30  → Multiplicação</span>
+<span class="cf">alert</span>(<span class="cv">a</span> / <span class="cv">b</span>)   <span class="cc">// 3.333... → Divisão</span>
+<span class="cf">alert</span>(<span class="cv">a</span> % <span class="cv">b</span>)   <span class="cc">// 1   → Resto da divisão (módulo)</span>
+<span class="cf">alert</span>(<span class="cv">a</span> ** <span class="cv">b</span>)  <span class="cc">// 1000 → Potência (10³)</span>
+
+<span class="cc">// Atalhos de atribuição</span>
+<span class="cv">a</span> += <span class="cn">5</span>   <span class="cc">// a = a + 5  → 15</span>
+<span class="cv">a</span> -= <span class="cn">2</span>   <span class="cc">// a = a - 2  → 13</span>
+<span class="cv">a</span> *= <span class="cn">2</span>   <span class="cc">// a = a * 2  → 26</span>
+<span class="cv">a</span>++       <span class="cc">// a = a + 1  → 27</span>
+<span class="cv">a</span>--       <span class="cc">// a = a - 1  → 26</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">Operadores de Comparação</h3>
+            <p>Sempre retornam <code>true</code> ou <code>false</code>:</p>
+
+            <div class="tbl-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Operador</th><th>Significado</th><th>Exemplo</th><th>Resultado</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>===</code></td><td>Igual (valor E tipo)</td><td><code>5 === 5</code></td><td><span class="op-yes">true</span></td></tr>
+                        <tr><td><code>===</code></td><td>Igual (valor E tipo)</td><td><code>5 === "5"</code></td><td><span class="op-no">false</span></td></tr>
+                        <tr><td><code>!==</code></td><td>Diferente (valor E tipo)</td><td><code>5 !== 8</code></td><td><span class="op-yes">true</span></td></tr>
+                        <tr><td><code>&gt;</code></td><td>Maior que</td><td><code>10 &gt; 5</code></td><td><span class="op-yes">true</span></td></tr>
+                        <tr><td><code>&lt;</code></td><td>Menor que</td><td><code>3 &lt; 2</code></td><td><span class="op-no">false</span></td></tr>
+                        <tr><td><code>&gt;=</code></td><td>Maior ou igual</td><td><code>5 &gt;= 5</code></td><td><span class="op-yes">true</span></td></tr>
+                        <tr><td><code>&lt;=</code></td><td>Menor ou igual</td><td><code>4 &lt;= 3</code></td><td><span class="op-no">false</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="sub-h">Operadores Lógicos</h3>
+            <p>Combinam condições:</p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">JavaScript</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">let</span> <span class="cv">idade</span> = <span class="cn">20</span>
+<span class="ck">let</span> <span class="cv">temCNH</span> = <span class="ck">true</span>
+
+<span class="cc">// && → E  (as DUAS condições precisam ser verdadeiras)</span>
+<span class="cf">alert</span>(<span class="cv">idade</span> >= <span class="cn">18</span> && <span class="cv">temCNH</span>)     <span class="cc">// true (tem 18+ E tem CNH)</span>
+<span class="cf">alert</span>(<span class="cv">idade</span> >= <span class="cn">18</span> && !<span class="cv">temCNH</span>)    <span class="cc">// false (tem 18+, mas NÃO tem CNH)</span>
+
+<span class="cc">// || → OU  (PELO MENOS UMA condição precisa ser verdadeira)</span>
+<span class="cf">alert</span>(<span class="cv">idade</span> >= <span class="cn">18</span> || <span class="cv">temCNH</span>)     <span class="cc">// true (basta uma ser verdadeira)</span>
+
+<span class="cc">// !  → NÃO  (inverte o valor)</span>
+<span class="cf">alert</span>(!<span class="ck">true</span>)    <span class="cc">// false</span>
+<span class="cf">alert</span>(!<span class="ck">false</span>)   <span class="cc">// true</span>
+<span class="cf">alert</span>(!<span class="cv">temCNH</span>) <span class="cc">// false (temCNH é true, ! inverte para false)</span></code></pre>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────
+             2. CONDICIONAIS
+        ───────────────────────────────────── -->
+        <section id="condicionais">
+            <div class="section-label">
+                <div class="sl-icon sl-yellow">🔀</div>
+                <span>Tópico 2</span>
+            </div>
+            <h2 class="section-h">Condicionais — O Programa Toma Decisões</h2>
+
+            <p>
+                Condicionais permitem que o programa execute blocos de código diferentes dependendo
+                de uma situação. É o famoso "SE isso, ENTÃO aquilo".
+            </p>
+
+            <h3 class="sub-h">if / else if / else</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">JavaScript — if / else</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">let</span> <span class="cv">nota</span> = <span class="cf">Number</span>( <span class="cf">prompt</span>(<span class="cs">"Digite sua nota (0 a 10):"</span>) )
+
+<span class="ck">if</span> (<span class="cv">nota</span> >= <span class="cn">9</span>) {
+    <span class="cf">alert</span>(<span class="cs">"🏆 Excelente! Você tirou A!"</span>)
+} <span class="ck">else if</span> (<span class="cv">nota</span> >= <span class="cn">7</span>) {
+    <span class="cf">alert</span>(<span class="cs">"✅ Bom! Você passou com B."</span>)
+} <span class="ck">else if</span> (<span class="cv">nota</span> >= <span class="cn">5</span>) {
+    <span class="cf">alert</span>(<span class="cs">"⚠️ Recuperação! Você tirou C."</span>)
+} <span class="ck">else</span> {
+    <span class="cf">alert</span>(<span class="cs">"❌ Reprovado. Nota abaixo de 5."</span>)
+}
+
+<span class="cc">// Só o primeiro bloco verdadeiro é executado.
+// O else captura tudo o que não entrou nos ifs anteriores.</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">Condicionais aninhadas</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">JavaScript — if dentro de if</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">let</span> <span class="cv">idade</span>  = <span class="cf">Number</span>( <span class="cf">prompt</span>(<span class="cs">"Qual a sua idade?"</span>) )
+<span class="ck">let</span> <span class="cv">temRG</span>  = <span class="cf">confirm</span>(<span class="cs">"Você tem RG?"</span>)
+
+<span class="ck">if</span> (<span class="cv">idade</span> >= <span class="cn">18</span>) {
+    <span class="ck">if</span> (<span class="cv">temRG</span>) {
+        <span class="cf">alert</span>(<span class="cs">"✅ Pode entrar! Maior de idade com documento."</span>)
+    } <span class="ck">else</span> {
+        <span class="cf">alert</span>(<span class="cs">"⚠️ Maior de idade, mas precisa do documento."</span>)
+    }
+} <span class="ck">else</span> {
+    <span class="cf">alert</span>(<span class="cs">"❌ Menor de idade. Entrada não permitida."</span>)
+}</code></pre>
+            </div>
+
+            <h3 class="sub-h">Operador ternário — if em uma linha</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">JavaScript — Ternário</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc">// Sintaxe: condição ? valor_se_true : valor_se_false</span>
+
+<span class="ck">let</span> <span class="cv">idade</span> = <span class="cf">Number</span>( <span class="cf">prompt</span>(<span class="cs">"Qual sua idade?"</span>) )
+
+<span class="cc">// Com if/else (4 linhas)</span>
+<span class="ck">let</span> <span class="cv">status</span>
+<span class="ck">if</span> (<span class="cv">idade</span> >= <span class="cn">18</span>) {
+    <span class="cv">status</span> = <span class="cs">"maior de idade"</span>
+} <span class="ck">else</span> {
+    <span class="cv">status</span> = <span class="cs">"menor de idade"</span>
+}
+
+<span class="cc">// Com ternário (1 linha) — mesma coisa!</span>
+<span class="ck">let</span> <span class="cv">status</span> = <span class="cv">idade</span> >= <span class="cn">18</span> ? <span class="cs">"maior de idade"</span> : <span class="cs">"menor de idade"</span>
+
+<span class="cf">alert</span>(<span class="cs">"Você é "</span> + <span class="cv">status</span> + <span class="cs">"."</span>)</code></pre>
+            </div>
+
+            <h3 class="sub-h">switch — muitos casos possíveis</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">JavaScript — switch</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">let</span> <span class="cv">dia</span> = <span class="cf">Number</span>( <span class="cf">prompt</span>(<span class="cs">"Digite o número do dia (1=Seg, 7=Dom):"</span>) )
+
+<span class="ck">switch</span> (<span class="cv">dia</span>) {
+    <span class="ck">case</span> <span class="cn">1</span>:
+        <span class="cf">alert</span>(<span class="cs">"Segunda-feira 😴"</span>)
+        <span class="ck">break</span>
+    <span class="ck">case</span> <span class="cn">2</span>:
+        <span class="cf">alert</span>(<span class="cs">"Terça-feira"</span>)
+        <span class="ck">break</span>
+    <span class="ck">case</span> <span class="cn">3</span>:
+        <span class="cf">alert</span>(<span class="cs">"Quarta-feira"</span>)
+        <span class="ck">break</span>
+    <span class="ck">case</span> <span class="cn">6</span>:
+    <span class="ck">case</span> <span class="cn">7</span>:
+        <span class="cf">alert</span>(<span class="cs">"Final de semana! 🎉"</span>)  <span class="cc">// case 6 e 7 caem aqui</span>
+        <span class="ck">break</span>
+    <span class="ck">default</span>:
+        <span class="cf">alert</span>(<span class="cs">"Dia inválido!"</span>)
+}
+<span class="cc">// IMPORTANTE: sem o "break", a execução "cai" para o próximo case!</span></code></pre>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────
+             3. LOOPS
+        ───────────────────────────────────── -->
+        <section id="loops">
+            <div class="section-label">
+                <div class="sl-icon sl-green">🔄</div>
+                <span>Tópico 3</span>
+            </div>
+            <h2 class="section-h">Loops — Repetindo sem Cansar</h2>
+
+            <p>
+                Loops (laços) executam um bloco de código várias vezes. Sem loops, para imprimir
+                os números de 1 a 100 você teria que escrever 100 <code>alert()</code>s.
+                Com um loop, são 3 linhas.
+            </p>
+
+            <h3 class="sub-h">Loop for — quando você sabe quantas vezes</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">JavaScript — for</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc">// Estrutura: for (início; condição; incremento)</span>
+<span class="cc">//   início    → onde o contador começa</span>
+<span class="cc">//   condição  → continua enquanto for true</span>
+<span class="cc">//   incremento→ o que acontece ao fim de cada volta</span>
+
+<span class="cc">// Conta de 1 a 5</span>
+<span class="ck">for</span> (<span class="ck">let</span> <span class="cv">i</span> = <span class="cn">1</span>; <span class="cv">i</span> <= <span class="cn">5</span>; <span class="cv">i</span>++) {
+    <span class="cf">alert</span>(<span class="cs">"Número: "</span> + <span class="cv">i</span>)
+}
+<span class="cc">// Exibe: 1, 2, 3, 4, 5</span>
+
+<span class="cc">// Conta de 10 a 1 (decrescente)</span>
+<span class="ck">for</span> (<span class="ck">let</span> <span class="cv">i</span> = <span class="cn">10</span>; <span class="cv">i</span> >= <span class="cn">1</span>; <span class="cv">i</span>--) {
+    <span class="cf">console</span>.<span class="cf">log</span>(<span class="cv">i</span>)
+}
+
+<span class="cc">// Acumula a soma de 1 até N</span>
+<span class="ck">let</span> <span class="cv">n</span>   = <span class="cf">Number</span>( <span class="cf">prompt</span>(<span class="cs">"Somar de 1 até qual número?"</span>) )
+<span class="ck">let</span> <span class="cv">soma</span> = <span class="cn">0</span>
+
+<span class="ck">for</span> (<span class="ck">let</span> <span class="cv">i</span> = <span class="cn">1</span>; <span class="cv">i</span> <= <span class="cv">n</span>; <span class="cv">i</span>++) {
+    <span class="cv">soma</span> += <span class="cv">i</span>   <span class="cc">// acumula: soma = soma + i</span>
+}
+
+<span class="cf">alert</span>(<span class="cs">"A soma de 1 até "</span> + <span class="cv">n</span> + <span class="cs">" é "</span> + <span class="cv">soma</span>)</code></pre>
+            </div>
+
+            <h3 class="sub-h">Loop while — enquanto a condição for verdadeira</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">JavaScript — while</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc">// Fica pedindo uma senha até o usuário acertar</span>
+<span class="ck">let</span> <span class="cv">senhaCorreta</span> = <span class="cs">"atlas123"</span>
+<span class="ck">let</span> <span class="cv">tentativa</span>    = <span class="cs">""</span>
+
+<span class="ck">while</span> (<span class="cv">tentativa</span> !== <span class="cv">senhaCorreta</span>) {
+    <span class="cv">tentativa</span> = <span class="cf">prompt</span>(<span class="cs">"Digite a senha:"</span>)
+}
+
+<span class="cf">alert</span>(<span class="cs">"✅ Acesso liberado!"</span>)
+
+<span class="cc">// ⚠️ Cuidado: se a condição nunca ficar falsa,
+//    o loop nunca para — loop infinito! O browser trava.
+//    Sempre garanta que a condição vai mudar.</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">do...while — executa ao menos uma vez</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">JavaScript — do...while</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc">// Perfeito para menus e validação de entrada:
+// executa o bloco UMA vez, depois verifica a condição</span>
+<span class="ck">let</span> <span class="cv">resposta</span>
+
+<span class="ck">do</span> {
+    <span class="cv">resposta</span> = <span class="cf">prompt</span>(<span class="cs">"Digite um número entre 1 e 10:"</span>)
+    <span class="cv">resposta</span> = <span class="cf">Number</span>(<span class="cv">resposta</span>)
+} <span class="ck">while</span> (<span class="cv">resposta</span> < <span class="cn">1</span> || <span class="cv">resposta</span> > <span class="cn">10</span>)
+<span class="cc">// Continua pedindo enquanto o número estiver fora do intervalo</span>
+
+<span class="cf">alert</span>(<span class="cs">"Você digitou: "</span> + <span class="cv">resposta</span>)</code></pre>
+            </div>
+
+            <h3 class="sub-h">break e continue — controlando o loop</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">JavaScript — break e continue</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc">// break → SAI do loop imediatamente</span>
+<span class="ck">for</span> (<span class="ck">let</span> <span class="cv">i</span> = <span class="cn">1</span>; <span class="cv">i</span> <= <span class="cn">10</span>; <span class="cv">i</span>++) {
+    <span class="ck">if</span> (<span class="cv">i</span> === <span class="cn">5</span>) <span class="ck">break</span>    <span class="cc">// para quando chega em 5</span>
+    <span class="cf">console</span>.<span class="cf">log</span>(<span class="cv">i</span>)          <span class="cc">// exibe 1, 2, 3, 4</span>
+}
+
+<span class="cc">// continue → PULA para a próxima iteração</span>
+<span class="ck">for</span> (<span class="ck">let</span> <span class="cv">i</span> = <span class="cn">1</span>; <span class="cv">i</span> <= <span class="cn">10</span>; <span class="cv">i</span>++) {
+    <span class="ck">if</span> (<span class="cv">i</span> % <span class="cn">2</span> === <span class="cn">0</span>) <span class="ck">continue</span>  <span class="cc">// pula os pares</span>
+    <span class="cf">console</span>.<span class="cf">log</span>(<span class="cv">i</span>)               <span class="cc">// exibe 1, 3, 5, 7, 9</span>
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────
+             4. FUNÇÕES
+        ───────────────────────────────────── -->
+        <section id="funcoes">
+            <div class="section-label">
+                <div class="sl-icon sl-purple">🧩</div>
+                <span>Tópico 4</span>
+            </div>
+            <h2 class="section-h">Funções — Blocos Reutilizáveis de Código</h2>
+
+            <p>
+                Uma função é um bloco de código com um nome. Você escreve a lógica uma vez e
+                pode usar quantas vezes quiser, em qualquer lugar do programa. É o princípio
+                fundamental de não repetir código (DRY — <em>Don't Repeat Yourself</em>).
+            </p>
+
+            <div class="callout fun">
+                <div class="callout-icon">🍕</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Analogia da máquina de pizza:</strong> uma função é como uma máquina
+                        que recebe ingredientes (<strong>parâmetros</strong>), executa um processo e
+                        entrega o resultado (<strong>return</strong>). Você não precisa saber como a
+                        máquina funciona por dentro toda vez que quiser uma pizza — só precisa chamar
+                        a função com os ingredientes certos.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Criando e chamando funções</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">JavaScript — Funções básicas</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc">// 1. Função sem parâmetro, sem retorno</span>
+<span class="ck">function</span> <span class="cf">saudar</span>() {
+    <span class="cf">alert</span>(<span class="cs">"Olá! Bem-vindo ao Dev Atlas!"</span>)
+}
+<span class="cf">saudar</span>()   <span class="cc">// chamando a função</span>
+<span class="cf">saudar</span>()   <span class="cc">// posso chamar quantas vezes quiser</span>
+
+<span class="cc">// 2. Função com parâmetros</span>
+<span class="ck">function</span> <span class="cf">saudarPessoa</span>(<span class="cv">nome</span>) {
+    <span class="cf">alert</span>(<span class="cs">"Olá, "</span> + <span class="cv">nome</span> + <span class="cs">"!"</span>)
+}
+<span class="cf">saudarPessoa</span>(<span class="cs">"Ana"</span>)    <span class="cc">// → "Olá, Ana!"</span>
+<span class="cf">saudarPessoa</span>(<span class="cs">"Carlos"</span>) <span class="cc">// → "Olá, Carlos!"</span>
+
+<span class="cc">// 3. Função com retorno (return)</span>
+<span class="ck">function</span> <span class="cf">somar</span>(<span class="cv">a</span>, <span class="cv">b</span>) {
+    <span class="ck">return</span> <span class="cv">a</span> + <span class="cv">b</span>    <span class="cc">// devolve o resultado para quem chamou</span>
+}
+
+<span class="ck">let</span> <span class="cv">resultado</span> = <span class="cf">somar</span>(<span class="cn">5</span>, <span class="cn">3</span>)    <span class="cc">// resultado = 8</span>
+<span class="cf">alert</span>(<span class="cv">resultado</span>)               <span class="cc">// → 8</span>
+<span class="cf">alert</span>( <span class="cf">somar</span>(<span class="cn">10</span>, <span class="cn">20</span>) )          <span class="cc">// → 30 (direto no alert)</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">Exemplos práticos</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">JavaScript — Funções do mundo real</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc">// Verifica se um número é par</span>
+<span class="ck">function</span> <span class="cf">ehPar</span>(<span class="cv">numero</span>) {
+    <span class="ck">return</span> <span class="cv">numero</span> % <span class="cn">2</span> === <span class="cn">0</span>   <span class="cc">// retorna true ou false</span>
+}
+<span class="cf">alert</span>( <span class="cf">ehPar</span>(<span class="cn">4</span>) )   <span class="cc">// true</span>
+<span class="cf">alert</span>( <span class="cf">ehPar</span>(<span class="cn">7</span>) )   <span class="cc">// false</span>
+
+<span class="cc">// Calcula média de três notas</span>
+<span class="ck">function</span> <span class="cf">calcularMedia</span>(<span class="cv">n1</span>, <span class="cv">n2</span>, <span class="cv">n3</span>) {
+    <span class="ck">let</span> <span class="cv">media</span> = (<span class="cv">n1</span> + <span class="cv">n2</span> + <span class="cv">n3</span>) / <span class="cn">3</span>
+    <span class="ck">return</span> <span class="cv">media</span>
+}
+
+<span class="ck">let</span> <span class="cv">minhaNota1</span> = <span class="cf">Number</span>( <span class="cf">prompt</span>(<span class="cs">"Nota 1:"</span>) )
+<span class="ck">let</span> <span class="cv">minhaNota2</span> = <span class="cf">Number</span>( <span class="cf">prompt</span>(<span class="cs">"Nota 2:"</span>) )
+<span class="ck">let</span> <span class="cv">minhaNota3</span> = <span class="cf">Number</span>( <span class="cf">prompt</span>(<span class="cs">"Nota 3:"</span>) )
+
+<span class="ck">let</span> <span class="cv">media</span>   = <span class="cf">calcularMedia</span>(<span class="cv">minhaNota1</span>, <span class="cv">minhaNota2</span>, <span class="cv">minhaNota3</span>)
+<span class="ck">let</span> <span class="cv">situacao</span> = <span class="cv">media</span> >= <span class="cn">6</span> ? <span class="cs">"Aprovado ✅"</span> : <span class="cs">"Reprovado ❌"</span>
+
+<span class="cf">alert</span>(<span class="cs">"Média: "</span> + <span class="cv">media</span>.toFixed(<span class="cn">1</span>) + <span class="cs">" → "</span> + <span class="cv">situacao</span>)
+
+<span class="cc">// Função de conversão de temperatura</span>
+<span class="ck">function</span> <span class="cf">celsiusParaFahrenheit</span>(<span class="cv">celsius</span>) {
+    <span class="ck">return</span> (<span class="cv">celsius</span> * <span class="cn">9</span> / <span class="cn">5</span>) + <span class="cn">32</span>
+}
+<span class="cf">alert</span>( <span class="cf">celsiusParaFahrenheit</span>(<span class="cn">100</span>) )  <span class="cc">// → 212</span>
+<span class="cf">alert</span>( <span class="cf">celsiusParaFahrenheit</span>(<span class="cn">0</span>)   )  <span class="cc">// → 32</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">Parâmetro padrão</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">JavaScript — Valor padrão</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc">// Se o argumento não for passado, usa o valor padrão</span>
+<span class="ck">function</span> <span class="cf">saudar</span>(<span class="cv">nome</span> = <span class="cs">"Visitante"</span>) {
+    <span class="cf">alert</span>(<span class="cs">"Olá, "</span> + <span class="cv">nome</span> + <span class="cs">"!"</span>)
+}
+
+<span class="cf">saudar</span>(<span class="cs">"Maria"</span>)  <span class="cc">// → "Olá, Maria!"</span>
+<span class="cf">saudar</span>()         <span class="cc">// → "Olá, Visitante!" (usou o padrão)</span></code></pre>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────
+             5. ARRAYS NA PRÁTICA
+        ───────────────────────────────────── -->
+        <section id="arrays-logica">
+            <div class="section-label">
+                <div class="sl-icon sl-blue">📋</div>
+                <span>Tópico 5</span>
+            </div>
+            <h2 class="section-h">Arrays na Prática — Listas de Dados</h2>
+
+            <p>
+                Arrays guardam vários valores em uma única variável. São fundamentais em lógica
+                de programação — praticamente todo problema real envolve uma lista de alguma coisa.
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">JavaScript — Arrays com loops</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">let</span> <span class="cv">notas</span> = [<span class="cn">8</span>, <span class="cn">6</span>, <span class="cn">9</span>, <span class="cn">5</span>, <span class="cn">7</span>]
+
+<span class="cc">// Acessar por índice (começa em 0!)</span>
+<span class="cf">alert</span>(<span class="cv">notas</span>[<span class="cn">0</span>])   <span class="cc">// → 8 (primeiro)</span>
+<span class="cf">alert</span>(<span class="cv">notas</span>[<span class="cn">4</span>])   <span class="cc">// → 7 (quinto / último)</span>
+
+<span class="cc">// Quantos elementos tem?</span>
+<span class="cf">alert</span>(<span class="cv">notas</span>.length)  <span class="cc">// → 5</span>
+
+<span class="cc">// Percorrer todos com for</span>
+<span class="ck">for</span> (<span class="ck">let</span> <span class="cv">i</span> = <span class="cn">0</span>; <span class="cv">i</span> < <span class="cv">notas</span>.length; <span class="cv">i</span>++) {
+    <span class="cf">console</span>.<span class="cf">log</span>(<span class="cs">"Nota "</span> + (<span class="cv">i</span>+<span class="cn">1</span>) + <span class="cs">": "</span> + <span class="cv">notas</span>[<span class="cv">i</span>])
+}
+
+<span class="cc">// Calcular a média de todas as notas</span>
+<span class="ck">let</span> <span class="cv">soma</span> = <span class="cn">0</span>
+<span class="ck">for</span> (<span class="ck">let</span> <span class="cv">i</span> = <span class="cn">0</span>; <span class="cv">i</span> < <span class="cv">notas</span>.length; <span class="cv">i</span>++) {
+    <span class="cv">soma</span> += <span class="cv">notas</span>[<span class="cv">i</span>]
+}
+<span class="ck">let</span> <span class="cv">media</span> = <span class="cv">soma</span> / <span class="cv">notas</span>.length
+<span class="cf">alert</span>(<span class="cs">"Média: "</span> + <span class="cv">media</span>)   <span class="cc">// → 7</span>
+
+<span class="cc">// Encontrar o maior valor</span>
+<span class="ck">let</span> <span class="cv">maior</span> = <span class="cv">notas</span>[<span class="cn">0</span>]    <span class="cc">// começa assumindo que o primeiro é o maior</span>
+<span class="ck">for</span> (<span class="ck">let</span> <span class="cv">i</span> = <span class="cn">1</span>; <span class="cv">i</span> < <span class="cv">notas</span>.length; <span class="cv">i</span>++) {
+    <span class="ck">if</span> (<span class="cv">notas</span>[<span class="cv">i</span>] > <span class="cv">maior</span>) {
+        <span class="cv">maior</span> = <span class="cv">notas</span>[<span class="cv">i</span>]   <span class="cc">// encontrou um valor maior, atualiza</span>
+    }
+}
+<span class="cf">alert</span>(<span class="cs">"Maior nota: "</span> + <span class="cv">maior</span>)  <span class="cc">// → 9</span></code></pre>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────
+             6. ESCOPO
+        ───────────────────────────────────── -->
+        <section id="escopo">
+            <div class="section-label">
+                <div class="sl-icon sl-yellow">🔭</div>
+                <span>Tópico 6</span>
+            </div>
+            <h2 class="section-h">Escopo — Onde a Variável Existe</h2>
+
+            <p>
+                <strong>Escopo</strong> define em que partes do código uma variável pode ser acessada.
+                Entender escopo evita muitos bugs confusos.
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">JavaScript — Escopo local vs global</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">let</span> <span class="cv">nome</span> = <span class="cs">"Global"</span>   <span class="cc">// escopo global — existe em todo o código</span>
+
+<span class="ck">function</span> <span class="cf">teste</span>() {
+    <span class="ck">let</span> <span class="cv">mensagem</span> = <span class="cs">"Local"</span>   <span class="cc">// escopo local — só existe dentro da função</span>
+    <span class="cf">alert</span>(<span class="cv">nome</span>)      <span class="cc">// ✅ Funciona: função pode acessar variável global</span>
+    <span class="cf">alert</span>(<span class="cv">mensagem</span>) <span class="cc">// ✅ Funciona: está dentro da função</span>
+}
+
+<span class="cf">teste</span>()
+<span class="cf">alert</span>(<span class="cv">nome</span>)      <span class="cc">// ✅ Funciona</span>
+<span class="cf">alert</span>(<span class="cv">mensagem</span>) <span class="cc">// ❌ ERRO! mensagem só existe dentro de teste()</span>
+
+<span class="cc">// Variável de bloco (if, for, while) com let também é local</span>
+<span class="ck">if</span> (<span class="ck">true</span>) {
+    <span class="ck">let</span> <span class="cv">dentro</span> = <span class="cs">"estou dentro"</span>
+    <span class="cf">alert</span>(<span class="cv">dentro</span>)   <span class="cc">// ✅ OK dentro do bloco</span>
+}
+<span class="cf">alert</span>(<span class="cv">dentro</span>)    <span class="cc">// ❌ ERRO! "dentro" não existe aqui fora</span></code></pre>
+            </div>
+
+            <div class="callout tip">
+                <div class="callout-icon">💡</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Regra de ouro:</strong> prefira variáveis com o escopo mais restrito
+                        possível. Use variáveis globais com parcimônia — elas podem ser modificadas
+                        acidentalmente em qualquer parte do código, gerando bugs difíceis de rastrear.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────
+             7. EXERCÍCIOS
+        ───────────────────────────────────── -->
+        <section id="exercicios">
+            <div class="section-label">
+                <div class="sl-icon sl-red">🏋️</div>
+                <span>Tópico 7</span>
+            </div>
+            <h2 class="section-h">Exercícios Práticos</h2>
+
+            <p>
+                A melhor forma de aprender lógica de programação é <strong>praticando</strong>.
+                Tente resolver cada exercício por conta própria antes de ver a solução.
+                Copie o código numa estrutura HTML básica e rode no browser.
+            </p>
+
+            <div class="callout info">
+                <div class="callout-icon">📋</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Como usar:</strong> Crie um arquivo <code>exercicio.html</code>
+                        com a estrutura básica do HTML e coloque seu código dentro da tag
+                        <code>&lt;script&gt;</code>. Use <code>alert()</code>, <code>prompt()</code>
+                        e <code>console.log()</code> para entrada e saída. Ao terminar, clique em
+                        "Ver solução" para comparar com a resposta.
+                    </p>
+                </div>
+            </div>
+
+            <!-- ── EX 1 ── -->
+            <div class="exercise">
+                <div class="exercise__header">
+                    <div class="exercise__num">1</div>
+                    <div class="exercise__title">Olá, nome!</div>
+                    <span class="exercise__level level-easy">Fácil</span>
+                </div>
+                <div class="exercise__desc">
+                    Peça ao usuário que digite o seu nome com <code>prompt()</code>.
+                    Em seguida, exiba a mensagem <strong>"Olá, [nome]! Bem-vindo ao Dev Atlas!"</strong>
+                    usando <code>alert()</code>.
+                </div>
+                <div class="exercise__hint">
+                    💡 Dica: guarde o resultado do <code>prompt()</code> em uma variável e depois
+                    use a variável dentro do <code>alert()</code>.
+                </div>
+                <button class="btn-solution" onclick="toggleSolution(this)">
+                    <span class="btn-icon">▶</span> Ver solução
+                </button>
+                <div class="solution-panel">
+                    <div class="sol-label">✅ Solução</div>
+                    <div class="code-block" style="margin:0">
+                        <div class="cb-header">
+                            <span class="cb-lang">JavaScript</span>
+                            <div class="cb-dots">
+                                <div class="cb-dot" style="background:#ff5f57"></div>
+                                <div class="cb-dot" style="background:#febc2e"></div>
+                                <div class="cb-dot" style="background:#28c840"></div>
+                            </div>
+                        </div>
+                        <pre><code><span class="ck">let</span> <span class="cv">nome</span> = <span class="cf">prompt</span>(<span class="cs">"Qual é o seu nome?"</span>)
+<span class="cf">alert</span>(<span class="cs">"Olá, "</span> + <span class="cv">nome</span> + <span class="cs">"! Bem-vindo ao Dev Atlas!"</span>)</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── EX 2 ── -->
+            <div class="exercise">
+                <div class="exercise__header">
+                    <div class="exercise__num">2</div>
+                    <div class="exercise__title">Calculadora de idade</div>
+                    <span class="exercise__level level-easy">Fácil</span>
+                </div>
+                <div class="exercise__desc">
+                    Peça o ano de nascimento do usuário. Calcule e exiba a <strong>idade aproximada</strong>
+                    da pessoa (considere o ano atual como 2025). Exiba também uma mensagem dizendo
+                    se ela é maior ou menor de idade.
+                </div>
+                <div class="exercise__hint">
+                    💡 Dica: lembre-se de converter o valor do <code>prompt()</code> para número com
+                    <code>Number()</code>. Use um <code>if/else</code> para a verificação de maior/menor.
+                </div>
+                <button class="btn-solution" onclick="toggleSolution(this)">
+                    <span class="btn-icon">▶</span> Ver solução
+                </button>
+                <div class="solution-panel">
+                    <div class="sol-label">✅ Solução</div>
+                    <div class="code-block" style="margin:0">
+                        <div class="cb-header">
+                            <span class="cb-lang">JavaScript</span>
+                            <div class="cb-dots">
+                                <div class="cb-dot" style="background:#ff5f57"></div>
+                                <div class="cb-dot" style="background:#febc2e"></div>
+                                <div class="cb-dot" style="background:#28c840"></div>
+                            </div>
+                        </div>
+                        <pre><code><span class="ck">let</span> <span class="cv">anoNascimento</span> = <span class="cf">Number</span>( <span class="cf">prompt</span>(<span class="cs">"Em que ano você nasceu?"</span>) )
+<span class="ck">let</span> <span class="cv">idade</span>          = <span class="cn">2025</span> - <span class="cv">anoNascimento</span>
+
+<span class="ck">let</span> <span class="cv">situacao</span>
+<span class="ck">if</span> (<span class="cv">idade</span> >= <span class="cn">18</span>) {
+    <span class="cv">situacao</span> = <span class="cs">"maior de idade ✅"</span>
+} <span class="ck">else</span> {
+    <span class="cv">situacao</span> = <span class="cs">"menor de idade ⚠️"</span>
+}
+
+<span class="cf">alert</span>(<span class="cs">"Você tem aproximadamente "</span> + <span class="cv">idade</span> + <span class="cs">" anos.\nVocê é "</span> + <span class="cv">situacao</span> + <span class="cs">"."</span>)</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── EX 3 ── -->
+            <div class="exercise">
+                <div class="exercise__header">
+                    <div class="exercise__num">3</div>
+                    <div class="exercise__title">Par ou ímpar</div>
+                    <span class="exercise__level level-easy">Fácil</span>
+                </div>
+                <div class="exercise__desc">
+                    Peça um número ao usuário. Diga se o número é <strong>par</strong> ou <strong>ímpar</strong>.
+                    Bônus: diga também se é positivo, negativo ou zero.
+                </div>
+                <div class="exercise__hint">
+                    💡 Dica: um número é par quando o resto da divisão por 2 é zero (<code>numero % 2 === 0</code>).
+                </div>
+                <button class="btn-solution" onclick="toggleSolution(this)">
+                    <span class="btn-icon">▶</span> Ver solução
+                </button>
+                <div class="solution-panel">
+                    <div class="sol-label">✅ Solução</div>
+                    <div class="code-block" style="margin:0">
+                        <div class="cb-header">
+                            <span class="cb-lang">JavaScript</span>
+                            <div class="cb-dots">
+                                <div class="cb-dot" style="background:#ff5f57"></div>
+                                <div class="cb-dot" style="background:#febc2e"></div>
+                                <div class="cb-dot" style="background:#28c840"></div>
+                            </div>
+                        </div>
+                        <pre><code><span class="ck">let</span> <span class="cv">numero</span> = <span class="cf">Number</span>( <span class="cf">prompt</span>(<span class="cs">"Digite um número:"</span>) )
+
+<span class="cc">// Par ou ímpar</span>
+<span class="ck">let</span> <span class="cv">paridade</span> = <span class="cv">numero</span> % <span class="cn">2</span> === <span class="cn">0</span> ? <span class="cs">"par"</span> : <span class="cs">"ímpar"</span>
+
+<span class="cc">// Positivo, negativo ou zero</span>
+<span class="ck">let</span> <span class="cv">sinal</span>
+<span class="ck">if</span> (<span class="cv">numero</span> > <span class="cn">0</span>)      <span class="cv">sinal</span> = <span class="cs">"positivo"</span>
+<span class="ck">else if</span> (<span class="cv">numero</span> < <span class="cn">0</span>) <span class="cv">sinal</span> = <span class="cs">"negativo"</span>
+<span class="ck">else</span>                <span class="cv">sinal</span> = <span class="cs">"zero"</span>
+
+<span class="cf">alert</span>(<span class="cs">"O número "</span> + <span class="cv">numero</span> + <span class="cs">" é "</span> + <span class="cv">paridade</span> + <span class="cs">" e "</span> + <span class="cv">sinal</span> + <span class="cs">"."</span>)</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── EX 4 ── -->
+            <div class="exercise">
+                <div class="exercise__header">
+                    <div class="exercise__num">4</div>
+                    <div class="exercise__title">Tabuada</div>
+                    <span class="exercise__level level-easy">Fácil</span>
+                </div>
+                <div class="exercise__desc">
+                    Peça um número ao usuário e exiba a <strong>tabuada completa</strong> desse número
+                    (de 1 a 10) usando um loop. Por exemplo, se o usuário digitar 7, exiba:
+                    7 x 1 = 7, 7 x 2 = 14… até 7 x 10 = 70.
+                </div>
+                <div class="exercise__hint">
+                    💡 Dica: use um loop <code>for</code> de 1 a 10. Acumule as linhas numa variável
+                    de texto e exiba tudo de uma vez no final com <code>alert()</code>.
+                </div>
+                <button class="btn-solution" onclick="toggleSolution(this)">
+                    <span class="btn-icon">▶</span> Ver solução
+                </button>
+                <div class="solution-panel">
+                    <div class="sol-label">✅ Solução</div>
+                    <div class="code-block" style="margin:0">
+                        <div class="cb-header">
+                            <span class="cb-lang">JavaScript</span>
+                            <div class="cb-dots">
+                                <div class="cb-dot" style="background:#ff5f57"></div>
+                                <div class="cb-dot" style="background:#febc2e"></div>
+                                <div class="cb-dot" style="background:#28c840"></div>
+                            </div>
+                        </div>
+                        <pre><code><span class="ck">let</span> <span class="cv">numero</span>   = <span class="cf">Number</span>( <span class="cf">prompt</span>(<span class="cs">"Digite um número para ver a tabuada:"</span>) )
+<span class="ck">let</span> <span class="cv">tabuada</span> = <span class="cs">"Tabuada do "</span> + <span class="cv">numero</span> + <span class="cs">":\n\n"</span>
+
+<span class="ck">for</span> (<span class="ck">let</span> <span class="cv">i</span> = <span class="cn">1</span>; <span class="cv">i</span> <= <span class="cn">10</span>; <span class="cv">i</span>++) {
+    <span class="cv">tabuada</span> += <span class="cv">numero</span> + <span class="cs">" x "</span> + <span class="cv">i</span> + <span class="cs">" = "</span> + (<span class="cv">numero</span> * <span class="cv">i</span>) + <span class="cs">"\n"</span>
+}
+
+<span class="cf">alert</span>(<span class="cv">tabuada</span>)</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── EX 5 ── -->
+            <div class="exercise">
+                <div class="exercise__header">
+                    <div class="exercise__num">5</div>
+                    <div class="exercise__title">Calculadora simples</div>
+                    <span class="exercise__level level-medium">Médio</span>
+                </div>
+                <div class="exercise__desc">
+                    Crie uma calculadora que peça dois números e a operação desejada
+                    (<strong>+</strong>, <strong>-</strong>, <strong>*</strong> ou <strong>/</strong>).
+                    Exiba o resultado da operação. Se a operação for inválida, exiba uma mensagem de erro.
+                    Bônus: se for divisão, verifique se o segundo número é zero.
+                </div>
+                <div class="exercise__hint">
+                    💡 Dica: use <code>switch</code> para tratar cada operação como um caso separado.
+                </div>
+                <button class="btn-solution" onclick="toggleSolution(this)">
+                    <span class="btn-icon">▶</span> Ver solução
+                </button>
+                <div class="solution-panel">
+                    <div class="sol-label">✅ Solução</div>
+                    <div class="code-block" style="margin:0">
+                        <div class="cb-header">
+                            <span class="cb-lang">JavaScript</span>
+                            <div class="cb-dots">
+                                <div class="cb-dot" style="background:#ff5f57"></div>
+                                <div class="cb-dot" style="background:#febc2e"></div>
+                                <div class="cb-dot" style="background:#28c840"></div>
+                            </div>
+                        </div>
+                        <pre><code><span class="ck">let</span> <span class="cv">num1</span> = <span class="cf">Number</span>( <span class="cf">prompt</span>(<span class="cs">"Digite o primeiro número:"</span>) )
+<span class="ck">let</span> <span class="cv">num2</span> = <span class="cf">Number</span>( <span class="cf">prompt</span>(<span class="cs">"Digite o segundo número:"</span>) )
+<span class="ck">let</span> <span class="cv">op</span>   = <span class="cf">prompt</span>(<span class="cs">"Qual operação? (+, -, *, /)"</span>)
+<span class="ck">let</span> <span class="cv">resultado</span>
+
+<span class="ck">switch</span> (<span class="cv">op</span>) {
+    <span class="ck">case</span> <span class="cs">"+"</span>:
+        <span class="cv">resultado</span> = <span class="cv">num1</span> + <span class="cv">num2</span>
+        <span class="ck">break</span>
+    <span class="ck">case</span> <span class="cs">"-"</span>:
+        <span class="cv">resultado</span> = <span class="cv">num1</span> - <span class="cv">num2</span>
+        <span class="ck">break</span>
+    <span class="ck">case</span> <span class="cs">"*"</span>:
+        <span class="cv">resultado</span> = <span class="cv">num1</span> * <span class="cv">num2</span>
+        <span class="ck">break</span>
+    <span class="ck">case</span> <span class="cs">"/"</span>:
+        <span class="ck">if</span> (<span class="cv">num2</span> === <span class="cn">0</span>) {
+            <span class="cf">alert</span>(<span class="cs">"❌ Não é possível dividir por zero!"</span>)
+        } <span class="ck">else</span> {
+            <span class="cv">resultado</span> = <span class="cv">num1</span> / <span class="cv">num2</span>
+        }
+        <span class="ck">break</span>
+    <span class="ck">default</span>:
+        <span class="cf">alert</span>(<span class="cs">"❌ Operação inválida! Use +, -, * ou /"</span>)
+}
+
+<span class="ck">if</span> (<span class="cv">resultado</span> !== <span class="ck">undefined</span>) {
+    <span class="cf">alert</span>(<span class="cv">num1</span> + <span class="cs">" "</span> + <span class="cv">op</span> + <span class="cs">" "</span> + <span class="cv">num2</span> + <span class="cs">" = "</span> + <span class="cv">resultado</span>)
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── EX 6 ── -->
+            <div class="exercise">
+                <div class="exercise__header">
+                    <div class="exercise__num">6</div>
+                    <div class="exercise__title">Média das notas</div>
+                    <span class="exercise__level level-medium">Médio</span>
+                </div>
+                <div class="exercise__desc">
+                    Peça ao usuário que informe <strong>5 notas</strong> (uma de cada vez).
+                    Calcule a média e exiba se o aluno foi <strong>Aprovado</strong> (média ≥ 6),
+                    em <strong>Recuperação</strong> (média entre 4 e 5,9) ou <strong>Reprovado</strong>
+                    (média &lt; 4). Use uma função para calcular a média.
+                </div>
+                <div class="exercise__hint">
+                    💡 Dica: use um loop <code>for</code> para pedir as 5 notas e acumular a soma.
+                    Crie uma função <code>calcularMedia(soma, quantidade)</code> que retorne o resultado.
+                </div>
+                <button class="btn-solution" onclick="toggleSolution(this)">
+                    <span class="btn-icon">▶</span> Ver solução
+                </button>
+                <div class="solution-panel">
+                    <div class="sol-label">✅ Solução</div>
+                    <div class="code-block" style="margin:0">
+                        <div class="cb-header">
+                            <span class="cb-lang">JavaScript</span>
+                            <div class="cb-dots">
+                                <div class="cb-dot" style="background:#ff5f57"></div>
+                                <div class="cb-dot" style="background:#febc2e"></div>
+                                <div class="cb-dot" style="background:#28c840"></div>
+                            </div>
+                        </div>
+                        <pre><code><span class="ck">function</span> <span class="cf">calcularMedia</span>(<span class="cv">soma</span>, <span class="cv">quantidade</span>) {
+    <span class="ck">return</span> <span class="cv">soma</span> / <span class="cv">quantidade</span>
+}
+
+<span class="ck">let</span> <span class="cv">somaNotas</span> = <span class="cn">0</span>
+<span class="ck">let</span> <span class="cv">total</span>     = <span class="cn">5</span>
+
+<span class="ck">for</span> (<span class="ck">let</span> <span class="cv">i</span> = <span class="cn">1</span>; <span class="cv">i</span> <= <span class="cv">total</span>; <span class="cv">i</span>++) {
+    <span class="ck">let</span> <span class="cv">nota</span> = <span class="cf">Number</span>( <span class="cf">prompt</span>(<span class="cs">"Digite a nota "</span> + <span class="cv">i</span> + <span class="cs">" (0 a 10):"</span>) )
+    <span class="cv">somaNotas</span> += <span class="cv">nota</span>
+}
+
+<span class="ck">let</span> <span class="cv">media</span>    = <span class="cf">calcularMedia</span>(<span class="cv">somaNotas</span>, <span class="cv">total</span>)
+<span class="ck">let</span> <span class="cv">situacao</span>
+
+<span class="ck">if</span> (<span class="cv">media</span> >= <span class="cn">6</span>) {
+    <span class="cv">situacao</span> = <span class="cs">"✅ Aprovado!"</span>
+} <span class="ck">else if</span> (<span class="cv">media</span> >= <span class="cn">4</span>) {
+    <span class="cv">situacao</span> = <span class="cs">"⚠️ Recuperação"</span>
+} <span class="ck">else</span> {
+    <span class="cv">situacao</span> = <span class="cs">"❌ Reprovado"</span>
+}
+
+<span class="cf">alert</span>(<span class="cs">"Média: "</span> + <span class="cv">media</span>.toFixed(<span class="cn">1</span>) + <span class="cs">"\nSituação: "</span> + <span class="cv">situacao</span>)</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── EX 7 ── -->
+            <div class="exercise">
+                <div class="exercise__header">
+                    <div class="exercise__num">7</div>
+                    <div class="exercise__title">Adivinhe o número</div>
+                    <span class="exercise__level level-medium">Médio</span>
+                </div>
+                <div class="exercise__desc">
+                    Crie um jogo onde o computador "pensa" num número entre 1 e 10
+                    (use <code>Math.floor(Math.random() * 10) + 1</code> para gerar).
+                    O usuário tem tentativas ilimitadas para adivinhar.
+                    A cada tentativa errada, diga se o número secreto é <strong>maior</strong> ou
+                    <strong>menor</strong> que o palpite. Quando acertar, mostre o número de tentativas.
+                </div>
+                <div class="exercise__hint">
+                    💡 Dica: use um loop <code>while</code> que continua enquanto o usuário não acertar.
+                    Incremente um contador de tentativas a cada volta do loop.
+                </div>
+                <button class="btn-solution" onclick="toggleSolution(this)">
+                    <span class="btn-icon">▶</span> Ver solução
+                </button>
+                <div class="solution-panel">
+                    <div class="sol-label">✅ Solução</div>
+                    <div class="code-block" style="margin:0">
+                        <div class="cb-header">
+                            <span class="cb-lang">JavaScript</span>
+                            <div class="cb-dots">
+                                <div class="cb-dot" style="background:#ff5f57"></div>
+                                <div class="cb-dot" style="background:#febc2e"></div>
+                                <div class="cb-dot" style="background:#28c840"></div>
+                            </div>
+                        </div>
+                        <pre><code><span class="ck">let</span> <span class="cv">secreto</span>    = <span class="cf">Math</span>.<span class="cf">floor</span>(<span class="cf">Math</span>.<span class="cf">random</span>() * <span class="cn">10</span>) + <span class="cn">1</span>
+<span class="ck">let</span> <span class="cv">tentativas</span> = <span class="cn">0</span>
+<span class="ck">let</span> <span class="cv">palpite</span>    = <span class="cn">0</span>
+
+<span class="ck">while</span> (<span class="cv">palpite</span> !== <span class="cv">secreto</span>) {
+    <span class="cv">palpite</span> = <span class="cf">Number</span>( <span class="cf">prompt</span>(<span class="cs">"Adivinhe o número (1 a 10):"</span>) )
+    <span class="cv">tentativas</span>++
+
+    <span class="ck">if</span> (<span class="cv">palpite</span> < <span class="cv">secreto</span>) {
+        <span class="cf">alert</span>(<span class="cs">"⬆️ O número secreto é MAIOR. Tente de novo!"</span>)
+    } <span class="ck">else if</span> (<span class="cv">palpite</span> > <span class="cv">secreto</span>) {
+        <span class="cf">alert</span>(<span class="cs">"⬇️ O número secreto é MENOR. Tente de novo!"</span>)
+    }
+}
+
+<span class="cf">alert</span>(<span class="cs">"🎉 Parabéns! Você acertou em "</span> + <span class="cv">tentativas</span> + <span class="cs">" tentativa(s)!"</span>)</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── EX 8 ── -->
+            <div class="exercise">
+                <div class="exercise__header">
+                    <div class="exercise__num">8</div>
+                    <div class="exercise__title">Fatorial</div>
+                    <span class="exercise__level level-medium">Médio</span>
+                </div>
+                <div class="exercise__desc">
+                    Crie uma função <code>fatorial(n)</code> que calcule o fatorial de um número.
+                    O fatorial de 5 é <strong>5! = 5 × 4 × 3 × 2 × 1 = 120</strong>.
+                    O fatorial de 0 é 1 por definição. Peça um número ao usuário e exiba o resultado.
+                </div>
+                <div class="exercise__hint">
+                    💡 Dica: use um loop <code>for</code> que começa em 1 e vai até <code>n</code>,
+                    multiplicando um acumulador (que começa em 1) a cada iteração.
+                </div>
+                <button class="btn-solution" onclick="toggleSolution(this)">
+                    <span class="btn-icon">▶</span> Ver solução
+                </button>
+                <div class="solution-panel">
+                    <div class="sol-label">✅ Solução</div>
+                    <div class="code-block" style="margin:0">
+                        <div class="cb-header">
+                            <span class="cb-lang">JavaScript</span>
+                            <div class="cb-dots">
+                                <div class="cb-dot" style="background:#ff5f57"></div>
+                                <div class="cb-dot" style="background:#febc2e"></div>
+                                <div class="cb-dot" style="background:#28c840"></div>
+                            </div>
+                        </div>
+                        <pre><code><span class="ck">function</span> <span class="cf">fatorial</span>(<span class="cv">n</span>) {
+    <span class="ck">if</span> (<span class="cv">n</span> === <span class="cn">0</span>) <span class="ck">return</span> <span class="cn">1</span>   <span class="cc">// caso especial: 0! = 1</span>
+
+    <span class="ck">let</span> <span class="cv">resultado</span> = <span class="cn">1</span>
+    <span class="ck">for</span> (<span class="ck">let</span> <span class="cv">i</span> = <span class="cn">1</span>; <span class="cv">i</span> <= <span class="cv">n</span>; <span class="cv">i</span>++) {
+        <span class="cv">resultado</span> *= <span class="cv">i</span>   <span class="cc">// resultado = resultado * i</span>
+    }
+    <span class="ck">return</span> <span class="cv">resultado</span>
+}
+
+<span class="ck">let</span> <span class="cv">numero</span> = <span class="cf">Number</span>( <span class="cf">prompt</span>(<span class="cs">"Digite um número inteiro positivo:"</span>) )
+<span class="cf">alert</span>(<span class="cv">numero</span> + <span class="cs">"! = "</span> + <span class="cf">fatorial</span>(<span class="cv">numero</span>))</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── EX 9 ── -->
+            <div class="exercise">
+                <div class="exercise__header">
+                    <div class="exercise__num">9</div>
+                    <div class="exercise__title">Verificar Palíndromo</div>
+                    <span class="exercise__level level-hard">Difícil</span>
+                </div>
+                <div class="exercise__desc">
+                    Um <strong>palíndromo</strong> é uma palavra que se lê igual de frente para trás
+                    (ex: "arara", "radar", "ovo"). Crie uma função que receba uma palavra e retorne
+                    <code>true</code> se for palíndromo e <code>false</code> caso contrário.
+                    Ignore maiúsculas e minúsculas.
+                </div>
+                <div class="exercise__hint">
+                    💡 Dica: converta para minúsculas com <code>.toLowerCase()</code>, depois use
+                    <code>.split("")</code> para transformar em array de letras,
+                    <code>.reverse()</code> para inverter e <code>.join("")</code> para juntar de volta.
+                    Compare a palavra original com a invertida.
+                </div>
+                <button class="btn-solution" onclick="toggleSolution(this)">
+                    <span class="btn-icon">▶</span> Ver solução
+                </button>
+                <div class="solution-panel">
+                    <div class="sol-label">✅ Solução</div>
+                    <div class="code-block" style="margin:0">
+                        <div class="cb-header">
+                            <span class="cb-lang">JavaScript</span>
+                            <div class="cb-dots">
+                                <div class="cb-dot" style="background:#ff5f57"></div>
+                                <div class="cb-dot" style="background:#febc2e"></div>
+                                <div class="cb-dot" style="background:#28c840"></div>
+                            </div>
+                        </div>
+                        <pre><code><span class="ck">function</span> <span class="cf">ehPalindromo</span>(<span class="cv">palavra</span>) {
+    <span class="ck">let</span> <span class="cv">limpa</span>     = <span class="cv">palavra</span>.<span class="cf">toLowerCase</span>()
+    <span class="ck">let</span> <span class="cv">invertida</span> = <span class="cv">limpa</span>.<span class="cf">split</span>(<span class="cs">""</span>).<span class="cf">reverse</span>().<span class="cf">join</span>(<span class="cs">""</span>)
+    <span class="ck">return</span> <span class="cv">limpa</span> === <span class="cv">invertida</span>
+}
+
+<span class="ck">let</span> <span class="cv">palavra</span> = <span class="cf">prompt</span>(<span class="cs">"Digite uma palavra:"</span>)
+
+<span class="ck">if</span> (<span class="cf">ehPalindromo</span>(<span class="cv">palavra</span>)) {
+    <span class="cf">alert</span>(<span class="cs">'"'</span> + <span class="cv">palavra</span> + <span class="cs">'" é um palíndromo! 🔄'</span>)
+} <span class="ck">else</span> {
+    <span class="cf">alert</span>(<span class="cs">'"'</span> + <span class="cv">palavra</span> + <span class="cs">'" NÃO é um palíndromo.'</span>)
+}
+
+<span class="cc">// Teste com: arara, radar, ovo, level, Ana</span></code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── EX 10 ── -->
+            <div class="exercise">
+                <div class="exercise__header">
+                    <div class="exercise__num">10</div>
+                    <div class="exercise__title">FizzBuzz</div>
+                    <span class="exercise__level level-hard">Difícil</span>
+                </div>
+                <div class="exercise__desc">
+                    Um clássico de entrevistas! Imprima no console os números de 1 a 100,
+                    mas com estas regras:<br><br>
+                    • Se o número for <strong>divisível por 3</strong>, imprima <code>"Fizz"</code><br>
+                    • Se for <strong>divisível por 5</strong>, imprima <code>"Buzz"</code><br>
+                    • Se for <strong>divisível por 3 E 5</strong>, imprima <code>"FizzBuzz"</code><br>
+                    • Caso contrário, imprima o número normalmente.
+                </div>
+                <div class="exercise__hint">
+                    💡 Dica: verifique o caso FizzBuzz (divisível por 3 E 5) <strong>primeiro</strong>,
+                    antes dos casos individuais. Use o operador módulo (<code>%</code>) para verificar
+                    divisibilidade — se <code>n % 3 === 0</code>, é divisível por 3.
+                </div>
+                <button class="btn-solution" onclick="toggleSolution(this)">
+                    <span class="btn-icon">▶</span> Ver solução
+                </button>
+                <div class="solution-panel">
+                    <div class="sol-label">✅ Solução</div>
+                    <div class="code-block" style="margin:0">
+                        <div class="cb-header">
+                            <span class="cb-lang">JavaScript</span>
+                            <div class="cb-dots">
+                                <div class="cb-dot" style="background:#ff5f57"></div>
+                                <div class="cb-dot" style="background:#febc2e"></div>
+                                <div class="cb-dot" style="background:#28c840"></div>
+                            </div>
+                        </div>
+                        <pre><code><span class="ck">for</span> (<span class="ck">let</span> <span class="cv">i</span> = <span class="cn">1</span>; <span class="cv">i</span> <= <span class="cn">100</span>; <span class="cv">i</span>++) {
+
+    <span class="ck">if</span> (<span class="cv">i</span> % <span class="cn">3</span> === <span class="cn">0</span> && <span class="cv">i</span> % <span class="cn">5</span> === <span class="cn">0</span>) {
+        <span class="cf">console</span>.<span class="cf">log</span>(<span class="cs">"FizzBuzz"</span>)  <span class="cc">// divisível por 3 E 5 — vem primeiro!</span>
+    } <span class="ck">else if</span> (<span class="cv">i</span> % <span class="cn">3</span> === <span class="cn">0</span>) {
+        <span class="cf">console</span>.<span class="cf">log</span>(<span class="cs">"Fizz"</span>)
+    } <span class="ck">else if</span> (<span class="cv">i</span> % <span class="cn">5</span> === <span class="cn">0</span>) {
+        <span class="cf">console</span>.<span class="cf">log</span>(<span class="cs">"Buzz"</span>)
+    } <span class="ck">else</span> {
+        <span class="cf">console</span>.<span class="cf">log</span>(<span class="cv">i</span>)
+    }
+
+}
+<span class="cc">// Abra o DevTools (F12 → Console) para ver os resultados!</span></code></pre>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ── SUMMARY BOX ── -->
+        <div class="summary-box">
+            <h4>📋 Resumo — Lógica de Programação</h4>
+            <ul>
+                <li>Use <strong>===</strong> para comparar (nunca ==) — ele verifica valor E tipo</li>
+                <li><strong>if/else if/else</strong> para bifurcações; <strong>switch</strong> quando há muitos casos do mesmo valor</li>
+                <li>O ternário <code>condição ? a : b</code> é um if/else em uma linha — use com moderação</li>
+                <li><strong>for</strong> quando você sabe quantas repetições; <strong>while</strong> enquanto uma condição for verdadeira</li>
+                <li><strong>break</strong> sai do loop; <strong>continue</strong> pula para a próxima iteração</li>
+                <li>Funções recebem <strong>parâmetros</strong> e devolvem resultados com <strong>return</strong></li>
+                <li>Variáveis dentro de funções têm <strong>escopo local</strong> — não existem fora delas</li>
+                <li>Arrays + loops são inseparáveis — percorra listas sempre com um <code>for</code></li>
+                <li>O índice de arrays começa em <strong>0</strong>, não em 1. O último elemento é <code>array[array.length - 1]</code></li>
+                <li>Pratique os exercícios: a lógica só entra com a mão no teclado</li>
+            </ul>
+        </div>
+
+        <div class="page-nav" style="display:flex;justify-content:space-between;margin:2.5rem 0 0">
+            <a href="programacao.html">← Fundamentos da Programação</a>
+            <a href="fundamentos.html">Fundamentos Web →</a>
+        </div>
+
+    </main>
+
+    <!-- ── TOC ── -->
+    <nav class="toc-panel" aria-label="Nesta página">
+        <h4>Nesta página</h4>
+        <ul>
+            <li><a href="#operadores">Operadores</a></li>
+            <li class="sub"><a href="#operadores">Aritméticos</a></li>
+            <li class="sub"><a href="#operadores">Comparação</a></li>
+            <li class="sub"><a href="#operadores">Lógicos</a></li>
+            <li><a href="#condicionais">Condicionais</a></li>
+            <li class="sub"><a href="#condicionais">if / else</a></li>
+            <li class="sub"><a href="#condicionais">Ternário</a></li>
+            <li class="sub"><a href="#condicionais">switch</a></li>
+            <li><a href="#loops">Loops</a></li>
+            <li class="sub"><a href="#loops">for</a></li>
+            <li class="sub"><a href="#loops">while</a></li>
+            <li class="sub"><a href="#loops">break / continue</a></li>
+            <li><a href="#funcoes">Funções</a></li>
+            <li class="sub"><a href="#funcoes">Parâmetros e retorno</a></li>
+            <li class="sub"><a href="#funcoes">Exemplos práticos</a></li>
+            <li><a href="#arrays-logica">Arrays na Prática</a></li>
+            <li><a href="#escopo">Escopo</a></li>
+            <li><a href="#exercicios">Exercícios</a></li>
+            <li class="sub"><a href="#exercicios">1–3 Fáceis</a></li>
+            <li class="sub"><a href="#exercicios">4–6 Médios</a></li>
+            <li class="sub"><a href="#exercicios">7–10 Difíceis</a></li>
+        </ul>
+    </nav>
+
+</div><!-- /.page-wrapper -->
+<script>
+    function toggleSolution(btn) {
+        const panel = btn.nextElementSibling
+        const isOpen = panel.classList.contains('visible')
+
+        panel.classList.toggle('visible')
+        btn.classList.toggle('open')
+        btn.querySelector('.btn-icon').textContent = isOpen ? '▶' : '▼'
+        btn.childNodes[2].textContent = isOpen ? ' Ver solução' : ' Ocultar solução'
+    }
+</script>
+
+<script src="./assets/js/include.js" defer></script>
+</body>
+</html>

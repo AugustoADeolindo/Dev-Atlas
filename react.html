@@ -1,0 +1,1538 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dev Atlas — React: componentes, JSX/TSX, props, state, hooks e o modelo mental de UI como função de estado.">
+    <title>React — Dev Atlas</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <style>
+        /* ── Comparison strip ── */
+        .compare-strip {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin: 1.25rem 0;
+        }
+        @media(max-width: 640px) { .compare-strip { grid-template-columns: 1fr; } }
+        .compare-strip .half {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.1rem 1.2rem;
+        }
+        .compare-strip .half h4 {
+            font-size: .78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .07em;
+            margin-bottom: .7rem;
+        }
+        .h-bad  h4 { color: var(--red); }
+        .h-good h4 { color: var(--green); }
+
+        /* ── Concept flow ── */
+        .concept-flow {
+            display: flex; flex-wrap: wrap; align-items: center;
+            gap: .5rem; background: var(--bg-code);
+            border: 1px solid var(--border); border-radius: 12px;
+            padding: 1.5rem; margin: 1.25rem 0;
+        }
+        .cf-box {
+            display: flex; flex-direction: column; align-items: center;
+            gap: .3rem; min-width: 82px; text-align: center;
+        }
+        .cf-box__icon { font-size: 1.8rem; }
+        .cf-box__label { font-size: .72rem; font-weight: 700; color: var(--accent); }
+        .cf-box__sub { font-size: .64rem; color: var(--text-muted); }
+        .cf-arrow { font-size: 1.2rem; color: var(--text-muted); flex-shrink: 0; }
+
+        /* ── Hook grid ── */
+        .hook-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem; margin: 1.25rem 0;
+        }
+        .hook-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem 1.1rem;
+        }
+        .hook-card__name {
+            font-family: 'Cascadia Code','Fira Code', monospace;
+            font-size: .88rem; font-weight: 700; color: var(--pink);
+            margin-bottom: .3rem;
+        }
+        .hook-card__when {
+            font-size: .72rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: .06em; color: var(--accent); margin-bottom: .35rem;
+        }
+        .hook-card__desc {
+            font-size: .8rem; color: var(--text-muted); line-height: 1.5;
+        }
+
+        /* ── page nav ── */
+        .page-nav { display: flex; justify-content: space-between; margin: 2.5rem 0 0; }
+        .page-nav a {
+            display: inline-flex; align-items: center; gap: .45rem;
+            padding: .6rem 1.1rem; border-radius: 8px;
+            border: 1px solid var(--border); font-size: .88rem;
+            color: var(--text); text-decoration: none;
+            transition: border-color .2s, background .2s;
+        }
+        .page-nav a:hover { border-color: var(--accent); background: rgba(108,99,255,.08); }
+
+        /* ── re-use two-col util locally for wider screens ── */
+        @media(max-width: 640px) { .two-col { grid-template-columns: 1fr !important; } }
+    </style>
+</head>
+<body>
+<!-- ── LAYOUT ── -->
+<div class="page-wrapper">
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="sidebar">
+        <h3>Módulos</h3>
+        <ul>
+            <li><a href="index.html"><span class="dot"></span>Início</a></li>
+            <li><a href="programacao.html"><span class="dot"></span>Fundamentos da Programação</a></li>
+            <li><a href="logica.html"><span class="dot"></span>Lógica de Programação</a></li>
+            <li><a href="fundamentos.html"><span class="dot"></span>Fundamentos Web</a></li>
+            <li><a href="html.html"><span class="dot"></span>HTML</a></li>
+            <li><a href="css.html"><span class="dot"></span>CSS</a></li>
+            <li><a href="javascript.html"><span class="dot"></span>JavaScript</a></li>
+            <li><a href="react.html" class="active"><span class="dot"></span>React</a></li>
+            <li><a href="php.html"><span class="dot"></span>PHP</a></li>
+            <li><a href="git.html"><span class="dot"></span>Git</a></li>
+            <li><a href="ferramentas.html"><span class="dot"></span>Ferramentas</a></li>
+        </ul>
+
+        <h3>Nesta página</h3>
+        <ul>
+            <li><a href="#intro"><span class="dot"></span>O que é React?</a></li>
+            <li><a href="#jsx-tsx"><span class="dot"></span>JSX e TSX</a></li>
+            <li><a href="#componentes"><span class="dot"></span>Componentes</a></li>
+            <li><a href="#props"><span class="dot"></span>Props</a></li>
+            <li><a href="#state"><span class="dot"></span>State e useState</a></li>
+            <li><a href="#eventos"><span class="dot"></span>Eventos</a></li>
+            <li><a href="#renderizacao"><span class="dot"></span>Renderização Condicional</a></li>
+            <li><a href="#listas"><span class="dot"></span>Listas e key</a></li>
+            <li><a href="#useeffect"><span class="dot"></span>useEffect</a></li>
+            <li><a href="#hooks"><span class="dot"></span>Outros Hooks</a></li>
+            <li><a href="#composicao"><span class="dot"></span>Composição</a></li>
+            <li><a href="#setup"><span class="dot"></span>Setup com Vite</a></li>
+        </ul>
+    </aside>
+
+    <!-- ── MAIN ── -->
+    <main class="content">
+
+        <div class="page-badge">⚛️ React</div>
+        <h1 class="page-title">React</h1>
+        <p class="page-subtitle">
+            A biblioteca que mudou o jeito de construir interfaces. Com React você pensa em
+            <em>componentes</em> reutilizáveis e deixa a biblioteca cuidar do DOM — seu código
+            fica focado no <em>o quê</em> mostrar, não no <em>como</em> atualizar a tela.
+        </p>
+
+        <!-- ─────────────────────────────────────
+             1. O QUE É REACT
+        ───────────────────────────────────── -->
+        <section id="intro">
+            <div class="section-label">
+                <div class="sl-icon sl-blue">⚛️</div>
+                <span>Tópico 1</span>
+            </div>
+            <h2 class="section-h">O que é React?</h2>
+
+            <p>
+                React é uma <strong>biblioteca JavaScript</strong> criada pelo Facebook (Meta) em 2013
+                para construir interfaces de usuário. Ela resolve um problema muito real: quando sua
+                página tem dezenas de elementos que precisam refletir dados que mudam o tempo todo,
+                manipular o DOM manualmente com <code>document.querySelector</code> vira um pesadelo.
+            </p>
+
+            <div class="callout fun">
+                <div class="callout-icon">🪟</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>A analogia da janela:</strong> com JavaScript puro você sai pintando
+                        tijolo por tijolo na parede toda vez que algo muda. Com React você descreve
+                        como a janela deve <em>parecer</em> em cada estado, e ele calcula sozinho
+                        quais tijolos precisam ser repintados. Você declara o resultado; o React
+                        decide o caminho mais eficiente para chegar lá.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Por que React é tão popular?</h3>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-badge b-blue">Modelo mental</span>
+                    <div class="card-title">UI = f(estado)</div>
+                    <div class="card-desc">
+                        A interface é sempre uma <em>função pura do estado</em>. Dado um estado,
+                        o resultado na tela é sempre o mesmo — previsível, testável e fácil de
+                        raciocinar.
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-purple">Reutilização</span>
+                    <div class="card-title">Componentes</div>
+                    <div class="card-desc">
+                        Você constrói peças independentes e as combina como blocos de Lego.
+                        Um botão criado uma vez pode ser usado em cem lugares diferentes.
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-green">Performance</span>
+                    <div class="card-title">Virtual DOM</div>
+                    <div class="card-desc">
+                        React mantém uma cópia virtual da árvore DOM em memória. Quando o estado
+                        muda, ele compara a versão nova com a antiga e atualiza <em>somente</em>
+                        o que mudou no DOM real — operação muito mais rápida.
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-yellow">Ecossistema</span>
+                    <div class="card-title">Ecossistema gigante</div>
+                    <div class="card-desc">
+                        Next.js, React Native, React Query, Zustand, Radix UI… O ecossistema
+                        React é o maior do frontend. O que você aprender aqui abre portas para
+                        mobile, SSR, e muito mais.
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="sub-h">React vs JavaScript puro — o problema que ele resolve</h3>
+
+            <div class="compare-strip">
+                <div class="half h-bad">
+                    <h4>❌ JavaScript Puro — imperativo</h4>
+                    <div class="code-block" style="margin:0">
+                        <div class="cb-header">
+                            <span class="cb-lang">JS</span>
+                            <div class="cb-dots">
+                                <div class="cb-dot" style="background:#ff5f57"></div>
+                                <div class="cb-dot" style="background:#febc2e"></div>
+                                <div class="cb-dot" style="background:#28c840"></div>
+                            </div>
+                        </div>
+                        <pre><code><span class="cc">// "Conta" num botão</span>
+<span class="ck">let</span> <span class="cv">count</span> = <span class="cn">0</span>
+<span class="ck">const</span> <span class="cv">btn</span> = document
+  .<span class="cf">querySelector</span>(<span class="cs">'#btn'</span>)
+
+<span class="cv">btn</span>.<span class="cf">addEventListener</span>(<span class="cs">'click'</span>, () => {
+  <span class="cv">count</span>++
+  <span class="cc">// preciso MANUALMENTE</span>
+  <span class="cc">// atualizar o texto</span>
+  <span class="cv">btn</span>.<span class="cprop">textContent</span> =
+    <span class="cs">`Clicou <span style="color:var(--orange)">${count}</span>x`</span>
+})</code></pre>
+                    </div>
+                    <p style="font-size:.8rem;color:var(--text-muted);margin:.6rem 0 0">Você diz <em>como</em> mudar o DOM a cada evento.</p>
+                </div>
+                <div class="half h-good">
+                    <h4>✅ React — declarativo</h4>
+                    <div class="code-block" style="margin:0">
+                        <div class="cb-header">
+                            <span class="cb-lang">TSX</span>
+                            <div class="cb-dots">
+                                <div class="cb-dot" style="background:#ff5f57"></div>
+                                <div class="cb-dot" style="background:#febc2e"></div>
+                                <div class="cb-dot" style="background:#28c840"></div>
+                            </div>
+                        </div>
+                        <pre><code><span class="ck">function</span> <span class="cf">Contador</span>() {
+  <span class="ck">const</span> [<span class="cv">count</span>, <span class="cv">setCount</span>] =
+    <span class="cf">useState</span>(<span class="cn">0</span>)
+
+  <span class="ck">return</span> (
+    <span class="ct">&lt;button</span> <span class="ca">onClick</span>=<span class="cs">{() =></span>
+      <span class="cv">setCount</span>(<span class="cv">count</span> + <span class="cn">1</span>)<span class="cs">}</span><span class="ct">&gt;</span>
+      Clicou {<span class="cv">count</span>}x
+    <span class="ct">&lt;/button&gt;</span>
+  )
+}</code></pre>
+                    </div>
+                    <p style="font-size:.8rem;color:var(--text-muted);margin:.6rem 0 0">Você descreve <em>o que</em> renderizar dado o estado.</p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">O fluxo React de ponta a ponta</h3>
+
+            <div class="concept-flow">
+                <div class="cf-box">
+                    <div class="cf-box__icon">📝</div>
+                    <div class="cf-box__label">Você escreve</div>
+                    <div class="cf-box__sub">componentes em TSX</div>
+                </div>
+                <div class="cf-arrow">→</div>
+                <div class="cf-box">
+                    <div class="cf-box__icon">⚙️</div>
+                    <div class="cf-box__label">Vite / Babel</div>
+                    <div class="cf-box__sub">compila para JS puro</div>
+                </div>
+                <div class="cf-arrow">→</div>
+                <div class="cf-box">
+                    <div class="cf-box__icon">🌳</div>
+                    <div class="cf-box__label">Virtual DOM</div>
+                    <div class="cf-box__sub">React cria a árvore</div>
+                </div>
+                <div class="cf-arrow">→</div>
+                <div class="cf-box">
+                    <div class="cf-box__icon">🔍</div>
+                    <div class="cf-box__label">Diffing</div>
+                    <div class="cf-box__sub">compara versões</div>
+                </div>
+                <div class="cf-arrow">→</div>
+                <div class="cf-box">
+                    <div class="cf-box__icon">🎨</div>
+                    <div class="cf-box__label">Patch no DOM</div>
+                    <div class="cf-box__sub">só o que mudou</div>
+                </div>
+                <div class="cf-arrow">→</div>
+                <div class="cf-box">
+                    <div class="cf-box__icon">👁️</div>
+                    <div class="cf-box__label">Tela atualizada</div>
+                    <div class="cf-box__sub">mínimo de trabalho</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────
+             2. JSX E TSX
+        ───────────────────────────────────── -->
+        <section id="jsx-tsx">
+            <div class="section-label">
+                <div class="sl-icon sl-yellow">📄</div>
+                <span>Tópico 2</span>
+            </div>
+            <h2 class="section-h">JSX e TSX — HTML dentro do JavaScript</h2>
+
+            <p>
+                <strong>JSX</strong> (JavaScript XML) é uma extensão de sintaxe que permite escrever
+                algo parecido com HTML dentro de arquivos JavaScript. <strong>TSX</strong> é a mesma
+                coisa, mas em TypeScript — e é o formato recomendado em projetos modernos porque
+                adiciona tipagem estática ao código.
+            </p>
+
+            <div class="callout info">
+                <div class="callout-icon">📎</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>JSX vs TSX — qual usar?</strong><br>
+                        Arquivos <code>.jsx</code> usam JavaScript puro (sem tipos).
+                        Arquivos <code>.tsx</code> usam TypeScript (com tipos).
+                        Nesta documentação todos os exemplos são em <strong>.tsx</strong> —
+                        que é o padrão da indústria hoje. As diferenças de sintaxe são mínimas;
+                        o que você aprender aqui funciona em ambos.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">JSX não é HTML — as diferenças importantes</h3>
+
+            <div class="tbl-wrap">
+                <table>
+                    <thead>
+                        <tr><th>HTML</th><th>JSX / TSX</th><th>Por quê?</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>class="btn"</code></td>
+                            <td><code>className="btn"</code></td>
+                            <td><code>class</code> é palavra reservada em JS</td>
+                        </tr>
+                        <tr>
+                            <td><code>for="email"</code></td>
+                            <td><code>htmlFor="email"</code></td>
+                            <td><code>for</code> é palavra reservada em JS</td>
+                        </tr>
+                        <tr>
+                            <td><code>onclick="fn()"</code></td>
+                            <td><code>onClick={fn}</code></td>
+                            <td>Eventos em camelCase, função como referência</td>
+                        </tr>
+                        <tr>
+                            <td><code>style="color:red"</code></td>
+                            <td><code>style={{ color: 'red' }}</code></td>
+                            <td>Style recebe um objeto JS, não uma string</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;br&gt;</code></td>
+                            <td><code>&lt;br /&gt;</code></td>
+                            <td>Tags sem filho precisam ser auto-fechadas</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;!-- comment --&gt;</code></td>
+                            <td><code>{/* comment */}</code></td>
+                            <td>Comentários usam sintaxe JS dentro de chaves</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="sub-h">Expressões JavaScript dentro do JSX — as chaves {}</h3>
+            <p>
+                Tudo que estiver entre chaves <code>{}</code> dentro do JSX é avaliado como
+                JavaScript. É assim que você mistura dados dinâmicos com a estrutura visual:
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">App.tsx</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">const</span> <span class="cv">nome</span> = <span class="cs">"Ana"</span>
+<span class="ck">const</span> <span class="cv">ativo</span> = <span class="ck">true</span>
+<span class="ck">const</span> <span class="cv">preco</span> = <span class="cn">49.9</span>
+
+<span class="ck">function</span> <span class="cf">App</span>() {
+  <span class="ck">return</span> (
+    <span class="ct">&lt;div&gt;</span>
+      {<span class="cc">/* string */</span>}
+      <span class="ct">&lt;h1&gt;</span>Olá, {<span class="cv">nome</span>}!<span class="ct">&lt;/h1&gt;</span>
+
+      {<span class="cc">/* expressão JS */</span>}
+      <span class="ct">&lt;p&gt;</span>2 + 2 = {<span class="cn">2</span> + <span class="cn">2</span>}<span class="ct">&lt;/p&gt;</span>
+
+      {<span class="cc">/* método de string */</span>}
+      <span class="ct">&lt;p&gt;</span>{<span class="cv">nome</span>.<span class="cf">toUpperCase</span>()}<span class="ct">&lt;/p&gt;</span>
+
+      {<span class="cc">/* atributo dinâmico */</span>}
+      <span class="ct">&lt;button</span> <span class="ca">disabled</span>=<span class="cs">{!</span><span class="cv">ativo</span><span class="cs">}</span><span class="ct">&gt;</span>Comprar<span class="ct">&lt;/button&gt;</span>
+
+      {<span class="cc">/* formatação de número */</span>}
+      <span class="ct">&lt;p&gt;</span>R$ {<span class="cv">preco</span>.<span class="cf">toFixed</span>(<span class="cn">2</span>)}<span class="ct">&lt;/p&gt;</span>
+
+      {<span class="cc">/* ternário para conteúdo condicional */</span>}
+      <span class="ct">&lt;p&gt;</span>{<span class="cv">ativo</span> ? <span class="cs">"✅ Ativo"</span> : <span class="cs">"❌ Inativo"</span>}<span class="ct">&lt;/p&gt;</span>
+    <span class="ct">&lt;/div&gt;</span>
+  )
+}</code></pre>
+            </div>
+
+            <h3 class="sub-h">Regra do elemento raiz único</h3>
+            <p>
+                Todo componente deve retornar <strong>um único elemento raiz</strong>.
+                Se precisar retornar múltiplos elementos sem adicionar uma div extra ao DOM,
+                use um <strong>Fragment</strong>:
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">Componente.tsx — Fragment</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc">// ❌ Erro — dois elementos raiz</span>
+<span class="ck">return</span> (
+  <span class="ct">&lt;h1&gt;</span>Título<span class="ct">&lt;/h1&gt;</span>
+  <span class="ct">&lt;p&gt;</span>Parágrafo<span class="ct">&lt;/p&gt;</span>
+)
+
+<span class="cc">// ✅ OK — wrapper div (mas adiciona nó ao DOM)</span>
+<span class="ck">return</span> (
+  <span class="ct">&lt;div&gt;</span>
+    <span class="ct">&lt;h1&gt;</span>Título<span class="ct">&lt;/h1&gt;</span>
+    <span class="ct">&lt;p&gt;</span>Parágrafo<span class="ct">&lt;/p&gt;</span>
+  <span class="ct">&lt;/div&gt;</span>
+)
+
+<span class="cc">// ✅ MELHOR — Fragment (não adiciona nó extra ao DOM)</span>
+<span class="ck">return</span> (
+  <span class="ct">&lt;&gt;</span>
+    <span class="ct">&lt;h1&gt;</span>Título<span class="ct">&lt;/h1&gt;</span>
+    <span class="ct">&lt;p&gt;</span>Parágrafo<span class="ct">&lt;/p&gt;</span>
+  <span class="ct">&lt;/&gt;</span>
+)</code></pre>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────
+             3. COMPONENTES
+        ───────────────────────────────────── -->
+        <section id="componentes">
+            <div class="section-label">
+                <div class="sl-icon sl-purple">🧩</div>
+                <span>Tópico 3</span>
+            </div>
+            <h2 class="section-h">Componentes — As Peças da Interface</h2>
+
+            <p>
+                Um <strong>componente</strong> é uma função que retorna JSX. É a unidade fundamental
+                do React. Tudo que aparece na tela é um componente — ou vários deles compostos.
+                A grande vantagem é que você encapsula estrutura, comportamento e estilo num bloco
+                reutilizável e independente.
+            </p>
+
+            <div class="callout fun">
+                <div class="callout-icon">🧱</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Lego para interfaces:</strong> cada componente é uma peça. Um
+                        <code>Button</code>, um <code>Card</code>, um <code>Header</code>.
+                        Você encaixa as peças para montar a interface inteira. Se precisar mudar
+                        como o botão se parece, você muda num lugar só — e todos os botões do app
+                        atualizam automaticamente.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Criando um componente</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">Saudacao.tsx</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc">// Componente: função com nome iniciado em MAIÚSCULA</span>
+<span class="ck">function</span> <span class="cf">Saudacao</span>() {
+  <span class="ck">return</span> <span class="ct">&lt;h1&gt;</span>Olá, Dev Atlas! 👋<span class="ct">&lt;/h1&gt;</span>
+}
+
+<span class="cc">// Usando o componente como se fosse uma tag HTML</span>
+<span class="ck">function</span> <span class="cf">App</span>() {
+  <span class="ck">return</span> (
+    <span class="ct">&lt;div&gt;</span>
+      <span class="ct">&lt;Saudacao /&gt;</span>
+      <span class="ct">&lt;Saudacao /&gt;</span>  {<span class="cc">/* reutilizável quantas vezes quiser */</span>}
+    <span class="ct">&lt;/div&gt;</span>
+  )
+}
+
+<span class="ck">export default</span> <span class="cv">App</span></code></pre>
+            </div>
+
+            <div class="callout warning">
+                <div class="callout-icon">⚠️</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Componente começa sempre com MAIÚSCULA.</strong>
+                        <code>&lt;saudacao /&gt;</code> (minúscula) → React trata como tag HTML
+                        desconhecida e ignora. <code>&lt;Saudacao /&gt;</code> (maiúscula) → React
+                        executa sua função. Essa é uma das regras mais importantes.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Por que componentes são vantajosos?</h3>
+
+            <div class="tbl-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Vantagem</th><th>O que significa na prática</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Reutilização</strong></td>
+                            <td>Escreva um <code>Button</code> uma vez e use em 50 lugares</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Isolamento</strong></td>
+                            <td>Um bug no <code>Card</code> não afeta o <code>Header</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Legibilidade</strong></td>
+                            <td><code>&lt;ProductCard /&gt;</code> é mais claro que 30 linhas de divs aninhadas</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Testabilidade</strong></td>
+                            <td>Você testa cada peça separadamente, sem precisar do app todo</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Colaboração</strong></td>
+                            <td>Times diferentes trabalham em componentes diferentes sem conflito</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Performance</strong></td>
+                            <td>React re-renderiza apenas o componente cujo estado mudou</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="sub-h">Estrutura recomendada de arquivos</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">Estrutura de pastas — projeto React</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code>src/
+  components/         <span class="cc">← componentes reutilizáveis</span>
+    Button.tsx
+    Card.tsx
+    Header.tsx
+  pages/              <span class="cc">← componentes de página inteira</span>
+    Home.tsx
+    About.tsx
+  hooks/              <span class="cc">← hooks customizados</span>
+    useAuth.ts
+  App.tsx             <span class="cc">← componente raiz</span>
+  main.tsx            <span class="cc">← ponto de entrada (ReactDOM.render)</span></code></pre>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────
+             4. PROPS
+        ───────────────────────────────────── -->
+        <section id="props">
+            <div class="section-label">
+                <div class="sl-icon sl-green">📨</div>
+                <span>Tópico 4</span>
+            </div>
+            <h2 class="section-h">Props — Passando Dados para Componentes</h2>
+
+            <p>
+                <strong>Props</strong> (propriedades) são a forma de passar dados de um componente
+                pai para um componente filho. Funcionam como atributos HTML, mas podem receber
+                qualquer valor JavaScript — string, número, função, objeto, array.
+            </p>
+
+            <div class="callout info">
+                <div class="callout-icon">🔒</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Props são somente leitura.</strong> Um componente filho nunca deve
+                        modificar as props que recebeu — elas pertencem ao pai. Se o filho precisar
+                        de um dado que mude, use <code>state</code> (próximo tópico) ou peça ao pai
+                        para passar uma função callback.
+                    </p>
+                </div>
+            </div>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">Button.tsx — Componente com props tipadas</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc">// Definindo o tipo das props com TypeScript</span>
+<span class="ck">type</span> <span class="ct">ButtonProps</span> = {
+  <span class="cv">label</span>:    <span class="ck">string</span>
+  <span class="cv">variant</span>?: <span class="cs">"primary"</span> | <span class="cs">"danger"</span>   <span class="cc">// ? = opcional</span>
+  <span class="cv">onClick</span>:  () => <span class="ck">void</span>
+  <span class="cv">disabled</span>?: <span class="ck">boolean</span>
+}
+
+<span class="ck">function</span> <span class="cf">Button</span>({ <span class="cv">label</span>, <span class="cv">variant</span> = <span class="cs">"primary"</span>, <span class="cv">onClick</span>, <span class="cv">disabled</span> }: <span class="ct">ButtonProps</span>) {
+  <span class="ck">return</span> (
+    <span class="ct">&lt;button</span>
+      <span class="ca">className</span>=<span class="cs">{`btn btn--<span style="color:var(--orange)">${variant}</span>`}</span>
+      <span class="ca">onClick</span>=<span class="cs">{onClick}</span>
+      <span class="ca">disabled</span>=<span class="cs">{disabled}</span>
+    <span class="ct">&gt;</span>
+      {<span class="cv">label</span>}
+    <span class="ct">&lt;/button&gt;</span>
+  )
+}
+
+<span class="cc">// Usando o componente com diferentes props</span>
+<span class="ck">function</span> <span class="cf">App</span>() {
+  <span class="ck">return</span> (
+    <span class="ct">&lt;&gt;</span>
+      <span class="ct">&lt;Button</span> <span class="ca">label</span>=<span class="cs">"Salvar"</span>     <span class="ca">onClick</span>=<span class="cs">{() => console.log("salvo")}</span> <span class="ct">/&gt;</span>
+      <span class="ct">&lt;Button</span> <span class="ca">label</span>=<span class="cs">"Excluir"</span>   <span class="ca">variant</span>=<span class="cs">"danger"</span>  <span class="ca">onClick</span>=<span class="cs">{() => {}}</span> <span class="ct">/&gt;</span>
+      <span class="ct">&lt;Button</span> <span class="ca">label</span>=<span class="cs">"Desabilitado"</span> <span class="ca">disabled</span> <span class="ca">onClick</span>=<span class="cs">{() => {}}</span> <span class="ct">/&gt;</span>
+    <span class="ct">&lt;/&gt;</span>
+  )
+}</code></pre>
+            </div>
+
+            <h3 class="sub-h">A prop children — conteúdo aninhado</h3>
+            <p>
+                A prop especial <code>children</code> recebe tudo que for colocado entre as tags
+                de abertura e fechamento do componente — texto, outros elementos, outros componentes:
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">Card.tsx — prop children</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">import</span> { <span class="ct">ReactNode</span> } <span class="ck">from</span> <span class="cs">"react"</span>
+
+<span class="ck">type</span> <span class="ct">CardProps</span> = {
+  <span class="cv">title</span>:    <span class="ck">string</span>
+  <span class="cv">children</span>: <span class="ct">ReactNode</span>   <span class="cc">// qualquer coisa renderizável</span>
+}
+
+<span class="ck">function</span> <span class="cf">Card</span>({ <span class="cv">title</span>, <span class="cv">children</span> }: <span class="ct">CardProps</span>) {
+  <span class="ck">return</span> (
+    <span class="ct">&lt;div</span> <span class="ca">className</span>=<span class="cs">"card"</span><span class="ct">&gt;</span>
+      <span class="ct">&lt;h2</span> <span class="ca">className</span>=<span class="cs">"card__title"</span><span class="ct">&gt;</span>{<span class="cv">title</span>}<span class="ct">&lt;/h2&gt;</span>
+      <span class="ct">&lt;div</span> <span class="ca">className</span>=<span class="cs">"card__body"</span><span class="ct">&gt;</span>
+        {<span class="cv">children</span>}
+      <span class="ct">&lt;/div&gt;</span>
+    <span class="ct">&lt;/div&gt;</span>
+  )
+}
+
+<span class="cc">// Usando — tudo entre &lt;Card&gt;...&lt;/Card&gt; vira "children"</span>
+<span class="ck">function</span> <span class="cf">App</span>() {
+  <span class="ck">return</span> (
+    <span class="ct">&lt;Card</span> <span class="ca">title</span>=<span class="cs">"Meu Produto"</span><span class="ct">&gt;</span>
+      <span class="ct">&lt;p&gt;</span>Descrição do produto aqui.<span class="ct">&lt;/p&gt;</span>
+      <span class="ct">&lt;Button</span> <span class="ca">label</span>=<span class="cs">"Comprar"</span> <span class="ca">onClick</span>=<span class="cs">{() => {}}</span> <span class="ct">/&gt;</span>
+    <span class="ct">&lt;/Card&gt;</span>
+  )
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────
+             5. STATE E USESTATE
+        ───────────────────────────────────── -->
+        <section id="state">
+            <div class="section-label">
+                <div class="sl-icon sl-red">🔄</div>
+                <span>Tópico 5</span>
+            </div>
+            <h2 class="section-h">State — A Memória do Componente</h2>
+
+            <p>
+                <strong>State</strong> (estado) é a memória interna de um componente — dados que
+                ele precisa lembrar entre renderizações. Quando o state muda, o React re-renderiza
+                automaticamente o componente com os dados atualizados. É aqui que a mágica acontece.
+            </p>
+
+            <div class="callout fun">
+                <div class="callout-icon">🧠</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Props vs State:</strong> props vêm de fora (do pai) e são imutáveis.
+                        State vive dentro do componente e pode mudar. Se uma variável precisa mudar
+                        e o componente precisa re-renderizar, ela é state. Se vem de fora, é prop.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">useState — o hook de estado básico</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">Contador.tsx</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">import</span> { useState } <span class="ck">from</span> <span class="cs">"react"</span>
+
+<span class="ck">function</span> <span class="cf">Contador</span>() {
+  <span class="cc">// useState retorna [valorAtual, funçãoParaAtualizar]</span>
+  <span class="cc">// o argumento é o valor inicial</span>
+  <span class="ck">const</span> [<span class="cv">count</span>, <span class="cv">setCount</span>] = <span class="cf">useState</span>(<span class="cn">0</span>)
+
+  <span class="ck">return</span> (
+    <span class="ct">&lt;div&gt;</span>
+      <span class="ct">&lt;p&gt;</span>Contagem: {<span class="cv">count</span>}<span class="ct">&lt;/p&gt;</span>
+      <span class="ct">&lt;button</span> <span class="ca">onClick</span>=<span class="cs">{() =></span> <span class="cv">setCount</span>(<span class="cv">count</span> + <span class="cn">1</span>)<span class="cs">}</span><span class="ct">&gt;</span>+<span class="ct">&lt;/button&gt;</span>
+      <span class="ct">&lt;button</span> <span class="ca">onClick</span>=<span class="cs">{() =></span> <span class="cv">setCount</span>(<span class="cv">count</span> - <span class="cn">1</span>)<span class="cs">}</span><span class="ct">&gt;</span>-<span class="ct">&lt;/button&gt;</span>
+      <span class="ct">&lt;button</span> <span class="ca">onClick</span>=<span class="cs">{() =></span> <span class="cv">setCount</span>(<span class="cn">0</span>)<span class="cs">}</span><span class="ct">&gt;</span>Reset<span class="ct">&lt;/button&gt;</span>
+    <span class="ct">&lt;/div&gt;</span>
+  )
+}</code></pre>
+            </div>
+
+            <h3 class="sub-h">State com objetos e strings — exemplos reais</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">Formulario.tsx</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">import</span> { useState } <span class="ck">from</span> <span class="cs">"react"</span>
+
+<span class="ck">function</span> <span class="cf">Formulario</span>() {
+  <span class="ck">const</span> [<span class="cv">nome</span>,  <span class="cv">setNome</span>]  = <span class="cf">useState</span>(<span class="cs">""</span>)
+  <span class="ck">const</span> [<span class="cv">email</span>, <span class="cv">setEmail</span>] = <span class="cf">useState</span>(<span class="cs">""</span>)
+  <span class="ck">const</span> [<span class="cv">enviado</span>, <span class="cv">setEnviado</span>] = <span class="cf">useState</span>(<span class="ck">false</span>)
+
+  <span class="ck">function</span> <span class="cf">handleSubmit</span>(<span class="cv">e</span>: <span class="ct">React.FormEvent</span>) {
+    <span class="cv">e</span>.<span class="cf">preventDefault</span>()
+    <span class="cf">console</span>.<span class="cf">log</span>({ <span class="cv">nome</span>, <span class="cv">email</span> })
+    <span class="cv">setEnviado</span>(<span class="ck">true</span>)
+  }
+
+  <span class="ck">if</span> (<span class="cv">enviado</span>) {
+    <span class="ck">return</span> <span class="ct">&lt;p&gt;</span>✅ Obrigado, {<span class="cv">nome</span>}! Formulário enviado.<span class="ct">&lt;/p&gt;</span>
+  }
+
+  <span class="ck">return</span> (
+    <span class="ct">&lt;form</span> <span class="ca">onSubmit</span>=<span class="cs">{handleSubmit}</span><span class="ct">&gt;</span>
+      <span class="ct">&lt;input</span>
+        <span class="ca">type</span>=<span class="cs">"text"</span>
+        <span class="ca">placeholder</span>=<span class="cs">"Nome"</span>
+        <span class="ca">value</span>=<span class="cs">{nome}</span>
+        <span class="ca">onChange</span>=<span class="cs">{(e) =></span> <span class="cv">setNome</span>(<span class="cv">e</span>.<span class="cv">target</span>.<span class="cv">value</span>)<span class="cs">}</span>
+      <span class="ct">/&gt;</span>
+      <span class="ct">&lt;input</span>
+        <span class="ca">type</span>=<span class="cs">"email"</span>
+        <span class="ca">placeholder</span>=<span class="cs">"Email"</span>
+        <span class="ca">value</span>=<span class="cs">{email}</span>
+        <span class="ca">onChange</span>=<span class="cs">{(e) =></span> <span class="cv">setEmail</span>(<span class="cv">e</span>.<span class="cv">target</span>.<span class="cv">value</span>)<span class="cs">}</span>
+      <span class="ct">/&gt;</span>
+      <span class="ct">&lt;button</span> <span class="ca">type</span>=<span class="cs">"submit"</span><span class="ct">&gt;</span>Enviar<span class="ct">&lt;/button&gt;</span>
+    <span class="ct">&lt;/form&gt;</span>
+  )
+}</code></pre>
+            </div>
+
+            <div class="callout warning">
+                <div class="callout-icon">⚠️</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Nunca mute o state diretamente.</strong> <code>count++</code> não
+                        funciona — o React não detecta a mudança e não re-renderiza. Sempre use a
+                        função setter: <code>setCount(count + 1)</code>.
+                        Para arrays e objetos, sempre crie uma nova cópia:
+                        <code>setLista([...lista, novoItem])</code>.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────
+             6. EVENTOS
+        ───────────────────────────────────── -->
+        <section id="eventos">
+            <div class="section-label">
+                <div class="sl-icon sl-yellow">🖱️</div>
+                <span>Tópico 6</span>
+            </div>
+            <h2 class="section-h">Eventos — Reagindo às Ações do Usuário</h2>
+
+            <p>
+                No React, eventos são tratados com props em camelCase diretamente nos elementos JSX.
+                O React normaliza os eventos do browser para que funcionem igual em todos os navegadores.
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">Eventos.tsx</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">import</span> { useState } <span class="ck">from</span> <span class="cs">"react"</span>
+
+<span class="ck">function</span> <span class="cf">ExemplosEventos</span>() {
+  <span class="ck">const</span> [<span class="cv">texto</span>, <span class="cv">setTexto</span>] = <span class="cf">useState</span>(<span class="cs">""</span>)
+  <span class="ck">const</span> [<span class="cv">hover</span>, <span class="cv">setHover</span>] = <span class="cf">useState</span>(<span class="ck">false</span>)
+
+  <span class="cc">// Handler separado (recomendado para lógica não trivial)</span>
+  <span class="ck">function</span> <span class="cf">handleChange</span>(<span class="cv">e</span>: <span class="ct">React.ChangeEvent</span>&lt;<span class="ct">HTMLInputElement</span>&gt;) {
+    <span class="cv">setTexto</span>(<span class="cv">e</span>.<span class="cv">target</span>.<span class="cv">value</span>)
+  }
+
+  <span class="ck">function</span> <span class="cf">handleKeyDown</span>(<span class="cv">e</span>: <span class="ct">React.KeyboardEvent</span>) {
+    <span class="ck">if</span> (<span class="cv">e</span>.<span class="cv">key</span> === <span class="cs">"Enter"</span>) <span class="cf">alert</span>(<span class="cs">"Enter pressionado!"</span>)
+  }
+
+  <span class="ck">return</span> (
+    <span class="ct">&lt;div&gt;</span>
+      {<span class="cc">/* Click */</span>}
+      <span class="ct">&lt;button</span> <span class="ca">onClick</span>=<span class="cs">{() =></span> <span class="cf">alert</span>(<span class="cs">"clicou!"</span>)<span class="cs">}</span><span class="ct">&gt;</span>Clique<span class="ct">&lt;/button&gt;</span>
+
+      {<span class="cc">/* Hover */</span>}
+      <span class="ct">&lt;div</span>
+        <span class="ca">onMouseEnter</span>=<span class="cs">{() =></span> <span class="cv">setHover</span>(<span class="ck">true</span>)<span class="cs">}</span>
+        <span class="ca">onMouseLeave</span>=<span class="cs">{() =></span> <span class="cv">setHover</span>(<span class="ck">false</span>)<span class="cs">}</span>
+        <span class="ca">style</span>=<span class="cs">{{</span> <span class="cv">background</span>: <span class="cv">hover</span> ? <span class="cs">"#6c63ff"</span> : <span class="cs">"#1a1d27"</span> <span class="cs">}}</span>
+      <span class="ct">&gt;</span>
+        {<span class="cv">hover</span> ? <span class="cs">"Mouse em cima!"</span> : <span class="cs">"Passe o mouse aqui"</span>}
+      <span class="ct">&lt;/div&gt;</span>
+
+      {<span class="cc">/* Input controlado */</span>}
+      <span class="ct">&lt;input</span>
+        <span class="ca">value</span>=<span class="cs">{texto}</span>
+        <span class="ca">onChange</span>=<span class="cs">{handleChange}</span>
+        <span class="ca">onKeyDown</span>=<span class="cs">{handleKeyDown}</span>
+        <span class="ca">placeholder</span>=<span class="cs">"Digite algo..."</span>
+      <span class="ct">/&gt;</span>
+      <span class="ct">&lt;p&gt;</span>Você digitou: {<span class="cv">texto</span>}<span class="ct">&lt;/p&gt;</span>
+    <span class="ct">&lt;/div&gt;</span>
+  )
+}</code></pre>
+            </div>
+
+            <div class="tbl-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Evento React</th><th>Equivalente DOM</th><th>Quando dispara</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>onClick</code></td><td><code>onclick</code></td><td>Clique do mouse ou toque</td></tr>
+                        <tr><td><code>onChange</code></td><td><code>oninput</code></td><td>Qualquer alteração no input</td></tr>
+                        <tr><td><code>onSubmit</code></td><td><code>onsubmit</code></td><td>Envio de formulário</td></tr>
+                        <tr><td><code>onKeyDown</code></td><td><code>onkeydown</code></td><td>Tecla pressionada</td></tr>
+                        <tr><td><code>onMouseEnter</code></td><td><code>onmouseenter</code></td><td>Mouse entra no elemento</td></tr>
+                        <tr><td><code>onFocus</code></td><td><code>onfocus</code></td><td>Elemento recebe foco</td></tr>
+                        <tr><td><code>onBlur</code></td><td><code>onblur</code></td><td>Elemento perde foco</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────
+             7. RENDERIZAÇÃO CONDICIONAL
+        ───────────────────────────────────── -->
+        <section id="renderizacao">
+            <div class="section-label">
+                <div class="sl-icon sl-blue">🔀</div>
+                <span>Tópico 7</span>
+            </div>
+            <h2 class="section-h">Renderização Condicional</h2>
+
+            <p>
+                Mostrar ou esconder partes da interface com base em condições é uma das coisas mais
+                comuns em React. Como você está dentro de JavaScript, todas as ferramentas que já
+                conhece funcionam: <code>if</code>, ternário e o operador <code>&&</code>.
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">Condicional.tsx</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">function</span> <span class="cf">Painel</span>({ <span class="cv">logado</span>, <span class="cv">carregando</span>, <span class="cv">erro</span> }: {
+  <span class="cv">logado</span>:     <span class="ck">boolean</span>
+  <span class="cv">carregando</span>: <span class="ck">boolean</span>
+  <span class="cv">erro</span>?:       <span class="ck">string</span>
+}) {
+  <span class="cc">// 1. if antes do return — para casos que mudam todo o layout</span>
+  <span class="ck">if</span> (<span class="cv">carregando</span>) <span class="ck">return</span> <span class="ct">&lt;p&gt;</span>⏳ Carregando...<span class="ct">&lt;/p&gt;</span>
+  <span class="ck">if</span> (<span class="cv">erro</span>)       <span class="ck">return</span> <span class="ct">&lt;p</span> <span class="ca">style</span>=<span class="cs">{{color:"red"}}</span><span class="ct">&gt;</span>❌ {<span class="cv">erro</span>}<span class="ct">&lt;/p&gt;</span>
+
+  <span class="ck">return</span> (
+    <span class="ct">&lt;div&gt;</span>
+      {<span class="cc">/* 2. Ternário — quando há dois casos distintos */</span>}
+      {<span class="cv">logado</span>
+        ? <span class="ct">&lt;p&gt;</span>👋 Bem-vindo de volta!<span class="ct">&lt;/p&gt;</span>
+        : <span class="ct">&lt;button&gt;</span>Fazer Login<span class="ct">&lt;/button&gt;</span>
+      }
+
+      {<span class="cc">/* 3. && — quando há só um caso (mostrar ou não) */</span>}
+      {<span class="cv">logado</span> && <span class="ct">&lt;button&gt;</span>Painel Admin<span class="ct">&lt;/button&gt;</span>}
+
+      {<span class="cc">/* Cuidado: && com número! 0 renderiza "0" na tela */</span>}
+      {<span class="cv">logado</span> && <span class="cv">minhasNotas</span>.length > <span class="cn">0</span> && <span class="ct">&lt;Lista /&gt;</span>}
+    <span class="ct">&lt;/div&gt;</span>
+  )
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────
+             8. LISTAS E KEY
+        ───────────────────────────────────── -->
+        <section id="listas">
+            <div class="section-label">
+                <div class="sl-icon sl-green">📋</div>
+                <span>Tópico 8</span>
+            </div>
+            <h2 class="section-h">Listas e a Prop key</h2>
+
+            <p>
+                Para renderizar listas no React, usamos o método <code>.map()</code> do JavaScript.
+                Cada item da lista deve ter uma prop <code>key</code> única — é o identificador
+                que o React usa para saber qual item mudou, foi adicionado ou removido.
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">Lista.tsx</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">type</span> <span class="ct">Produto</span> = {
+  <span class="cv">id</span>:    <span class="ck">number</span>
+  <span class="cv">nome</span>:  <span class="ck">string</span>
+  <span class="cv">preco</span>: <span class="ck">number</span>
+}
+
+<span class="ck">const</span> <span class="cv">produtos</span>: <span class="ct">Produto</span>[] = [
+  { <span class="cv">id</span>: <span class="cn">1</span>, <span class="cv">nome</span>: <span class="cs">"Teclado"</span>, <span class="cv">preco</span>: <span class="cn">350</span> },
+  { <span class="cv">id</span>: <span class="cn">2</span>, <span class="cv">nome</span>: <span class="cs">"Mouse"</span>,   <span class="cv">preco</span>: <span class="cn">180</span> },
+  { <span class="cv">id</span>: <span class="cn">3</span>, <span class="cv">nome</span>: <span class="cs">"Monitor"</span>, <span class="cv">preco</span>: <span class="cn">1200</span> },
+]
+
+<span class="ck">function</span> <span class="cf">ListaProdutos</span>() {
+  <span class="ck">return</span> (
+    <span class="ct">&lt;ul&gt;</span>
+      {<span class="cv">produtos</span>.<span class="cf">map</span>((<span class="cv">p</span>) => (
+        <span class="cc">// key é obrigatória — use o id único do item, NUNCA o índice</span>
+        <span class="ct">&lt;li</span> <span class="ca">key</span>=<span class="cs">{p.id}</span><span class="ct">&gt;</span>
+          {<span class="cv">p</span>.<span class="cv">nome</span>} — R$ {<span class="cv">p</span>.<span class="cv">preco</span>.<span class="cf">toFixed</span>(<span class="cn">2</span>)}
+        <span class="ct">&lt;/li&gt;</span>
+      ))}
+    <span class="ct">&lt;/ul&gt;</span>
+  )
+}
+
+<span class="cc">// Adicionando e removendo da lista com state</span>
+<span class="ck">function</span> <span class="cf">ListaDinamica</span>() {
+  <span class="ck">const</span> [<span class="cv">itens</span>, <span class="cv">setItens</span>] = <span class="cf">useState</span>([<span class="cs">"Café"</span>, <span class="cs">"Leite"</span>, <span class="cs">"Pão"</span>])
+  <span class="ck">const</span> [<span class="cv">novoItem</span>, <span class="cv">setNovoItem</span>] = <span class="cf">useState</span>(<span class="cs">""</span>)
+
+  <span class="ck">function</span> <span class="cf">adicionar</span>() {
+    <span class="ck">if</span> (!<span class="cv">novoItem</span>.<span class="cf">trim</span>()) <span class="ck">return</span>
+    <span class="cv">setItens</span>([...<span class="cv">itens</span>, <span class="cv">novoItem</span>])  <span class="cc">// spread cria nova array</span>
+    <span class="cv">setNovoItem</span>(<span class="cs">""</span>)
+  }
+
+  <span class="ck">function</span> <span class="cf">remover</span>(<span class="cv">index</span>: <span class="ck">number</span>) {
+    <span class="cv">setItens</span>(<span class="cv">itens</span>.<span class="cf">filter</span>((_, <span class="cv">i</span>) => <span class="cv">i</span> !== <span class="cv">index</span>))
+  }
+
+  <span class="ck">return</span> (
+    <span class="ct">&lt;div&gt;</span>
+      <span class="ct">&lt;input</span> <span class="ca">value</span>=<span class="cs">{novoItem}</span> <span class="ca">onChange</span>=<span class="cs">{(e) =></span> <span class="cv">setNovoItem</span>(<span class="cv">e</span>.<span class="cv">target</span>.<span class="cv">value</span>)<span class="cs">}</span> <span class="ct">/&gt;</span>
+      <span class="ct">&lt;button</span> <span class="ca">onClick</span>=<span class="cs">{adicionar}</span><span class="ct">&gt;</span>Adicionar<span class="ct">&lt;/button&gt;</span>
+      <span class="ct">&lt;ul&gt;</span>
+        {<span class="cv">itens</span>.<span class="cf">map</span>((<span class="cv">item</span>, <span class="cv">i</span>) => (
+          <span class="ct">&lt;li</span> <span class="ca">key</span>=<span class="cs">{item + i}</span><span class="ct">&gt;</span>
+            {<span class="cv">item</span>} <span class="ct">&lt;button</span> <span class="ca">onClick</span>=<span class="cs">{() =></span> <span class="cf">remover</span>(<span class="cv">i</span>)<span class="cs">}</span><span class="ct">&gt;</span>×<span class="ct">&lt;/button&gt;</span>
+          <span class="ct">&lt;/li&gt;</span>
+        ))}
+      <span class="ct">&lt;/ul&gt;</span>
+    <span class="ct">&lt;/div&gt;</span>
+  )
+}</code></pre>
+            </div>
+
+            <div class="callout warning">
+                <div class="callout-icon">⚠️</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Nunca use o índice do array como key</strong> quando os itens podem
+                        ser reordenados ou removidos. Se você remover o item de índice 0, todos os
+                        outros mudam de índice — o React fica confuso e pode exibir dados errados.
+                        Sempre use um identificador único e estável, como o <code>id</code> do banco
+                        de dados.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────
+             9. USEEFFECT
+        ───────────────────────────────────── -->
+        <section id="useeffect">
+            <div class="section-label">
+                <div class="sl-icon sl-purple">⚡</div>
+                <span>Tópico 9</span>
+            </div>
+            <h2 class="section-h">useEffect — Efeitos Colaterais</h2>
+
+            <p>
+                <strong>useEffect</strong> serve para executar código que precisa acontecer
+                <em>fora</em> do fluxo de renderização: buscar dados de uma API, modificar o título
+                da página, configurar timers, adicionar listeners. Esses são os chamados
+                <strong>efeitos colaterais</strong> — coisas que afetam o mundo além do JSX retornado.
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">useEffect.tsx — as três formas</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">import</span> { useState, useEffect } <span class="ck">from</span> <span class="cs">"react"</span>
+
+<span class="ck">function</span> <span class="cf">ExemploEffect</span>() {
+  <span class="ck">const</span> [<span class="cv">dados</span>, <span class="cv">setDados</span>] = <span class="cf">useState</span>(<span class="ck">null</span>)
+  <span class="ck">const</span> [<span class="cv">id</span>, <span class="cv">setId</span>]     = <span class="cf">useState</span>(<span class="cn">1</span>)
+
+  <span class="cc">// 1. Sem array de dependências → roda em TODA renderização</span>
+  <span class="cf">useEffect</span>(() => {
+    <span class="cf">console</span>.<span class="cf">log</span>(<span class="cs">"Componente renderizou"</span>)
+  })
+
+  <span class="cc">// 2. Array vazio → roda UMA VEZ, quando o componente monta</span>
+  <span class="cf">useEffect</span>(() => {
+    <span class="cf">console</span>.<span class="cf">log</span>(<span class="cs">"Componente montou!"</span>)
+  }, [])
+
+  <span class="cc">// 3. Com dependência [id] → roda quando "id" muda</span>
+  <span class="cf">useEffect</span>(() => {
+    <span class="cc">// Busca dados sempre que o id muda</span>
+    <span class="cf">fetch</span>(<span class="cs">`https://jsonplaceholder.typicode.com/users/<span style="color:var(--orange)">${id}</span>`</span>)
+      .<span class="cf">then</span>(<span class="cv">r</span> => <span class="cv">r</span>.<span class="cf">json</span>())
+      .<span class="cf">then</span>(<span class="cv">setDados</span>)
+  }, [<span class="cv">id</span>])  <span class="cc">// ← lista de dependências</span>
+
+  <span class="ck">return</span> (
+    <span class="ct">&lt;div&gt;</span>
+      <span class="ct">&lt;button</span> <span class="ca">onClick</span>=<span class="cs">{() =></span> <span class="cv">setId</span>(<span class="cv">id</span> + <span class="cn">1</span>)<span class="cs">}</span><span class="ct">&gt;</span>Próximo usuário<span class="ct">&lt;/button&gt;</span>
+      <span class="ct">&lt;pre&gt;</span>{<span class="ct">JSON</span>.<span class="cf">stringify</span>(<span class="cv">dados</span>, <span class="ck">null</span>, <span class="cn">2</span>)}<span class="ct">&lt;/pre&gt;</span>
+    <span class="ct">&lt;/div&gt;</span>
+  )
+}</code></pre>
+            </div>
+
+            <h3 class="sub-h">Cleanup — limpando o que o efeito criou</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">Timer.tsx — função de cleanup</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">function</span> <span class="cf">Relogio</span>() {
+  <span class="ck">const</span> [<span class="cv">hora</span>, <span class="cv">setHora</span>] = <span class="cf">useState</span>(<span class="ck">new</span> <span class="ct">Date</span>())
+
+  <span class="cf">useEffect</span>(() => {
+    <span class="cc">// Inicia o intervalo quando o componente monta</span>
+    <span class="ck">const</span> <span class="cv">timer</span> = <span class="cf">setInterval</span>(() => {
+      <span class="cv">setHora</span>(<span class="ck">new</span> <span class="ct">Date</span>())
+    }, <span class="cn">1000</span>)
+
+    <span class="cc">// Função de cleanup: roda quando o componente desmonta</span>
+    <span class="cc">// Sem isso, o timer continuaria rodando para sempre — memory leak!</span>
+    <span class="ck">return</span> () => <span class="cf">clearInterval</span>(<span class="cv">timer</span>)
+  }, [])  <span class="cc">// ← [] = só monta/desmonta uma vez</span>
+
+  <span class="ck">return</span> <span class="ct">&lt;p&gt;</span>🕐 {<span class="cv">hora</span>.<span class="cf">toLocaleTimeString</span>(<span class="cs">"pt-BR"</span>)}<span class="ct">&lt;/p&gt;</span>
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────
+             10. OUTROS HOOKS
+        ───────────────────────────────────── -->
+        <section id="hooks">
+            <div class="section-label">
+                <div class="sl-icon sl-blue">🪝</div>
+                <span>Tópico 10</span>
+            </div>
+            <h2 class="section-h">Outros Hooks Essenciais</h2>
+
+            <p>
+                Hooks são funções especiais do React que começam com <code>use</code>. Eles permitem
+                que componentes funcionais usem recursos como estado, efeitos, contexto e muito mais.
+            </p>
+
+            <div class="hook-grid">
+                <div class="hook-card">
+                    <div class="hook-card__name">useState</div>
+                    <div class="hook-card__when">Quando: guardar valor que muda</div>
+                    <div class="hook-card__desc">O hook mais usado. Armazena state local e força re-render ao ser atualizado.</div>
+                </div>
+                <div class="hook-card">
+                    <div class="hook-card__name">useEffect</div>
+                    <div class="hook-card__when">Quando: efeitos colaterais</div>
+                    <div class="hook-card__desc">Fetch de dados, timers, event listeners, integração com bibliotecas externas.</div>
+                </div>
+                <div class="hook-card">
+                    <div class="hook-card__name">useRef</div>
+                    <div class="hook-card__when">Quando: referenciar DOM ou valor persistente</div>
+                    <div class="hook-card__desc">Acessa elementos DOM diretamente ou guarda valor que não deve causar re-render.</div>
+                </div>
+                <div class="hook-card">
+                    <div class="hook-card__name">useContext</div>
+                    <div class="hook-card__when">Quando: dados globais</div>
+                    <div class="hook-card__desc">Acessa um contexto criado com createContext. Evita prop drilling em árvores profundas.</div>
+                </div>
+                <div class="hook-card">
+                    <div class="hook-card__name">useMemo</div>
+                    <div class="hook-card__when">Quando: cálculo custoso</div>
+                    <div class="hook-card__desc">Memoriza o resultado de um cálculo. Só recalcula quando as dependências mudam.</div>
+                </div>
+                <div class="hook-card">
+                    <div class="hook-card__name">useCallback</div>
+                    <div class="hook-card__when">Quando: função passada como prop</div>
+                    <div class="hook-card__desc">Memoriza a referência de uma função para evitar re-renders desnecessários em filhos.</div>
+                </div>
+                <div class="hook-card">
+                    <div class="hook-card__name">useReducer</div>
+                    <div class="hook-card__when">Quando: lógica de state complexa</div>
+                    <div class="hook-card__desc">Alternativa ao useState para estados com múltiplas sub-variáveis ou transições complexas.</div>
+                </div>
+                <div class="hook-card">
+                    <div class="hook-card__name">useId</div>
+                    <div class="hook-card__when">Quando: IDs acessíveis</div>
+                    <div class="hook-card__desc">Gera um ID único e estável para associar labels a inputs sem colisão entre componentes.</div>
+                </div>
+            </div>
+
+            <h3 class="sub-h">useRef — acessando o DOM diretamente</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">FocoAutomatico.tsx</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">import</span> { useRef, useEffect } <span class="ck">from</span> <span class="cs">"react"</span>
+
+<span class="ck">function</span> <span class="cf">FocoAutomatico</span>() {
+  <span class="cc">// useRef cria uma referência mutável que não causa re-render</span>
+  <span class="ck">const</span> <span class="cv">inputRef</span> = <span class="cf">useRef</span>&lt;<span class="ct">HTMLInputElement</span>&gt;(<span class="ck">null</span>)
+
+  <span class="cf">useEffect</span>(() => {
+    <span class="cc">// Foca o input quando o componente monta</span>
+    <span class="cv">inputRef</span>.<span class="cv">current</span>?.<span class="cf">focus</span>()
+  }, [])
+
+  <span class="ck">return</span> (
+    <span class="ct">&lt;input</span>
+      <span class="ca">ref</span>=<span class="cs">{inputRef}</span>
+      <span class="ca">placeholder</span>=<span class="cs">"Foco automático ao abrir a página"</span>
+    <span class="ct">/&gt;</span>
+  )
+}</code></pre>
+            </div>
+
+            <h3 class="sub-h">Hooks customizados — criando os seus</h3>
+            <p>
+                Você pode criar seus próprios hooks para encapsular e reutilizar lógica stateful.
+                A única regra: o nome deve começar com <code>use</code>.
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">hooks/useLocalStorage.ts</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">import</span> { useState } <span class="ck">from</span> <span class="cs">"react"</span>
+
+<span class="cc">// Hook que sincroniza state com o localStorage automaticamente</span>
+<span class="ck">function</span> <span class="cf">useLocalStorage</span>&lt;<span class="ct">T</span>&gt;(<span class="cv">chave</span>: <span class="ck">string</span>, <span class="cv">valorInicial</span>: <span class="ct">T</span>) {
+  <span class="ck">const</span> [<span class="cv">valor</span>, <span class="cv">setValor</span>] = <span class="cf">useState</span>&lt;<span class="ct">T</span>&gt;(() => {
+    <span class="ck">const</span> <span class="cv">salvo</span> = localStorage.<span class="cf">getItem</span>(<span class="cv">chave</span>)
+    <span class="ck">return</span> <span class="cv">salvo</span> ? <span class="ct">JSON</span>.<span class="cf">parse</span>(<span class="cv">salvo</span>) : <span class="cv">valorInicial</span>
+  })
+
+  <span class="ck">function</span> <span class="cf">salvar</span>(<span class="cv">novoValor</span>: <span class="ct">T</span>) {
+    <span class="cv">setValor</span>(<span class="cv">novoValor</span>)
+    localStorage.<span class="cf">setItem</span>(<span class="cv">chave</span>, <span class="ct">JSON</span>.<span class="cf">stringify</span>(<span class="cv">novoValor</span>))
+  }
+
+  <span class="ck">return</span> [<span class="cv">valor</span>, <span class="cv">salvar</span>] <span class="ck">as const</span>
+}
+
+<span class="cc">// Usando o hook customizado em qualquer componente</span>
+<span class="ck">function</span> <span class="cf">Preferencias</span>() {
+  <span class="ck">const</span> [<span class="cv">tema</span>, <span class="cv">setTema</span>] = <span class="cf">useLocalStorage</span>(<span class="cs">"tema"</span>, <span class="cs">"dark"</span>)
+
+  <span class="ck">return</span> (
+    <span class="ct">&lt;button</span> <span class="ca">onClick</span>=<span class="cs">{() =></span> <span class="cv">setTema</span>(<span class="cv">tema</span> === <span class="cs">"dark"</span> ? <span class="cs">"light"</span> : <span class="cs">"dark"</span>)<span class="cs">}</span><span class="ct">&gt;</span>
+      Tema atual: {<span class="cv">tema</span>}
+    <span class="ct">&lt;/button&gt;</span>
+  )
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────
+             11. COMPOSIÇÃO
+        ───────────────────────────────────── -->
+        <section id="composicao">
+            <div class="section-label">
+                <div class="sl-icon sl-green">🏗️</div>
+                <span>Tópico 11</span>
+            </div>
+            <h2 class="section-h">Composição — Montando Interfaces Complexas</h2>
+
+            <p>
+                React favorece <strong>composição</strong> em vez de herança. Em vez de criar
+                componentes cada vez mais genéricos por herança (como se faz em POO), você compõe
+                componentes pequenos em componentes maiores. É o modelo mental mais poderoso do React.
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">Exemplo de composição real — ProdutoCard.tsx</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc">// Peças pequenas</span>
+<span class="ck">function</span> <span class="cf">Preco</span>({ <span class="cv">valor</span> }: { <span class="cv">valor</span>: <span class="ck">number</span> }) {
+  <span class="ck">return</span> <span class="ct">&lt;span</span> <span class="ca">className</span>=<span class="cs">"preco"</span><span class="ct">&gt;</span>R$ {<span class="cv">valor</span>.<span class="cf">toFixed</span>(<span class="cn">2</span>)}<span class="ct">&lt;/span&gt;</span>
+}
+
+<span class="ck">function</span> <span class="cf">Badge</span>({ <span class="cv">texto</span> }: { <span class="cv">texto</span>: <span class="ck">string</span> }) {
+  <span class="ck">return</span> <span class="ct">&lt;span</span> <span class="ca">className</span>=<span class="cs">"badge"</span><span class="ct">&gt;</span>{<span class="cv">texto</span>}<span class="ct">&lt;/span&gt;</span>
+}
+
+<span class="ck">function</span> <span class="cf">BotaoComprar</span>({ <span class="cv">onClick</span> }: { <span class="cv">onClick</span>: () => <span class="ck">void</span> }) {
+  <span class="ck">return</span> <span class="ct">&lt;button</span> <span class="ca">className</span>=<span class="cs">"btn-comprar"</span> <span class="ca">onClick</span>=<span class="cs">{onClick}</span><span class="ct">&gt;</span>Comprar<span class="ct">&lt;/button&gt;</span>
+}
+
+<span class="cc">// Composição: montando o card a partir das peças</span>
+<span class="ck">type</span> <span class="ct">Produto</span> = { <span class="cv">nome</span>: <span class="ck">string</span>; <span class="cv">preco</span>: <span class="ck">number</span>; <span class="cv">novo</span>: <span class="ck">boolean</span> }
+
+<span class="ck">function</span> <span class="cf">ProdutoCard</span>({ <span class="cv">produto</span>, <span class="cv">onComprar</span> }: { <span class="cv">produto</span>: <span class="ct">Produto</span>; <span class="cv">onComprar</span>: () => <span class="ck">void</span> }) {
+  <span class="ck">return</span> (
+    <span class="ct">&lt;div</span> <span class="ca">className</span>=<span class="cs">"produto-card"</span><span class="ct">&gt;</span>
+      {<span class="cv">produto</span>.<span class="cv">novo</span> && <span class="ct">&lt;Badge</span> <span class="ca">texto</span>=<span class="cs">"Novo"</span> <span class="ct">/&gt;</span>}
+      <span class="ct">&lt;h3&gt;</span>{<span class="cv">produto</span>.<span class="cv">nome</span>}<span class="ct">&lt;/h3&gt;</span>
+      <span class="ct">&lt;Preco</span> <span class="ca">valor</span>=<span class="cs">{produto.preco}</span> <span class="ct">/&gt;</span>
+      <span class="ct">&lt;BotaoComprar</span> <span class="ca">onClick</span>=<span class="cs">{onComprar}</span> <span class="ct">/&gt;</span>
+    <span class="ct">&lt;/div&gt;</span>
+  )
+}
+
+<span class="cc">// Usando a composição completa</span>
+<span class="ck">function</span> <span class="cf">App</span>() {
+  <span class="ck">const</span> <span class="cv">produto</span> = { <span class="cv">nome</span>: <span class="cs">"Teclado Mecânico"</span>, <span class="cv">preco</span>: <span class="cn">350</span>, <span class="cv">novo</span>: <span class="ck">true</span> }
+  <span class="ck">return</span> <span class="ct">&lt;ProdutoCard</span> <span class="ca">produto</span>=<span class="cs">{produto}</span> <span class="ca">onComprar</span>=<span class="cs">{() =></span> <span class="cf">alert</span>(<span class="cs">"Adicionado!"</span>)<span class="cs">}</span> <span class="ct">/&gt;</span>
+}</code></pre>
+            </div>
+
+            <div class="callout tip">
+                <div class="callout-icon">💡</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Levantamento de estado (lifting state up):</strong> se dois
+                        componentes irmãos precisam do mesmo estado, suba o state para o ancestral
+                        comum mais próximo e passe os dados via props. Nunca crie estado duplicado
+                        em dois lugares para representar a mesma coisa.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────
+             12. SETUP COM VITE
+        ───────────────────────────────────── -->
+        <section id="setup">
+            <div class="section-label">
+                <div class="sl-icon sl-yellow">🚀</div>
+                <span>Tópico 12</span>
+            </div>
+            <h2 class="section-h">Setup com Vite — Criando um Projeto React + TypeScript</h2>
+
+            <p>
+                O <strong>Vite</strong> é o bundler padrão para projetos React modernos. É
+                extremamente rápido, tem hot reload instantâneo e setup zero. Em segundos você
+                tem um projeto React com TypeScript rodando.
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">TERMINAL — Criando o projeto</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># Criar projeto React com TypeScript</span>
+<span class="ck">npm create</span> vite@latest meu-app <span class="ck">--</span> <span class="ck">--template</span> react-ts
+
+<span class="cc"># Entrar na pasta e instalar as dependências</span>
+<span class="ck">cd</span> meu-app
+<span class="ck">npm install</span>
+
+<span class="cc"># Iniciar o servidor de desenvolvimento</span>
+<span class="ck">npm run dev</span>
+<span class="cc"># → Local: http://localhost:5173</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">Estrutura gerada pelo Vite</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">Estrutura inicial do projeto</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code>meu-app/
+  public/              <span class="cc">← arquivos estáticos (ícones, imagens)</span>
+  src/
+    App.tsx            <span class="cc">← componente raiz — edite aqui!</span>
+    App.css            <span class="cc">← estilos do App</span>
+    main.tsx           <span class="cc">← ponto de entrada (renderiza o App no DOM)</span>
+    index.css          <span class="cc">← estilos globais</span>
+    vite-env.d.ts      <span class="cc">← tipos do Vite para TypeScript</span>
+  index.html           <span class="cc">← HTML base — o React injeta tudo aqui</span>
+  package.json
+  tsconfig.json        <span class="cc">← configurações do TypeScript</span>
+  vite.config.ts       <span class="cc">← configurações do Vite</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">O main.tsx — como o React monta na página</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">src/main.tsx</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="ck">import</span> { StrictMode } <span class="ck">from</span> <span class="cs">"react"</span>
+<span class="ck">import</span> { createRoot } <span class="ck">from</span> <span class="cs">"react-dom/client"</span>
+<span class="ck">import</span> <span class="cs">"./index.css"</span>
+<span class="ck">import</span> <span class="cv">App</span> <span class="ck">from</span> <span class="cs">"./App.tsx"</span>
+
+<span class="cc">// Pega o elemento #root do index.html e injeta o App React dentro dele</span>
+<span class="cf">createRoot</span>(document.<span class="cf">getElementById</span>(<span class="cs">"root"</span>)!).<span class="cf">render</span>(
+  <span class="ct">&lt;StrictMode&gt;</span>
+    <span class="ct">&lt;App /&gt;</span>
+  <span class="ct">&lt;/StrictMode&gt;</span>
+)
+
+<span class="cc">// StrictMode: ativa avisos extras em desenvolvimento.
+// Ele renderiza os componentes duas vezes para detectar problemas.
+// Não tem efeito em produção.</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">Comandos úteis do projeto</h3>
+
+            <div class="tbl-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Comando</th><th>O que faz</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>npm run dev</code></td><td>Inicia o servidor de desenvolvimento com hot reload</td></tr>
+                        <tr><td><code>npm run build</code></td><td>Gera a versão otimizada para produção na pasta <code>dist/</code></td></tr>
+                        <tr><td><code>npm run preview</code></td><td>Serve o build de produção localmente para inspecionar</td></tr>
+                        <tr><td><code>npm run lint</code></td><td>Verifica erros de código com ESLint</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout tip">
+                <div class="callout-icon">💡</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Extensões VS Code para React:</strong>
+                        <strong>ES7+ React/Redux Snippets</strong> (atalho <code>rafce</code> cria
+                        um componente funcional inteiro em segundos) e
+                        <strong>TypeScript React code snippets</strong>.
+                        Com o snippet <code>rafce</code> você nunca mais vai digitar o boilerplate
+                        de um componente na mão.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── SUMMARY BOX ── -->
+        <div class="summary-box">
+            <h4>📋 Resumo — React</h4>
+            <ul>
+                <li>React é uma biblioteca declarativa — você descreve <em>o que</em> mostrar, não <em>como</em> atualizar o DOM</li>
+                <li><strong>TSX</strong> é a sintaxe recomendada: JSX com TypeScript. Use <code>.tsx</code> em todos os componentes</li>
+                <li>Componentes são funções que retornam JSX. Nome sempre com <strong>letra maiúscula</strong></li>
+                <li><strong>Props</strong> passam dados do pai para o filho — são somente leitura</li>
+                <li><strong>State</strong> (<code>useState</code>) é a memória interna do componente. Mude sempre via setter, nunca diretamente</li>
+                <li>Eventos em camelCase: <code>onClick</code>, <code>onChange</code>, <code>onSubmit</code></li>
+                <li>Renderização condicional: <code>if</code> antes do return, ternário e <code>&&</code> dentro do JSX</li>
+                <li>Listas com <code>.map()</code> e <code>key</code> única — nunca use o índice como key se a lista pode mudar</li>
+                <li><code>useEffect</code> para efeitos colaterais: fetch, timers, listeners. Sempre limpe com cleanup</li>
+                <li>Hooks começam com <code>use</code>. Você pode criar os seus para reutilizar lógica stateful</li>
+                <li>Prefira <strong>composição</strong> — componentes pequenos compostos em maiores — a componentes gigantes</li>
+                <li>Setup com <code>npm create vite@latest meu-app -- --template react-ts</code></li>
+            </ul>
+        </div>
+
+        <div class="page-nav">
+            <a href="javascript.html">← JavaScript</a>
+            <a href="php.html">PHP →</a>
+        </div>
+
+    </main>
+
+    <!-- ── TOC ── -->
+    <nav class="toc-panel" aria-label="Nesta página">
+        <h4>Nesta página</h4>
+        <ul>
+            <li><a href="#intro">O que é React?</a></li>
+            <li class="sub"><a href="#intro">Imperativo vs Declarativo</a></li>
+            <li class="sub"><a href="#intro">Virtual DOM</a></li>
+            <li><a href="#jsx-tsx">JSX e TSX</a></li>
+            <li class="sub"><a href="#jsx-tsx">Diferenças do HTML</a></li>
+            <li class="sub"><a href="#jsx-tsx">Expressões {}</a></li>
+            <li class="sub"><a href="#jsx-tsx">Fragment</a></li>
+            <li><a href="#componentes">Componentes</a></li>
+            <li class="sub"><a href="#componentes">Por que usar</a></li>
+            <li class="sub"><a href="#componentes">Estrutura de arquivos</a></li>
+            <li><a href="#props">Props</a></li>
+            <li class="sub"><a href="#props">Tipagem com TypeScript</a></li>
+            <li class="sub"><a href="#props">children</a></li>
+            <li><a href="#state">State e useState</a></li>
+            <li class="sub"><a href="#state">Formulários controlados</a></li>
+            <li><a href="#eventos">Eventos</a></li>
+            <li><a href="#renderizacao">Renderização Condicional</a></li>
+            <li><a href="#listas">Listas e key</a></li>
+            <li><a href="#useeffect">useEffect</a></li>
+            <li class="sub"><a href="#useeffect">Dependências</a></li>
+            <li class="sub"><a href="#useeffect">Cleanup</a></li>
+            <li><a href="#hooks">Outros Hooks</a></li>
+            <li class="sub"><a href="#hooks">useRef</a></li>
+            <li class="sub"><a href="#hooks">Hooks customizados</a></li>
+            <li><a href="#composicao">Composição</a></li>
+            <li><a href="#setup">Setup com Vite</a></li>
+        </ul>
+    </nav>
+
+</div><!-- /.page-wrapper -->
+<script src="./assets/js/include.js" defer></script>
+</body>
+</html>

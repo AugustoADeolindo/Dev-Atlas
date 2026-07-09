@@ -1,0 +1,1285 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fundamentos da Web — Dev Atlas</title>
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <style>
+    /* ── Page-level extras not covered by style.css ── */
+
+    /* ---- Flow diagram ---- */
+    .flow-diagram{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;background:var(--surface,#1e1e2e);border:1px solid var(--border,#313244);border-radius:12px;padding:1.5rem;margin:1.5rem 0}
+    .flow-step{display:flex;flex-direction:column;align-items:center;gap:.3rem;min-width:80px;text-align:center}
+    .flow-step__icon{font-size:1.8rem;line-height:1}
+    .flow-step__label{font-size:.75rem;font-weight:600;color:var(--accent,#cba6f7)}
+    .flow-step__sub{font-size:.65rem;color:var(--text-muted,#a6adc8)}
+    .flow-arrow{font-size:1.2rem;color:var(--text-muted,#a6adc8);flex-shrink:0}
+
+    /* ---- Step list ---- */
+    .step-list{counter-reset:steps;list-style:none;padding:0;margin:1rem 0}
+    .step-list li{counter-increment:steps;display:flex;gap:1rem;padding:.75rem 0;border-bottom:1px solid var(--border,#313244)}
+    .step-list li:last-child{border-bottom:none}
+    .step-list li::before{content:counter(steps);display:flex;align-items:center;justify-content:center;min-width:2rem;height:2rem;border-radius:50%;background:var(--accent,#cba6f7);color:#1e1e2e;font-weight:700;font-size:.8rem;flex-shrink:0;margin-top:.1rem}
+
+    /* ---- Two-column cards ---- */
+    .split-cards{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin:1.25rem 0}
+    @media(max-width:640px){.split-cards{grid-template-columns:1fr}}
+    .split-card{border-radius:10px;padding:1.25rem;border:1px solid var(--border,#313244)}
+    .split-card--blue{background:rgba(137,180,250,.07);border-color:rgba(137,180,250,.3)}
+    .split-card--purple{background:rgba(203,166,247,.07);border-color:rgba(203,166,247,.3)}
+    .split-card--red{background:rgba(243,139,168,.07);border-color:rgba(243,139,168,.3)}
+    .split-card--green{background:rgba(166,227,161,.07);border-color:rgba(166,227,161,.3)}
+    .split-card__icon{font-size:2rem;margin-bottom:.5rem}
+    .split-card h3{margin:.25rem 0 .6rem;font-size:1rem}
+    .split-card ul{margin:0;padding-left:1.2rem;font-size:.88rem;line-height:1.7}
+
+    /* ---- HTTP verb badges ---- */
+    .verb{display:inline-block;padding:.1rem .55rem;border-radius:5px;font-size:.78rem;font-weight:700;font-family:monospace}
+    .verb-get{background:rgba(166,227,161,.2);color:#a6e3a1}
+    .verb-post{background:rgba(137,180,250,.2);color:#89b4fa}
+    .verb-put{background:rgba(250,179,135,.2);color:#fab387}
+    .verb-patch{background:rgba(249,226,175,.2);color:#f9e2af}
+    .verb-delete{background:rgba(243,139,168,.2);color:#f38ba8}
+
+    /* ---- Status rows ---- */
+    .status-2xx td:first-child{color:#a6e3a1}
+    .status-3xx td:first-child{color:#89b4fa}
+    .status-4xx td:first-child{color:#f9e2af}
+    .status-5xx td:first-child{color:#f38ba8}
+
+    /* ---- Feature list ---- */
+    .feature-list{display:flex;flex-direction:column;gap:.9rem;margin:.75rem 0}
+    .feature-item{display:flex;gap:.85rem;align-items:flex-start}
+    .feature-item__icon{font-size:1.35rem;flex-shrink:0;margin-top:.1rem}
+    .feature-item h4{margin:0 0 .15rem;font-size:.92rem}
+    .feature-item p{margin:0;font-size:.83rem;color:var(--text-muted,#a6adc8);line-height:1.55}
+
+    /* ---- API cards grid ---- */
+    .api-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1rem;margin:1.25rem 0}
+    .api-card{background:var(--surface,#1e1e2e);border:1px solid var(--border,#313244);border-radius:10px;padding:1rem;text-align:center;transition:border-color .2s}
+    .api-card:hover{border-color:var(--accent,#cba6f7)}
+    .api-card__icon{font-size:1.8rem;margin-bottom:.4rem}
+    .api-card__name{font-weight:700;font-size:.85rem;margin-bottom:.3rem;color:var(--text,#cdd6f4)}
+    .api-card__desc{font-size:.75rem;color:var(--text-muted,#a6adc8);line-height:1.4}
+
+    /* ---- Summary grid ---- */
+    .summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+    @media(max-width:560px){.summary-grid{grid-template-columns:1fr}}
+    .summary-item{display:flex;gap:.75rem;align-items:flex-start;background:var(--surface,#1e1e2e);border:1px solid var(--border,#313244);border-radius:8px;padding:.9rem}
+    .summary-item__icon{font-size:1.4rem;flex-shrink:0}
+    .summary-item h4{margin:0 0 .2rem;font-size:.88rem}
+    .summary-item p{margin:0;font-size:.8rem;color:var(--text-muted,#a6adc8);line-height:1.5}
+
+    /* ---- Page nav ---- */
+    .page-nav{display:flex;justify-content:space-between;margin:2.5rem 0 0}
+    .page-nav a{display:inline-flex;align-items:center;gap:.45rem;padding:.6rem 1.1rem;border-radius:8px;border:1px solid var(--border,#313244);font-size:.88rem;color:var(--text,#cdd6f4);text-decoration:none;transition:border-color .2s,background .2s}
+    .page-nav a:hover{border-color:var(--accent,#cba6f7);background:rgba(203,166,247,.08)}
+
+    /* ---- Callout variants ---- */
+    .callout{display:flex;gap:1rem;border-radius:10px;padding:1.1rem 1.25rem;margin:1.25rem 0;border-left:4px solid}
+    .callout__icon{font-size:1.5rem;flex-shrink:0;line-height:1.2}
+    .callout__body{font-size:.9rem;line-height:1.65}
+    .callout__body strong{display:block;margin-bottom:.35rem}
+    .callout__body p,.callout__body ul{margin:.3rem 0 0}
+    .callout__body ul{padding-left:1.2rem}
+    .callout--fun{background:rgba(249,226,175,.07);border-color:#f9e2af}
+    .callout--info{background:rgba(137,180,250,.07);border-color:#89b4fa}
+    .callout--warn{background:rgba(243,139,168,.07);border-color:#f38ba8}
+    .callout--highlight{background:rgba(203,166,247,.1);border-color:var(--accent,#cba6f7)}
+    .callout--tip{background:rgba(166,227,161,.07);border-color:#a6e3a1}
+
+    /* ---- Tip box ---- */
+    .tip-box{background:rgba(166,227,161,.07);border-left:4px solid #a6e3a1;border-radius:0 8px 8px 0;padding:.9rem 1.1rem;margin:1.25rem 0;font-size:.87rem;line-height:1.6}
+    .tip-box code{font-size:.82rem}
+    kbd{background:var(--surface-alt,#313244);border:1px solid var(--border,#45475a);border-radius:4px;padding:.1rem .4rem;font-size:.8rem;font-family:monospace}
+
+    /* ---- Section anchor header ---- */
+    .section-h2{display:flex;align-items:center;gap:.6rem;font-size:1.55rem;margin:2.5rem 0 1rem;padding-bottom:.6rem;border-bottom:2px solid var(--border,#313244)}
+    .section-h2 .s-icon{font-size:1.4rem}
+    h3.sub-h3{font-size:1.05rem;margin:1.5rem 0 .6rem;color:var(--accent,#cba6f7)}
+
+    /* ---- Table wrapper ---- */
+    .tbl{overflow-x:auto;margin:1rem 0}
+    .tbl table{width:100%;border-collapse:collapse;font-size:.87rem}
+    .tbl th{background:var(--surface-alt,#313244);padding:.6rem .85rem;text-align:left;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--text-muted,#a6adc8)}
+    .tbl td{padding:.55rem .85rem;border-bottom:1px solid var(--border,#313244);vertical-align:top;line-height:1.5}
+    .tbl tr:last-child td{border-bottom:none}
+    .tbl tr:hover td{background:rgba(255,255,255,.025)}
+    .tbl code{font-size:.82rem}
+
+    /* ---- Page header band ---- */
+    .page-band{margin-bottom:2rem}
+    .page-band__badge{display:inline-block;background:rgba(203,166,247,.15);color:var(--accent,#cba6f7);border:1px solid rgba(203,166,247,.3);border-radius:20px;padding:.25rem .9rem;font-size:.78rem;font-weight:600;letter-spacing:.04em;margin-bottom:.75rem}
+    .page-band__title{font-size:2rem;font-weight:800;margin:0 0 .75rem;line-height:1.2}
+    .page-band__desc{font-size:1rem;color:var(--text-muted,#a6adc8);line-height:1.7;max-width:680px;margin:0}
+
+    /* ---- Content section spacing ---- */
+    .content-section{margin-bottom:3rem}
+  </style>
+</head>
+<body>
+<!-- ═══════════════════════════════════ PAGE WRAPPER ═══════════════════════════════════ -->
+<div class="page-wrapper">
+
+  <!-- ══════ SIDEBAR ══════ -->
+  <aside class="sidebar">
+    <h3>Navegação</h3>
+    <ul>
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="fundamentos.html" class="active">🌐 Fundamentos</a></li>
+      <li><a href="html.html">🏗️ HTML</a></li>
+      <li><a href="css.html">🎨 CSS</a></li>
+      <li><a href="javascript.html">⚡ JavaScript</a></li>
+      <li><a href="php.html">🐘 PHP</a></li>
+      <li><a href="git.html">🌿 Git</a></li>
+      <li><a href="ferramentas.html">🛠️ Ferramentas</a></li>
+    </ul>
+
+    <h3 style="margin-top:1.75rem">Seções</h3>
+    <ul>
+      <li><a href="#web">Como funciona a Web</a></li>
+      <li><a href="#cliente-servidor">Cliente e Servidor</a></li>
+      <li><a href="#http">HTTP e HTTPS</a></li>
+      <li><a href="#dns">DNS</a></li>
+      <li><a href="#navegadores">Navegadores</a></li>
+      <li><a href="#apis">APIs</a></li>
+      <li><a href="#json">JSON</a></li>
+    </ul>
+  </aside>
+
+  <!-- ══════ MAIN CONTENT ══════ -->
+  <main class="content">
+
+    <!-- Page header -->
+    <div class="page-band">
+      <div class="page-band__badge">🌍 Fundamentos</div>
+      <h1 class="page-band__title">Fundamentos da Web</h1>
+      <p class="page-band__desc">
+        Antes de sair construindo sites e sistemas, vale entender o que acontece
+        <em>por baixo dos panos</em>. Aqui você vai descobrir como a web funciona de verdade —
+        do clique no link até a página aparecer na tela. Sem medo, sem papo de PhD,
+        só o essencial com exemplos do dia a dia. 🚀
+      </p>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         SEÇÃO 1 — COMO FUNCIONA A WEB
+    ══════════════════════════════════════════ -->
+    <section id="web" class="content-section">
+      <h2 class="section-h2"><span class="s-icon">🌍</span> Como funciona a Web</h2>
+
+      <p>
+        Você digita <code>www.google.com</code> no navegador e — <em>zap</em> — a página aparece
+        em menos de um segundo. Parece mágica, mas por trás existe um processo bem organizado,
+        com várias etapas acontecendo a toda velocidade. Bora desvendar cada uma!
+      </p>
+
+      <!-- Analogia da pizza -->
+      <div class="callout callout--fun">
+        <div class="callout__icon">🍕</div>
+        <div class="callout__body">
+          <strong>Analogia do dia: Pedir Pizza</strong>
+          <p>
+            Pense que <strong>você é o navegador</strong> e a <strong>pizzaria é o servidor</strong>.
+            Você pega o telefone (abre o browser), liga para o número certo (encontra o IP via DNS),
+            faz o pedido (HTTP Request) e a pizzaria prepara e entrega (HTTP Response).
+            A pizza chegou? Você come (o browser renderiza a página). Simples! 🍕
+          </p>
+        </div>
+      </div>
+
+      <h3 class="sub-h3">O fluxo completo — passo a passo visual</h3>
+
+      <!-- Diagrama de fluxo -->
+      <div class="flow-diagram">
+        <div class="flow-step">
+          <div class="flow-step__icon">💻</div>
+          <div class="flow-step__label">Você digita a URL</div>
+          <div class="flow-step__sub">www.exemplo.com</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-step__icon">📖</div>
+          <div class="flow-step__label">DNS Lookup</div>
+          <div class="flow-step__sub">domínio → IP</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-step__icon">🔌</div>
+          <div class="flow-step__label">Conexão TCP</div>
+          <div class="flow-step__sub">3-way handshake</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-step__icon">📤</div>
+          <div class="flow-step__label">HTTP Request</div>
+          <div class="flow-step__sub">GET / HTTP/1.1</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-step__icon">🖥️</div>
+          <div class="flow-step__label">Servidor processa</div>
+          <div class="flow-step__sub">busca arquivos/BD</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-step__icon">📥</div>
+          <div class="flow-step__label">HTTP Response</div>
+          <div class="flow-step__sub">200 OK + HTML</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-step__icon">🎨</div>
+          <div class="flow-step__label">Browser renderiza</div>
+          <div class="flow-step__sub">página na tela!</div>
+        </div>
+      </div>
+
+      <ol class="step-list">
+        <li>
+          <div>
+            <strong>Você digita a URL</strong> — o navegador recebe o endereço e começa a trabalhar.
+            Já verifica se tem resultado em cache local antes de qualquer coisa.
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>DNS Lookup</strong> — o browser pergunta ao DNS: "qual é o IP desse domínio?".
+            O DNS devolve algo como <code>142.250.79.46</code>.
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Conexão TCP</strong> — o browser abre uma conexão com o servidor usando o protocolo TCP
+            (o famoso <em>3-way handshake</em>: SYN → SYN-ACK → ACK). É como dar um aperto de mão antes de conversar.
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>HTTP Request</strong> — o browser envia uma requisição pedindo a página
+            (geralmente um <code>GET /</code>).
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Servidor processa</strong> — o servidor recebe o pedido, busca os arquivos
+            (ou consulta o banco de dados) e monta a resposta.
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>HTTP Response</strong> — o servidor devolve o HTML, junto com metadados
+            (status code, tipo de conteúdo, etc.).
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Renderização</strong> — o browser lê o HTML, monta o DOM, aplica o CSS
+            e executa o JavaScript. Pronto: página na tela!
+          </div>
+        </li>
+      </ol>
+
+      <!-- Exemplo de request/response -->
+      <div class="code-block">
+        <div class="cb-header">
+          <span class="cb-lang">HTTP</span>
+          <div class="cb-dots">
+            <div class="cb-dot" style="background:#ff5f57"></div>
+            <div class="cb-dot" style="background:#febc2e"></div>
+            <div class="cb-dot" style="background:#28c840"></div>
+          </div>
+        </div>
+        <pre><code><span class="cc"><!-- Requisição enviada pelo browser --></span>
+<span class="ck">GET</span> / <span class="ct">HTTP/1.1</span>
+<span class="ca">Host:</span> <span class="cs">www.exemplo.com</span>
+<span class="ca">User-Agent:</span> <span class="cs">Mozilla/5.0 (Windows NT 10.0)</span>
+<span class="ca">Accept:</span> <span class="cs">text/html,application/xhtml+xml</span>
+<span class="ca">Accept-Language:</span> <span class="cs">pt-BR,pt;q=0.9</span>
+<span class="ca">Connection:</span> <span class="cs">keep-alive</span>
+
+<span class="cc"><!-- Resposta do servidor --></span>
+<span class="ct">HTTP/1.1</span> <span class="cn">200</span> <span class="ck">OK</span>
+<span class="ca">Content-Type:</span> <span class="cs">text/html; charset=UTF-8</span>
+<span class="ca">Content-Length:</span> <span class="cn">1523</span>
+<span class="ca">Cache-Control:</span> <span class="cs">max-age=3600</span>
+
+<span class="ck">&lt;!DOCTYPE html&gt;</span>
+<span class="ck">&lt;html</span> <span class="ca">lang</span>=<span class="cs">"pt-BR"</span><span class="ck">&gt;</span>...página aqui...<span class="ck">&lt;/html&gt;</span></code></pre>
+      </div>
+
+      <div class="callout callout--warn">
+        <div class="callout__icon">⚠️</div>
+        <div class="callout__body">
+          <strong>Erros comuns de quem tá começando</strong>
+          <ul>
+            <li>Confundir URL com IP — a URL é o nome legível; o IP é o endereço numérico real.</li>
+            <li>Achar que a página vem "pronta" do servidor — o browser ainda precisa montar tudo a partir do HTML.</li>
+            <li>Ignorar o cache — muitas vezes o browser nem precisa ir ao servidor; já tem a resposta guardada localmente.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <strong>💡 Dica:</strong> Abra o DevTools do Chrome (<kbd>F12</kbd>), vá na aba <strong>Network</strong>
+        e recarregue a página. Você vai ver cada requisição acontecendo ao vivo, com tempo, tamanho e status code.
+        É hipnotizante — e muito útil para debugar!
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SEÇÃO 2 — CLIENTE E SERVIDOR
+    ══════════════════════════════════════════ -->
+    <section id="cliente-servidor" class="content-section">
+      <h2 class="section-h2"><span class="s-icon">🤝</span> Cliente e Servidor</h2>
+
+      <p>
+        A web funciona num esquema de <strong>pergunta e resposta</strong>. Tem quem pergunta
+        e tem quem responde. Essa dupla tem um nome clássico na computação:
+        <strong>cliente</strong> e <strong>servidor</strong>.
+      </p>
+
+      <div class="callout callout--highlight">
+        <div class="callout__icon">💬</div>
+        <div class="callout__body">
+          <strong>"O cliente pergunta, o servidor responde. Simples assim."</strong>
+          <p>
+            O cliente nunca acessa o banco de dados diretamente — ele pede ao servidor,
+            que decide o que responder. É uma camada de segurança indispensável.
+          </p>
+        </div>
+      </div>
+
+      <div class="split-cards">
+        <div class="split-card split-card--blue">
+          <div class="split-card__icon">💻</div>
+          <h3>Cliente (Frontend)</h3>
+          <p style="font-size:.85rem;margin:.3rem 0 .6rem;color:var(--text-muted,#a6adc8)">
+            Quem <strong>inicia a conversa</strong> — faz as requisições e exibe o resultado.
+          </p>
+          <ul>
+            <li>Roda no dispositivo do usuário</li>
+            <li>Lida com HTML, CSS e JavaScript</li>
+            <li>O que o usuário vê e clica</li>
+            <li>Exemplos: Chrome, Firefox, app React/Vue</li>
+          </ul>
+        </div>
+        <div class="split-card split-card--purple">
+          <div class="split-card__icon">🖥️</div>
+          <h3>Servidor (Backend)</h3>
+          <p style="font-size:.85rem;margin:.3rem 0 .6rem;color:var(--text-muted,#a6adc8)">
+            Quem <strong>ouve e responde</strong> — processa os dados e devolve o que foi pedido.
+          </p>
+          <ul>
+            <li>Roda em máquinas remotas (datacenter/nuvem)</li>
+            <li>Pode usar Node.js, PHP, Python, Go, Java…</li>
+            <li>Acessa bancos de dados e serviços externos</li>
+            <li>Exemplos: API em Express, servidor Apache/Nginx</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="sub-h3">Frontend × Backend × Full Stack</h3>
+      <div class="tbl">
+        <table>
+          <thead>
+            <tr><th>Perfil</th><th>O que faz</th><th>Tecnologias comuns</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Frontend Dev</strong></td>
+              <td>Cria a interface visual com a qual o usuário interage</td>
+              <td>HTML, CSS, JavaScript, React, Vue, Svelte</td>
+            </tr>
+            <tr>
+              <td><strong>Backend Dev</strong></td>
+              <td>Lógica de negócio, banco de dados, autenticação, APIs</td>
+              <td>Node.js, PHP, Python, Java, Go, Ruby</td>
+            </tr>
+            <tr>
+              <td><strong>Full Stack Dev</strong></td>
+              <td>Trabalha nos dois lados — o dev do bem e do mal 😄</td>
+              <td>Tudo acima + noções de DevOps/infra</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="code-block">
+        <div class="cb-header">
+          <span class="cb-lang">JavaScript</span>
+          <div class="cb-dots">
+            <div class="cb-dot" style="background:#ff5f57"></div>
+            <div class="cb-dot" style="background:#febc2e"></div>
+            <div class="cb-dot" style="background:#28c840"></div>
+          </div>
+        </div>
+        <pre><code><span class="cc">// CLIENTE (browser) — faz uma requisição ao servidor</span>
+<span class="ck">const</span> <span class="cv">resposta</span> = <span class="ck">await</span> <span class="cf">fetch</span>(<span class="cs">'https://api.exemplo.com/usuarios'</span>);
+<span class="ck">const</span> <span class="cv">dados</span>    = <span class="ck">await</span> <span class="cv">resposta</span>.<span class="cf">json</span>();
+<span class="cv">console</span>.<span class="cf">log</span>(<span class="cv">dados</span>); <span class="cc">// exibe na tela do usuário</span>
+
+<span class="cc">// SERVIDOR (Node.js/Express) — responde à requisição</span>
+<span class="cv">app</span>.<span class="cf">get</span>(<span class="cs">'/usuarios'</span>, (<span class="cv">req</span>, <span class="cv">res</span>) <span class="ck">=></span> {
+  <span class="ck">const</span> <span class="cv">usuarios</span> = <span class="cv">db</span>.<span class="cf">buscarTodos</span>(); <span class="cc">// consulta o banco de dados</span>
+  <span class="cv">res</span>.<span class="cf">json</span>(<span class="cv">usuarios</span>);              <span class="cc">// devolve os dados como JSON</span>
+});</code></pre>
+      </div>
+
+      <div class="callout callout--warn">
+        <div class="callout__icon">⚠️</div>
+        <div class="callout__body">
+          <strong>Erros comuns</strong>
+          <ul>
+            <li>Colocar lógica sensível (senhas, chaves de API) no frontend — qualquer um pode inspecionar o código!</li>
+            <li>Confundir "frontend" com "só HTML" — apps React/Vue complexos são 100% frontend.</li>
+            <li>Esquecer que servidores também podem ser clientes (quando chamam outras APIs).</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SEÇÃO 3 — HTTP E HTTPS
+    ══════════════════════════════════════════ -->
+    <section id="http" class="content-section">
+      <h2 class="section-h2"><span class="s-icon">📡</span> HTTP e HTTPS</h2>
+
+      <p>
+        <strong>HTTP</strong> significa <em>HyperText Transfer Protocol</em> — é o idioma que cliente
+        e servidor usam para conversar na web. Pensa nele como o roteiro da conversa: quem fala primeiro,
+        o que pode perguntar, como deve ser a resposta.
+      </p>
+
+      <div class="callout callout--fun">
+        <div class="callout__icon">✉️</div>
+        <div class="callout__body">
+          <strong>HTTP sem S é como mandar carta sem envelope — qualquer um lê!</strong>
+          <p>
+            Sem criptografia, os dados trafegam "na clara" pela rede. Alguém com acesso ao seu Wi-Fi
+            (em cafés, aeroportos…) consegue interceptar e ler suas senhas. O HTTPS adiciona a camada
+            <strong>TLS/SSL</strong> que embaralha tudo — só quem tem a chave certa consegue ler. 🔐
+          </p>
+        </div>
+      </div>
+
+      <h3 class="sub-h3">Os Verbos HTTP (Métodos)</h3>
+      <p>Cada requisição usa um <strong>verbo</strong> que indica a intenção da operação:</p>
+
+      <div class="tbl">
+        <table>
+          <thead>
+            <tr><th>Verbo</th><th>Uso</th><th>Analogia</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="verb verb-get">GET</span></td>
+              <td>Buscar/ler dados</td>
+              <td>Pedir o cardápio do restaurante</td>
+            </tr>
+            <tr>
+              <td><span class="verb verb-post">POST</span></td>
+              <td>Criar novo recurso</td>
+              <td>Fazer um pedido novo</td>
+            </tr>
+            <tr>
+              <td><span class="verb verb-put">PUT</span></td>
+              <td>Atualizar recurso completo</td>
+              <td>Trocar o pedido inteiro</td>
+            </tr>
+            <tr>
+              <td><span class="verb verb-patch">PATCH</span></td>
+              <td>Atualizar parte do recurso</td>
+              <td>Mudar só a sobremesa do pedido</td>
+            </tr>
+            <tr>
+              <td><span class="verb verb-delete">DELETE</span></td>
+              <td>Remover recurso</td>
+              <td>Cancelar o pedido</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sub-h3">Códigos de Status HTTP</h3>
+      <p>O servidor sempre responde com um código numérico que diz como foi a operação:</p>
+
+      <div class="tbl">
+        <table>
+          <thead>
+            <tr><th>Código</th><th>Nome</th><th>Significado</th></tr>
+          </thead>
+          <tbody>
+            <tr class="status-2xx">
+              <td><strong>200</strong></td><td>OK</td>
+              <td>Deu tudo certo! Aqui está o que você pediu.</td>
+            </tr>
+            <tr class="status-2xx">
+              <td><strong>201</strong></td><td>Created</td>
+              <td>Recurso criado com sucesso (resposta típica de POST).</td>
+            </tr>
+            <tr class="status-3xx">
+              <td><strong>301</strong></td><td>Moved Permanently</td>
+              <td>Essa URL mudou de endereço para sempre.</td>
+            </tr>
+            <tr class="status-3xx">
+              <td><strong>302</strong></td><td>Found (Redirect)</td>
+              <td>Vá para outro endereço temporariamente.</td>
+            </tr>
+            <tr class="status-4xx">
+              <td><strong>400</strong></td><td>Bad Request</td>
+              <td>Sua requisição está malformada. Erro do cliente.</td>
+            </tr>
+            <tr class="status-4xx">
+              <td><strong>401</strong></td><td>Unauthorized</td>
+              <td>Você precisa se autenticar primeiro.</td>
+            </tr>
+            <tr class="status-4xx">
+              <td><strong>403</strong></td><td>Forbidden</td>
+              <td>Autenticado, mas sem permissão. Acesso negado.</td>
+            </tr>
+            <tr class="status-4xx">
+              <td><strong>404</strong></td><td>Not Found</td>
+              <td>Não encontrado. O clássico dos clássicos. 👻</td>
+            </tr>
+            <tr class="status-5xx">
+              <td><strong>500</strong></td><td>Internal Server Error</td>
+              <td>O servidor bugou. Culpa dele, não sua.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sub-h3">HTTP vs HTTPS</h3>
+
+      <div class="split-cards">
+        <div class="split-card split-card--red">
+          <div class="split-card__icon">🔓</div>
+          <h3>HTTP</h3>
+          <ul>
+            <li>Dados trafegam em texto puro</li>
+            <li>Qualquer um na rede pode interceptar</li>
+            <li>Porta padrão: <code>80</code></li>
+            <li>Não use para dados sensíveis!</li>
+          </ul>
+        </div>
+        <div class="split-card split-card--green">
+          <div class="split-card__icon">🔒</div>
+          <h3>HTTPS</h3>
+          <ul>
+            <li>HTTP + camada TLS/SSL</li>
+            <li>Dados criptografados ponta a ponta</li>
+            <li>Porta padrão: <code>443</code></li>
+            <li>Obrigatório para qualquer site sério</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="code-block">
+        <div class="cb-header">
+          <span class="cb-lang">HTTP — POST com JSON</span>
+          <div class="cb-dots">
+            <div class="cb-dot" style="background:#ff5f57"></div>
+            <div class="cb-dot" style="background:#febc2e"></div>
+            <div class="cb-dot" style="background:#28c840"></div>
+          </div>
+        </div>
+        <pre><code><span class="cc"># Criando um usuário via POST</span>
+<span class="ck">POST</span> /api/usuarios <span class="ct">HTTP/1.1</span>
+<span class="ca">Host:</span> <span class="cs">api.exemplo.com</span>
+<span class="ca">Content-Type:</span> <span class="cs">application/json</span>
+<span class="ca">Authorization:</span> <span class="cs">Bearer eyJhbGciOiJIUzI1NiJ9...</span>
+
+{
+  <span class="ca">"nome"</span>: <span class="cs">"Maria Silva"</span>,
+  <span class="ca">"email"</span>: <span class="cs">"maria@exemplo.com"</span>
+}
+
+<span class="cc"># Resposta de sucesso</span>
+<span class="ct">HTTP/1.1</span> <span class="cn">201</span> <span class="ck">Created</span>
+<span class="ca">Content-Type:</span> <span class="cs">application/json</span>
+
+{
+  <span class="ca">"id"</span>: <span class="cn">42</span>,
+  <span class="ca">"nome"</span>: <span class="cs">"Maria Silva"</span>,
+  <span class="ca">"criadoEm"</span>: <span class="cs">"2024-01-15T10:30:00Z"</span>
+}</code></pre>
+      </div>
+
+      <div class="tip-box">
+        <strong>💡 Dica:</strong> Sempre use HTTPS no seu projeto — mesmo em desenvolvimento local você pode
+        usar certificados com a ferramenta <code>mkcert</code>. Browsers modernos já exibem aviso para sites
+        HTTP. Não deixa essa mancada passar!
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SEÇÃO 4 — DNS
+    ══════════════════════════════════════════ -->
+    <section id="dns" class="content-section">
+      <h2 class="section-h2"><span class="s-icon">📖</span> DNS — A Agenda Telefônica da Internet</h2>
+
+      <p>
+        <strong>DNS</strong> significa <em>Domain Name System</em>. É o sistema que traduz nomes de domínio legíveis
+        (como <code>google.com</code>) para endereços IP numéricos (como <code>142.250.79.46</code>) que as máquinas entendem.
+        Porque ninguém quer decorar <code>142.250.79.46</code> em vez de <code>google.com</code>, né? 😅
+      </p>
+
+      <div class="callout callout--fun">
+        <div class="callout__icon">📱</div>
+        <div class="callout__body">
+          <strong>Analogia: A Agenda do Celular</strong>
+          <p>
+            Você salvou "Mãe" no celular e já ligou pra ela centenas de vezes — mas provavelmente não
+            sabe o número dela de cor. O DNS faz o mesmo: você digita <code>youtube.com</code> e ele
+            descobre o número (IP) pra você. Sem DNS, você precisaria decorar o IP de cada site. 😱
+          </p>
+        </div>
+      </div>
+
+      <h3 class="sub-h3">Como a resolução DNS funciona</h3>
+
+      <!-- Diagrama DNS -->
+      <div class="flow-diagram">
+        <div class="flow-step">
+          <div class="flow-step__icon">🖥️</div>
+          <div class="flow-step__label">Você digita</div>
+          <div class="flow-step__sub">google.com</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-step__icon">💾</div>
+          <div class="flow-step__label">Cache local</div>
+          <div class="flow-step__sub">já sabe? usa!</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-step__icon">📡</div>
+          <div class="flow-step__label">Resolver DNS</div>
+          <div class="flow-step__sub">do seu ISP</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-step__icon">🌐</div>
+          <div class="flow-step__label">Root Server</div>
+          <div class="flow-step__sub">quem cuida do .com?</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-step__icon">🏢</div>
+          <div class="flow-step__label">DNS Autoritativo</div>
+          <div class="flow-step__sub">IP = 142.250.79.46</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-step__icon">✅</div>
+          <div class="flow-step__label">Resposta ao browser</div>
+          <div class="flow-step__sub">aqui está o IP!</div>
+        </div>
+      </div>
+
+      <h3 class="sub-h3">Tipos de Registros DNS</h3>
+      <div class="tbl">
+        <table>
+          <thead>
+            <tr><th>Tipo</th><th>Para que serve</th><th>Exemplo</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>A</code></td>
+              <td>Aponta domínio para um endereço IPv4</td>
+              <td><code>exemplo.com → 192.168.1.1</code></td>
+            </tr>
+            <tr>
+              <td><code>AAAA</code></td>
+              <td>Aponta domínio para um endereço IPv6</td>
+              <td><code>exemplo.com → 2001:db8::1</code></td>
+            </tr>
+            <tr>
+              <td><code>CNAME</code></td>
+              <td>Apelido — aponta para outro domínio</td>
+              <td><code>www → exemplo.com</code></td>
+            </tr>
+            <tr>
+              <td><code>MX</code></td>
+              <td>Servidor de e-mail do domínio</td>
+              <td><code>mail.exemplo.com</code></td>
+            </tr>
+            <tr>
+              <td><code>TXT</code></td>
+              <td>Texto livre (verificações, SPF, DKIM)</td>
+              <td><code>v=spf1 include:...</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="code-block">
+        <div class="cb-header">
+          <span class="cb-lang">Terminal</span>
+          <div class="cb-dots">
+            <div class="cb-dot" style="background:#ff5f57"></div>
+            <div class="cb-dot" style="background:#febc2e"></div>
+            <div class="cb-dot" style="background:#28c840"></div>
+          </div>
+        </div>
+        <pre><code><span class="cc"># Consultando DNS pelo terminal</span>
+$ <span class="cf">nslookup</span> google.com
+Server:   <span class="cn">8.8.8.8</span>
+Address:  8.8.8.8#<span class="cn">53</span>
+
+Non-authoritative answer:
+Name:    google.com
+Address: <span class="cn">142.250.79.46</span>
+
+<span class="cc"># Usando o dig (mais detalhado)</span>
+$ <span class="cf">dig</span> google.com A
+
+<span class="cc"># Resposta inclui TTL (tempo em cache)</span>
+google.com.  <span class="cn">300</span>  IN  A  <span class="cn">142.250.79.46</span></code></pre>
+      </div>
+
+      <div class="callout callout--warn">
+        <div class="callout__icon">⚠️</div>
+        <div class="callout__body">
+          <strong>Erros comuns ao mexer com DNS</strong>
+          <ul>
+            <li><strong>Impaciência:</strong> mudanças podem demorar até 48h para propagar — é o TTL do registro.</li>
+            <li><strong>CNAME na raiz:</strong> não se usa CNAME no domínio raiz (<code>exemplo.com</code>), só em subdomínios.</li>
+            <li><strong>Ponto final faltando:</strong> em alguns painéis, CNAME precisa do ponto no fim: <code>outro.com.</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <strong>💡 Dica:</strong> DNS público gratuito e rápido: use <code>8.8.8.8</code> (Google) ou
+        <code>1.1.1.1</code> (Cloudflare). O da Cloudflare é geralmente o mais rápido do mundo
+        e tem foco em privacidade. Vale trocar no seu roteador!
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SEÇÃO 5 — NAVEGADORES
+    ══════════════════════════════════════════ -->
+    <section id="navegadores" class="content-section">
+      <h2 class="section-h2"><span class="s-icon">🧭</span> Navegadores</h2>
+
+      <p>
+        O navegador (browser) é muito mais que uma janelinha para a internet. Ele é um software
+        extremamente complexo que faz download de arquivos, interpreta HTML/CSS/JS, executa animações,
+        gerencia memória, isola abas e muito mais — tudo em milissegundos. É literalmente um
+        <em>sistema operacional dentro do sistema operacional</em>.
+      </p>
+
+      <h3 class="sub-h3">O pipeline de renderização</h3>
+      <ol class="step-list">
+        <li><div><strong>Requisição:</strong> busca os arquivos no servidor via HTTP/HTTPS.</div></li>
+        <li><div><strong>Parse do HTML:</strong> lê o HTML e monta o <strong>DOM</strong> (Document Object Model — a árvore da página).</div></li>
+        <li><div><strong>Parse do CSS:</strong> lê os estilos e monta o <strong>CSSOM</strong> (CSS Object Model).</div></li>
+        <li><div><strong>Render Tree:</strong> combina DOM + CSSOM para saber exatamente o que renderizar.</div></li>
+        <li><div><strong>Layout:</strong> calcula posição e tamanho de cada elemento na tela.</div></li>
+        <li><div><strong>Paint:</strong> desenha os pixels — cores, bordas, sombras, texto.</div></li>
+        <li><div><strong>Composite:</strong> combina as camadas (layers) e exibe o resultado final.</div></li>
+      </ol>
+
+      <h3 class="sub-h3">Engines de Renderização</h3>
+      <div class="tbl">
+        <table>
+          <thead>
+            <tr><th>Engine</th><th>Browsers que usam</th><th>Mantida por</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Blink</strong></td>
+              <td>Chrome, Edge, Opera, Brave, Samsung Internet</td>
+              <td>Google (fork do WebKit em 2013)</td>
+            </tr>
+            <tr>
+              <td><strong>Gecko</strong></td>
+              <td>Firefox, Thunderbird</td>
+              <td>Mozilla Foundation</td>
+            </tr>
+            <tr>
+              <td><strong>WebKit</strong></td>
+              <td>Safari, e <em>todos</em> os browsers no iOS (por obrigação da Apple)</td>
+              <td>Apple</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout--fun">
+        <div class="callout__icon">⚔️</div>
+        <div class="callout__body">
+          <strong>Fun Fact: A Browser War dos anos 90</strong>
+          <p>
+            Netscape e Internet Explorer travaram uma batalha épica pelo domínio da web.
+            Cada um inventava suas próprias tags HTML — o que funcionava num não funcionava no outro.
+            Essa bagunça motivou a criação do W3C para padronizar tudo. O IE ganhou aquela batalha
+            mas perdeu a guerra: foi descontinuado em 2022 depois de anos de piadas. Hoje o Chrome
+            domina com ~65% do mercado. 👑
+          </p>
+        </div>
+      </div>
+
+      <h3 class="sub-h3">DevTools — seu melhor amigo</h3>
+      <p>Aperte <kbd>F12</kbd> (ou <kbd>Ctrl+Shift+I</kbd>) em qualquer browser e um universo se abre:</p>
+
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="feature-item__icon">🔍</div>
+          <div>
+            <h4>Elements / Inspector</h4>
+            <p>Inspeciona e edita HTML e CSS ao vivo na página. Você literalmente vê a Render Tree.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-item__icon">📡</div>
+          <div>
+            <h4>Network</h4>
+            <p>Vê todas as requisições HTTP em tempo real — status, tempo, tamanho, cabeçalhos, payload.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-item__icon">⚡</div>
+          <div>
+            <h4>Console</h4>
+            <p>Roda JavaScript na hora, vê erros, avisos e logs do seu código.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-item__icon">📦</div>
+          <div>
+            <h4>Application / Storage</h4>
+            <p>Gerencia cookies, localStorage, sessionStorage, IndexedDB e Service Workers.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-item__icon">🔦</div>
+          <div>
+            <h4>Lighthouse</h4>
+            <p>Auditoria automática de performance, SEO, acessibilidade e boas práticas. Gera nota de 0–100.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <strong>💡 Dica:</strong> No Console do browser, você pode executar JavaScript diretamente para
+        manipular a página ao vivo. Tente: <code>document.body.style.background = 'hotpink'</code>
+        — é uma forma incrível de aprender e testar rapidinho sem editar arquivo nenhum!
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SEÇÃO 6 — APIS
+    ══════════════════════════════════════════ -->
+    <section id="apis" class="content-section">
+      <h2 class="section-h2"><span class="s-icon">🔌</span> APIs</h2>
+
+      <p>
+        <strong>API</strong> significa <em>Application Programming Interface</em>.
+        É um conjunto de regras que define como dois sistemas se comunicam. Em outras palavras:
+        é o contrato que diz <em>"se você me pedir desta forma, eu te respondo desta forma"</em>.
+      </p>
+
+      <div class="callout callout--highlight">
+        <div class="callout__icon">🍽️</div>
+        <div class="callout__body">
+          <strong>"API é o garçom entre você e a cozinha."</strong>
+          <p>
+            Você (o app/cliente) não vai direto na cozinha (banco de dados/sistema interno).
+            Você fala com o garçom (API), que leva seu pedido, traz o resultado e garante que
+            você não mexa onde não deve. Elegante, seguro e organizado! 🧑‍🍳
+          </p>
+        </div>
+      </div>
+
+      <h3 class="sub-h3">REST API — o jeito mais popular</h3>
+      <p>
+        <strong>REST</strong> (Representational State Transfer) é um estilo arquitetural para criar APIs web.
+        Uma API REST usa os verbos HTTP e organiza os dados em <strong>recursos</strong> (URLs).
+        Cada URL representa algo do mundo real — um usuário, um produto, um pedido.
+      </p>
+
+      <div class="code-block">
+        <div class="cb-header">
+          <span class="cb-lang">HTTP / REST API</span>
+          <div class="cb-dots">
+            <div class="cb-dot" style="background:#ff5f57"></div>
+            <div class="cb-dot" style="background:#febc2e"></div>
+            <div class="cb-dot" style="background:#28c840"></div>
+          </div>
+        </div>
+        <pre><code><span class="cc"># Endpoints REST de uma API de produtos</span>
+
+<span class="ck">GET</span>    /api/produtos           <span class="cc"># lista todos os produtos</span>
+<span class="ck">GET</span>    /api/produtos/<span class="cn">42</span>       <span class="cc"># busca o produto id=42</span>
+<span class="ck">POST</span>   /api/produtos           <span class="cc"># cria novo produto</span>
+<span class="ck">PUT</span>    /api/produtos/<span class="cn">42</span>       <span class="cc"># substitui produto id=42 completamente</span>
+<span class="ck">PATCH</span>  /api/produtos/<span class="cn">42</span>       <span class="cc"># atualiza só alguns campos</span>
+<span class="ck">DELETE</span> /api/produtos/<span class="cn">42</span>       <span class="cc"># remove produto id=42</span>
+
+<span class="cc"># Resposta do GET /api/produtos/42</span>
+<span class="ct">HTTP/1.1</span> <span class="cn">200</span> <span class="ck">OK</span>
+{
+  <span class="ca">"id"</span>: <span class="cn">42</span>,
+  <span class="ca">"nome"</span>: <span class="cs">"Notebook Gamer"</span>,
+  <span class="ca">"preco"</span>: <span class="cn">4999.90</span>,
+  <span class="ca">"categoria"</span>: <span class="cs">"eletrônicos"</span>,
+  <span class="ca">"emEstoque"</span>: <span class="ck">true</span>
+}</code></pre>
+      </div>
+
+      <h3 class="sub-h3">Consumindo uma API com JavaScript</h3>
+
+      <div class="code-block">
+        <div class="cb-header">
+          <span class="cb-lang">JavaScript — fetch()</span>
+          <div class="cb-dots">
+            <div class="cb-dot" style="background:#ff5f57"></div>
+            <div class="cb-dot" style="background:#febc2e"></div>
+            <div class="cb-dot" style="background:#28c840"></div>
+          </div>
+        </div>
+        <pre><code><span class="cc">// Buscando dados de uma API pública de clima</span>
+<span class="ck">async function</span> <span class="cf">buscarClima</span>(<span class="cv">cidade</span>) {
+  <span class="ck">const</span> <span class="cv">url</span> = <span class="cs">`https://api.openweathermap.org/data/2.5/weather?q=<span class="cv">${cidade}</span>&appid=SUA_CHAVE`</span>;
+
+  <span class="ck">try</span> {
+    <span class="ck">const</span> <span class="cv">resposta</span> = <span class="ck">await</span> <span class="cf">fetch</span>(<span class="cv">url</span>);
+
+    <span class="ck">if</span> (!<span class="cv">resposta</span>.ok) {
+      <span class="ck">throw new</span> <span class="ct">Error</span>(<span class="cs">`Erro HTTP: <span class="cv">${resposta.status}</span>`</span>);
+    }
+
+    <span class="ck">const</span> <span class="cv">dados</span> = <span class="ck">await</span> <span class="cv">resposta</span>.<span class="cf">json</span>();
+    <span class="cv">console</span>.<span class="cf">log</span>(<span class="cs">`Temperatura: <span class="cv">${dados.main.temp}</span>°C`</span>);
+
+  } <span class="ck">catch</span> (<span class="cv">erro</span>) {
+    <span class="cv">console</span>.<span class="cf">error</span>(<span class="cs">'Algo deu errado:'</span>, <span class="cv">erro</span>);
+  }
+}
+
+<span class="cf">buscarClima</span>(<span class="cs">'São Paulo'</span>);</code></pre>
+      </div>
+
+      <h3 class="sub-h3">APIs famosas que você vai usar</h3>
+
+      <div class="api-grid">
+        <div class="api-card">
+          <div class="api-card__icon">🌤️</div>
+          <div class="api-card__name">OpenWeather</div>
+          <div class="api-card__desc">Clima e previsão do tempo</div>
+        </div>
+        <div class="api-card">
+          <div class="api-card__icon">🗺️</div>
+          <div class="api-card__name">Google Maps</div>
+          <div class="api-card__desc">Mapas, rotas, geolocalização</div>
+        </div>
+        <div class="api-card">
+          <div class="api-card__icon">💳</div>
+          <div class="api-card__name">Stripe</div>
+          <div class="api-card__desc">Pagamentos online</div>
+        </div>
+        <div class="api-card">
+          <div class="api-card__icon">📧</div>
+          <div class="api-card__name">SendGrid</div>
+          <div class="api-card__desc">Envio de e-mails</div>
+        </div>
+        <div class="api-card">
+          <div class="api-card__icon">🏠</div>
+          <div class="api-card__name">ViaCEP</div>
+          <div class="api-card__desc">Endereço por CEP 🇧🇷</div>
+        </div>
+        <div class="api-card">
+          <div class="api-card__icon">🤖</div>
+          <div class="api-card__name">OpenAI</div>
+          <div class="api-card__desc">GPT, DALL-E, Whisper</div>
+        </div>
+      </div>
+
+      <div class="callout callout--warn">
+        <div class="callout__icon">⚠️</div>
+        <div class="callout__body">
+          <strong>Erros comuns com APIs</strong>
+          <ul>
+            <li><strong>Expor chaves de API no frontend</strong> — qualquer um inspeciona o código e rouba sua chave!</li>
+            <li><strong>Não tratar erros</strong> — APIs ficam fora do ar, têm rate limits e retornam dados inesperados.</li>
+            <li><strong>Ignorar rate limits</strong> — Excedeu o limite? Leva um 429 (Too Many Requests) e fica bloqueado.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SEÇÃO 7 — JSON
+    ══════════════════════════════════════════ -->
+    <section id="json" class="content-section">
+      <h2 class="section-h2"><span class="s-icon">📄</span> JSON</h2>
+
+      <p>
+        <strong>JSON</strong> — JavaScript Object Notation — é o formato de dados mais usado na web hoje.
+        É uma forma de representar dados como texto legível tanto para humanos quanto para máquinas.
+        Se você for trabalhar com APIs (e vai!), vai usar JSON o dia todo, todo dia.
+      </p>
+
+      <h3 class="sub-h3">Objeto JSON completo com endereço aninhado</h3>
+
+      <div class="code-block">
+        <div class="cb-header">
+          <span class="cb-lang">JSON</span>
+          <div class="cb-dots">
+            <div class="cb-dot" style="background:#ff5f57"></div>
+            <div class="cb-dot" style="background:#febc2e"></div>
+            <div class="cb-dot" style="background:#28c840"></div>
+          </div>
+        </div>
+        <pre><code>{
+  <span class="ca">"id"</span>: <span class="cn">1</span>,
+  <span class="ca">"nome"</span>: <span class="cs">"João da Silva"</span>,
+  <span class="ca">"email"</span>: <span class="cs">"joao@exemplo.com"</span>,
+  <span class="ca">"idade"</span>: <span class="cn">28</span>,
+  <span class="ca">"ativo"</span>: <span class="ck">true</span>,
+  <span class="ca">"telefone"</span>: <span class="ck">null</span>,
+  <span class="ca">"endereco"</span>: {
+    <span class="ca">"rua"</span>: <span class="cs">"Av. Paulista"</span>,
+    <span class="ca">"numero"</span>: <span class="cn">1000</span>,
+    <span class="ca">"bairro"</span>: <span class="cs">"Bela Vista"</span>,
+    <span class="ca">"cidade"</span>: <span class="cs">"São Paulo"</span>,
+    <span class="ca">"cep"</span>: <span class="cs">"01310-100"</span>
+  },
+  <span class="ca">"hobbies"</span>: [
+    <span class="cs">"programação"</span>,
+    <span class="cs">"videogame"</span>,
+    <span class="cs">"café"</span>
+  ],
+  <span class="ca">"scores"</span>: [<span class="cn">95</span>, <span class="cn">87</span>, <span class="cn">92</span>]
+}</code></pre>
+      </div>
+
+      <h3 class="sub-h3">Tipos de dados em JSON</h3>
+      <div class="tbl">
+        <table>
+          <thead>
+            <tr><th>Tipo</th><th>Exemplo</th><th>Observação</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>string</code></td>
+              <td><code>"Olá mundo"</code></td>
+              <td>Sempre aspas duplas</td>
+            </tr>
+            <tr>
+              <td><code>number</code></td>
+              <td><code>42</code>, <code>3.14</code></td>
+              <td>Sem aspas. Sem separador de milhar.</td>
+            </tr>
+            <tr>
+              <td><code>boolean</code></td>
+              <td><code>true</code>, <code>false</code></td>
+              <td>Minúsculo! Não <code>True</code>/<code>False</code>.</td>
+            </tr>
+            <tr>
+              <td><code>null</code></td>
+              <td><code>null</code></td>
+              <td>Representa ausência de valor</td>
+            </tr>
+            <tr>
+              <td><code>array</code></td>
+              <td><code>[1, "dois", true]</code></td>
+              <td>Pode misturar tipos</td>
+            </tr>
+            <tr>
+              <td><code>object</code></td>
+              <td><code>{"chave": "valor"}</code></td>
+              <td>Chaves sempre entre aspas duplas</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sub-h3">JSON.parse e JSON.stringify no JavaScript</h3>
+
+      <div class="code-block">
+        <div class="cb-header">
+          <span class="cb-lang">JavaScript</span>
+          <div class="cb-dots">
+            <div class="cb-dot" style="background:#ff5f57"></div>
+            <div class="cb-dot" style="background:#febc2e"></div>
+            <div class="cb-dot" style="background:#28c840"></div>
+          </div>
+        </div>
+        <pre><code><span class="cc">// JSON.parse — converte string JSON → objeto JavaScript</span>
+<span class="ck">const</span> <span class="cv">jsonString</span> = <span class="cs">'{"nome":"Ana","idade":25}'</span>;
+<span class="ck">const</span> <span class="cv">objeto</span>     = <span class="ct">JSON</span>.<span class="cf">parse</span>(<span class="cv">jsonString</span>);
+<span class="cv">console</span>.<span class="cf">log</span>(<span class="cv">objeto</span>.nome);  <span class="cc">// "Ana"</span>
+<span class="cv">console</span>.<span class="cf">log</span>(<span class="cv">objeto</span>.idade); <span class="cc">// 25</span>
+
+<span class="cc">// JSON.stringify — converte objeto JavaScript → string JSON</span>
+<span class="ck">const</span> <span class="cv">usuario</span> = { <span class="ca">nome</span>: <span class="cs">"Carlos"</span>, <span class="ca">logado</span>: <span class="ck">true</span> };
+<span class="ck">const</span> <span class="cv">texto</span>   = <span class="ct">JSON</span>.<span class="cf">stringify</span>(<span class="cv">usuario</span>);
+<span class="cv">console</span>.<span class="cf">log</span>(<span class="cv">texto</span>); <span class="cc">// '{"nome":"Carlos","logado":true}'</span>
+
+<span class="cc">// Com indentação (útil para debug e logs):</span>
+<span class="cv">console</span>.<span class="cf">log</span>(<span class="ct">JSON</span>.<span class="cf">stringify</span>(<span class="cv">usuario</span>, <span class="ck">null</span>, <span class="cn">2</span>));
+
+<span class="cc">// Acessando dados aninhados:</span>
+<span class="ck">const</span> <span class="cv">cidade</span> = <span class="cv">objeto</span>.endereco.cidade; <span class="cc">// "São Paulo"</span>
+<span class="ck">const</span> <span class="cv">hobby</span>  = <span class="cv">objeto</span>.hobbies[<span class="cn">0</span>];       <span class="cc">// "programação"</span></code></pre>
+      </div>
+
+      <h3 class="sub-h3">Erros comuns no JSON</h3>
+
+      <div class="code-block">
+        <div class="cb-header">
+          <span class="cb-lang">JSON — O que NÃO fazer ❌</span>
+          <div class="cb-dots">
+            <div class="cb-dot" style="background:#ff5f57"></div>
+            <div class="cb-dot" style="background:#febc2e"></div>
+            <div class="cb-dot" style="background:#28c840"></div>
+          </div>
+        </div>
+        <pre><code><span class="cc">// ❌ Trailing comma — vírgula no último item</span>
+{
+  <span class="ca">"nome"</span>: <span class="cs">"Ana"</span>,
+  <span class="ca">"idade"</span>: <span class="cn">25</span>,   <span class="cc">// ← essa vírgula quebra tudo!</span>
+}
+
+<span class="cc">// ❌ Aspas simples — não são válidas em JSON</span>
+{
+  <span class="cs">'nome'</span>: <span class="cs">'Ana'</span>   <span class="cc">// ← deve usar aspas DUPLAS</span>
+}
+
+<span class="cc">// ❌ Chaves sem aspas — JSON não é JavaScript!</span>
+{
+  nome: <span class="cs">"Ana"</span>   <span class="cc">// ← chaves precisam de aspas duplas</span>
+}
+
+<span class="cc">// ❌ Comentários — JSON puro não suporta</span>
+{
+  <span class="ca">"id"</span>: <span class="cn">1</span> <span class="cc">// isso vai quebrar o parse</span>
+}
+
+<span class="cc">// ✅ CORRETO</span>
+{
+  <span class="ca">"nome"</span>: <span class="cs">"Ana"</span>,
+  <span class="ca">"idade"</span>: <span class="cn">25</span>
+}</code></pre>
+      </div>
+
+      <div class="tip-box">
+        <strong>💡 Dica:</strong> Use <a href="https://jsonlint.com" target="_blank" rel="noopener">jsonlint.com</a>
+        para validar se um JSON está correto. No VS Code, use <kbd>Ctrl+Shift+P</kbd> → "Format Document"
+        para indentar JSON automaticamente. Salva muita dor de cabeça!
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         CAIXA RESUMO FINAL
+    ══════════════════════════════════════════ -->
+    <div class="summary-box">
+      <h3 style="margin:0 0 1rem;font-size:1.15rem;">📋 Resumão — Fundamentos da Web</h3>
+      <div class="summary-grid">
+        <div class="summary-item">
+          <div class="summary-item__icon">🌍</div>
+          <div>
+            <h4>Como funciona a Web</h4>
+            <p>URL → DNS → TCP → HTTP Request → Server → HTTP Response → Render</p>
+          </div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-item__icon">🤝</div>
+          <div>
+            <h4>Cliente e Servidor</h4>
+            <p>Cliente pergunta (browser/app), servidor responde (Node.js/PHP/Python).</p>
+          </div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-item__icon">📡</div>
+          <div>
+            <h4>HTTP e HTTPS</h4>
+            <p>Verbos (GET/POST/PUT/DELETE), status codes (200/404/500), HTTPS = HTTP + TLS.</p>
+          </div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-item__icon">📖</div>
+          <div>
+            <h4>DNS</h4>
+            <p>Traduz domínios em IPs. Registros: A, CNAME, MX, TXT. Propagação leva até 48h.</p>
+          </div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-item__icon">🧭</div>
+          <div>
+            <h4>Navegadores</h4>
+            <p>Parse HTML → DOM, CSS → CSSOM, Render Tree, Layout, Paint. DevTools é essencial!</p>
+          </div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-item__icon">🔌</div>
+          <div>
+            <h4>APIs</h4>
+            <p>Contrato entre sistemas. REST usa HTTP + URLs como recursos. JSON como formato.</p>
+          </div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-item__icon">📄</div>
+          <div>
+            <h4>JSON</h4>
+            <p>Aspas duplas, sem vírgula no final, sem comentários. JSON.parse / JSON.stringify.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navegação entre páginas -->
+    <div class="page-nav">
+      <a href="index.html">← Home</a>
+      <a href="html.html">HTML →</a>
+    </div>
+
+  </main>
+
+  <!-- ══════ TOC PANEL (direita) ══════ -->
+  <div class="toc-panel">
+    <h4>Nesta página</h4>
+    <ul>
+      <li><a href="#web">🌍 Como funciona a Web</a></li>
+      <li><a href="#cliente-servidor">🤝 Cliente e Servidor</a></li>
+      <li><a href="#http">📡 HTTP e HTTPS</a></li>
+      <li><a href="#dns">📖 DNS</a></li>
+      <li><a href="#navegadores">🧭 Navegadores</a></li>
+      <li><a href="#apis">🔌 APIs</a></li>
+      <li><a href="#json">📄 JSON</a></li>
+    </ul>
+  </div>
+
+</div><!-- /page-wrapper -->
+<script>
+  /* Highlight ativo no TOC conforme o scroll */
+  (function () {
+    const sections = document.querySelectorAll('section[id]');
+    const tocLinks = document.querySelectorAll('.toc-panel a');
+
+    function update() {
+      let current = '';
+      sections.forEach(sec => {
+        if (sec.getBoundingClientRect().top <= 130) current = sec.id;
+      });
+      tocLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current
+          ? 'var(--accent,#cba6f7)'
+          : '';
+        a.style.fontWeight = a.getAttribute('href') === '#' + current ? '600' : '';
+      });
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+</script>
+
+<script src="./assets/js/include.js" defer></script>
+</body>
+</html>

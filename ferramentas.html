@@ -1,0 +1,1269 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dev Atlas — Ferramentas: VS Code, DevTools, Terminal, Node.js e npm para turbinar seu fluxo de desenvolvimento.">
+    <title>Ferramentas — Dev Atlas</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+<!-- ── LAYOUT ── -->
+<div class="page-wrapper">
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="sidebar">
+        <h3>Módulos</h3>
+        <ul>
+            <li><a href="index.html"><span class="dot"></span>Início</a></li>
+            <li><a href="fundamentos.html"><span class="dot"></span>Fundamentos</a></li>
+            <li><a href="html.html"><span class="dot"></span>HTML</a></li>
+            <li><a href="css.html"><span class="dot"></span>CSS</a></li>
+            <li><a href="javascript.html"><span class="dot"></span>JavaScript</a></li>
+            <li><a href="php.html"><span class="dot"></span>PHP</a></li>
+            <li><a href="git.html"><span class="dot"></span>Git</a></li>
+            <li><a href="ferramentas.html" class="active"><span class="dot"></span>Ferramentas</a></li>
+        </ul>
+
+        <h3>Nesta página</h3>
+        <ul>
+            <li><a href="#vscode"><span class="dot"></span>VS Code</a></li>
+            <li><a href="#devtools"><span class="dot"></span>DevTools</a></li>
+            <li><a href="#terminal"><span class="dot"></span>Terminal</a></li>
+            <li><a href="#nodejs"><span class="dot"></span>Node.js e npm</a></li>
+            <li><a href="#outras"><span class="dot"></span>Outras Ferramentas</a></li>
+        </ul>
+    </aside>
+
+    <!-- ── MAIN ── -->
+    <main class="content">
+
+        <div class="page-badge">🛠️ Ferramentas</div>
+        <h1 class="page-title">Ferramentas do Desenvolvedor</h1>
+        <p class="page-subtitle">
+            Saber a linguagem é metade do caminho. A outra metade é dominar as ferramentas que
+            tornam seu trabalho mais rápido, organizado e menos frustrante. Aqui estão as essenciais.
+        </p>
+
+        <!-- ────────────────────────────────────────
+             1. VS CODE
+        ──────────────────────────────────────── -->
+        <section id="vscode">
+
+            <div class="section-label">
+                <div class="sl-icon sl-blue">💻</div>
+                <span>Tópico 1</span>
+            </div>
+            <h2 class="section-h">VS Code — O Editor dos Devs</h2>
+
+            <p>
+                O <strong>Visual Studio Code</strong> (VS Code) é o editor de código mais popular do mundo
+                — e não é à toa. É gratuito, open source, leve, cheio de extensões e funciona em Windows,
+                Mac e Linux. Se você ainda usa o Bloco de Notas para escrever código, esse é o upgrade mais
+                importante que você pode fazer agora.
+            </p>
+
+            <div class="callout fun">
+                <div class="callout-icon">📊</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Números que impressionam:</strong> Segundo a pesquisa anual do Stack Overflow,
+                        o VS Code é usado por mais de <strong>73% dos desenvolvedores</strong> em todo o mundo.
+                        Ele foi lançado pela Microsoft em 2015 e em menos de dois anos já havia desbancado o
+                        Sublime Text e o Atom que reinavam antes. Hoje tem mais de 35 mil extensões disponíveis.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Instalação e primeiros passos</h3>
+            <p>
+                Baixe em <a href="https://code.visualstudio.com" target="_blank" rel="noopener">code.visualstudio.com</a>.
+                Instale, abra uma pasta do seu projeto com <strong>File → Open Folder</strong> (ou
+                arraste a pasta para a janela) e pronto — você já está em casa.
+            </p>
+
+            <h3 class="sub-h">Interface — o que é o quê</h3>
+
+            <div class="diagram">
+                <div class="d-line" style="color:var(--text-muted);font-size:.75rem;margin-bottom:.8rem">LAYOUT DO VS CODE</div>
+                <div class="d-line">
+                    <span class="d-tag">Activity Bar</span>
+                    <span class="d-note">faixa vertical esquerda — Explorer, Search, Git, Extensions, Debug</span>
+                </div>
+                <div class="d-line i1"><span>↓</span></div>
+                <div class="d-line">
+                    <span class="d-tag">Explorer (Ctrl+Shift+E)</span>
+                    <span class="d-note">árvore de arquivos do seu projeto</span>
+                </div>
+                <div class="d-line i1"><span>↓</span></div>
+                <div class="d-line">
+                    <span class="d-tag">Editor</span>
+                    <span class="d-note">área central — onde você escreve código. Abre em abas. Split com Ctrl+\</span>
+                </div>
+                <div class="d-line i1"><span>↓</span></div>
+                <div class="d-line">
+                    <span class="d-tag">Terminal Integrado (Ctrl+`)</span>
+                    <span class="d-note">painel inferior — roda comandos sem sair do editor</span>
+                </div>
+                <div class="d-line i1"><span>↓</span></div>
+                <div class="d-line">
+                    <span class="d-tag">Status Bar</span>
+                    <span class="d-note">rodapé — branch Git, erros, warnings, linguagem do arquivo</span>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Atalhos que salvam vidas</h3>
+            <p>Decorar esses atalhos é o maior salto de produtividade que você pode ter como dev:</p>
+
+            <div class="tbl-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Atalho (Windows)</th>
+                            <th>Atalho (Mac)</th>
+                            <th>O que faz</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>Ctrl+P</code></td>
+                            <td><code>Cmd+P</code></td>
+                            <td>Abre arquivo pelo nome (busca fuzzy em todo o projeto)</td>
+                        </tr>
+                        <tr>
+                            <td><code>Ctrl+Shift+P</code></td>
+                            <td><code>Cmd+Shift+P</code></td>
+                            <td>Paleta de comandos — acessa qualquer função do editor</td>
+                        </tr>
+                        <tr>
+                            <td><code>Ctrl+`</code></td>
+                            <td><code>Ctrl+`</code></td>
+                            <td>Abre/fecha o terminal integrado</td>
+                        </tr>
+                        <tr>
+                            <td><code>Ctrl+D</code></td>
+                            <td><code>Cmd+D</code></td>
+                            <td>Seleciona próxima ocorrência da palavra (multi-cursor)</td>
+                        </tr>
+                        <tr>
+                            <td><code>Alt+↑ / Alt+↓</code></td>
+                            <td><code>Option+↑ / Option+↓</code></td>
+                            <td>Move a linha atual para cima ou para baixo</td>
+                        </tr>
+                        <tr>
+                            <td><code>Shift+Alt+↓</code></td>
+                            <td><code>Shift+Option+↓</code></td>
+                            <td>Duplica a linha atual abaixo</td>
+                        </tr>
+                        <tr>
+                            <td><code>Ctrl+/</code></td>
+                            <td><code>Cmd+/</code></td>
+                            <td>Comenta/descomenta a linha selecionada</td>
+                        </tr>
+                        <tr>
+                            <td><code>Ctrl+Shift+F</code></td>
+                            <td><code>Cmd+Shift+F</code></td>
+                            <td>Busca em todos os arquivos do projeto</td>
+                        </tr>
+                        <tr>
+                            <td><code>Ctrl+H</code></td>
+                            <td><code>Cmd+Option+F</code></td>
+                            <td>Buscar e substituir no arquivo atual</td>
+                        </tr>
+                        <tr>
+                            <td><code>F12</code></td>
+                            <td><code>F12</code></td>
+                            <td>Vai para a definição da função/variável</td>
+                        </tr>
+                        <tr>
+                            <td><code>Ctrl+Z / Ctrl+Shift+Z</code></td>
+                            <td><code>Cmd+Z / Cmd+Shift+Z</code></td>
+                            <td>Desfazer / Refazer</td>
+                        </tr>
+                        <tr>
+                            <td><code>Ctrl+\</code></td>
+                            <td><code>Cmd+\</code></td>
+                            <td>Divide o editor em duas colunas</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="sub-h">Extensões essenciais</h3>
+            <p>
+                Extensões transformam o VS Code num ambiente completo para qualquer linguagem.
+                Instale via <code>Ctrl+Shift+X</code> ou pela paleta de comandos:
+            </p>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-badge b-blue">Produtividade</span>
+                    <div class="card-title">Prettier</div>
+                    <div class="card-desc">Formata seu código automaticamente ao salvar. Acabaram as brigas sobre indentação.</div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-red">Qualidade</span>
+                    <div class="card-title">ESLint</div>
+                    <div class="card-desc">Analisa seu JavaScript em tempo real e aponta erros antes de você rodar o código.</div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-orange">HTML/CSS</span>
+                    <div class="card-title">Live Server</div>
+                    <div class="card-desc">Cria um servidor local que recarrega o browser automaticamente ao salvar o arquivo.</div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-green">HTML</span>
+                    <div class="card-title">Auto Rename Tag</div>
+                    <div class="card-desc">Renomeia a tag de fechamento automaticamente quando você muda a de abertura.</div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-purple">Visual</span>
+                    <div class="card-title">GitLens</div>
+                    <div class="card-desc">Mostra inline quem fez qual alteração, quando e em qual commit. Git turbinado.</div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-blue">Visual</span>
+                    <div class="card-title">Indent Rainbow</div>
+                    <div class="card-desc">Coloriza os níveis de indentação, facilitando muito a leitura de código aninhado.</div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-yellow">CSS</span>
+                    <div class="card-title">CSS Peek</div>
+                    <div class="card-desc">Permite ver e navegar para a definição CSS ao passar o mouse sobre uma classe no HTML.</div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-green">PHP</span>
+                    <div class="card-title">PHP Intelephense</div>
+                    <div class="card-desc">Autocomplete, diagnóstico de erros e navegação de código para PHP.</div>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Configurando o Prettier</h3>
+            <p>
+                Criar um arquivo <code>.prettierrc</code> na raiz do projeto garante que todos no time
+                usem as mesmas regras de formatação:
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">.prettierrc</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code>{
+  <span class="ca">"semi"</span>: <span class="ck">false</span>,
+  <span class="ca">"singleQuote"</span>: <span class="ck">true</span>,
+  <span class="ca">"tabWidth"</span>: <span class="cn">2</span>,
+  <span class="ca">"trailingComma"</span>: <span class="cs">"es5"</span>,
+  <span class="ca">"printWidth"</span>: <span class="cn">100</span>,
+  <span class="ca">"arrowParens"</span>: <span class="cs">"avoid"</span>
+}</code></pre>
+            </div>
+
+            <h3 class="sub-h">Configurando o VS Code (settings.json)</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">settings.json — Ctrl+Shift+P → "Open User Settings JSON"</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code>{
+  <span class="ca">"editor.formatOnSave"</span>: <span class="ck">true</span>,
+  <span class="ca">"editor.defaultFormatter"</span>: <span class="cs">"esbenp.prettier-vscode"</span>,
+  <span class="ca">"editor.fontSize"</span>: <span class="cn">14</span>,
+  <span class="ca">"editor.tabSize"</span>: <span class="cn">2</span>,
+  <span class="ca">"editor.wordWrap"</span>: <span class="cs">"on"</span>,
+  <span class="ca">"editor.minimap.enabled"</span>: <span class="ck">false</span>,
+  <span class="ca">"editor.fontFamily"</span>: <span class="cs">"'Cascadia Code', 'Fira Code', Consolas, monospace"</span>,
+  <span class="ca">"editor.fontLigatures"</span>: <span class="ck">true</span>,
+  <span class="ca">"files.autoSave"</span>: <span class="cs">"onFocusChange"</span>,
+  <span class="ca">"terminal.integrated.defaultProfile.windows"</span>: <span class="cs">"Git Bash"</span>,
+  <span class="ca">"workbench.colorTheme"</span>: <span class="cs">"One Dark Pro"</span>
+}</code></pre>
+            </div>
+
+            <div class="callout tip">
+                <div class="callout-icon">💡</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Fonte com ligaduras:</strong> instale a fonte
+                        <strong>Cascadia Code</strong> (Microsoft, gratuita) ou <strong>Fira Code</strong>
+                        e ative <code>"editor.fontLigatures": true</code>. Símbolos como
+                        <code>=></code>, <code>!==</code> e <code>>=</code> viram caracteres especiais
+                        muito mais legíveis. Parece bobagem até você experimentar.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Emmet — HTML ultrarrápido</h3>
+            <p>
+                O Emmet já vem embutido no VS Code e permite escrever HTML e CSS com atalhos.
+                Digite a abreviação e pressione <code>Tab</code>:
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">Emmet — Abreviações → HTML gerado</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc">! → estrutura completa do HTML5</span>
+
+<span class="cc">ul>li*3 →</span>
+<span class="ct">&lt;ul&gt;</span>
+  <span class="ct">&lt;li&gt;&lt;/li&gt;</span>
+  <span class="ct">&lt;li&gt;&lt;/li&gt;</span>
+  <span class="ct">&lt;li&gt;&lt;/li&gt;</span>
+<span class="ct">&lt;/ul&gt;</span>
+
+<span class="cc">div.card>h2.card__title+p.card__text →</span>
+<span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cs">"card"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;h2</span> <span class="ca">class</span>=<span class="cs">"card__title"</span><span class="ct">&gt;&lt;/h2&gt;</span>
+  <span class="ct">&lt;p</span> <span class="ca">class</span>=<span class="cs">"card__text"</span><span class="ct">&gt;&lt;/p&gt;</span>
+<span class="ct">&lt;/div&gt;</span>
+
+<span class="cc">input[type="email"]#email.form-input →</span>
+<span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cs">"email"</span> <span class="ca">id</span>=<span class="cs">"email"</span> <span class="ca">class</span>=<span class="cs">"form-input"</span><span class="ct">&gt;</span>
+
+<span class="cc">table>thead>tr>th*3^^tbody>tr*3>td*3 →</span>
+<span class="cc">tabela completa com thead e 3 linhas de 3 colunas</span></code></pre>
+            </div>
+
+        </section>
+
+        <!-- ────────────────────────────────────────
+             2. DEVTOOLS
+        ──────────────────────────────────────── -->
+        <section id="devtools">
+
+            <div class="section-label">
+                <div class="sl-icon sl-yellow">🔍</div>
+                <span>Tópico 2</span>
+            </div>
+            <h2 class="section-h">DevTools — Seus Olhos no Browser</h2>
+
+            <p>
+                O DevTools é a coleção de ferramentas de desenvolvedor embutida em todo browser moderno.
+                É gratuito, sempre disponível e absolutamente indispensável. Sem ele, depurar CSS e
+                JavaScript seria como operar no escuro.
+            </p>
+
+            <div class="callout fun">
+                <div class="callout-icon">🔬</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>O DevTools é o bisturi do dev front-end.</strong> Você consegue inspecionar
+                        cada elemento da página, ver cada requisição HTTP que o browser fez, executar
+                        JavaScript em tempo real, simular celulares, medir performance e até gravar um perfil
+                        de CPU — tudo sem sair do browser. É uma das ferramentas mais poderosas do ecossistema
+                        web e a maioria dos devs usa menos de 20% do que ela oferece.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Como abrir</h3>
+            <p>Em qualquer browser baseado em Chromium (Chrome, Edge, Brave) ou Firefox:</p>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-badge b-yellow">Atalho</span>
+                    <div class="card-title">F12</div>
+                    <div class="card-desc">A forma mais rápida. Abre/fecha o DevTools em qualquer página.</div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-yellow">Atalho</span>
+                    <div class="card-title">Ctrl+Shift+I</div>
+                    <div class="card-desc">Alternativa para abrir o DevTools. Cmd+Option+I no Mac.</div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-yellow">Mouse</span>
+                    <div class="card-title">Botão Direito → Inspecionar</div>
+                    <div class="card-desc">Abre o DevTools direto na aba Elements, já no elemento que você clicou.</div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-yellow">Atalho</span>
+                    <div class="card-title">Ctrl+Shift+J</div>
+                    <div class="card-desc">Abre o DevTools diretamente na aba Console. Cmd+Option+J no Mac.</div>
+                </div>
+            </div>
+
+            <h3 class="sub-h">As abas principais</h3>
+
+            <div class="tbl-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aba</th>
+                            <th>Para que serve</th>
+                            <th>Use quando...</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Elements</strong></td>
+                            <td>Inspeciona e edita HTML e CSS em tempo real</td>
+                            <td>Ajustar estilos, entender a estrutura, debugar layout</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Console</strong></td>
+                            <td>Logs, erros e execução de JS ao vivo</td>
+                            <td>Ver erros, testar código, depurar JavaScript</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Network</strong></td>
+                            <td>Todas as requisições HTTP da página</td>
+                            <td>Debugar APIs, ver headers, medir tempo de carga</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sources</strong></td>
+                            <td>Código-fonte do site, debugger com breakpoints</td>
+                            <td>Pausar execução JS linha a linha</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Application</strong></td>
+                            <td>Cookies, LocalStorage, SessionStorage, Cache</td>
+                            <td>Gerenciar dados salvos no browser</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Performance</strong></td>
+                            <td>Perfil de CPU e renderização frame a frame</td>
+                            <td>Otimizar animações lentas e gargalos de JS</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lighthouse</strong></td>
+                            <td>Auditoria automática de performance, SEO e a11y</td>
+                            <td>Checar a saúde geral do site com notas de 0-100</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="sub-h">Aba Elements — editando CSS ao vivo</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">Console do DevTools — experimentos úteis</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc">// Muda o fundo da página inteira (teste imediato!)</span>
+document.body.style.background = <span class="cs">'hotpink'</span>
+
+<span class="cc">// Seleciona e exibe um elemento</span>
+document.<span class="cf">querySelector</span>(<span class="cs">'h1'</span>)
+
+<span class="cc">// Inspeciona todas as propriedades de um elemento</span>
+<span class="cf">dir</span>(document.<span class="cf">querySelector</span>(<span class="cs">'h1'</span>))
+
+<span class="cc">// $_ retorna o último resultado do Console</span>
+document.<span class="cf">querySelectorAll</span>(<span class="cs">'.card'</span>)
+<span class="cv">$_</span>.length <span class="cc">// → número de cards na página</span>
+
+<span class="cc">// Cronometrar um bloco de código</span>
+console.<span class="cf">time</span>(<span class="cs">'operacao'</span>)
+<span class="cc">// ... código a medir ...</span>
+console.<span class="cf">timeEnd</span>(<span class="cs">'operacao'</span>) <span class="cc">// → "operacao: 1.23ms"</span>
+
+<span class="cc">// Logar um objeto formatado (muito melhor que console.log)</span>
+console.<span class="cf">table</span>([{nome: <span class="cs">'Ana'</span>, idade: <span class="cn">28</span>}, {nome: <span class="cs">'Bruno'</span>, idade: <span class="cn">32</span>}])
+
+<span class="cc">// Agrupar logs relacionados</span>
+console.<span class="cf">group</span>(<span class="cs">'Dados do usuário'</span>)
+console.<span class="cf">log</span>(<span class="cs">'nome:'</span>, <span class="cv">nome</span>)
+console.<span class="cf">log</span>(<span class="cs">'email:'</span>, <span class="cv">email</span>)
+console.<span class="cf">groupEnd</span>()</code></pre>
+            </div>
+
+            <h3 class="sub-h">Aba Network — debugando requisições</h3>
+            <p>
+                A aba Network é onde você vê <em>cada arquivo que o browser buscou</em> para montar a
+                página — HTML, CSS, JS, imagens, fontes e chamadas de API. Para usá-la bem:
+            </p>
+
+            <ol class="lst">
+                <li>Abra o DevTools <strong>antes</strong> de recarregar a página (ou clique no ícone 🔴 para gravar)</li>
+                <li>Recarregue com <code>F5</code> ou <code>Ctrl+R</code></li>
+                <li>Veja as requisições listadas em ordem cronológica</li>
+                <li>Clique em qualquer requisição para ver Headers, Payload (corpo) e Response</li>
+                <li>Use o filtro <strong>XHR / Fetch</strong> para ver só chamadas de API</li>
+            </ol>
+
+            <div class="callout tip">
+                <div class="callout-icon">💡</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Simulação de rede lenta:</strong> Na aba Network, clique no menu
+                        "No throttling" e selecione "Slow 3G" ou "Fast 3G". Assim você consegue testar
+                        como seu site se comporta em conexões ruins — algo que usuários de celular
+                        enfrentam todos os dias.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Modo responsivo — testando em celular</h3>
+            <p>
+                Pressione <code>Ctrl+Shift+M</code> (ou clique no ícone de celular/tablet no DevTools)
+                para ativar o <strong>Device Toolbar</strong>. Você pode simular qualquer device,
+                resolução e até toque na tela sem sair do computador.
+            </p>
+
+        </section>
+
+        <!-- ────────────────────────────────────────
+             3. TERMINAL
+        ──────────────────────────────────────── -->
+        <section id="terminal">
+
+            <div class="section-label">
+                <div class="sl-icon sl-green">⌨️</div>
+                <span>Tópico 3</span>
+            </div>
+            <h2 class="section-h">Terminal — Falando com o Computador</h2>
+
+            <p>
+                O terminal (também chamado de linha de comando, CLI ou prompt) é uma interface de texto
+                onde você digita comandos para interagir com o sistema. Parece intimidador no começo,
+                mas é uma das ferramentas mais poderosas que existem — e desenvolvedores usam o tempo todo.
+            </p>
+
+            <div class="callout fun">
+                <div class="callout-icon">🎮</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Analogia de RPG:</strong> usar uma interface gráfica (GUI) é como jogar
+                        com o controle padrão do game. O terminal é como usar os comandos de debug do
+                        desenvolvedor — você acessa tudo, sem restrições, de forma muito mais rápida.
+                        Sim, tem curva de aprendizado. Mas uma vez que você aprende, nunca mais volta.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Qual terminal usar</h3>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-badge b-blue">Windows</span>
+                    <div class="card-title">Git Bash</div>
+                    <div class="card-desc">
+                        Instala junto com o Git. Emula um terminal Linux no Windows. É o mais
+                        recomendado para iniciantes no Windows — comandos compatíveis com tutoriais.
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-blue">Windows</span>
+                    <div class="card-title">Windows Terminal</div>
+                    <div class="card-desc">
+                        Terminal moderno da Microsoft, disponível na Microsoft Store. Suporta abas,
+                        múltiplos shells (PowerShell, CMD, WSL) e personalização.
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-purple">Mac</span>
+                    <div class="card-title">Terminal / iTerm2</div>
+                    <div class="card-desc">
+                        O Terminal nativo do Mac já é ótimo. O iTerm2 é uma alternativa popular com
+                        mais recursos, como divisão de painéis e autocomplete avançado.
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-orange">Linux</span>
+                    <div class="card-title">Bash / Zsh</div>
+                    <div class="card-desc">
+                        Qualquer emulador de terminal no Linux funciona. Zsh com Oh My Zsh é a
+                        configuração mais popular entre devs — temas e plugins incríveis.
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Navegação — comandos essenciais</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">BASH / TERMINAL</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># Onde estou agora? (print working directory)</span>
+<span class="ck">pwd</span>
+<span class="cc"># → /home/usuario/projetos</span>
+
+<span class="cc"># Listar arquivos da pasta atual</span>
+<span class="ck">ls</span>
+<span class="ck">ls</span> <span class="ck">-la</span>    <span class="cc"># listagem detalhada, incluindo arquivos ocultos</span>
+<span class="ck">ls</span> <span class="ck">-lh</span>    <span class="cc"># tamanhos legíveis (KB, MB)</span>
+
+<span class="cc"># Navegar entre pastas (change directory)</span>
+<span class="ck">cd</span> projetos           <span class="cc"># entra na pasta "projetos"</span>
+<span class="ck">cd</span> ..                 <span class="cc"># sobe um nível</span>
+<span class="ck">cd</span> ../outro-projeto   <span class="cc"># sobe e entra em outra pasta</span>
+<span class="ck">cd</span> ~                  <span class="cc"># vai para a pasta home do usuário</span>
+<span class="ck">cd</span> -                  <span class="cc"># volta para a pasta anterior</span>
+
+<span class="cc"># Tab completa o nome → cd proj[Tab] → cd projetos/</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">Manipulação de arquivos e pastas</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">BASH / TERMINAL</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># Criar pasta</span>
+<span class="ck">mkdir</span> meu-projeto
+<span class="ck">mkdir</span> <span class="ck">-p</span> src/components/ui   <span class="cc"># cria estrutura de pastas de uma vez</span>
+
+<span class="cc"># Criar arquivo vazio</span>
+<span class="ck">touch</span> index.html style.css app.js
+
+<span class="cc"># Mostrar conteúdo de um arquivo</span>
+<span class="ck">cat</span> package.json
+
+<span class="cc"># Copiar arquivo</span>
+<span class="ck">cp</span> index.html backup.html
+<span class="ck">cp</span> <span class="ck">-r</span> src/ src-backup/    <span class="cc"># copia pasta inteira (-r = recursivo)</span>
+
+<span class="cc"># Mover / renomear</span>
+<span class="ck">mv</span> arquivo.txt nova-pasta/
+<span class="ck">mv</span> nome-antigo.js nome-novo.js
+
+<span class="cc"># Remover (CUIDADO — sem lixeira!)</span>
+<span class="ck">rm</span> arquivo.txt
+<span class="ck">rm</span> <span class="ck">-rf</span> pasta/    <span class="cc"># remove pasta e tudo dentro dela — IRREVERSÍVEL!</span>
+
+<span class="cc"># Abrir a pasta atual no VS Code</span>
+<span class="ck">code</span> .
+
+<span class="cc"># Limpar a tela do terminal</span>
+<span class="ck">clear</span>   <span class="cc"># ou Ctrl+L</span></code></pre>
+            </div>
+
+            <div class="callout warning">
+                <div class="callout-icon">⚠️</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Atenção total com <code>rm -rf</code>:</strong> esse comando deleta
+                        arquivos e pastas <em>permanentemente</em>, sem passar pela lixeira.
+                        Não existe Ctrl+Z. Sempre confira o que você está digitando antes de
+                        pressionar Enter. Há histórias de devs que deletaram o projeto inteiro
+                        (ou pior, o servidor de produção) por descuido.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Comandos de busca e utilidades</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">BASH / TERMINAL</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># Buscar texto dentro de arquivos (grep)</span>
+<span class="ck">grep</span> <span class="cs">"console.log"</span> app.js
+<span class="ck">grep</span> <span class="ck">-r</span> <span class="cs">"TODO"</span> src/           <span class="cc"># busca recursiva em pastas</span>
+<span class="ck">grep</span> <span class="ck">-rn</span> <span class="cs">"fetch("</span> src/          <span class="cc"># -n mostra número da linha</span>
+
+<span class="cc"># Histórico de comandos</span>
+<span class="ck">history</span>             <span class="cc"># lista os últimos comandos</span>
+<span class="ck">!!</span>                  <span class="cc"># repete o último comando</span>
+<span class="cc"># Ctrl+R → busca no histórico enquanto você digita</span>
+
+<span class="cc"># Verificar se um programa está instalado</span>
+<span class="ck">which</span> node          <span class="cc"># → /usr/bin/node</span>
+<span class="ck">which</span> git           <span class="cc"># → /usr/bin/git</span>
+
+<span class="cc"># Ver versão de ferramentas instaladas</span>
+<span class="ck">node</span> <span class="ck">--version</span>      <span class="cc"># → v20.11.0</span>
+<span class="ck">npm</span> <span class="ck">--version</span>       <span class="cc"># → 10.2.4</span>
+<span class="ck">git</span> <span class="ck">--version</span>       <span class="cc"># → git version 2.43.0</span>
+
+<span class="cc"># Encadear comandos</span>
+<span class="ck">mkdir</span> projeto <span class="co">&&</span> <span class="ck">cd</span> projeto <span class="co">&&</span> <span class="ck">git init</span>
+<span class="cc"># && só roda o próximo se o anterior foi bem-sucedido</span></code></pre>
+            </div>
+
+            <div class="callout tip">
+                <div class="callout-icon">💡</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Atalhos que economizam tempo no terminal:</strong><br>
+                        <code>Tab</code> — autocompleta nomes de arquivos e comandos<br>
+                        <code>Ctrl+C</code> — cancela o comando em execução<br>
+                        <code>Ctrl+L</code> — limpa a tela (igual ao <code>clear</code>)<br>
+                        <code>↑ / ↓</code> — navega no histórico de comandos<br>
+                        <code>Ctrl+A</code> — vai para o início da linha<br>
+                        <code>Ctrl+E</code> — vai para o fim da linha
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ────────────────────────────────────────
+             4. NODE.JS E NPM
+        ──────────────────────────────────────── -->
+        <section id="nodejs">
+
+            <div class="section-label">
+                <div class="sl-icon sl-green">🟢</div>
+                <span>Tópico 4</span>
+            </div>
+            <h2 class="section-h">Node.js e npm — JavaScript no Servidor</h2>
+
+            <p>
+                <strong>Node.js</strong> é um ambiente de execução que permite rodar JavaScript
+                <em>fora do browser</em> — no servidor, no terminal, em scripts de automação.
+                Ele é construído sobre o motor V8 do Chrome e tornou o JavaScript uma linguagem
+                verdadeiramente full stack.
+            </p>
+
+            <div class="callout info">
+                <div class="callout-icon">🧠</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Por que Node.js importa mesmo que você não seja backend?</strong>
+                        Praticamente todas as ferramentas modernas de frontend — Vite, Webpack,
+                        ESLint, Prettier, Sass, TypeScript — rodam em Node.js. Mesmo desenvolvendo
+                        só HTML/CSS/JS no browser, você vai usar Node.js como infraestrutura de
+                        desenvolvimento. É inevitável e vale muito aprender o básico.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Instalação</h3>
+            <p>
+                Baixe a versão <strong>LTS</strong> (Long Term Support) em
+                <a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a>.
+                A LTS é a versão estável e recomendada para projetos. O instalador já inclui o npm.
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">TERMINAL — Verificando a instalação</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code>$ <span class="ck">node</span> <span class="ck">--version</span>
+v20.11.0
+
+$ <span class="ck">npm</span> <span class="ck">--version</span>
+10.2.4
+
+<span class="cc"># Rodar um arquivo JavaScript no terminal</span>
+$ <span class="ck">node</span> app.js
+
+<span class="cc"># Modo interativo (REPL) — digita JS e vê o resultado</span>
+$ <span class="ck">node</span>
+<span class="cv">> </span><span class="cn">2</span> + <span class="cn">2</span>
+<span class="cn">4</span>
+<span class="cv">> </span><span class="cs">'olá'</span>.<span class="cf">toUpperCase</span>()
+<span class="cs">'OLÁ'</span>
+<span class="cv">> </span><span class="co">.exit</span>  <span class="cc"># ou Ctrl+C duas vezes</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">npm — o gerenciador de pacotes</h3>
+            <p>
+                <strong>npm</strong> (Node Package Manager) é o maior repositório de pacotes open source
+                do mundo. Com ele você instala, atualiza e remove bibliotecas em qualquer projeto com
+                um único comando.
+            </p>
+
+            <div class="callout fun">
+                <div class="callout-icon">📦</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>O npm tem mais de 2 milhões de pacotes disponíveis.</strong>
+                        Precisa validar emails? Tem pacote. Formatar datas? Tem pacote. Criar gráficos,
+                        manipular imagens, conectar ao banco, enviar email? Tem pacote pra tudo.
+                        A filosofia é: não reinvente a roda — use o que a comunidade já construiu e
+                        testou. Só tome cuidado com pacotes desatualizados ou mal mantidos.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Comandos npm essenciais</h3>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">TERMINAL — npm</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># Inicializar um projeto (cria o package.json)</span>
+<span class="ck">npm init</span>         <span class="cc"># modo interativo com perguntas</span>
+<span class="ck">npm init</span> <span class="ck">-y</span>      <span class="cc"># aceita tudo com valores padrão (mais rápido)</span>
+
+<span class="cc"># Instalar um pacote (salva em dependencies)</span>
+<span class="ck">npm install</span> lodash
+<span class="ck">npm i</span> lodash      <span class="cc"># forma abreviada</span>
+
+<span class="cc"># Instalar como dependência de desenvolvimento (devDependencies)</span>
+<span class="ck">npm install</span> <span class="ck">--save-dev</span> prettier
+<span class="ck">npm i</span> <span class="ck">-D</span> prettier <span class="cc"># forma abreviada</span>
+
+<span class="cc"># Instalar globalmente (disponível em qualquer projeto)</span>
+<span class="ck">npm install</span> <span class="ck">-g</span> nodemon
+
+<span class="cc"># Instalar todas as dependências de um projeto existente</span>
+<span class="ck">npm install</span>      <span class="cc"># lê o package.json e instala tudo</span>
+
+<span class="cc"># Remover um pacote</span>
+<span class="ck">npm uninstall</span> lodash
+
+<span class="cc"># Atualizar pacotes</span>
+<span class="ck">npm update</span>
+
+<span class="cc"># Checar pacotes desatualizados</span>
+<span class="ck">npm outdated</span>
+
+<span class="cc"># Rodar um script definido no package.json</span>
+<span class="ck">npm run</span> dev
+<span class="ck">npm run</span> build
+<span class="ck">npm run</span> test</code></pre>
+            </div>
+
+            <h3 class="sub-h">O package.json — o coração do projeto</h3>
+            <p>
+                Todo projeto Node.js tem um <code>package.json</code>. Ele funciona como a "ficha técnica"
+                do projeto: nome, versão, dependências, scripts e configurações.
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">package.json — exemplo comentado</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code>{
+  <span class="ca">"name"</span>: <span class="cs">"meu-projeto"</span>,
+  <span class="ca">"version"</span>: <span class="cs">"1.0.0"</span>,
+  <span class="ca">"description"</span>: <span class="cs">"Uma descrição breve do projeto"</span>,
+  <span class="ca">"main"</span>: <span class="cs">"index.js"</span>,
+
+  <span class="cc">// Scripts que você roda com "npm run nome"</span>
+  <span class="ca">"scripts"</span>: {
+    <span class="ca">"start"</span>: <span class="cs">"node index.js"</span>,
+    <span class="ca">"dev"</span>: <span class="cs">"nodemon index.js"</span>,
+    <span class="ca">"build"</span>: <span class="cs">"vite build"</span>,
+    <span class="ca">"test"</span>: <span class="cs">"jest"</span>
+  },
+
+  <span class="cc">// Dependências de produção (vão para o servidor)</span>
+  <span class="ca">"dependencies"</span>: {
+    <span class="ca">"express"</span>: <span class="cs">"^4.18.2"</span>
+  },
+
+  <span class="cc">// Dependências apenas de desenvolvimento (não vão para produção)</span>
+  <span class="ca">"devDependencies"</span>: {
+    <span class="ca">"nodemon"</span>: <span class="cs">"^3.0.2"</span>,
+    <span class="ca">"prettier"</span>: <span class="cs">"^3.2.5"</span>,
+    <span class="ca">"eslint"</span>: <span class="cs">"^8.57.0"</span>
+  }
+}</code></pre>
+            </div>
+
+            <h3 class="sub-h">O que é o node_modules e por que não commitar</h3>
+            <p>
+                Quando você roda <code>npm install</code>, o npm baixa todos os pacotes para uma pasta
+                chamada <code>node_modules</code>. Ela pode ter <strong>centenas de megabytes</strong> e
+                <strong>dezenas de milhares de arquivos</strong> — mesmo para projetos simples.
+            </p>
+
+            <div class="callout warning">
+                <div class="callout-icon">⚠️</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>NUNCA commite o <code>node_modules</code> no Git.</strong> Sempre
+                        adicione <code>node_modules/</code> no <code>.gitignore</code>. O arquivo
+                        <code>package.json</code> já registra quais dependências o projeto precisa —
+                        qualquer pessoa que clonar o repositório roda <code>npm install</code> e
+                        recria a pasta automaticamente.
+                    </p>
+                </div>
+            </div>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">.gitignore — Node.js</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cs">node_modules/</span>
+<span class="cs">.env</span>
+<span class="cs">.env.local</span>
+<span class="cs">dist/</span>
+<span class="cs">build/</span>
+<span class="cs">*.log</span></code></pre>
+            </div>
+
+            <h3 class="sub-h">Nodemon — reinício automático</h3>
+            <p>
+                Toda vez que você salva um arquivo, normalmente precisa parar o servidor e reiniciar.
+                O <strong>Nodemon</strong> faz isso automaticamente — monitora os arquivos e reinicia
+                o Node.js quando detecta mudanças:
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">TERMINAL</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># Instalar globalmente</span>
+<span class="ck">npm install</span> <span class="ck">-g</span> nodemon
+
+<span class="cc"># Usar no lugar de "node"</span>
+<span class="ck">nodemon</span> app.js
+<span class="cc"># → [nodemon] starting `node app.js`</span>
+<span class="cc"># → (você salva o arquivo...)</span>
+<span class="cc"># → [nodemon] restarting due to changes...</span>
+
+<span class="cc"># Dica: adicionar no package.json como script "dev"</span>
+<span class="cc"># "dev": "nodemon app.js"</span>
+<span class="ck">npm run</span> dev</code></pre>
+            </div>
+
+        </section>
+
+        <!-- ────────────────────────────────────────
+             5. OUTRAS FERRAMENTAS
+        ──────────────────────────────────────── -->
+        <section id="outras">
+
+            <div class="section-label">
+                <div class="sl-icon sl-purple">🧰</div>
+                <span>Tópico 5</span>
+            </div>
+            <h2 class="section-h">Outras Ferramentas Essenciais</h2>
+
+            <p>
+                Além do VS Code, DevTools, terminal e Node.js, existe um conjunto de ferramentas que
+                aparecem no dia a dia de quase todo desenvolvedor web. Você não precisa aprender todas
+                de uma vez — mas vale conhecer para saber o que buscar quando precisar.
+            </p>
+
+            <h3 class="sub-h">Postman e Insomnia — testando APIs</h3>
+            <p>
+                Quando você está desenvolvendo ou consumindo uma API, precisa fazer requisições HTTP
+                e inspecionar as respostas sem escrever código. É aí que entram o Postman e o Insomnia:
+                interfaces gráficas para testar endpoints de API.
+            </p>
+
+            <div class="two-col">
+                <div class="half">
+                    <h4>📮 Postman</h4>
+                    <p style="font-size:.85rem;color:var(--text-muted)">
+                        O mais popular. Interface rica, suporte a coleções de requests, ambientes,
+                        variáveis, testes automatizados e documentação. Tem plano gratuito generoso.
+                    </p>
+                </div>
+                <div class="half">
+                    <h4>🦋 Insomnia</h4>
+                    <p style="font-size:.85rem;color:var(--text-muted)">
+                        Interface mais limpa e simples que o Postman. Ótima para quem está começando.
+                        Também tem suporte a ambientes e variáveis. Open source.
+                    </p>
+                </div>
+            </div>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">TERMINAL — Testando API com curl (sem instalar nada)</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># GET simples</span>
+<span class="ck">curl</span> https://viacep.com.br/ws/01310-100/json/
+
+<span class="cc"># POST com JSON</span>
+<span class="ck">curl</span> <span class="ck">-X</span> POST https://jsonplaceholder.typicode.com/posts \
+  <span class="ck">-H</span> <span class="cs">"Content-Type: application/json"</span> \
+  <span class="ck">-d</span> <span class="cs">'{"title": "Teste", "body": "Conteúdo", "userId": 1}'</span>
+
+<span class="cc"># Com autenticação por token</span>
+<span class="ck">curl</span> <span class="ck">-H</span> <span class="cs">"Authorization: Bearer SEU_TOKEN"</span> https://api.exemplo.com/dados
+
+<span class="cc"># Salvar resposta em arquivo</span>
+<span class="ck">curl</span> <span class="ck">-o</span> resposta.json https://api.exemplo.com/dados</code></pre>
+            </div>
+
+            <h3 class="sub-h">Figma — design e prototipagem</h3>
+            <p>
+                O <strong>Figma</strong> é a ferramenta de design de interfaces mais usada atualmente.
+                Como dev, você não precisa ser designer — mas entender como usar o Figma para inspecionar
+                designs, copiar valores de CSS e colaborar com designers é uma habilidade muito valorizada.
+            </p>
+
+            <div class="callout tip">
+                <div class="callout-icon">💡</div>
+                <div class="callout-body">
+                    <p>
+                        <strong>Dev Mode no Figma:</strong> clique no botão "Dev Mode" (ícone &lt;/&gt;)
+                        em qualquer arquivo Figma. Você passa a ver o CSS exato de cada elemento —
+                        cores, fontes, espaçamentos, border-radius. Não precisa ficar adivinhando valores:
+                        o Figma já entrega o código pronto.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-h">Vite — servidor de desenvolvimento moderno</h3>
+            <p>
+                O <strong>Vite</strong> substituiu o Create React App e ferramentas similares como o
+                padrão para projetos frontend modernos. É extremamente rápido, com hot reload instantâneo
+                e build otimizado para produção.
+            </p>
+
+            <div class="code-block">
+                <div class="cb-header">
+                    <span class="cb-lang">TERMINAL — Criando projeto com Vite</span>
+                    <div class="cb-dots">
+                        <div class="cb-dot" style="background:#ff5f57"></div>
+                        <div class="cb-dot" style="background:#febc2e"></div>
+                        <div class="cb-dot" style="background:#28c840"></div>
+                    </div>
+                </div>
+                <pre><code><span class="cc"># Criar projeto Vite (escolha o framework na interface)</span>
+<span class="ck">npm create</span> vite@latest meu-projeto
+<span class="ck">cd</span> meu-projeto
+<span class="ck">npm install</span>
+<span class="ck">npm run</span> dev
+<span class="cc"># → Server running at http://localhost:5173</span>
+
+<span class="cc"># Criar projeto React com Vite diretamente</span>
+<span class="ck">npm create</span> vite@latest meu-react <span class="ck">--</span> <span class="ck">--template</span> react
+
+<span class="cc"># Criar projeto vanilla JS (sem framework)</span>
+<span class="ck">npm create</span> vite@latest meu-vanilla <span class="ck">--</span> <span class="ck">--template</span> vanilla</code></pre>
+            </div>
+
+            <h3 class="sub-h">Ferramentas por categoria</h3>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-badge b-blue">Versionamento</span>
+                    <div class="card-title">GitHub Desktop</div>
+                    <div class="card-desc">
+                        Interface gráfica para Git. Ideal para quem está começando e prefere evitar
+                        o terminal para operações do dia a dia.
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-green">Performance</span>
+                    <div class="card-title">PageSpeed Insights</div>
+                    <div class="card-desc">
+                        Ferramenta do Google que analisa a performance do seu site em produção
+                        e dá sugestões de melhoria com pontuação detalhada.
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-purple">Banco de Dados</span>
+                    <div class="card-title">DBeaver / TablePlus</div>
+                    <div class="card-desc">
+                        Clientes gráficos para gerenciar bancos de dados MySQL, PostgreSQL,
+                        SQLite e outros. Muito mais cômodo que usar o terminal do banco.
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-orange">Imagens</span>
+                    <div class="card-title">Squoosh</div>
+                    <div class="card-desc">
+                        Ferramenta online do Google para compressão de imagens. Reduz o tamanho
+                        sem perda visível de qualidade — essencial para performance web.
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-yellow">Fontes</span>
+                    <div class="card-title">Google Fonts</div>
+                    <div class="card-desc">
+                        Biblioteca gratuita de fontes do Google. Mais de 1.400 famílias tipográficas
+                        prontas para usar em qualquer projeto web.
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-red">Ícones</span>
+                    <div class="card-title">Lucide / Heroicons</div>
+                    <div class="card-desc">
+                        Bibliotecas de ícones SVG open source. Consistentes, acessíveis e fáceis
+                        de customizar via CSS. Substitutos modernos ao Font Awesome.
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-blue">Cores</span>
+                    <div class="card-title">Coolors / Realtime Colors</div>
+                    <div class="card-desc">
+                        Geradores de paletas de cores. O Coolors cria combinações harmoniosas;
+                        o Realtime Colors mostra como a paleta fica aplicada numa interface real.
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-badge b-green">Acessibilidade</span>
+                    <div class="card-title">Contrast Checker</div>
+                    <div class="card-desc">
+                        Verifica se a combinação de cores de texto e fundo atende ao padrão WCAG 2.1
+                        de contraste mínimo (4.5:1 para texto normal).
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="sub-h">O fluxo de trabalho completo</h3>
+            <p>
+                Juntando tudo que vimos neste e nos outros módulos, o fluxo de um projeto real se parece
+                com isso:
+            </p>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-body">
+                        <strong>Criar o projeto</strong>
+                        <p>
+                            <code>mkdir meu-projeto && cd meu-projeto && git init && npm init -y</code><br>
+                            Criar o <code>.gitignore</code> e fazer o primeiro commit.
+                        </p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-body">
+                        <strong>Configurar o ambiente de desenvolvimento</strong>
+                        <p>
+                            Instalar dependências (<code>npm install</code>), configurar Prettier e ESLint,
+                            subir o servidor de desenvolvimento com <code>npm run dev</code>.
+                        </p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-body">
+                        <strong>Desenvolver em branches</strong>
+                        <p>
+                            Criar uma branch por funcionalidade (<code>git switch -c feature/nome</code>),
+                            desenvolver, commitar com mensagens claras.
+                        </p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-body">
+                        <strong>Depurar com DevTools</strong>
+                        <p>
+                            Usar o Console para erros de JavaScript, Elements para ajustes de CSS,
+                            Network para problemas com APIs.
+                        </p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">5</div>
+                    <div class="step-body">
+                        <strong>Revisar e fazer merge</strong>
+                        <p>
+                            Abrir Pull Request no GitHub, revisar o código, fazer merge na branch
+                            principal e publicar.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ── SUMMARY BOX ── -->
+        <div class="summary-box">
+            <h4>📋 Resumo do módulo — Ferramentas</h4>
+            <ul>
+                <li><strong>VS Code</strong> é o editor mais popular do mundo — gratuito, extensível e cheio de atalhos de produtividade</li>
+                <li>Instale Prettier, ESLint e Live Server logo de cara — você vai usar em todo projeto</li>
+                <li>Emmet acelera a escrita de HTML com abreviações expandidas pelo Tab</li>
+                <li>O <strong>DevTools</strong> (F12) permite inspecionar HTML/CSS, debugar JS e analisar requisições de rede em tempo real</li>
+                <li>O terminal é indispensável para navegar em pastas, rodar scripts e usar ferramentas de linha de comando</li>
+                <li><strong>Node.js</strong> permite rodar JS fora do browser — necessário para qualquer ferramenta moderna de frontend</li>
+                <li><strong>npm</strong> gerencia as dependências do projeto via <code>package.json</code> — nunca commite <code>node_modules/</code></li>
+                <li>Postman ou Insomnia para testar APIs; Figma para inspecionar designs; Vite para projetos frontend modernos</li>
+                <li>Conhecer as ferramentas certas para cada situação é tão importante quanto conhecer a linguagem</li>
+            </ul>
+        </div>
+
+        <!-- ── NAV ENTRE MÓDULOS ── -->
+        <div style="display:flex;justify-content:space-between;margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--border)">
+            <a href="git.html" style="color:var(--text-muted);font-size:.85rem;display:flex;align-items:center;gap:.4rem">
+                ← Git
+            </a>
+            <a href="index.html" style="color:var(--accent);font-size:.85rem;display:flex;align-items:center;gap:.4rem">
+                Início →
+            </a>
+        </div>
+
+    </main>
+
+    <!-- ── TOC ── -->
+    <nav class="toc-panel" aria-label="Nesta página">
+        <h4>Nesta página</h4>
+        <ul>
+            <li><a href="#vscode">VS Code</a></li>
+            <li class="sub"><a href="#vscode">Atalhos essenciais</a></li>
+            <li class="sub"><a href="#vscode">Extensões</a></li>
+            <li class="sub"><a href="#vscode">Emmet</a></li>
+            <li><a href="#devtools">DevTools</a></li>
+            <li class="sub"><a href="#devtools">As abas principais</a></li>
+            <li class="sub"><a href="#devtools">Console</a></li>
+            <li class="sub"><a href="#devtools">Aba Network</a></li>
+            <li><a href="#terminal">Terminal</a></li>
+            <li class="sub"><a href="#terminal">Qual terminal usar</a></li>
+            <li class="sub"><a href="#terminal">Navegação</a></li>
+            <li class="sub"><a href="#terminal">Manipulação de arquivos</a></li>
+            <li><a href="#nodejs">Node.js e npm</a></li>
+            <li class="sub"><a href="#nodejs">npm — comandos</a></li>
+            <li class="sub"><a href="#nodejs">package.json</a></li>
+            <li class="sub"><a href="#nodejs">Nodemon</a></li>
+            <li><a href="#outras">Outras Ferramentas</a></li>
+            <li class="sub"><a href="#outras">Postman / curl</a></li>
+            <li class="sub"><a href="#outras">Figma / Vite</a></li>
+            <li class="sub"><a href="#outras">Fluxo completo</a></li>
+        </ul>
+    </nav>
+
+</div><!-- /.page-wrapper -->
+<script src="./assets/js/include.js" defer></script>
+</body>
+</html>

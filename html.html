@@ -1,0 +1,377 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML — Dev Atlas</title>
+<link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <aside class="sidebar">
+    <h3>Navegação</h3>
+    <ul><li><a href="index.html">🏠 Home</a></li></ul>
+    <h3>HTML</h3>
+    <ul>
+      <li><a href="#intro" class="active">Introdução</a></li>
+      <li><a href="#tags">Tags Principais</a></li>
+      <li><a href="#formularios">Formulários</a></li>
+      <li><a href="#tabelas">Tabelas</a></li>
+      <li><a href="#semantico">HTML Semântico</a></li>
+      <li><a href="#acessibilidade">Acessibilidade</a></li>
+    </ul>
+    <h3>Outros Módulos</h3>
+    <ul>
+      <li><a href="fundamentos.html">🌍 Fundamentos</a></li>
+      <li><a href="css.html">🎨 CSS</a></li>
+      <li><a href="javascript.html">⚡ JavaScript</a></li>
+      <li><a href="php.html">🐘 PHP</a></li>
+      <li><a href="git.html">🌿 Git</a></li>
+      <li><a href="ferramentas.html">🛠️ Ferramentas</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+
+    <div class="page-badge">📄 HTML</div>
+    <h1 class="page-title">HTML</h1>
+    <p class="page-subtitle">A linguagem que estrutura tudo na web. Sem HTML não existe página. Com ele, você define o que cada coisa é — e o navegador cuida do resto.</p>
+
+    <!-- ═══ INTRO ═══ -->
+    <h2 class="section-h" id="intro">📖 Introdução ao HTML</h2>
+    <p><strong>HTML</strong> (HyperText Markup Language) é a linguagem de <em>marcação</em> da web. Você usa <strong>tags</strong> para dizer ao navegador o que cada pedaço de conteúdo representa.</p>
+
+    <div class="callout fun">
+      <div class="callout-icon">😂</div>
+      <div class="callout-body"><p>"Eu sei programar — domino HTML!" — disse alguém que nunca vai ouvir o fim disso em uma entrevista técnica. HTML é uma linguagem de <strong>marcação</strong>, não de programação. Não tem lógica, não tem variáveis, não tem loops. Mas é a base de tudo na web, e saber bem faz toda a diferença.</p></div>
+    </div>
+
+    <h3 class="sub-h">Estrutura básica</h3>
+    <div class="diagram">
+      <div class="d-line"><span class="d-tag">&lt;!DOCTYPE html&gt;</span><span class="d-note">// declara HTML5 — sempre na primeira linha</span></div>
+      <div class="d-line"><span class="d-tag">&lt;html</span> <span style="color:var(--orange)">lang</span>=<span style="color:var(--green)">"pt-BR"</span><span class="d-tag">&gt;</span></div>
+      <div class="d-line i1"><span class="d-tag">&lt;head&gt;</span><span class="d-note">// metadados invisíveis ao usuário</span></div>
+      <div class="d-line i2"><span class="d-tag">&lt;meta</span> <span style="color:var(--orange)">charset</span>=<span style="color:var(--green)">"UTF-8"</span><span class="d-tag">&gt;</span></div>
+      <div class="d-line i2"><span class="d-tag">&lt;meta</span> <span style="color:var(--orange)">name</span>=<span style="color:var(--green)">"viewport"</span> <span style="color:var(--orange)">content</span>=<span style="color:var(--green)">"width=device-width, initial-scale=1.0"</span><span class="d-tag">&gt;</span></div>
+      <div class="d-line i2"><span class="d-tag">&lt;title&gt;</span>Título da Aba<span class="d-tag">&lt;/title&gt;</span></div>
+      <div class="d-line i1"><span class="d-tag">&lt;/head&gt;</span></div>
+      <div class="d-line i1"><span class="d-tag">&lt;body&gt;</span><span class="d-note">// tudo que o usuário vê vai aqui</span></div>
+      <div class="d-line i2"><span class="d-tag">&lt;h1&gt;</span>Olá, mundo!<span class="d-tag">&lt;/h1&gt;</span></div>
+      <div class="d-line i1"><span class="d-tag">&lt;/body&gt;</span></div>
+      <div class="d-line"><span class="d-tag">&lt;/html&gt;</span></div>
+    </div>
+
+    <h3 class="sub-h">Anatomia de uma tag</h3>
+    <div class="diagram">
+      <div class="d-line"><span class="d-tag">&lt;a</span> <span style="color:var(--orange)">href</span>=<span style="color:var(--green)">"https://google.com"</span> <span style="color:var(--orange)">target</span>=<span style="color:var(--green)">"_blank"</span><span class="d-tag">&gt;</span>Clique aqui<span class="d-tag">&lt;/a&gt;</span></div>
+      <div class="d-line" style="font-size:.75rem;color:var(--text-muted);padding-top:.5rem">
+        <span style="color:var(--pink)">tag de abertura</span> &nbsp;|&nbsp; <span style="color:var(--orange)">atributo</span>=<span style="color:var(--green)">"valor"</span> &nbsp;|&nbsp; <span style="color:var(--text)">conteúdo</span> &nbsp;|&nbsp; <span style="color:var(--pink)">tag de fechamento</span>
+      </div>
+    </div>
+
+    <!-- ═══ TAGS ═══ -->
+    <h2 class="section-h" id="tags">🏷️ Tags Principais</h2>
+
+    <h3 class="sub-h">Títulos e texto</h3>
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-lang">HTML</span><div class="cb-dots"><div class="cb-dot" style="background:#ff5f57"></div><div class="cb-dot" style="background:#febc2e"></div><div class="cb-dot" style="background:#28c840"></div></div></div>
+      <pre><code><span class="cc">&lt;!-- Hierarquia de títulos: h1 é o mais importante --&gt;</span>
+<span class="ct">&lt;h1&gt;</span>Título principal (um por página)<span class="ct">&lt;/h1&gt;</span>
+<span class="ct">&lt;h2&gt;</span>Seção<span class="ct">&lt;/h2&gt;</span>
+<span class="ct">&lt;h3&gt;</span>Subseção<span class="ct">&lt;/h3&gt;</span>
+
+<span class="ct">&lt;p&gt;</span>Parágrafo de texto corrido.<span class="ct">&lt;/p&gt;</span>
+
+<span class="ct">&lt;p&gt;</span>Isso é <span class="ct">&lt;strong&gt;</span>importante<span class="ct">&lt;/strong&gt;</span> e isso é <span class="ct">&lt;em&gt;</span>ênfase<span class="ct">&lt;/em&gt;</span>.<span class="ct">&lt;/p&gt;</span>
+
+<span class="ct">&lt;p&gt;</span>Código inline: <span class="ct">&lt;code&gt;</span>console.log('oi')<span class="ct">&lt;/code&gt;&lt;/p&gt;</span>
+
+<span class="ct">&lt;blockquote&gt;</span>Uma citação marcante de alguém famoso.<span class="ct">&lt;/blockquote&gt;</span>
+
+<span class="ct">&lt;hr&gt;</span> <span class="cc">&lt;!-- linha divisória horizontal, sem fechamento --&gt;</span>
+<span class="ct">&lt;br&gt;</span> <span class="cc">&lt;!-- quebra de linha --&gt;</span></code></pre>
+    </div>
+
+    <h3 class="sub-h">Links e mídias</h3>
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-lang">HTML</span><div class="cb-dots"><div class="cb-dot" style="background:#ff5f57"></div><div class="cb-dot" style="background:#febc2e"></div><div class="cb-dot" style="background:#28c840"></div></div></div>
+      <pre><code><span class="cc">&lt;!-- Link externo --&gt;</span>
+<span class="ct">&lt;a</span> <span class="ca">href</span>=<span class="cs">"https://google.com"</span> <span class="ca">target</span>=<span class="cs">"_blank"</span> <span class="ca">rel</span>=<span class="cs">"noopener noreferrer"</span><span class="ct">&gt;</span>Google<span class="ct">&lt;/a&gt;</span>
+
+<span class="cc">&lt;!-- Link interno (âncora) --&gt;</span>
+<span class="ct">&lt;a</span> <span class="ca">href</span>=<span class="cs">"#contato"</span><span class="ct">&gt;</span>Ir para Contato<span class="ct">&lt;/a&gt;</span>
+
+<span class="cc">&lt;!-- Imagem (alt é obrigatório para acessibilidade!) --&gt;</span>
+<span class="ct">&lt;img</span> <span class="ca">src</span>=<span class="cs">"foto.jpg"</span> <span class="ca">alt</span>=<span class="cs">"Descrição da imagem"</span> <span class="ca">width</span>=<span class="cs">"300"</span> <span class="ca">height</span>=<span class="cs">"200"</span><span class="ct">&gt;</span>
+
+<span class="cc">&lt;!-- Vídeo nativo --&gt;</span>
+<span class="ct">&lt;video</span> <span class="ca">src</span>=<span class="cs">"video.mp4"</span> <span class="ca">controls</span> <span class="ca">width</span>=<span class="cs">"640"</span><span class="ct">&gt;&lt;/video&gt;</span>
+
+<span class="cc">&lt;!-- Áudio nativo --&gt;</span>
+<span class="ct">&lt;audio</span> <span class="ca">src</span>=<span class="cs">"musica.mp3"</span> <span class="ca">controls</span><span class="ct">&gt;&lt;/audio&gt;</span></code></pre>
+    </div>
+
+    <h3 class="sub-h">Listas</h3>
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-lang">HTML</span><div class="cb-dots"><div class="cb-dot" style="background:#ff5f57"></div><div class="cb-dot" style="background:#febc2e"></div><div class="cb-dot" style="background:#28c840"></div></div></div>
+      <pre><code><span class="cc">&lt;!-- Lista não ordenada (bullets) --&gt;</span>
+<span class="ct">&lt;ul&gt;</span>
+  <span class="ct">&lt;li&gt;</span>HTML<span class="ct">&lt;/li&gt;</span>
+  <span class="ct">&lt;li&gt;</span>CSS<span class="ct">&lt;/li&gt;</span>
+  <span class="ct">&lt;li&gt;</span>JavaScript<span class="ct">&lt;/li&gt;</span>
+<span class="ct">&lt;/ul&gt;</span>
+
+<span class="cc">&lt;!-- Lista ordenada (numerada) --&gt;</span>
+<span class="ct">&lt;ol&gt;</span>
+  <span class="ct">&lt;li&gt;</span>Abra o editor<span class="ct">&lt;/li&gt;</span>
+  <span class="ct">&lt;li&gt;</span>Escreva o código<span class="ct">&lt;/li&gt;</span>
+  <span class="ct">&lt;li&gt;</span>Salve e abra no browser<span class="ct">&lt;/li&gt;</span>
+<span class="ct">&lt;/ol&gt;</span>
+
+<span class="cc">&lt;!-- Lista de definições --&gt;</span>
+<span class="ct">&lt;dl&gt;</span>
+  <span class="ct">&lt;dt&gt;</span>HTML<span class="ct">&lt;/dt&gt;</span>
+  <span class="ct">&lt;dd&gt;</span>Linguagem de marcação da web<span class="ct">&lt;/dd&gt;</span>
+<span class="ct">&lt;/dl&gt;</span></code></pre>
+    </div>
+
+    <!-- ═══ FORMULÁRIOS ═══ -->
+    <h2 class="section-h" id="formularios">📝 Formulários</h2>
+    <p>Formulários são o jeito de coletar dados do usuário. Login, cadastro, pesquisa, carrinho — tudo usa formulário.</p>
+
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-lang">HTML — Formulário Completo</span><div class="cb-dots"><div class="cb-dot" style="background:#ff5f57"></div><div class="cb-dot" style="background:#febc2e"></div><div class="cb-dot" style="background:#28c840"></div></div></div>
+      <pre><code><span class="ct">&lt;form</span> <span class="ca">action</span>=<span class="cs">"/cadastro"</span> <span class="ca">method</span>=<span class="cs">"POST"</span><span class="ct">&gt;</span>
+
+  <span class="cc">&lt;!-- label + input vinculados pelo for/id --&gt;</span>
+  <span class="ct">&lt;label</span> <span class="ca">for</span>=<span class="cs">"nome"</span><span class="ct">&gt;</span>Nome completo<span class="ct">&lt;/label&gt;</span>
+  <span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cs">"text"</span> <span class="ca">id</span>=<span class="cs">"nome"</span> <span class="ca">name</span>=<span class="cs">"nome"</span>
+         <span class="ca">placeholder</span>=<span class="cs">"Seu nome"</span> <span class="ca">required</span><span class="ct">&gt;</span>
+
+  <span class="ct">&lt;label</span> <span class="ca">for</span>=<span class="cs">"email"</span><span class="ct">&gt;</span>E-mail<span class="ct">&lt;/label&gt;</span>
+  <span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cs">"email"</span> <span class="ca">id</span>=<span class="cs">"email"</span> <span class="ca">name</span>=<span class="cs">"email"</span> <span class="ca">required</span><span class="ct">&gt;</span>
+
+  <span class="ct">&lt;label</span> <span class="ca">for</span>=<span class="cs">"senha"</span><span class="ct">&gt;</span>Senha<span class="ct">&lt;/label&gt;</span>
+  <span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cs">"password"</span> <span class="ca">id</span>=<span class="cs">"senha"</span> <span class="ca">name</span>=<span class="cs">"senha"</span>
+         <span class="ca">minlength</span>=<span class="cs">"8"</span> <span class="ca">required</span><span class="ct">&gt;</span>
+
+  <span class="ct">&lt;label</span> <span class="ca">for</span>=<span class="cs">"idade"</span><span class="ct">&gt;</span>Idade<span class="ct">&lt;/label&gt;</span>
+  <span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cs">"number"</span> <span class="ca">id</span>=<span class="cs">"idade"</span> <span class="ca">name</span>=<span class="cs">"idade"</span> <span class="ca">min</span>=<span class="cs">"18"</span> <span class="ca">max</span>=<span class="cs">"120"</span><span class="ct">&gt;</span>
+
+  <span class="cc">&lt;!-- Select --&gt;</span>
+  <span class="ct">&lt;label</span> <span class="ca">for</span>=<span class="cs">"cidade"</span><span class="ct">&gt;</span>Cidade<span class="ct">&lt;/label&gt;</span>
+  <span class="ct">&lt;select</span> <span class="ca">id</span>=<span class="cs">"cidade"</span> <span class="ca">name</span>=<span class="cs">"cidade"</span><span class="ct">&gt;</span>
+    <span class="ct">&lt;option</span> <span class="ca">value</span>=<span class="cs">""</span><span class="ct">&gt;</span>Selecione...<span class="ct">&lt;/option&gt;</span>
+    <span class="ct">&lt;option</span> <span class="ca">value</span>=<span class="cs">"sp"</span><span class="ct">&gt;</span>São Paulo<span class="ct">&lt;/option&gt;</span>
+    <span class="ct">&lt;option</span> <span class="ca">value</span>=<span class="cs">"rj"</span><span class="ct">&gt;</span>Rio de Janeiro<span class="ct">&lt;/option&gt;</span>
+  <span class="ct">&lt;/select&gt;</span>
+
+  <span class="cc">&lt;!-- Textarea --&gt;</span>
+  <span class="ct">&lt;label</span> <span class="ca">for</span>=<span class="cs">"bio"</span><span class="ct">&gt;</span>Sobre você<span class="ct">&lt;/label&gt;</span>
+  <span class="ct">&lt;textarea</span> <span class="ca">id</span>=<span class="cs">"bio"</span> <span class="ca">name</span>=<span class="cs">"bio"</span> <span class="ca">rows</span>=<span class="cs">"4"</span><span class="ct">&gt;&lt;/textarea&gt;</span>
+
+  <span class="cc">&lt;!-- Checkbox --&gt;</span>
+  <span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cs">"checkbox"</span> <span class="ca">id</span>=<span class="cs">"termos"</span> <span class="ca">name</span>=<span class="cs">"termos"</span> <span class="ca">required</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;label</span> <span class="ca">for</span>=<span class="cs">"termos"</span><span class="ct">&gt;</span>Aceito os termos de uso<span class="ct">&lt;/label&gt;</span>
+
+  <span class="ct">&lt;button</span> <span class="ca">type</span>=<span class="cs">"submit"</span><span class="ct">&gt;</span>Cadastrar<span class="ct">&lt;/button&gt;</span>
+
+<span class="ct">&lt;/form&gt;</span></code></pre>
+    </div>
+
+    <h3 class="sub-h">Tipos de input</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>type</th><th>O que faz</th></tr></thead>
+        <tbody>
+          <tr><td><code>text</code></td><td>Campo de texto livre</td></tr>
+          <tr><td><code>email</code></td><td>Valida formato de e-mail automaticamente</td></tr>
+          <tr><td><code>password</code></td><td>Esconde os caracteres digitados</td></tr>
+          <tr><td><code>number</code></td><td>Só aceita números, com setas de incremento</td></tr>
+          <tr><td><code>checkbox</code></td><td>Caixa marcável (múltipla escolha)</td></tr>
+          <tr><td><code>radio</code></td><td>Opção única de um grupo</td></tr>
+          <tr><td><code>file</code></td><td>Seletor de arquivo</td></tr>
+          <tr><td><code>date</code></td><td>Seletor de data nativo do navegador</td></tr>
+          <tr><td><code>range</code></td><td>Slider de valor numérico</td></tr>
+          <tr><td><code>color</code></td><td>Seletor de cor</td></tr>
+          <tr><td><code>hidden</code></td><td>Campo invisível (envia dados sem mostrar)</td></tr>
+          <tr><td><code>submit</code></td><td>Botão de envio (prefira <code>&lt;button type="submit"&gt;</code>)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ═══ TABELAS ═══ -->
+    <h2 class="section-h" id="tabelas">📊 Tabelas</h2>
+    <p>Tabelas são para <strong>dados tabulares</strong> — tipo uma planilha. Nunca use tabelas para fazer layout de página (isso era coisa de 2003).</p>
+
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-lang">HTML — Tabela completa</span><div class="cb-dots"><div class="cb-dot" style="background:#ff5f57"></div><div class="cb-dot" style="background:#febc2e"></div><div class="cb-dot" style="background:#28c840"></div></div></div>
+      <pre><code><span class="ct">&lt;table&gt;</span>
+  <span class="ct">&lt;caption&gt;</span>Produtos em estoque<span class="ct">&lt;/caption&gt;</span>
+
+  <span class="ct">&lt;thead&gt;</span>
+    <span class="ct">&lt;tr&gt;</span>
+      <span class="ct">&lt;th&gt;</span>Produto<span class="ct">&lt;/th&gt;</span>
+      <span class="ct">&lt;th&gt;</span>Preço<span class="ct">&lt;/th&gt;</span>
+      <span class="ct">&lt;th&gt;</span>Estoque<span class="ct">&lt;/th&gt;</span>
+    <span class="ct">&lt;/tr&gt;</span>
+  <span class="ct">&lt;/thead&gt;</span>
+
+  <span class="ct">&lt;tbody&gt;</span>
+    <span class="ct">&lt;tr&gt;</span>
+      <span class="ct">&lt;td&gt;</span>Teclado mecânico<span class="ct">&lt;/td&gt;</span>
+      <span class="ct">&lt;td&gt;</span>R$ 350,00<span class="ct">&lt;/td&gt;</span>
+      <span class="ct">&lt;td&gt;</span>15<span class="ct">&lt;/td&gt;</span>
+    <span class="ct">&lt;/tr&gt;</span>
+    <span class="ct">&lt;tr&gt;</span>
+      <span class="ct">&lt;td&gt;</span>Mouse gamer<span class="ct">&lt;/td&gt;</span>
+      <span class="ct">&lt;td&gt;</span>R$ 180,00<span class="ct">&lt;/td&gt;</span>
+      <span class="ct">&lt;td&gt;</span>32<span class="ct">&lt;/td&gt;</span>
+    <span class="ct">&lt;/tr&gt;</span>
+    <span class="ct">&lt;tr&gt;</span>
+      <span class="cc">&lt;!-- colspan: célula ocupa 2 colunas --&gt;</span>
+      <span class="ct">&lt;td</span> <span class="ca">colspan</span>=<span class="cs">"2"</span><span class="ct">&gt;</span>Total<span class="ct">&lt;/td&gt;</span>
+      <span class="ct">&lt;td&gt;</span>47<span class="ct">&lt;/td&gt;</span>
+    <span class="ct">&lt;/tr&gt;</span>
+  <span class="ct">&lt;/tbody&gt;</span>
+
+  <span class="ct">&lt;tfoot&gt;</span>
+    <span class="ct">&lt;tr&gt;</span>
+      <span class="ct">&lt;td</span> <span class="ca">colspan</span>=<span class="cs">"3"</span><span class="ct">&gt;</span>Dados atualizados hoje<span class="ct">&lt;/td&gt;</span>
+    <span class="ct">&lt;/tr&gt;</span>
+  <span class="ct">&lt;/tfoot&gt;</span>
+
+<span class="ct">&lt;/table&gt;</span></code></pre>
+    </div>
+
+    <!-- ═══ SEMÂNTICO ═══ -->
+    <h2 class="section-h" id="semantico">🧠 HTML Semântico</h2>
+    <p>HTML semântico significa usar a <strong>tag certa para o conteúdo certo</strong>. Em vez de usar <code>&lt;div&gt;</code> para tudo, você usa tags que têm <em>significado</em>.</p>
+    <p>Benefícios: melhor SEO, acessibilidade, legibilidade e manutenção do código.</p>
+
+    <div class="two-col">
+      <div class="half">
+        <h4>❌ Div soup (evite)</h4>
+        <pre style="background:var(--bg-code);padding:1rem;border-radius:8px;font-size:.8rem;color:var(--text-code);font-family:'Cascadia Code',monospace"><code>&lt;div class="header"&gt;
+  &lt;div class="nav"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="main"&gt;
+  &lt;div class="article"&gt;...&lt;/div&gt;
+  &lt;div class="sidebar"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="footer"&gt;...&lt;/div&gt;</code></pre>
+      </div>
+      <div class="half">
+        <h4>✅ HTML Semântico (use)</h4>
+        <pre style="background:var(--bg-code);padding:1rem;border-radius:8px;font-size:.8rem;color:var(--text-code);font-family:'Cascadia Code',monospace"><code>&lt;header&gt;
+  &lt;nav&gt;...&lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;
+  &lt;article&gt;...&lt;/article&gt;
+  &lt;aside&gt;...&lt;/aside&gt;
+&lt;/main&gt;
+&lt;footer&gt;...&lt;/footer&gt;</code></pre>
+      </div>
+    </div>
+
+    <div class="cards-grid">
+      <div class="card"><div class="card-badge b-purple">Estrutura</div><div class="card-title">&lt;header&gt;</div><div class="card-desc">Cabeçalho da página ou de uma seção. Logo, nav, título.</div></div>
+      <div class="card"><div class="card-badge b-purple">Estrutura</div><div class="card-title">&lt;nav&gt;</div><div class="card-desc">Bloco de links de navegação principal ou secundária.</div></div>
+      <div class="card"><div class="card-badge b-purple">Estrutura</div><div class="card-title">&lt;main&gt;</div><div class="card-desc">Conteúdo principal. Um único por página, nunca aninhado.</div></div>
+      <div class="card"><div class="card-badge b-green">Conteúdo</div><div class="card-title">&lt;section&gt;</div><div class="card-desc">Seção temática com título próprio (h2, h3...).</div></div>
+      <div class="card"><div class="card-badge b-green">Conteúdo</div><div class="card-title">&lt;article&gt;</div><div class="card-desc">Conteúdo autônomo: post de blog, notícia, card de produto.</div></div>
+      <div class="card"><div class="card-badge b-green">Conteúdo</div><div class="card-title">&lt;aside&gt;</div><div class="card-desc">Conteúdo complementar: sidebar, notas, banners.</div></div>
+      <div class="card"><div class="card-badge b-blue">Texto</div><div class="card-title">&lt;figure&gt; / &lt;figcaption&gt;</div><div class="card-desc">Agrupa imagem com sua legenda de forma semântica.</div></div>
+      <div class="card"><div class="card-badge b-blue">Texto</div><div class="card-title">&lt;time&gt;</div><div class="card-desc">Data/hora legível por máquinas: <code>&lt;time datetime="2025-01-01"&gt;</code></div></div>
+      <div class="card"><div class="card-badge b-yellow">Interativo</div><div class="card-title">&lt;details&gt; / &lt;summary&gt;</div><div class="card-desc">Accordion nativo do HTML, sem JavaScript.</div></div>
+      <div class="card"><div class="card-badge b-purple">Estrutura</div><div class="card-title">&lt;footer&gt;</div><div class="card-desc">Rodapé da página ou seção. Direitos, links, contato.</div></div>
+    </div>
+
+    <!-- ═══ ACESSIBILIDADE ═══ -->
+    <h2 class="section-h" id="acessibilidade">♿ Acessibilidade</h2>
+    <p>Acessibilidade (a11y) é fazer com que seu site funcione para <strong>todas as pessoas</strong> — incluindo quem usa leitor de tela, teclado, tem baixa visão ou dificuldades motoras.</p>
+
+    <div class="callout info">
+      <div class="callout-icon">ℹ️</div>
+      <div class="callout-body"><p>No Brasil, a <strong>Lei Brasileira de Inclusão (LBI)</strong> e as diretrizes <strong>WCAG 2.1</strong> estabelecem padrões de acessibilidade digital. Sites do governo e grandes empresas são legalmente obrigados a seguir essas regras.</p></div>
+    </div>
+
+    <div class="code-block">
+      <div class="cb-header"><span class="cb-lang">HTML — Boas Práticas de Acessibilidade</span><div class="cb-dots"><div class="cb-dot" style="background:#ff5f57"></div><div class="cb-dot" style="background:#febc2e"></div><div class="cb-dot" style="background:#28c840"></div></div></div>
+      <pre><code><span class="cc">&lt;!-- 1. Sempre use lang no html --&gt;</span>
+<span class="ct">&lt;html</span> <span class="ca">lang</span>=<span class="cs">"pt-BR"</span><span class="ct">&gt;</span>
+
+<span class="cc">&lt;!-- 2. Alt em imagens (string vazia se decorativa) --&gt;</span>
+<span class="ct">&lt;img</span> <span class="ca">src</span>=<span class="cs">"foto.jpg"</span> <span class="ca">alt</span>=<span class="cs">"Cachorro brincando no parque"</span><span class="ct">&gt;</span>
+<span class="ct">&lt;img</span> <span class="ca">src</span>=<span class="cs">"divider.png"</span> <span class="ca">alt</span>=<span class="cs">""</span> <span class="ca">role</span>=<span class="cs">"presentation"</span><span class="ct">&gt;</span>
+
+<span class="cc">&lt;!-- 3. Botões com texto descritivo --&gt;</span>
+<span class="ct">&lt;button</span> <span class="ca">aria-label</span>=<span class="cs">"Fechar modal"</span><span class="ct">&gt;</span>✕<span class="ct">&lt;/button&gt;</span>
+
+<span class="cc">&lt;!-- 4. Links com contexto claro --&gt;</span>
+<span class="cc">&lt;!-- ❌ Ruim: --&gt;</span>
+<span class="ct">&lt;a</span> <span class="ca">href</span>=<span class="cs">"/artigo"</span><span class="ct">&gt;</span>clique aqui<span class="ct">&lt;/a&gt;</span>
+<span class="cc">&lt;!-- ✅ Bom: --&gt;</span>
+<span class="ct">&lt;a</span> <span class="ca">href</span>=<span class="cs">"/artigo"</span><span class="ct">&gt;</span>Leia o artigo sobre HTML semântico<span class="ct">&lt;/a&gt;</span>
+
+<span class="cc">&lt;!-- 5. Label vinculado ao input --&gt;</span>
+<span class="ct">&lt;label</span> <span class="ca">for</span>=<span class="cs">"email"</span><span class="ct">&gt;</span>E-mail<span class="ct">&lt;/label&gt;</span>
+<span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cs">"email"</span> <span class="ca">id</span>=<span class="cs">"email"</span><span class="ct">&gt;</span>
+
+<span class="cc">&lt;!-- 6. Landmarks ARIA quando tags semânticas não bastam --&gt;</span>
+<span class="ct">&lt;div</span> <span class="ca">role</span>=<span class="cs">"alert"</span> <span class="ca">aria-live</span>=<span class="cs">"polite"</span><span class="ct">&gt;</span>
+  Formulário enviado com sucesso!
+<span class="ct">&lt;/div&gt;</span>
+
+<span class="cc">&lt;!-- 7. Skip link para pular direto ao conteúdo --&gt;</span>
+<span class="ct">&lt;a</span> <span class="ca">href</span>=<span class="cs">"#main"</span> <span class="ca">class</span>=<span class="cs">"skip-link"</span><span class="ct">&gt;</span>Pular para o conteúdo<span class="ct">&lt;/a&gt;</span></code></pre>
+    </div>
+
+    <h3 class="sub-h">Checklist rápida</h3>
+    <ul class="lst">
+      <li>✅ Todas as imagens têm <code>alt</code></li>
+      <li>✅ Contraste de cor mínimo 4.5:1 (texto normal) ou 3:1 (texto grande)</li>
+      <li>✅ Navegação por teclado funciona (Tab, Enter, Esc)</li>
+      <li>✅ Formulários têm <code>&lt;label&gt;</code> para cada <code>&lt;input&gt;</code></li>
+      <li>✅ Hierarquia de títulos faz sentido (h1 → h2 → h3)</li>
+      <li>✅ Links têm texto descritivo (sem "clique aqui")</li>
+      <li>✅ Idioma declarado no <code>&lt;html lang&gt;</code></li>
+    </ul>
+
+    <div class="summary-box">
+      <h4>📌 Resumo HTML</h4>
+      <ul>
+        <li>HTML é linguagem de <strong>marcação</strong> — estrutura o conteúdo, não programa lógica</li>
+        <li>Todo documento tem: <code>!DOCTYPE</code>, <code>html</code>, <code>head</code>, <code>body</code></li>
+        <li>Formulários coletam dados com <code>form</code>, <code>input</code>, <code>label</code>, <code>button</code></li>
+        <li>Tabelas são para dados tabulares — nunca para layout</li>
+        <li>Tags semânticas (<code>header</code>, <code>main</code>, <code>article</code>...) melhoram SEO e acessibilidade</li>
+        <li>Acessibilidade começa com <code>alt</code>, <code>label</code>, bom contraste e navegação por teclado</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <div class="toc-panel">
+    <h4>Nesta página</h4>
+    <ul>
+      <li><a href="#intro">Introdução</a></li>
+      <li class="sub"><a href="#intro">Estrutura básica</a></li>
+      <li><a href="#tags">Tags Principais</a></li>
+      <li class="sub"><a href="#tags">Títulos e texto</a></li>
+      <li class="sub"><a href="#tags">Links e mídias</a></li>
+      <li class="sub"><a href="#tags">Listas</a></li>
+      <li><a href="#formularios">Formulários</a></li>
+      <li><a href="#tabelas">Tabelas</a></li>
+      <li><a href="#semantico">HTML Semântico</a></li>
+      <li><a href="#acessibilidade">Acessibilidade</a></li>
+    </ul>
+  </div>
+
+</div>
+
+<script src="./assets/js/include.js" defer></script>
+</body>
+</html>
